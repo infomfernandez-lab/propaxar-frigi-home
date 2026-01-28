@@ -45,19 +45,16 @@ const FormSection = () => {
               {t('form.subheadline')}
             </p>
 
-            {/* Form Placeholder Box */}
-            <div className="bg-card border border-border rounded-xl shadow-lg p-10 min-h-[600px] flex flex-col items-center justify-center">
-              <div className="text-center text-foreground-muted">
-                <p className="text-base mb-4">
-                  {"<!-- Native Forms Shortcode Goes Here -->"}
-                </p>
-                <p className="text-lg font-medium text-foreground-subtle">
-                  {t('form.placeholder')}
-                </p>
-              </div>
-              <p className="text-sm text-foreground-subtle mt-8">
-                {t('form.placeholderNote')}
-              </p>
+            {/* Native Forms Iframe */}
+            <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden">
+              <iframe 
+                src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
+                width="100%" 
+                height="600" 
+                frameBorder="0"
+                style={{ border: 'none' }}
+                title="Contact Form"
+              />
             </div>
           </div>
 
@@ -90,18 +87,6 @@ const FormSection = () => {
                 ))}
               </div>
 
-              {/* Guarantee Box */}
-              <div className="mt-8 bg-success/10 rounded-lg p-5">
-                <p className="font-semibold text-foreground mb-2">
-                  {t('form.guaranteeTitle')}
-                </p>
-                <p className="text-[15px] text-foreground-muted leading-relaxed">
-                  {t('form.guaranteeText')}
-                </p>
-                <p className="text-sm text-foreground-subtle mt-2 italic">
-                  {t('form.guaranteeNote')}
-                </p>
-              </div>
             </div>
           </div>
         </div>

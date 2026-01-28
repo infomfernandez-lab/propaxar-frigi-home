@@ -29,23 +29,23 @@ const HeroSection = () => {
         <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-5 pt-24 pb-8 md:pt-32 md:pb-16">
           <div className="max-w-[900px] mx-auto text-center">
             {/* New 3-Line Headline Structure */}
-            <div className="mb-8 opacity-0 animate-fade-in-up">
-              {/* Line 1 - Medium weight, smaller */}
-              <p className="text-[28px] md:text-[42px] font-semibold text-white leading-tight mb-2">
+            <div className="mb-6 opacity-0 animate-fade-in-up">
+              {/* Line 1 - Medium weight, larger */}
+              <p className="text-[40px] md:text-[62px] font-semibold text-white leading-[1.2] mb-[10px]">
                 {t('hero.line1')}
               </p>
-              {/* Line 2 - Medium weight, smaller */}
-              <p className="text-[28px] md:text-[42px] font-semibold text-white leading-tight mb-2">
+              {/* Line 2 - Medium weight, larger */}
+              <p className="text-[40px] md:text-[62px] font-semibold text-white leading-[1.2] mb-[10px]">
                 {t('hero.line2')}
               </p>
-              {/* Line 3 - Bold, larger, primary blue color */}
-              <h1 className="text-[32px] md:text-[48px] font-bold text-primary leading-tight">
+              {/* Line 3 - Semibold, smaller, white */}
+              <h1 className="text-[24px] md:text-[36px] font-semibold text-white leading-[1.3] mt-5">
                 {t('hero.line3')}
               </h1>
             </div>
 
-            {/* Subheadline */}
-            <p className="text-lg md:text-[22px] font-medium text-white/90 max-w-[600px] mx-auto mb-10 opacity-0 animate-fade-in-up animation-delay-100">
+            {/* Subheadline with checkmarks */}
+            <p className="text-[18px] md:text-[20px] font-medium text-white/90 max-w-[700px] mx-auto mt-[25px] mb-[30px] opacity-0 animate-fade-in-up animation-delay-100">
               {t('hero.subheadline')}
             </p>
 

@@ -40,14 +40,19 @@ const Navigation = () => {
       <div className="max-w-[1200px] mx-auto px-5 md:px-10">
         <div className="flex items-center justify-between h-[70px]">
           {/* Logo */}
-          <div className="flex flex-col">
-            <span className="text-[22px] font-bold text-primary">
-              PROPAXAR
-            </span>
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex flex-col items-start"
+          >
+            <img 
+              src="https://propaxar.com/wp-content/uploads/2024/08/logo_small_icon_only_inverted_orDKnNi.png"
+              alt="Propaxar - Housing Consultant Frigiliana"
+              className="h-[45px] w-auto"
+            />
             <span className="text-[12px] uppercase tracking-wide text-foreground-muted -mt-1">
               {t('nav.subtitle')}
             </span>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
