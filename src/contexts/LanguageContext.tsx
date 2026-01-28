@@ -69,101 +69,65 @@ const translations = {
 
     // FAQ
     'faq.headline': 'Preguntas Frecuentes',
-    'faq.subheadline': 'Todo lo que necesitas saber antes de empezar',
-    'faq.q1': '¿Cuánto cuesta el servicio?',
-    'faq.a1': `El precio varía según tus necesidades específicas:
+    'faq.subheadline': 'Velocidad, Control y Resultados',
+    'faq.q1': '¿Por qué pagarte a ti si ya hay muchas inmobiliarias \'gratis\'?',
+    'faq.a1': `En Frigiliana, lo 'gratis' te sale carísimo en tiempo perdido. Las agencias tradicionales representan al dueño; su objetivo es venderte lo que tienen en stock, te encaje o no.
 
-• Búsqueda de alquiler largo plazo: €400-600
-• Alquiler vacacional (1-3 meses): €200-350
-• Relocation completa (vivienda + trámites): €700-1,000
+Yo te represento a TI.
 
-Después de nuestra consulta gratuita (15 min), te envío propuesta personalizada con precio exacto y qué incluye.
+Mi trabajo es peinar el 100% del mercado: particulares, todas las agencias y propiedades off-market que nunca llegan a internet.
 
-Pago en 2 fases:
-• Retainer (25-30%) al firmar contrato
-• Balance (70-75%) cuando seleccionas tu casa`,
-    'faq.q2': '¿Cómo funciona el pago?',
-    'faq.a2': `1. Consulta gratuita (sin pagar nada)
-2. Si decides seguir: Firmas contrato digital (vía email)
-3. Pagas retainer online (Stripe seguro, tarjetas internacionales)
-4. Empiezo búsqueda inmediatamente
-5. Cuando encuentras tu casa: Pagas balance
-6. Todo online, rápido, seguro.
+Conmigo no eliges entre lo que hay; consigues lo que realmente buscas.`,
+    'faq.q2': '¿De verdad eres más rápido que buscar yo mismo en portales?',
+    'faq.a2': `Infinitamente más rápido.
 
-Aceptamos: Visa, Mastercard, Amex. Sin efectivo.`,
-    'faq.q3': '¿En qué zonas de Frigiliana trabajas?',
-    'faq.a3': `Toda Frigiliana y pueblos cercanos:
+Si buscas por tu cuenta, tendrás que contarle tu historia a diez agencias distintas, esperar días a que te contesten (si lo hacen) y lidiar con anuncios de casas que ya están alquiladas o que ni siquiera existen.
 
-• Frigiliana (casco antiguo y zona baja)
-• Nerja (si prefieres más servicios)
-• Torrox (opción más económica)
-• Cómpeta (rural, montaña)
+Conmigo, solo hablas una vez. Yo ya conozco el terreno, sé qué casas están libres de verdad y ejecuto la búsqueda en horas, no en semanas.
 
-Mi expertise principal es Frigiliana donde nací, pero conozco toda la Axarquía.`,
-    'faq.q4': '¿Trabajas solo con alquileres o también ventas?',
-    'faq.a4': `Principalmente alquileres:
+Mientras otros esperan un email, tú ya estás visitando la casa ideal.`,
+    'faq.q3': '¿Es legal que me cobres a mí como inquilino?',
+    'faq.a3': `Es 100% legal y transparente.
 
-• Largo plazo (6+ meses)
-• Vacacional (1-6 meses)
-• Temporal (relocations empresariales)
+La ley prohíbe que la agencia del dueño te cobre por gestionar la casa del dueño. Yo no soy la agencia del dueño; soy tu Consultor de Búsqueda y representante exclusivo.
 
-También puedo ayudar con compra/venta si me lo solicitas, pero mi especialidad es alquiler.`,
-    'faq.q5': '¿Hablas inglés/alemán?',
-    'faq.a5': `Inglés: Fluido (nivel C1)
-Alemán: Básico conversacional
-Español: Nativo
+Tú no pagas una comisión de alquiler, pagas por un servicio profesional de localización, auditoría y blindaje legal.
 
-Si necesitas otro idioma, puedo coordinar con traductores profesionales (incluido en el servicio de relocation completa).`,
-    'faq.q6': '¿Qué pasa si no encuentro nada que me guste?',
-    'faq.a6': `Garantía simple: Si no encuentras casa que te encante en el plazo acordado (normalmente 7-10 días), te devuelvo tu retainer 100%.
+Es la diferencia entre usar un servicio público o contratar a un experto privado para que proteja tus intereses.`,
+    'faq.q4': 'Tengo mascotas, ¿es imposible encontrar algo en Frigiliana?',
+    'faq.a4': `Es difícil, pero no imposible si sabes a quién llamar.
 
-Sin letra pequeña. Sin excusas.
+Las agencias suelen decir 'no' por sistema para no complicarse. Yo, al ser nativo del pueblo y conocer personalmente a los propietarios, puedo negociar cara a cara.
 
-En 4 años, nunca he tenido que usar esta garantía. Pero está ahí para tu tranquilidad.`,
-    'faq.q7': '¿Necesito venir a Frigiliana antes de contratar?',
-    'faq.a7': `NO necesariamente.
+Sé qué dueños son flexibles y cómo presentar tu perfil para que tu mascota no sea un problema, sino un detalle más de un inquilino excelente.`,
+    'faq.q5': '¿Cómo me proteges de estafas o engaños?',
+    'faq.a5': `El mercado inmobiliario online está lleno de trampas: fotos retocadas, ubicaciones falsas o 'vicios ocultos' (humedades, ruidos insoportables, mala conexión).
 
-Proceso típico:
-1. Consulta inicial por videollamada (15 min)
-2. Te envío propuesta + contrato por email
-3. Firmas y pagas online
-4. Empiezo búsqueda
-5. ENTONCES vienes para visitas coordinadas (1-2 días)
+Yo realizo una Auditoría Técnica real. Si una casa tiene un problema, te lo diré al instante.
 
-Muchos clientes hacen todo remoto hasta las visitas finales. Más eficiente.`,
-    'faq.q8': '¿Eres agente inmobiliario? ¿Tienes licencia?',
-    'faq.a8': `NO soy agencia inmobiliaria.
+Mi lealtad es contigo, no con la venta. Te prevengo de cualquier intento de engaño porque conozco cada calle y cada historial de las viviendas del pueblo.`,
+    'faq.q6': '¿Qué gano pagando el Depósito de Activación (Retainer) de 200€?',
+    'faq.a6': `Ganas un Escudo de Prioridad.
 
-Soy CONSULTOR de vivienda.
+Este pago no es una cuota, es la activación de mi maquinaria de guerra para ti. Desbloquea mi red de contactos local y la creación de tu Tenant Profile VIP, el documento que garantiza tu solvencia y hace que los dueños te elijan a ti antes que a nadie.
 
-Diferencia:
-• Agencias: Gestionan propiedades, contratos con propietarios
-• Yo: Asesoro a CLIENTES (no a propietarios), conecto con las agencias
+Cobro por mi capacidad de ejecución y por mi tiempo de prospección exclusiva.
 
-Trabajo CON las agencias locales, no contra ellas. Cuando encuentro tu casa perfecta, te conecto con la agencia que la gestiona. Ellos hacen el contrato oficial.
+Si no estás listo para invertir en tu seguridad, no eres un cliente para Propaxar.`,
+    'faq.q7': 'No puedo viajar a España ahora, ¿puedo alquilar a distancia?',
+    'faq.a7': `Es mi especialidad.
 
-Legal, transparente, colaborativo.`,
-    'faq.q9': '¿Qué incluye exactamente tu servicio?',
-    'faq.a9': `Depende del paquete, pero básico incluye:
+El 80% de mis clientes cierran sus contratos desde su país de origen. Yo soy tus ojos y tus oídos.
 
-✓ Consulta personalizada (entender tus necesidades)
-✓ Búsqueda exhaustiva 100% mercado (todas agencias + directos)
-✓ Pre-selección 3-5 mejores opciones (ahorro 20-30h de tu tiempo)
-✓ Coordinación visitas en 1 día optimizado
-✓ Acompañamiento a visitas (traducción + asesoría)
-✓ Negociación de precio
-✓ Revisión educativa de contrato
-✓ Conexiones locales (abogado, utilidades, etc. si necesitas)
+Te enviaré videos reales, mediciones de velocidad de internet y un informe de 'honestidad radical' sobre la zona.
 
-Paquete Relocation añade: Gestión NIE, empadronamiento, utilidades, tour pueblo, soporte primer mes.`,
-    'faq.q10': '¿Puedo cancelar después de pagar el retainer?',
-    'faq.a10': `Política de cancelación:
+Cuando llegues, tu única ocupación será girar la llave y disfrutar.`,
+    'faq.q8': '¿Me ayudas con los suministros y el desembarco (luz, agua, internet)?',
+    'faq.a8': `Sí.
 
-• Antes de empezar búsqueda: Reembolso 100%
-• Durante búsqueda (primeros 3 días): Reembolso 50%
-• Después de presentar opciones: No reembolsable (trabajo ya hecho)
+Con el paquete Lifestyle Complete, yo me encargo del 'trabajo sucio'. Cambio de titularidad de suministros, gestión de trámites y una inmersión local para que sepas dónde comprar, a quién llamar y cómo moverte.
 
-PERO: Si no encuentras nada que te guste = reembolso 100% garantizado (ver FAQ 6).`,
+Te ahorro meses de burocracia y errores de principiante.`,
 
     // Final CTA
     'finalCta.headline': '¿Listo para encontrar tu casa en Frigiliana?',
@@ -231,101 +195,65 @@ PERO: Si no encuentras nada que te guste = reembolso 100% garantizado (ver FAQ 6
 
     // FAQ
     'faq.headline': 'Frequently Asked Questions',
-    'faq.subheadline': 'Everything you need to know before getting started',
-    'faq.q1': 'How much does the service cost?',
-    'faq.a1': `The price varies according to your specific needs:
+    'faq.subheadline': 'Speed, Control and Results',
+    'faq.q1': 'Why pay you when there are many \'free\' real estate agencies?',
+    'faq.a1': `In Frigiliana, 'free' ends up costing you dearly in wasted time. Traditional agencies represent the landlord; their goal is to sell you what they have in stock, whether it fits you or not.
 
-• Long-term rental search: €400-600
-• Vacation rental (1-3 months): €200-350
-• Complete relocation (housing + paperwork): €700-1,000
+I represent YOU.
 
-After our free consultation (15 min), I send you a personalized proposal with exact price and what's included.
+My job is to comb through 100% of the market: private listings, all agencies, and off-market properties that never make it to the internet.
 
-Payment in 2 phases:
-• Retainer (25-30%) when signing contract
-• Balance (70-75%) when you select your home`,
-    'faq.q2': 'How does payment work?',
-    'faq.a2': `1. Free consultation (no payment)
-2. If you decide to proceed: Sign digital contract (via email)
-3. Pay retainer online (secure Stripe, international cards)
-4. I start searching immediately
-5. When you find your home: Pay balance
-6. Everything online, fast, secure.
+With me, you don't choose from what's available; you get what you're really looking for.`,
+    'faq.q2': 'Are you really faster than searching myself on portals?',
+    'faq.a2': `Infinitely faster.
 
-We accept: Visa, Mastercard, Amex. No cash.`,
-    'faq.q3': 'What areas of Frigiliana do you work in?',
-    'faq.a3': `All of Frigiliana and nearby towns:
+If you search on your own, you'll have to tell your story to ten different agencies, wait days for them to respond (if they do), and deal with ads for houses that are already rented or don't even exist.
 
-• Frigiliana (old town and lower area)
-• Nerja (if you prefer more services)
-• Torrox (more affordable option)
-• Cómpeta (rural, mountains)
+With me, you only speak once. I already know the terrain, I know which houses are truly available, and I execute the search in hours, not weeks.
 
-My main expertise is Frigiliana where I was born, but I know all of the Axarquía.`,
-    'faq.q4': 'Do you only work with rentals or also sales?',
-    'faq.a4': `Mainly rentals:
+While others wait for an email, you're already visiting your ideal home.`,
+    'faq.q3': 'Is it legal for you to charge me as a tenant?',
+    'faq.a3': `It's 100% legal and transparent.
 
-• Long-term (6+ months)
-• Vacation (1-6 months)
-• Temporary (corporate relocations)
+The law prohibits the landlord's agency from charging you to manage the landlord's property. I'm not the landlord's agency; I'm your Search Consultant and exclusive representative.
 
-I can also help with buying/selling if you request it, but my specialty is rentals.`,
-    'faq.q5': 'Do you speak English/German?',
-    'faq.a5': `English: Fluent (C1 level)
-German: Basic conversational
-Spanish: Native
+You're not paying a rental commission, you're paying for professional localization, audit, and legal protection services.
 
-If you need another language, I can coordinate with professional translators (included in the complete relocation service).`,
-    'faq.q6': "What if I don't find anything I like?",
-    'faq.a6': `Simple guarantee: If you don't find a home you love within the agreed timeframe (usually 7-10 days), I refund your retainer 100%.
+It's the difference between using a public service or hiring a private expert to protect your interests.`,
+    'faq.q4': 'I have pets, is it impossible to find something in Frigiliana?',
+    'faq.a4': `It's difficult, but not impossible if you know who to call.
 
-No fine print. No excuses.
+Agencies usually say 'no' systematically to avoid complications. Being a local and personally knowing the landlords, I can negotiate face to face.
 
-In 4 years, I've never had to use this guarantee. But it's there for your peace of mind.`,
-    'faq.q7': 'Do I need to come to Frigiliana before hiring?',
-    'faq.a7': `NOT necessarily.
+I know which owners are flexible and how to present your profile so your pet isn't a problem, but just another detail of an excellent tenant.`,
+    'faq.q5': 'How do you protect me from scams or deception?',
+    'faq.a5': `The online real estate market is full of traps: retouched photos, fake locations, or 'hidden defects' (humidity, unbearable noise, bad connection).
 
-Typical process:
-1. Initial consultation via video call (15 min)
-2. I send proposal + contract by email
-3. You sign and pay online
-4. I start searching
-5. THEN you come for coordinated visits (1-2 days)
+I perform a real Technical Audit. If a house has a problem, I'll tell you instantly.
 
-Many clients do everything remote until the final visits. More efficient.`,
-    'faq.q8': 'Are you a real estate agent? Do you have a license?',
-    'faq.a8': `I am NOT a real estate agency.
+My loyalty is with you, not with the sale. I prevent any attempt at deception because I know every street and every property history in town.`,
+    'faq.q6': 'What do I gain by paying the €200 Activation Deposit (Retainer)?',
+    'faq.a6': `You gain a Priority Shield.
 
-I am a housing CONSULTANT.
+This payment isn't a fee, it's the activation of my war machine for you. It unlocks my local contact network and the creation of your VIP Tenant Profile, the document that guarantees your solvency and makes landlords choose you over anyone else.
 
-Difference:
-• Agencies: Manage properties, contracts with landlords
-• Me: I advise CLIENTS (not landlords), connect with agencies
+I charge for my execution capacity and exclusive prospecting time.
 
-I work WITH local agencies, not against them. When I find your perfect home, I connect you with the agency that manages it. They do the official contract.
+If you're not ready to invest in your security, you're not a client for Propaxar.`,
+    'faq.q7': 'I can\'t travel to Spain now, can I rent remotely?',
+    'faq.a7': `It's my specialty.
 
-Legal, transparent, collaborative.`,
-    'faq.q9': 'What exactly does your service include?',
-    'faq.a9': `Depends on the package, but basic includes:
+80% of my clients close their contracts from their home country. I am your eyes and ears.
 
-✓ Personalized consultation (understand your needs)
-✓ Exhaustive search 100% market (all agencies + direct)
-✓ Pre-selection of 3-5 best options (saving 20-30h of your time)
-✓ Coordinated visits in 1 optimized day
-✓ Accompaniment to visits (translation + advice)
-✓ Price negotiation
-✓ Educational contract review
-✓ Local connections (lawyer, utilities, etc. if you need)
+I'll send you real videos, internet speed measurements, and a 'radical honesty' report about the area.
 
-Relocation package adds: NIE management, registration, utilities, town tour, first month support.`,
-    'faq.q10': 'Can I cancel after paying the retainer?',
-    'faq.a10': `Cancellation policy:
+When you arrive, your only task will be turning the key and enjoying.`,
+    'faq.q8': 'Do you help with utilities and landing (electricity, water, internet)?',
+    'faq.a8': `Yes.
 
-• Before starting search: 100% refund
-• During search (first 3 days): 50% refund
-• After presenting options: Non-refundable (work already done)
+With the Lifestyle Complete package, I handle the 'dirty work'. Transfer of utility ownership, paperwork management, and local immersion so you know where to shop, who to call, and how to get around.
 
-BUT: If you don't find anything you like = 100% guaranteed refund (see FAQ 6).`,
+I save you months of bureaucracy and beginner mistakes.`,
 
     // Final CTA
     'finalCta.headline': 'Ready to find your home in Frigiliana?',
