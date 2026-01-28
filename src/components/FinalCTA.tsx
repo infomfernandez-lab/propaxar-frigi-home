@@ -9,7 +9,7 @@ const FinalCTA = () => {
   };
 
   return (
-    <section className="bg-primary py-20 md:py-24" id="form-section">
+    <section className="bg-primary py-20 md:py-24">
       <div className="max-w-[900px] mx-auto px-5 text-center">
         {/* Headline */}
         <h2 className="text-3xl md:text-[42px] font-bold text-primary-foreground leading-tight mb-6">
