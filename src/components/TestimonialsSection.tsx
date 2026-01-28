@@ -1,37 +1,46 @@
 import { Star } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const TestimonialsSection = () => {
+  const { t } = useLanguage();
+
   const testimonials = [
     {
       quote: "Manuel encontró nuestra casa en 5 días. Nos ahorró semanas de búsqueda caótica y negoció un mejor precio.",
+      quoteEn: "Manuel found our house in 5 days. He saved us weeks of chaotic searching and negotiated a better price.",
       name: "Sarah & Tom",
       origin: "UK → Frigiliana",
       property: "Casa 2 dormitorios, €950/mes",
+      propertyEn: "2-bedroom house, €950/month",
       avatar: "ST",
     },
     {
       quote: "Después de meses buscando desde Alemania sin éxito, Manuel lo resolvió en una semana. Increíble servicio.",
+      quoteEn: "After months of searching from Germany without success, Manuel solved it in a week. Incredible service.",
       name: "Klaus & Maria",
-      origin: "Alemania → Frigiliana",
+      origin: "Germany → Frigiliana",
       property: "Apartamento con terraza, €850/mes",
+      propertyEn: "Apartment with terrace, €850/month",
       avatar: "KM",
     },
     {
       quote: "Profesional, honesto y conoce cada rincón de Frigiliana. La mejor inversión que hicimos.",
+      quoteEn: "Professional, honest and knows every corner of Frigiliana. The best investment we made.",
       name: "Jan & Annika",
-      origin: "Países Bajos → Frigiliana",
+      origin: "Netherlands → Frigiliana",
       property: "Villa con vistas, €1,200/mes",
+      propertyEn: "Villa with views, €1,200/month",
       avatar: "JA",
     },
   ];
 
   return (
-    <section className="bg-background py-16 md:py-20">
+    <section id="testimonials" className="bg-background py-16 md:py-20">
       <div className="max-w-[1200px] mx-auto px-5">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Qué dicen quienes ya encontraron su casa
+            {t('testimonials.headline')}
           </h2>
         </div>
 
@@ -59,7 +68,7 @@ const TestimonialsSection = () => {
 
               {/* Quote */}
               <blockquote className="text-foreground-muted italic leading-relaxed mb-6">
-                "{testimonial.quote}"
+                "{t('testimonials.headline').includes('What') ? testimonial.quoteEn : testimonial.quote}"
               </blockquote>
 
               {/* Author Info */}
@@ -71,7 +80,7 @@ const TestimonialsSection = () => {
                   {testimonial.origin}
                 </p>
                 <p className="text-sm text-primary font-medium">
-                  {testimonial.property}
+                  {t('testimonials.headline').includes('What') ? testimonial.propertyEn : testimonial.property}
                 </p>
               </div>
             </div>
