@@ -39,8 +39,14 @@ const TestimonialsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((testimonial, index) => (
             <div key={index} className="testimonial-card">
-              {/* Avatar */}
-              <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xl font-bold mb-6">
+              {/* Avatar - alternating colors: blue, gold, blue */}
+              <div 
+                className={`w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mb-6 ${
+                  index % 2 === 0 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-secondary text-secondary-foreground'
+                }`}
+              >
                 {testimonial.avatar}
               </div>
 
