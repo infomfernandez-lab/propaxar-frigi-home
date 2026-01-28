@@ -1,4 +1,4 @@
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   const handleCTAClick = () => {
@@ -9,74 +9,63 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-16 items-center">
-          {/* Left Column - Content */}
-          <div className="space-y-8">
-            {/* Main Headline */}
-            <div className="opacity-0 animate-fade-in-up">
-              <h1 className="text-hero-mobile lg:text-hero text-foreground">
-                Tu casa en Frigiliana.
-                <br />
-                <span className="text-terracotta">En 7 días.</span>
-              </h1>
-            </div>
+    <section className="bg-background">
+      {/* Hero Content */}
+      <div className="px-5 pt-16 pb-12 md:pt-28 md:pb-20">
+        <div className="max-w-[900px] mx-auto text-center">
+          {/* Pre-headline */}
+          <p className="text-sm uppercase tracking-widest font-medium text-secondary mb-6 opacity-0 animate-fade-in-up">
+            Experto local en Frigiliana
+          </p>
 
-            {/* Subheadline */}
-            <p className="text-subhead text-muted-foreground max-w-lg opacity-0 animate-fade-in-up animation-delay-100">
-              Nacido aquí. Conozco cada propiedad, cada propietario, cada calle.
-            </p>
+          {/* Main Headline */}
+          <h1 className="text-4xl md:text-[54px] font-bold text-foreground leading-tight mb-6 opacity-0 animate-fade-in-up animation-delay-100">
+            Acceso al 100% del mercado inmobiliario de Frigiliana
+          </h1>
 
-            {/* Value Proposition */}
-            <p className="text-value-prop text-primary opacity-0 animate-fade-in-up animation-delay-200">
-              Una llamada conmigo = Acceso al 100% del mercado.
-            </p>
+          {/* Subheadline */}
+          <p className="text-xl md:text-2xl font-medium text-foreground-muted mb-8 opacity-0 animate-fade-in-up animation-delay-200">
+            Tu facilitador local para encontrar casa sin estrés
+          </p>
 
-            {/* Guarantee */}
-            <p className="text-lg italic text-olive opacity-0 animate-fade-in-up animation-delay-300">
-              "Si no encuentras nada que te encante, te devuelvo el dinero."
-            </p>
+          {/* Description */}
+          <p className="text-lg text-foreground-muted max-w-[700px] mx-auto mb-10 leading-relaxed opacity-0 animate-fade-in-up animation-delay-300">
+            Nacido aquí. 40 años conociendo cada propiedad, cada propietario, cada calle. 
+            Una llamada conmigo = todo el mercado a tu disposición. Casa encontrada en 7 días.
+          </p>
 
-            {/* Trust Stats */}
-            <div className="flex flex-wrap gap-8 lg:gap-12 py-4 opacity-0 animate-fade-in-up animation-delay-400">
-              <div className="text-center">
-                <div className="stat-number">127</div>
-                <div className="stat-label">familias reubicadas</div>
-              </div>
-              <div className="text-center">
-                <div className="stat-number">7 días</div>
-                <div className="stat-label">promedio</div>
-              </div>
-              <div className="text-center">
-                <div className="stat-number">100%</div>
-                <div className="stat-label">del mercado</div>
-              </div>
-            </div>
-
-            {/* CTA Section */}
-            <div className="space-y-4 opacity-0 animate-fade-in-up animation-delay-500">
-              <button onClick={handleCTAClick} className="btn-hero group">
-                Encuentra tu casa ahora
-                <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
-              </button>
-
-              {/* Micro-copy */}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Zap className="w-4 h-4 text-secondary" />
-                <span>Consulta gratuita 15 min · Sin compromiso · Te llamo en 24h</span>
-              </div>
-            </div>
+          {/* CTA Button */}
+          <div className="mb-5 opacity-0 animate-fade-in-up animation-delay-400">
+            <button 
+              onClick={handleCTAClick} 
+              className="btn-primary w-full max-w-[400px] md:w-auto"
+            >
+              Empezar ahora
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
 
-          {/* Right Column - Hero Image */}
-          <div className="opacity-0 animate-fade-in-up animation-delay-600 order-first lg:order-last">
-            <div className="hero-image-container aspect-square lg:aspect-[4/5]">
-              <img
-                src="/hero-consultant.jpg"
-                alt="Manuel Fernández - Expert local housing consultant Frigiliana"
-                className="w-full h-full object-cover"
-              />
+          {/* Micro-copy */}
+          <p className="text-[15px] text-foreground-subtle mb-16 opacity-0 animate-fade-in-up animation-delay-400">
+            ✓ Consulta gratuita 15 min  •  Sin compromiso  •  Respuesta en 24h
+          </p>
+
+          {/* Visual Divider */}
+          <div className="border-t border-border max-w-[600px] mx-auto mb-12 opacity-0 animate-fade-in-up animation-delay-500" />
+
+          {/* Trust Bar */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-[600px] mx-auto opacity-0 animate-fade-in-up animation-delay-500">
+            <div className="text-center">
+              <div className="stat-number">127</div>
+              <div className="stat-label">Familias reubicadas</div>
+            </div>
+            <div className="text-center">
+              <div className="stat-number">7 días</div>
+              <div className="stat-label">Tiempo promedio</div>
+            </div>
+            <div className="text-center">
+              <div className="stat-number">100%</div>
+              <div className="stat-label">Cobertura mercado</div>
             </div>
           </div>
         </div>
