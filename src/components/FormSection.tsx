@@ -34,9 +34,9 @@ const FormSection = () => {
   return (
     <section id="form-section" className="bg-background py-16 md:py-20">
       <div className="max-w-[1200px] mx-auto px-5">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
           {/* Left Column - 60% (3/5) */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 self-start">
             {/* Headlines */}
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
               {t('form.headline')}
@@ -46,21 +46,22 @@ const FormSection = () => {
             </p>
 
             {/* Native Forms Iframe */}
-            <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden p-10 box-border">
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
                 width="100%" 
-                height="1200" 
+                height="850" 
                 frameBorder="0"
-                style={{ border: 'none', minHeight: '1200px' }}
+                scrolling="no"
+                style={{ border: 'none', overflow: 'hidden', display: 'block' }}
                 title="Contact Form"
               />
             </div>
           </div>
 
           {/* Right Column - 40% (2/5) */}
-          <div className="lg:col-span-2">
-            <div className="bg-background-alt rounded-xl p-6 md:p-8">
+          <div className="lg:col-span-2 self-start">
+            <div className="bg-background-alt rounded-xl p-8 pt-[30px]">
               {/* Timeline Title */}
               <h3 className="text-xl font-bold text-foreground mb-6">
                 {t('form.timelineTitle')}
