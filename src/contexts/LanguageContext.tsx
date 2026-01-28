@@ -1,3 +1,4 @@
+// Language context for bilingual support (ES/EN)
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'es' | 'en';
