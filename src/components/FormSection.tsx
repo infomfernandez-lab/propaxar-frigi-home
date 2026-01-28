@@ -50,9 +50,9 @@ const FormSection = () => {
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
                 width="100%" 
-                height="600" 
+                height="1200" 
                 frameBorder="0"
-                style={{ border: 'none' }}
+                style={{ border: 'none', minHeight: '1200px' }}
                 title="Contact Form"
               />
             </div>

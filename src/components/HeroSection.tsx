@@ -28,26 +28,17 @@ const HeroSection = () => {
         {/* Hero Content */}
         <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-5 pt-24 pb-8 md:pt-32 md:pb-16">
           <div className="max-w-[900px] mx-auto text-center">
-            {/* New 3-Line Headline Structure */}
+            {/* Main Headline Structure */}
             <div className="mb-6 opacity-0 animate-fade-in-up">
-              {/* Line 1 - Medium weight, larger */}
-              <p className="text-[40px] md:text-[62px] font-semibold text-white leading-[1.2] mb-[10px]">
-                {t('hero.line1')}
-              </p>
-              {/* Line 2 - Medium weight, larger */}
-              <p className="text-[40px] md:text-[62px] font-semibold text-white leading-[1.2] mb-[10px]">
-                {t('hero.line2')}
-              </p>
-              {/* Line 3 - Semibold, smaller, white */}
-              <h1 className="text-[24px] md:text-[36px] font-semibold text-white leading-[1.3] mt-5">
+              {/* Main Title - LARGEST */}
+              <h1 className="text-[36px] md:text-[58px] font-extrabold text-white leading-[1.1]">
                 {t('hero.line3')}
               </h1>
+              {/* Subtitle - SMALLER */}
+              <p className="text-[22px] md:text-[28px] font-medium text-white/90 leading-[1.4] mt-[15px]">
+                {t('hero.line1')} {t('hero.line2')}
+              </p>
             </div>
-
-            {/* Subheadline with checkmarks */}
-            <p className="text-[18px] md:text-[20px] font-medium text-white/90 max-w-[700px] mx-auto mt-[25px] mb-[30px] opacity-0 animate-fade-in-up animation-delay-100">
-              {t('hero.subheadline')}
-            </p>
 
             {/* Simple CTA Button */}
             <div className="opacity-0 animate-fade-in-up animation-delay-200">
@@ -60,10 +51,15 @@ const HeroSection = () => {
               </button>
             </div>
 
-            {/* Micro-copy below button */}
-            <p className="text-base text-white/80 mt-6 opacity-0 animate-fade-in-up animation-delay-300">
-              {t('hero.microcopy')}
-            </p>
+            {/* Two benefit lines below button */}
+            <div className="mt-5 opacity-0 animate-fade-in-up animation-delay-300 space-y-2">
+              <p className="text-[15px] text-white/80">
+                {t('hero.microcopy')}
+              </p>
+              <p className="text-[15px] text-white/80">
+                {t('hero.subheadline')}
+              </p>
+            </div>
           </div>
         </div>
 

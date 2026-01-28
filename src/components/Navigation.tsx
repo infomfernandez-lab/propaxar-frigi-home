@@ -42,16 +42,12 @@ const Navigation = () => {
           {/* Logo */}
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex flex-col items-start"
           >
             <img 
               src="https://propaxar.com/wp-content/uploads/2024/08/logo_small_icon_only_inverted_orDKnNi.png"
               alt="Propaxar - Housing Consultant Frigiliana"
               className="h-[45px] w-auto"
             />
-            <span className="text-[12px] uppercase tracking-wide text-foreground-muted -mt-1">
-              {t('nav.subtitle')}
-            </span>
           </button>
 
           {/* Desktop Navigation */}
