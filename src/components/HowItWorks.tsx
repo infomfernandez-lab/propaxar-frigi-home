@@ -1,24 +1,27 @@
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HowItWorks = () => {
+  const { t } = useLanguage();
+
   const steps = [
     {
       number: 1,
       icon: "📞",
-      title: "Consulta gratuita",
-      description: "15 minutos para entender qué buscas. Te explico mi proceso.",
+      title: t('howItWorks.step1.title'),
+      description: t('howItWorks.step1.description'),
     },
     {
       number: 2,
       icon: "🔍",
-      title: "Búsqueda exhaustiva",
-      description: "Reviso el 100% del mercado (todas las agencias + propietarios directos). Te presento las 3-5 mejores opciones.",
+      title: t('howItWorks.step2.title'),
+      description: t('howItWorks.step2.description'),
     },
     {
       number: 3,
       icon: "🏡",
-      title: "Tu nueva casa",
-      description: "Coordino visitas, te acompaño, negocio por ti. Firma y mudanza en 7 días.",
+      title: t('howItWorks.step3.title'),
+      description: t('howItWorks.step3.description'),
     },
   ];
 
@@ -30,15 +33,15 @@ const HowItWorks = () => {
   };
 
   return (
-    <section className="bg-background py-16 md:py-20">
+    <section id="how-it-works" className="bg-background py-16 md:py-20">
       <div className="max-w-[1200px] mx-auto px-5">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Cómo funciona
+            {t('howItWorks.headline')}
           </h2>
           <p className="text-lg text-foreground-muted max-w-[700px] mx-auto">
-            De la primera llamada a tu nueva casa en menos de una semana
+            {t('howItWorks.subheadline')}
           </p>
         </div>
 
@@ -76,7 +79,7 @@ const HowItWorks = () => {
         {/* CTA */}
         <div className="text-center">
           <button onClick={handleCTAClick} className="btn-primary">
-            Empezar ahora
+            {t('howItWorks.cta')}
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>

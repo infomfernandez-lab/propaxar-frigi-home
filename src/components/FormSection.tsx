@@ -1,29 +1,33 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const FormSection = () => {
+  const { t } = useLanguage();
+
   const timelineSteps = [
     {
       number: 1,
-      title: "En 1 minuto",
-      description: "Recibes email de confirmación",
+      title: t('form.step1.title'),
+      description: t('form.step1.description'),
     },
     {
       number: 2,
-      title: "En 24 horas",
-      description: "Te llamo para entender qué necesitas",
+      title: t('form.step2.title'),
+      description: t('form.step2.description'),
     },
     {
       number: 3,
-      title: "Mismo día",
-      description: "Te envío propuesta personalizada + precio",
+      title: t('form.step3.title'),
+      description: t('form.step3.description'),
     },
     {
       number: 4,
-      title: "Si decides seguir",
-      description: "Firmas contrato online + Pago retainer",
+      title: t('form.step4.title'),
+      description: t('form.step4.description'),
     },
     {
       number: 5,
-      title: "En 7 días",
-      description: "Estás en tu nueva casa 🏡",
+      title: t('form.step5.title'),
+      description: t('form.step5.description'),
     },
   ];
 
@@ -35,10 +39,10 @@ const FormSection = () => {
           <div className="lg:col-span-3">
             {/* Headlines */}
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-              Empieza aquí (Gratis, 15 minutos)
+              {t('form.headline')}
             </h2>
             <p className="text-lg text-foreground-muted mb-8">
-              Te llamo en las próximas 24 horas. Sin compromiso.
+              {t('form.subheadline')}
             </p>
 
             {/* Form Placeholder Box */}
@@ -48,11 +52,11 @@ const FormSection = () => {
                   {"<!-- Native Forms Shortcode Goes Here -->"}
                 </p>
                 <p className="text-lg font-medium text-foreground-subtle">
-                  [Formulario de contacto]
+                  {t('form.placeholder')}
                 </p>
               </div>
               <p className="text-sm text-foreground-subtle mt-8">
-                This is a placeholder. Replace with your Native Forms shortcode.
+                {t('form.placeholderNote')}
               </p>
             </div>
           </div>
@@ -62,7 +66,7 @@ const FormSection = () => {
             <div className="bg-background-alt rounded-xl p-6 md:p-8">
               {/* Timeline Title */}
               <h3 className="text-xl font-bold text-foreground mb-6">
-                ¿Qué pasa después?
+                {t('form.timelineTitle')}
               </h3>
 
               {/* Timeline Steps */}
@@ -89,14 +93,13 @@ const FormSection = () => {
               {/* Guarantee Box */}
               <div className="mt-8 bg-success/10 rounded-lg p-5">
                 <p className="font-semibold text-foreground mb-2">
-                  💯 Mi garantía
+                  {t('form.guaranteeTitle')}
                 </p>
                 <p className="text-[15px] text-foreground-muted leading-relaxed">
-                  Si no encuentras casa que te encante en el plazo acordado, te
-                  devuelvo tu retainer completo.
+                  {t('form.guaranteeText')}
                 </p>
                 <p className="text-sm text-foreground-subtle mt-2 italic">
-                  En 4 años, nunca he tenido que hacerlo.
+                  {t('form.guaranteeNote')}
                 </p>
               </div>
             </div>
