@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Propaxar Design System - Clean, Modern, Professional */
+/* Propaxar Design System - Modern Housing Platform Style */
 
 @layer base {
   :root {
@@ -14,6 +14,7 @@
     /* Semantic Tokens */
     --background: 0 0% 100%;
     --background-alt: 210 20% 98%;
+    --background-blue-tint: 213 100% 97%;
     --foreground: 0 0% 10%;
     --foreground-muted: 0 0% 40%;
     --foreground-subtle: 0 0% 60%;
@@ -62,6 +63,7 @@
   .dark {
     --background: 0 0% 7%;
     --background-alt: 0 0% 10%;
+    --background-blue-tint: 217 30% 12%;
     --foreground: 0 0% 98%;
     --foreground-muted: 0 0% 70%;
     --foreground-subtle: 0 0% 50%;
@@ -110,15 +112,15 @@
 @layer components {
   /* Primary CTA Button */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-10 py-4 text-xl font-medium text-primary-foreground rounded-lg transition-all duration-200 ease-out;
+    @apply inline-flex items-center justify-center gap-2 px-10 py-4 text-lg font-medium text-primary-foreground rounded-lg transition-all duration-200 ease-out;
     background-color: hsl(var(--primary));
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 14px 0 hsl(var(--primary) / 0.3);
   }
 
   .btn-primary:hover {
     background-color: hsl(217 54% 32%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 hsl(var(--primary) / 0.4);
   }
 
   .btn-primary:active {
@@ -127,6 +129,20 @@
 
   .btn-primary:focus-visible {
     @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Secondary/Gold CTA Button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-10 py-4 text-lg font-semibold rounded-lg transition-all duration-200 ease-out;
+    background-color: hsl(var(--secondary));
+    color: hsl(0 0% 10%);
+    box-shadow: 0 4px 14px 0 hsl(var(--secondary) / 0.3);
+  }
+
+  .btn-secondary:hover {
+    background-color: hsl(39 76% 55%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 hsl(var(--secondary) / 0.4);
   }
 
   /* Trust stat styling */
@@ -139,6 +155,38 @@
     @apply text-sm;
     color: hsl(var(--foreground-muted));
   }
+
+  /* Process step card */
+  .process-card {
+    @apply flex flex-col items-center text-center p-6;
+  }
+
+  .process-icon {
+    @apply text-6xl mb-4;
+  }
+
+  .process-badge {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-primary-foreground mb-4;
+    background-color: hsl(var(--primary));
+  }
+
+  /* Testimonial card */
+  .testimonial-card {
+    @apply bg-card p-8 rounded-xl shadow-lg border border-border;
+  }
+
+  /* Chip/Radio button styling */
+  .chip-radio {
+    @apply px-4 py-2 rounded-full border-2 border-border bg-background text-foreground-muted cursor-pointer transition-all duration-200;
+  }
+
+  .chip-radio:hover {
+    @apply border-primary/50;
+  }
+
+  .chip-radio.active {
+    @apply border-primary bg-primary/10 text-primary font-medium;
+  }
 }
 
 @layer utilities {
@@ -146,7 +194,7 @@
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -154,8 +202,21 @@
     }
   }
 
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .animate-fade-in-up {
-    animation: fade-in-up 0.5s ease-out forwards;
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
   }
 
   .animation-delay-100 {
@@ -176,5 +237,9 @@
 
   .animation-delay-500 {
     animation-delay: 500ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
   }
 }
