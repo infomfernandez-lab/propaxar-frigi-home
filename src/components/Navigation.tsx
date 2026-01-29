@@ -46,7 +46,7 @@ const Navigation = () => {
             <img 
               src="https://propaxar.com/wp-content/uploads/2024/08/logo_small_icon_only_inverted_orDKnNi.png"
               alt="Propaxar - Housing Consultant Frigiliana"
-              className="h-[45px] w-auto"
+              className="h-[60px] w-auto"
             />
           </button>
 
