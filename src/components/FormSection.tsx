@@ -50,7 +50,7 @@ const FormSection = () => {
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
                 width="100%" 
-                height="850" 
+                height="820" 
                 frameBorder="0"
                 scrolling="no"
                 style={{ border: 'none', overflow: 'hidden', display: 'block' }}

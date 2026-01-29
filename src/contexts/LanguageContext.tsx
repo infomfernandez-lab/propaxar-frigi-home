@@ -33,6 +33,7 @@ const translations = {
     'hero.stat2.label': 'Tiempo promedio',
     'hero.stat3.number': '100%',
     'hero.stat3.label': 'Cobertura mercado',
+    'hero.temporalContext': 'Desde 2020 ayudando a personas de todo el mundo a encontrar su hogar en Frigiliana',
 
     // How It Works
     'howItWorks.headline': 'Cómo funciona',
@@ -131,7 +132,7 @@ Con el paquete Lifestyle Complete, yo me encargo del 'trabajo sucio'. Cambio de 
 Te ahorro meses de burocracia y errores de principiante.`,
 
     // Final CTA
-    'finalCta.headline': '¿Listo para encontrar tu casa en Frigiliana?',
+    'finalCta.headline': 'Tu casa en Frigiliana te espera. Empieza ahora.',
     'finalCta.subheadline': 'La próxima semana podrías estar en tu nueva casa',
     'finalCta.button': 'Empezar búsqueda gratuita',
     'finalCta.microcopy': 'Consulta 15 min  •  Sin compromiso  •  Te llamo hoy',
@@ -159,6 +160,7 @@ Te ahorro meses de burocracia y errores de principiante.`,
     'hero.stat2.label': 'Average time',
     'hero.stat3.number': '100%',
     'hero.stat3.label': 'Market coverage',
+    'hero.temporalContext': 'Since 2020 helping people from all over the world find their home in Frigiliana',
 
     // How It Works
     'howItWorks.headline': 'How it works',
@@ -257,7 +259,7 @@ With the Lifestyle Complete package, I handle the 'dirty work'. Transfer of util
 I save you months of bureaucracy and beginner mistakes.`,
 
     // Final CTA
-    'finalCta.headline': 'Ready to find your home in Frigiliana?',
+    'finalCta.headline': 'Your home in Frigiliana is waiting. Start now.',
     'finalCta.subheadline': 'Next week you could be in your new home',
     'finalCta.button': 'Start free search',
     'finalCta.microcopy': "15-min consultation  •  No commitment  •  I'll call you today",

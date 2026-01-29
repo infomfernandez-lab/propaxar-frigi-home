@@ -80,6 +80,10 @@ const HeroSection = () => {
                 <div className="stat-label">{t('hero.stat3.label')}</div>
               </div>
             </div>
+            {/* Temporal Context */}
+            <p className="text-[14px] text-[#666666] font-normal italic text-center mt-[25px] mb-0 opacity-0 animate-fade-in-up animation-delay-500">
+              {t('hero.temporalContext')}
+            </p>
           </div>
         </div>
       </div>
