@@ -1,8 +1,25 @@
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState, useEffect } from "react";
+
+const locations = ["Frigiliana", "Nerja", "Torrox"];
 
 const HeroSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % locations.length);
+        setIsVisible(true);
+      }, 500); // Fade out duration
+    }, 2500); // Word visible duration
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleCTAClick = () => {
     const formSection = document.getElementById("form-section");
@@ -10,6 +27,11 @@ const HeroSection = () => {
       formSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Dynamic headline based on language
+  const headlinePrefix = language === 'es' 
+    ? 'Tu Consultor Personal de Vivienda en ' 
+    : 'Your Personal Housing Consultant in ';
 
   return (
     <section className="relative">
@@ -32,7 +54,14 @@ const HeroSection = () => {
             <div className="mb-6 opacity-0 animate-fade-in-up">
               {/* Main Title - LARGEST */}
               <h1 className="text-[36px] md:text-[58px] font-extrabold text-white leading-[1.1]">
-                {t('hero.line3')}
+                {headlinePrefix}
+                <span 
+                  className={`inline-block min-w-[180px] md:min-w-[280px] text-[#E8B44F] transition-opacity duration-500 ${
+                    isVisible ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  {locations[currentIndex]}
+                </span>
               </h1>
               {/* Subtitle - SMALLER */}
               <p className="text-[22px] md:text-[28px] font-medium text-white/90 leading-[1.4] mt-[15px]">
