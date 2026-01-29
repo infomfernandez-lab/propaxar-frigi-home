@@ -7,19 +7,58 @@ const locations = ["Frigiliana", "Nerja", "Torrox"];
 const HeroSection = () => {
   const { t, language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [animationPhase, setAnimationPhase] = useState<'fade-in' | 'white-to-gold' | 'gold' | 'gold-to-white' | 'fade-out'>('fade-in');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % locations.length);
-        setIsVisible(true);
-      }, 500); // Fade out duration
-    }, 2500); // Word visible duration
+    // Timeline: fade-in (0.3s) -> white-to-gold (0.6s) -> gold (1s) -> gold-to-white (0.3s) -> fade-out (0.3s)
+    const phases = [
+      { phase: 'white-to-gold' as const, delay: 300 },
+      { phase: 'gold' as const, delay: 600 },
+      { phase: 'gold-to-white' as const, delay: 1000 },
+      { phase: 'fade-out' as const, delay: 300 },
+    ];
 
-    return () => clearInterval(interval);
+    let timeouts: NodeJS.Timeout[] = [];
+    
+    const runAnimation = () => {
+      setAnimationPhase('fade-in');
+      
+      let accumulatedDelay = 0;
+      phases.forEach(({ phase, delay }) => {
+        accumulatedDelay += delay;
+        const timeout = setTimeout(() => setAnimationPhase(phase), accumulatedDelay);
+        timeouts.push(timeout);
+      });
+
+      // After fade-out, change word and restart
+      const finalTimeout = setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % locations.length);
+        runAnimation();
+      }, accumulatedDelay + 300);
+      timeouts.push(finalTimeout);
+    };
+
+    runAnimation();
+
+    return () => timeouts.forEach(clearTimeout);
   }, []);
+
+  const getAnimationStyles = () => {
+    switch (animationPhase) {
+      case 'fade-in':
+        return 'opacity-0 text-white';
+      case 'white-to-gold':
+        return 'opacity-100 text-white';
+      case 'gold':
+        return 'opacity-100 text-[#E8B44F]';
+      case 'gold-to-white':
+        return 'opacity-100 text-white';
+      case 'fade-out':
+        return 'opacity-0 text-white';
+      default:
+        return 'opacity-100 text-white';
+    }
+  };
 
   const handleCTAClick = () => {
     const formSection = document.getElementById("form-section");
@@ -56,9 +95,7 @@ const HeroSection = () => {
               <h1 className="text-[36px] md:text-[58px] font-extrabold text-white leading-[1.1]">
                 {headlinePrefix}
                 <span 
-                  className={`inline-block min-w-[180px] md:min-w-[280px] text-[#E8B44F] transition-opacity duration-500 ${
-                    isVisible ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`inline-block min-w-[180px] md:min-w-[280px] transition-all duration-300 ${getAnimationStyles()}`}
                 >
                   {locations[currentIndex]}
                 </span>
