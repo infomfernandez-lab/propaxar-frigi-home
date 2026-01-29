@@ -6,6 +6,27 @@ import {
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Helper to render text with clickable phone numbers
+const renderWithPhoneLinks = (text: string) => {
+  const phoneRegex = /(\+34\s?662\s?317\s?561)/g;
+  const parts = text.split(phoneRegex);
+  
+  return parts.map((part, index) => {
+    if (part.match(phoneRegex)) {
+      return (
+        <a
+          key={index}
+          href="tel:+34662317561"
+          className="text-[#E8B44F] hover:underline font-medium"
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
 const FAQSection = () => {
   const { t } = useLanguage();
 
@@ -45,7 +66,7 @@ const FAQSection = () => {
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-foreground-muted leading-relaxed whitespace-pre-line">
-                {faq.answer}
+                {renderWithPhoneLinks(faq.answer)}
               </AccordionContent>
             </AccordionItem>
           ))}
