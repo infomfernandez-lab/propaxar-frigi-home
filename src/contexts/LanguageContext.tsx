@@ -72,14 +72,30 @@ const translations = {
     // FAQ
     'faq.headline': 'Preguntas Frecuentes',
     'faq.subheadline': 'Velocidad, Control y Resultados',
-    'faq.q1': '¿Por qué pagarte a ti si ya hay muchas inmobiliarias \'gratis\'?',
-    'faq.a1': `En Frigiliana, lo 'gratis' te sale carísimo en tiempo perdido. Las agencias tradicionales representan al dueño; su objetivo es venderte lo que tienen en stock, te encaje o no.
+    'faq.q1': '¿Qué incluye exactamente tu servicio?',
+    'faq.a1': `Depende de tu caso, pero siempre incluye:
 
-Yo te represento a TI.
+CORE (Todos los servicios):
+✓ Consulta personalizada detallada
+✓ Acceso 100% mercado (agencias + directos + off-market)
+✓ Pre-selección de mejores opciones
+✓ Dossier con análisis honesto de cada propiedad
+✓ Auditoría técnica (problemas ocultos, zona real, vecinos)
+✓ Coordinación de todas las visitas
+✓ Acompañamiento presencial (traducción si necesario)
+✓ Negociación de precio/condiciones
+✓ Revisión de contrato de alquiler/compra
+✓ Conexión con profesionales (abogado, gestor, si necesitas)
 
-Mi trabajo es peinar el 100% del mercado: particulares, todas las agencias y propiedades off-market que nunca llegan a internet.
+ADICIONALES (Según tu necesidad):
+✓ Gestión NIE y empadronamiento
+✓ Alta de suministros (luz, agua, internet, móvil)
+✓ Tour de inmersión local
+✓ Soporte post-mudanza (30 días)
 
-Conmigo no eliges entre lo que hay; consigues lo que realmente buscas.`,
+Todo personalizado según lo que necesites.
+La inversión varía según servicios incluidos.
+Lo discutimos en la consulta inicial.`,
     'faq.q2': '¿De verdad eres más rápido que buscar yo mismo en portales?',
     'faq.a2': `Infinitamente más rápido.
 
@@ -108,28 +124,43 @@ Sé qué dueños son flexibles y cómo presentar tu perfil para que tu mascota n
 Yo realizo una Auditoría Técnica real. Si una casa tiene un problema, te lo diré al instante.
 
 Mi lealtad es contigo, no con la venta. Te prevengo de cualquier intento de engaño porque conozco cada calle y cada historial de las viviendas del pueblo.`,
-    'faq.q6': '¿Qué gano pagando el Depósito de Activación (Retainer) de 200€?',
-    'faq.a6': `Ganas un Escudo de Prioridad.
-
-Este pago no es una cuota, es la activación de mi maquinaria de guerra para ti. Desbloquea mi red de contactos local y la creación de tu Tenant Profile VIP, el documento que garantiza tu solvencia y hace que los dueños te elijan a ti antes que a nadie.
-
-Cobro por mi capacidad de ejecución y por mi tiempo de prospección exclusiva.
-
-Si no estás listo para invertir en tu seguridad, no eres un cliente para Propaxar.`,
-    'faq.q7': 'No puedo viajar a España ahora, ¿puedo alquilar a distancia?',
-    'faq.a7': `Es mi especialidad.
+    'faq.q6': 'No puedo viajar a España ahora, ¿puedo alquilar a distancia?',
+    'faq.a6': `Es mi especialidad.
 
 El 80% de mis clientes cierran sus contratos desde su país de origen. Yo soy tus ojos y tus oídos.
 
 Te enviaré videos reales, mediciones de velocidad de internet y un informe de 'honestidad radical' sobre la zona.
 
 Cuando llegues, tu única ocupación será girar la llave y disfrutar.`,
-    'faq.q8': '¿Me ayudas con los suministros y el desembarco (luz, agua, internet)?',
-    'faq.a8': `Sí.
+    'faq.q7': '¿Me ayudas con los suministros y el desembarco (luz, agua, internet)?',
+    'faq.a7': `Sí.
 
 Con el paquete Lifestyle Complete, yo me encargo del 'trabajo sucio'. Cambio de titularidad de suministros, gestión de trámites y una inmersión local para que sepas dónde comprar, a quién llamar y cómo moverte.
 
 Te ahorro meses de burocracia y errores de principiante.`,
+    'faq.q8': '¿Cuál es el siguiente paso?',
+    'faq.a8': `Simple:
+
+1. Completa el formulario arriba (2 minutos)
+   O llámame/escríbeme directo: +34 662 317 561
+
+2. Agendamos consulta inicial (15-30 min, gratis)
+   Según tu disponibilidad.
+
+3. En la consulta:
+   • Entiendo tu situación
+   • Evalúo si puedo ayudarte
+   • Te explico cómo trabajaría en tu caso
+
+4. Si encajamos:
+   • Te envío propuesta personalizada
+   • Incluye servicios, inversión, timeline
+   • Decides si seguimos o no
+
+Sin presión. Sin compromiso hasta que tú decidas.
+La mayoría de mis clientes deciden seguir después de la consulta porque ven claramente el valor.
+
+¿Hablamos?`,
 
     // Final CTA
     'finalCta.headline': 'Tu casa en Frigiliana te espera. Empieza ahora.',
@@ -199,14 +230,30 @@ Te ahorro meses de burocracia y errores de principiante.`,
     // FAQ
     'faq.headline': 'Frequently Asked Questions',
     'faq.subheadline': 'Speed, Control and Results',
-    'faq.q1': 'Why pay you when there are many \'free\' real estate agencies?',
-    'faq.a1': `In Frigiliana, 'free' ends up costing you dearly in wasted time. Traditional agencies represent the landlord; their goal is to sell you what they have in stock, whether it fits you or not.
+    'faq.q1': "What's included in your service?",
+    'faq.a1': `Depends on your case, but always includes:
 
-I represent YOU.
+CORE (All services):
+✓ Detailed personalized consultation
+✓ 100% market access (agencies + direct owners + off-market)
+✓ Pre-selection of best options
+✓ Dossier with honest analysis of each property
+✓ Technical audit (hidden issues, real neighborhood, neighbors)
+✓ Coordination of all viewings
+✓ In-person accompaniment (translation if needed)
+✓ Price/terms negotiation
+✓ Rental/purchase contract review
+✓ Connection to professionals (lawyer, gestor, if needed)
 
-My job is to comb through 100% of the market: private listings, all agencies, and off-market properties that never make it to the internet.
+ADDITIONAL (Based on your needs):
+✓ NIE and registration management
+✓ Utilities setup (electricity, water, internet, mobile)
+✓ Local immersion tour
+✓ Post-move support (30 days)
 
-With me, you don't choose from what's available; you get what you're really looking for.`,
+Everything customized to what you need.
+Investment varies based on services included.
+We discuss it in the initial consultation.`,
     'faq.q2': 'Are you really faster than searching myself on portals?',
     'faq.a2': `Infinitely faster.
 
@@ -235,28 +282,43 @@ I know which owners are flexible and how to present your profile so your pet isn
 I perform a real Technical Audit. If a house has a problem, I'll tell you instantly.
 
 My loyalty is with you, not with the sale. I prevent any attempt at deception because I know every street and every property history in town.`,
-    'faq.q6': 'What do I gain by paying the €200 Activation Deposit (Retainer)?',
-    'faq.a6': `You gain a Priority Shield.
-
-This payment isn't a fee, it's the activation of my war machine for you. It unlocks my local contact network and the creation of your VIP Tenant Profile, the document that guarantees your solvency and makes landlords choose you over anyone else.
-
-I charge for my execution capacity and exclusive prospecting time.
-
-If you're not ready to invest in your security, you're not a client for Propaxar.`,
-    'faq.q7': 'I can\'t travel to Spain now, can I rent remotely?',
-    'faq.a7': `It's my specialty.
+    'faq.q6': "I can't travel to Spain now, can I rent remotely?",
+    'faq.a6': `It's my specialty.
 
 80% of my clients close their contracts from their home country. I am your eyes and ears.
 
 I'll send you real videos, internet speed measurements, and a 'radical honesty' report about the area.
 
 When you arrive, your only task will be turning the key and enjoying.`,
-    'faq.q8': 'Do you help with utilities and landing (electricity, water, internet)?',
-    'faq.a8': `Yes.
+    'faq.q7': 'Do you help with utilities and landing (electricity, water, internet)?',
+    'faq.a7': `Yes.
 
 With the Lifestyle Complete package, I handle the 'dirty work'. Transfer of utility ownership, paperwork management, and local immersion so you know where to shop, who to call, and how to get around.
 
 I save you months of bureaucracy and beginner mistakes.`,
+    'faq.q8': "What's the next step?",
+    'faq.a8': `Simple:
+
+1. Complete the form above (2 minutes)
+   Or call/text me directly: +34 662 317 561
+
+2. We schedule initial consultation (15-30 min, free)
+   According to your availability.
+
+3. In the consultation:
+   • I understand your situation
+   • I evaluate if I can help you
+   • I explain how I would work on your case
+
+4. If we're a fit:
+   • I send you personalized proposal
+   • Includes services, investment, timeline
+   • You decide if we proceed or not
+
+No pressure. No commitment until you decide.
+Most of my clients decide to proceed after the consultation because they clearly see the value.
+
+Shall we talk?`,
 
     // Final CTA
     'finalCta.headline': 'Your home in Frigiliana is waiting. Start now.',
