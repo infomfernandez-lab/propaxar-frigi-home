@@ -286,15 +286,16 @@
   }
 }
 
-/* Mobile form fix - ensure submit button is fully visible */
+/* Mobile form fix - tighter container around iframe */
 @media (max-width: 768px) {
   .form-container {
-    min-height: auto !important; /* let the white container adapt to the iframe height */
-    padding-bottom: 8px !important; /* minimal gap below the button */
+    min-height: auto !important;
+    padding: 16px !important;
+    padding-bottom: 12px !important;
     overflow: visible !important;
   }
 
   iframe[src*="nativeforms"] {
-    height: 1350px !important;
+    height: 950px !important;
   }
 }
