@@ -10,8 +10,8 @@ const TestimonialsSection = () => {
       quoteEn: "Manolo's services are excellent. He is honest and committed to me as a client, not only in property finding but negotiating terms and supporting me with all the extras that moving house involves. He is the one person who took time to find out exactly what I was looking for and what were my priorities. Then he found my perfect home in less than 24 hours! I highly recommend his services. They are very reasonably priced and saved me enormous stress and searching.",
       name: "Sally H.",
       origin: "UK → Frigiliana",
-      property: "Casa perfecta en 24h",
-      propertyEn: "Perfect home in 24h",
+      property: "Casa de campo, €750/mes",
+      propertyEn: "Country house, €750/month",
       avatar: "SH",
     },
     {
