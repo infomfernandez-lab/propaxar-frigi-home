@@ -289,8 +289,8 @@
 /* Mobile form fix - ensure submit button is fully visible */
 @media (max-width: 768px) {
   .form-container {
-    min-height: 1450px !important; /* taller white container on mobile to fit full form */
-    padding-bottom: 20px !important; /* reduce extra white space below the submit button */
+    min-height: auto !important; /* let the white container adapt to the iframe height */
+    padding-bottom: 8px !important; /* minimal gap below the button */
     overflow: visible !important;
   }
 
