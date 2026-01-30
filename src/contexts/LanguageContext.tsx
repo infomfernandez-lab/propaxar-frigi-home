@@ -33,7 +33,7 @@ const translations = {
     'hero.stat2.label': 'Tiempo promedio',
     'hero.stat3.number': '100%',
     'hero.stat3.label': 'Cobertura mercado',
-    'hero.temporalContext': 'Desde 2020 ayudando a personas de todo el mundo a encontrar su hogar en Frigiliana',
+    'hero.temporalContextPrefix': 'Desde 2020 ayudando a personas de todo el mundo a encontrar su hogar en ',
 
     // How It Works
     'howItWorks.headline': 'Cómo funciona',
@@ -73,8 +73,24 @@ const translations = {
     // FAQ
     'faq.headline': 'Preguntas Frecuentes',
     'faq.subheadline': 'Velocidad, Control y Resultados',
-    'faq.q1': '¿Qué incluye exactamente tu servicio?',
-    'faq.a1': `Depende de tu caso, pero siempre incluye:
+    'faq.q1': '¿Quién hay detrás de Propaxar?',
+    'faq.a1': `Soy Manuel Fernández.
+
+Nacido en Frigiliana hace más de 40 años.
+
+He vivido toda mi vida en Axarquía. Conozco cada calle, cada barrio, cada propietario.
+
+No soy una agencia corporativa con oficina en la playa.
+
+Soy un asesor independiente que representa TUS intereses, no los del propietario.
+
+Mi negocio funciona por referencias: Si no te ayudo bien, mi reputación en este pueblo pequeño se destruye.
+
+Por eso cada cliente recibe mi atención personal directa.
+
+Trabaja con alguien que conoce esta zona mejor que nadie.`,
+    'faq.q2': '¿Qué incluye exactamente tu servicio?',
+    'faq.a2': `Depende de tu caso, pero siempre incluye:
 
 CORE (Todos los servicios):
 ✓ Consulta personalizada detallada
@@ -97,28 +113,50 @@ ADICIONALES (Según tu necesidad):
 Todo personalizado según lo que necesites.
 La inversión varía según servicios incluidos.
 Lo discutimos en la consulta inicial.`,
-    'faq.q2': '¿De verdad eres más rápido que buscar yo mismo en portales?',
-    'faq.a2': `Infinitamente más rápido.
+    'faq.q3': '¿Por qué debería usar un experto local en vez de buscar solo?',
+    'faq.a3': `Porque conocer la zona de verdad marca la diferencia.
 
-Si buscas por tu cuenta, tendrás que contarle tu historia a diez agencias distintas, esperar días a que te contesten (si lo hacen) y lidiar con anuncios de casas que ya están alquiladas o que ni siquiera existen.
+BUSCANDO SOLO:
+- 40% de anuncios están desactualizados (ya alquilados)
+- Fotos engañosas, descripciones inexactas
+- Contactas 10 agencias, la mitad no responde
+- Visitas propiedades que no encajan
+- Descubres problemas DESPUÉS de firmar
+- 3-4 semanas de frustración
 
-Conmigo, solo hablas una vez. Yo ya conozco el terreno, sé qué casas están libres de verdad y ejecuto la búsqueda en horas, no en semanas.
+CON EXPERTO LOCAL:
+- Conozco qué está disponible DE VERDAD
+- Sé qué barrios y calles son buenos vs turísticos/ruidosos
+- Pruebo disponibilidad, calidad y velocidad de conexiones a internet personalmente (crítico para nómadas)
+- Detecto problemas antes de que pierdas tiempo
+- 7-10 días de primera llamada a firma
 
-Mientras otros esperan un email, tú ya estás visitando la casa ideal.`,
-    'faq.q3': '¿Es legal que me cobres a mí como inquilino?',
-    'faq.a3': `Es 100% legal y transparente.
+No pagas por 'buscar en Google por ti'.
+Pagas por 40 años de inteligencia local que te ahorran semanas de errores costosos.`,
+    'faq.q4': '¿Trabajas casos complicados? (mascotas, presupuesto ajustado, necesidades específicas)',
+    'faq.a4': `Depende. Seré honesto desde el principio.
 
-La ley prohíbe que la agencia del dueño te cobre por gestionar la casa del dueño. Yo no soy la agencia del dueño; soy tu Consultor de Búsqueda y representante exclusivo.
+LO QUE SÍ PUEDO AYUDAR (presupuesto €900-2,500):
+✓ 1-2 mascotas bien educadas (conozco propietarios pet-friendly)
+✓ Requisitos específicos de internet (pruebo velocidad in situ)
+✓ Necesidades de accesibilidad
+✓ Preferencias de amueblado/sin amueblar
+✓ Ubicación específica (tranquilo, caminable, comunidad expat)
+✓ Familias con 2-3 niños
+✓ Alquileres largo plazo (12+ meses, más fácil negociar)
 
-Tú no pagas una comisión de alquiler, pagas por un servicio profesional de localización, auditoría y blindaje legal.
+DIFÍCIL PERO POSIBLE:
+- Presupuesto justo en zona cara
+- Timing muy ajustado (necesitas casa en 1 semana)
+- Combinación de requisitos específicos
 
-Es la diferencia entre usar un servicio público o contratar a un experto privado para que proteja tus intereses.`,
-    'faq.q4': 'Tengo mascotas, ¿es imposible encontrar algo en Frigiliana?',
-    'faq.a4': `Es difícil, pero no imposible si sabes a quién llamar.
+HONESTAMENTE DIFÍCIL (opciones muy limitadas):
+- Presupuesto bajo €900/mes en Nerja/Frigiliana
+- 3+ perros grandes (mayoría de propietarios dicen no)
+- Familias 5+ personas con presupuesto bajo €1,500
 
-Las agencias suelen decir 'no' por sistema para no complicarse. Yo, al ser nativo del pueblo y conocer personalmente a los propietarios, puedo negociar cara a cara.
-
-Sé qué dueños son flexibles y cómo presentar tu perfil para que tu mascota no sea un problema, sino un detalle más de un inquilino excelente.`,
+En la consulta inicial te digo claramente si puedo ayudarte o no.
+No acepto tu dinero si no puedo cumplir.`,
     'faq.q5': '¿Cómo me proteges de estafas o engaños?',
     'faq.a5': `El mercado inmobiliario online está lleno de trampas: fotos retocadas, ubicaciones falsas o 'vicios ocultos' (humedades, ruidos insoportables, mala conexión).
 
@@ -164,7 +202,8 @@ La mayoría de mis clientes deciden seguir después de la consulta porque ven cl
 ¿Hablamos?`,
 
     // Final CTA
-    'finalCta.headline': 'Tu casa en Frigiliana te espera. Empieza ahora.',
+    'finalCta.headlinePrefix': 'Tu casa en ',
+    'finalCta.headlineSuffix': ' te espera. Empieza ahora.',
     'finalCta.subheadline': 'La próxima semana podrías estar en tu nueva casa',
     'finalCta.button': 'Empezar búsqueda gratuita',
     'finalCta.microcopy': 'Consulta 15 min  •  Sin compromiso  •  Te llamo hoy',
@@ -192,7 +231,7 @@ La mayoría de mis clientes deciden seguir después de la consulta porque ven cl
     'hero.stat2.label': 'Average time',
     'hero.stat3.number': '100%',
     'hero.stat3.label': 'Market coverage',
-    'hero.temporalContext': 'Since 2020 helping people from all over the world find their home in Frigiliana',
+    'hero.temporalContextPrefix': 'Since 2020 helping people from all over the world find their home in ',
 
     // How It Works
     'howItWorks.headline': 'How it works',
@@ -232,8 +271,24 @@ La mayoría de mis clientes deciden seguir después de la consulta porque ven cl
     // FAQ
     'faq.headline': 'Frequently Asked Questions',
     'faq.subheadline': 'Speed, Control and Results',
-    'faq.q1': "What's included in your service?",
-    'faq.a1': `Depends on your case, but always includes:
+    'faq.q1': 'Who is behind Propaxar?',
+    'faq.a1': `I'm Manuel Fernández.
+
+Born in Frigiliana over 40 years ago.
+
+I've lived my entire life in Axarquía. I know every street, every neighborhood, every landlord.
+
+I'm not a corporate agency with a beach office.
+
+I'm an independent advisor who represents YOUR interests, not the landlord's.
+
+My business runs on referrals: If I don't help you well, my reputation in this small town is destroyed.
+
+That's why every client receives my direct personal attention.
+
+Work with someone who knows this area better than anyone.`,
+    'faq.q2': "What's included in your service?",
+    'faq.a2': `Depends on your case, but always includes:
 
 CORE (All services):
 ✓ Detailed personalized consultation
@@ -256,28 +311,50 @@ ADDITIONAL (Based on your needs):
 Everything customized to what you need.
 Investment varies based on services included.
 We discuss it in the initial consultation.`,
-    'faq.q2': 'Are you really faster than searching myself on portals?',
-    'faq.a2': `Infinitely faster.
+    'faq.q3': 'Why should I use a local expert instead of searching myself?',
+    'faq.a3': `Because truly knowing the area makes all the difference.
 
-If you search on your own, you'll have to tell your story to ten different agencies, wait days for them to respond (if they do), and deal with ads for houses that are already rented or don't even exist.
+SEARCHING ALONE:
+- 40% of listings are outdated (already rented)
+- Misleading photos, inaccurate descriptions
+- You contact 10 agencies, half don't respond
+- You visit properties that don't fit
+- You discover problems AFTER signing
+- 3-4 weeks of frustration
 
-With me, you only speak once. I already know the terrain, I know which houses are truly available, and I execute the search in hours, not weeks.
+WITH LOCAL EXPERT:
+- I know what's ACTUALLY available
+- I know which neighborhoods and streets are good vs touristy/noisy
+- I personally test availability, quality and speed of internet connections (critical for nomads)
+- I spot problems before you waste time
+- 7-10 days from first call to signed contract
 
-While others wait for an email, you're already visiting your ideal home.`,
-    'faq.q3': 'Is it legal for you to charge me as a tenant?',
-    'faq.a3': `It's 100% legal and transparent.
+You're not paying for 'searching Google for you'.
+You're paying for 40 years of local intelligence that saves you weeks of costly mistakes.`,
+    'faq.q4': 'Do you work on complicated cases? (pets, tight budget, specific needs)',
+    'faq.a4': `Depends. I'll be honest from the start.
 
-The law prohibits the landlord's agency from charging you to manage the landlord's property. I'm not the landlord's agency; I'm your Search Consultant and exclusive representative.
+WHAT I CAN HELP WITH (budget €900-2,500):
+✓ 1-2 well-behaved pets (I know pet-friendly landlords)
+✓ Specific internet requirements (I test speed on-site)
+✓ Accessibility needs
+✓ Furnished/unfurnished preferences
+✓ Specific location (quiet, walkable, expat community)
+✓ Families with 2-3 children
+✓ Long-term rentals (12+ months, easier to negotiate)
 
-You're not paying a rental commission, you're paying for professional localization, audit, and legal protection services.
+DIFFICULT BUT POSSIBLE:
+- Tight budget in expensive area
+- Very tight timing (need home in 1 week)
+- Combination of specific requirements
 
-It's the difference between using a public service or hiring a private expert to protect your interests.`,
-    'faq.q4': 'I have pets, is it impossible to find something in Frigiliana?',
-    'faq.a4': `It's difficult, but not impossible if you know who to call.
+HONESTLY DIFFICULT (very limited options):
+- Budget under €900/month in Nerja/Frigiliana
+- 3+ large dogs (most landlords say no)
+- Families 5+ people with budget under €1,500
 
-Agencies usually say 'no' systematically to avoid complications. Being a local and personally knowing the landlords, I can negotiate face to face.
-
-I know which owners are flexible and how to present your profile so your pet isn't a problem, but just another detail of an excellent tenant.`,
+In the initial consultation I'll tell you clearly if I can help or not.
+I don't take your money if I can't deliver.`,
     'faq.q5': 'How do you protect me from scams or deception?',
     'faq.a5': `The online real estate market is full of traps: retouched photos, fake locations, or 'hidden defects' (humidity, unbearable noise, bad connection).
 
@@ -323,7 +400,8 @@ Most of my clients decide to proceed after the consultation because they clearly
 Shall we talk?`,
 
     // Final CTA
-    'finalCta.headline': 'Your home in Frigiliana is waiting. Start now.',
+    'finalCta.headlinePrefix': 'Your home in ',
+    'finalCta.headlineSuffix': ' is waiting. Start now.',
     'finalCta.subheadline': 'Next week you could be in your new home',
     'finalCta.button': 'Start free search',
     'finalCta.microcopy': "15-min consultation  •  No commitment  •  I'll call you today",
