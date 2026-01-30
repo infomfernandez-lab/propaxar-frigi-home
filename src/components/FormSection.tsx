@@ -46,7 +46,7 @@ const FormSection = () => {
             </p>
 
             {/* Native Forms Iframe */}
-            <div className="form-container bg-card border border-border rounded-xl shadow-lg p-10 pb-20 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-[1000px] md:min-h-0">
+            <div className="form-container bg-card border border-border rounded-xl shadow-lg p-10 pb-6 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-0">
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
                 width="100%" 
