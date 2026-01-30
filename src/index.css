@@ -290,6 +290,7 @@
 @media (max-width: 768px) {
   .form-container {
     min-height: 1450px !important; /* taller white container on mobile to fit full form */
+    padding-bottom: 20px !important; /* reduce extra white space below the submit button */
     overflow: visible !important;
   }
 
