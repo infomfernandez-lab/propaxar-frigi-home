@@ -6,13 +6,13 @@ const TestimonialsSection = () => {
 
   const testimonials = [
     {
-      quote: "Manuel encontró nuestra casa en 5 días. Nos ahorró semanas de búsqueda caótica y negoció un mejor precio.",
-      quoteEn: "Manuel found our house in 5 days. He saved us weeks of chaotic searching and negotiated a better price.",
-      name: "Sarah & Tom",
+      quote: "Los servicios de Manolo son excelentes. Es honesto y comprometido conmigo como cliente, no solo en la búsqueda de vivienda sino negociando términos y ayudándome con todos los extras que implica mudarse. Fue la única persona que se tomó el tiempo de entender exactamente lo que buscaba y cuáles eran mis prioridades. ¡Luego encontró mi casa perfecta en menos de 24 horas! Recomiendo mucho sus servicios. Tienen un precio muy razonable y me ahorraron un estrés enorme y búsquedas.",
+      quoteEn: "Manolo's services are excellent. He is honest and committed to me as a client, not only in property finding but negotiating terms and supporting me with all the extras that moving house involves. He is the one person who took time to find out exactly what I was looking for and what were my priorities. Then he found my perfect home in less than 24 hours! I highly recommend his services. They are very reasonably priced and saved me enormous stress and searching.",
+      name: "Sally H.",
       origin: "UK → Frigiliana",
-      property: "Casa 2 dormitorios, €950/mes",
-      propertyEn: "2-bedroom house, €950/month",
-      avatar: "ST",
+      property: "Casa perfecta en 24h",
+      propertyEn: "Perfect home in 24h",
+      avatar: "SH",
     },
     {
       quote: "Después de meses buscando desde Alemania sin éxito, Manuel lo resolvió en una semana. Increíble servicio.",

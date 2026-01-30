@@ -43,7 +43,7 @@ const translations = {
     'howItWorks.step2.title': 'Búsqueda exhaustiva',
     'howItWorks.step2.description': 'Reviso el 100% del mercado. Te presento las mejores opciones.',
     'howItWorks.step3.title': 'Tu nueva casa',
-    'howItWorks.step3.description': 'Coordino visitas, te acompaño, negocio por ti. Firma y mudanza en 7 días.',
+    'howItWorks.step3.description': 'Coordino visitas, te acompaño, te asesoro. Firma y mudanza en 7 días.',
     'howItWorks.cta': 'Empezar ahora',
 
     // Form Section
@@ -241,7 +241,7 @@ La mayoría de mis clientes deciden seguir después de la consulta porque ven cl
     'howItWorks.step2.title': 'Exhaustive search',
     'howItWorks.step2.description': 'I review 100% of the market. I present you the best options.',
     'howItWorks.step3.title': 'Your new home',
-    'howItWorks.step3.description': 'I coordinate visits, accompany you, negotiate for you. Signing and moving in 7 days.',
+    'howItWorks.step3.description': 'I coordinate visits, accompany you, advise you. Signed and moved in 7 days.',
     'howItWorks.cta': 'Start now',
 
     // Form Section
