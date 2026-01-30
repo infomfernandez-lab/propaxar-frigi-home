@@ -46,7 +46,7 @@ const FormSection = () => {
             </p>
 
             {/* Native Forms Iframe */}
-            <div className="form-container bg-card border border-border rounded-xl shadow-lg p-10 pb-6 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-0">
+            <div className="form-container bg-background-alt md:bg-card border border-border rounded-xl shadow-lg p-10 pb-6 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-0">
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
                 width="100%" 
@@ -57,6 +57,8 @@ const FormSection = () => {
                 title="Contact Form"
               />
             </div>
+            {/* Gradient fade on mobile to blend into next section */}
+            <div className="block md:hidden h-16 -mt-4 bg-gradient-to-b from-background to-background-alt pointer-events-none" />
             {/* Micro-copy below form */}
             <p className="text-center text-sm text-foreground-muted mt-4">
               {t('form.microcopy')}
