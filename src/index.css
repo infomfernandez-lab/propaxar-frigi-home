@@ -289,7 +289,7 @@
 /* Mobile form fix - ensure submit button is fully visible */
 @media (max-width: 768px) {
   .form-container {
-    min-height: 1000px !important;
+    min-height: 1150px !important; /* +150px height on mobile to fully reveal submit button */
     padding-bottom: 130px !important; /* +50px extra space on mobile */
     overflow: visible !important;
   }
