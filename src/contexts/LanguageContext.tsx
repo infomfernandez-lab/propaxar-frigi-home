@@ -47,8 +47,9 @@ const translations = {
     'howItWorks.cta': 'Empezar ahora',
 
     // Form Section
-    'form.headline': 'Empieza aquí (Gratis, 15 minutos)',
-    'form.subheadline': 'Te llamo en las próximas 24 horas. Sin compromiso.',
+    'form.headline': '¿Listo para empezar?',
+    'form.subheadline': 'Completa el formulario (2 min) y te llamo para una consulta gratuita de 15 minutos.',
+    'form.microcopy': '✓ Te contacto en 24h  •  Sin compromiso  •  Hablamos en inglés si necesitas',
     'form.placeholder': '[Formulario de contacto]',
     'form.placeholderNote': 'This is a placeholder. Replace with your Native Forms shortcode.',
     'form.timelineTitle': '¿Qué pasa después?',
@@ -205,8 +206,9 @@ La mayoría de mis clientes deciden seguir después de la consulta porque ven cl
     'howItWorks.cta': 'Start now',
 
     // Form Section
-    'form.headline': 'Start here (Free, 15 minutes)',
-    'form.subheadline': "I'll call you within 24 hours. No commitment.",
+    'form.headline': 'Ready to Start?',
+    'form.subheadline': "Complete the form (2 min) and I'll call you for a free 15-minute consultation.",
+    'form.microcopy': '✓ Response within 24h  •  No commitment  •  English spoken',
     'form.placeholder': '[Contact form]',
     'form.placeholderNote': 'This is a placeholder. Replace with your Native Forms shortcode.',
     'form.timelineTitle': 'What happens next?',

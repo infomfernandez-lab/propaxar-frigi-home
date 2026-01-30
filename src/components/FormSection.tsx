@@ -57,6 +57,10 @@ const FormSection = () => {
                 title="Contact Form"
               />
             </div>
+            {/* Micro-copy below form */}
+            <p className="text-center text-sm text-foreground-muted mt-4">
+              {t('form.microcopy')}
+            </p>
           </div>
 
           {/* Right Column - 40% (2/5) */}
