@@ -146,9 +146,15 @@ const HeroSection = () => {
                 <div className="stat-label">{t('hero.stat3.label')}</div>
               </div>
             </div>
-            {/* Temporal Context */}
+            {/* Temporal Context with Rotating Location */}
             <p className="text-[14px] text-[#666666] font-normal italic text-center mt-[25px] mb-0 opacity-0 animate-fade-in-up animation-delay-500">
-              {t('hero.temporalContext')}
+              {t('hero.temporalContextPrefix')}
+              <span 
+                className={`inline-block min-w-[80px] transition-all duration-300 ${getAnimationStyles().replace('text-white', 'text-[#666666]')}`}
+                style={{ color: animationPhase === 'gold' ? '#E8B44F' : undefined }}
+              >
+                {locations[currentIndex]}
+              </span>
             </p>
           </div>
         </div>
