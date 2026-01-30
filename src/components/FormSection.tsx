@@ -46,14 +46,14 @@ const FormSection = () => {
             </p>
 
             {/* Native Forms Iframe */}
-            <div className="form-container bg-card border border-border rounded-xl shadow-lg overflow-hidden p-10 pb-[100px] md:pb-10 box-border">
+            <div className="form-container bg-card border border-border rounded-xl shadow-lg p-10 pb-20 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-[1000px] md:min-h-0">
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
                 width="100%" 
                 height="820" 
                 frameBorder="0"
                 scrolling="no"
-                style={{ border: 'none', overflow: 'hidden', display: 'block', marginBottom: '50px' }}
+                style={{ border: 'none', overflow: 'hidden', display: 'block' }}
                 title="Contact Form"
               />
             </div>
