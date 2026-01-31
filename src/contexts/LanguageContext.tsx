@@ -200,6 +200,44 @@ Sin presión. Sin compromiso hasta que tú decidas.
 La mayoría de mis clientes deciden seguir después de la consulta porque ven claramente el valor.
 
 ¿Hablamos?`,
+    'faq.q9': '¿Cómo funciona la consulta inicial exactamente?',
+    'faq.a9': `15-30 minutos por teléfono o videollamada donde voy a preguntarte:
+
+✓ Qué tipo de casa buscas (dormitorios, zona, presupuesto)
+✓ Cuándo necesitas mudarte (urgencia real)
+✓ Situación personal (familia, mascotas, trabajo remoto)
+✓ Requisitos específicos (internet, parking, jardín, etc.)
+✓ Deal-breakers absolutos (qué no aceptarías nunca)
+
+Uso un checklist completo para no olvidar nada.
+
+Al final de la llamada:
+- Te digo claramente si puedo ayudarte o no
+- Si sí, te explico cómo trabajaría en tu caso específico
+- Te envío propuesta personalizada en 24h
+
+Sin presión. Sin compromiso hasta que tú decidas.`,
+    'faq.q10': '¿Qué información necesito preparar antes de la consulta?',
+    'faq.a10': `Para aprovechar al máximo la llamada, ten claro:
+
+BÁSICO (esencial):
+- Presupuesto real (no "depende", un rango concreto)
+- Fecha de mudanza (aunque sea aproximada)
+- Zona preferida (Frigiliana, Nerja, Torrox, flexible)
+
+ÚTIL (si lo sabes):
+- Dormitorios/baños necesarios
+- Si necesitas parking, jardín, terraza
+- Trabajo remoto (velocidad internet necesaria)
+- Mascotas (tipo y número)
+- Preferencias de ubicación (tranquilo, cerca playa, etc.)
+
+NO NECESITAS:
+- NIE o documentación (eso viene después)
+- Decisión tomada (la consulta es para decidir)
+- Fotos o referencias (las discutimos en la llamada)
+
+Cuanto más claro tengas lo que buscas, más rápido encuentro tu casa perfecta.`,
 
     // Final CTA
     'finalCta.headlinePrefix': 'Tu casa en ',
@@ -398,6 +436,44 @@ No pressure. No commitment until you decide.
 Most of my clients decide to proceed after the consultation because they clearly see the value.
 
 Shall we talk?`,
+    'faq.q9': 'How does the initial consultation work exactly?',
+    'faq.a9': `15-30 minutes by phone or video call where I'll ask you:
+
+✓ What type of home you're looking for (bedrooms, area, budget)
+✓ When you need to move (real urgency)
+✓ Personal situation (family, pets, remote work)
+✓ Specific requirements (internet, parking, garden, etc.)
+✓ Absolute deal-breakers (what you'd never accept)
+
+I use a comprehensive checklist so nothing is forgotten.
+
+At the end of the call:
+- I tell you clearly if I can help you or not
+- If yes, I explain how I'd work on your specific case
+- I send you a personalized proposal within 24h
+
+No pressure. No commitment until you decide.`,
+    'faq.q10': 'What information do I need to prepare before the consultation?',
+    'faq.a10': `To make the most of the call, be clear on:
+
+ESSENTIAL (must have):
+- Real budget (not "depends", a concrete range)
+- Move-in date (even if approximate)
+- Preferred area (Frigiliana, Nerja, Torrox, flexible)
+
+HELPFUL (if you know):
+- Bedrooms/bathrooms needed
+- If you need parking, garden, terrace
+- Remote work (internet speed required)
+- Pets (type and number)
+- Location preferences (quiet, near beach, etc.)
+
+NOT NEEDED:
+- NIE or documentation (that comes later)
+- Decision made (consultation is to decide)
+- Photos or references (we discuss in the call)
+
+The clearer you are about what you're looking for, the faster I find your perfect home.`,
 
     // Final CTA
     'finalCta.headlinePrefix': 'Your home in ',
