@@ -133,30 +133,6 @@ CON EXPERTO LOCAL:
 
 No pagas por 'buscar en Google por ti'.
 Pagas por 40 años de inteligencia local que te ahorran semanas de errores costosos.`,
-    'faq.q4': '¿Trabajas casos complicados? (mascotas, presupuesto ajustado, necesidades específicas)',
-    'faq.a4': `Depende. Seré honesto desde el principio.
-
-LO QUE SÍ PUEDO AYUDAR (presupuesto €900-2,500):
-✓ 1-2 mascotas bien educadas (conozco propietarios pet-friendly)
-✓ Requisitos específicos de internet (pruebo velocidad in situ)
-✓ Necesidades de accesibilidad
-✓ Preferencias de amueblado/sin amueblar
-✓ Ubicación específica (tranquilo, caminable, comunidad expat)
-✓ Familias con 2-3 niños
-✓ Alquileres largo plazo (12+ meses, más fácil negociar)
-
-DIFÍCIL PERO POSIBLE:
-- Presupuesto justo en zona cara
-- Timing muy ajustado (necesitas casa en 1 semana)
-- Combinación de requisitos específicos
-
-HONESTAMENTE DIFÍCIL (opciones muy limitadas):
-- Presupuesto bajo €900/mes en Nerja/Frigiliana
-- 3+ perros grandes (mayoría de propietarios dicen no)
-- Familias 5+ personas con presupuesto bajo €1,500
-
-En la consulta inicial te digo claramente si puedo ayudarte o no.
-No acepto tu dinero si no puedo cumplir.`,
     'faq.q5': '¿Cómo me proteges de estafas o engaños?',
     'faq.a5': `El mercado inmobiliario online está lleno de trampas: fotos retocadas, ubicaciones falsas o 'vicios ocultos' (humedades, ruidos insoportables, mala conexión).
 
@@ -369,30 +345,6 @@ WITH LOCAL EXPERT:
 
 You're not paying for 'searching Google for you'.
 You're paying for 40 years of local intelligence that saves you weeks of costly mistakes.`,
-    'faq.q4': 'Do you work on complicated cases? (pets, tight budget, specific needs)',
-    'faq.a4': `Depends. I'll be honest from the start.
-
-WHAT I CAN HELP WITH (budget €900-2,500):
-✓ 1-2 well-behaved pets (I know pet-friendly landlords)
-✓ Specific internet requirements (I test speed on-site)
-✓ Accessibility needs
-✓ Furnished/unfurnished preferences
-✓ Specific location (quiet, walkable, expat community)
-✓ Families with 2-3 children
-✓ Long-term rentals (12+ months, easier to negotiate)
-
-DIFFICULT BUT POSSIBLE:
-- Tight budget in expensive area
-- Very tight timing (need home in 1 week)
-- Combination of specific requirements
-
-HONESTLY DIFFICULT (very limited options):
-- Budget under €900/month in Nerja/Frigiliana
-- 3+ large dogs (most landlords say no)
-- Families 5+ people with budget under €1,500
-
-In the initial consultation I'll tell you clearly if I can help or not.
-I don't take your money if I can't deliver.`,
     'faq.q5': 'How do you protect me from scams or deception?',
     'faq.a5': `The online real estate market is full of traps: retouched photos, fake locations, or 'hidden defects' (humidity, unbearable noise, bad connection).
 

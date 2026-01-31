@@ -31,16 +31,15 @@ const FAQSection = () => {
   const { t } = useLanguage();
 
   const faqs = [
-    { question: t('faq.q1'), answer: t('faq.a1') },
-    { question: t('faq.q2'), answer: t('faq.a2') },
-    { question: t('faq.q3'), answer: t('faq.a3') },
-    { question: t('faq.q4'), answer: t('faq.a4') },
-    { question: t('faq.q5'), answer: t('faq.a5') },
-    { question: t('faq.q6'), answer: t('faq.a6') },
-    { question: t('faq.q7'), answer: t('faq.a7') },
-    { question: t('faq.q8'), answer: t('faq.a8') },
-    { question: t('faq.q9'), answer: t('faq.a9') },
-    { question: t('faq.q10'), answer: t('faq.a10') },
+    { question: t('faq.q1'), answer: t('faq.a1') },   // 1. Who is behind Propaxar?
+    { question: t('faq.q3'), answer: t('faq.a3') },   // 2. Why use local expert?
+    { question: t('faq.q2'), answer: t('faq.a2') },   // 3. What's included?
+    { question: t('faq.q9'), answer: t('faq.a9') },   // 4. How does consultation work?
+    { question: t('faq.q10'), answer: t('faq.a10') }, // 5. What to prepare?
+    { question: t('faq.q5'), answer: t('faq.a5') },   // 6. Protection from scams?
+    { question: t('faq.q6'), answer: t('faq.a6') },   // 7. Rent remotely?
+    { question: t('faq.q7'), answer: t('faq.a7') },   // 8. Utilities help?
+    { question: t('faq.q8'), answer: t('faq.a8') },   // 9. Next step?
   ];
 
   return (
