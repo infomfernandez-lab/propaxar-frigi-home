@@ -140,13 +140,19 @@ Yo realizo una Auditoría Técnica real. Si una casa tiene un problema, te lo di
 
 Mi lealtad es contigo, no con la venta. Te prevengo de cualquier intento de engaño porque conozco cada calle y cada historial de las viviendas del pueblo.`,
     'faq.q6': 'No puedo viajar a España ahora, ¿puedo alquilar a distancia?',
-    'faq.a6': `Es mi especialidad.
+    'faq.a6': `Sí, sin problema.
 
-El 80% de mis clientes cierran sus contratos desde su país de origen. Yo soy tus ojos y tus oídos.
+La mayoría de mis clientes firman desde su país.
 
-Te enviaré videos reales, mediciones de velocidad de internet y un informe de 'honestidad radical' sobre la zona.
+Visito las casas por ti y te grabo videos completos. Te digo exactamente lo que funciona mal, lo que está roto, y lo que el propietario no menciona. Si hay humedad, lo ves. Si los vecinos son ruidosos, te lo digo.
 
-Cuando llegues, tu única ocupación será girar la llave y disfrutar.`,
+Hablamos por videollamada, me haces preguntas, decides.
+
+Si quieres esa casa, reviso el contrato contigo línea por línea. Firmas digital desde tu país.
+
+Cuando aterrizas en España, te espero con las llaves en la puerta.
+
+Sin sorpresas.`,
     'faq.q7': '¿Me ayudas con los suministros y el desembarco (luz, agua, internet)?',
     'faq.a7': `Sí.
 
@@ -352,13 +358,19 @@ I perform a real Technical Audit. If a house has a problem, I'll tell you instan
 
 My loyalty is with you, not with the sale. I prevent any attempt at deception because I know every street and every property history in town.`,
     'faq.q6': "I can't travel to Spain now, can I rent remotely?",
-    'faq.a6': `It's my specialty.
+    'faq.a6': `Yes, no problem.
 
-80% of my clients close their contracts from their home country. I am your eyes and ears.
+Most of my clients sign from their home country.
 
-I'll send you real videos, internet speed measurements, and a 'radical honesty' report about the area.
+I visit the houses for you and record complete videos. I tell you exactly what doesn't work, what's broken, and what the landlord doesn't mention. If there's humidity, you see it. If neighbors are noisy, I tell you.
 
-When you arrive, your only task will be turning the key and enjoying.`,
+We talk via video call, you ask questions, you decide.
+
+If you want that house, I review the contract with you line by line. You sign digitally from your country.
+
+When you land in Spain, I meet you at the door with the keys.
+
+No surprises.`,
     'faq.q7': 'Do you help with utilities and landing (electricity, water, internet)?',
     'faq.a7': `Yes.
 
