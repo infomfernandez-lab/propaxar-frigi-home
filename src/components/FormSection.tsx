@@ -24,11 +24,6 @@ const FormSection = () => {
       title: t('form.step4.title'),
       description: t('form.step4.description'),
     },
-    {
-      number: 5,
-      title: t('form.step5.title'),
-      description: t('form.step5.description'),
-    },
   ];
 
   return (
