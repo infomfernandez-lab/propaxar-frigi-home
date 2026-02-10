@@ -126,7 +126,7 @@ const PropertyFinder = () => {
               <span className="text-sm md:text-base">
                 He leído y acepto los{" "}
                 <a
-                  href="https://propaxar.es/terminos-property-finder"
+                  href="/terminos-finder"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline font-medium hover:text-[#ffd700] transition-colors"
