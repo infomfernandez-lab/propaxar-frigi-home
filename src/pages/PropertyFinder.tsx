@@ -37,7 +37,7 @@ const PropertyFinder = () => {
       return;
     }
     // Replace with real Stripe Payment Link
-    window.location.href = "https://buy.stripe.com/XXXXXXXXXXXXXXX";
+    window.location.href = "https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02";
   };
 
   return (
