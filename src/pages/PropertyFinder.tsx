@@ -161,7 +161,7 @@ const PropertyFinder = () => {
           <h3 className="text-2xl font-bold text-[#333] mb-2">¿Dudas Antes de Contratar?</h3>
           <p className="text-[#666] mb-6">Habla conmigo directamente</p>
           <a
-            href="https://wa.me/34XXXXXXXXX?text=Hola%20Manuel,%20tengo%20preguntas%20sobre%20el%20Property%20Finder"
+            href="https://wa.me/34662317561?text=Hola%20Manuel,%20tengo%20preguntas%20sobre%20el%20Property%20Finder"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25d366] hover:bg-[#1da851] text-white text-lg font-bold px-8 py-4 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5"
