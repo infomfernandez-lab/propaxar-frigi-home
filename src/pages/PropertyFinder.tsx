@@ -53,7 +53,7 @@ const translations = {
   footerRights: { es: "Todos los derechos reservados.", en: "All rights reserved." },
 };
 
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gw9E38Tn3sQ2Oc6oo";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02";
 
 const PropertyFinder = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
