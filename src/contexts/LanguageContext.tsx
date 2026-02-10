@@ -33,7 +33,7 @@ const translations = {
     'hero.stat2.label': 'Tiempo promedio',
     'hero.stat3.number': '100%',
     'hero.stat3.label': 'Cobertura mercado',
-    'hero.temporalContextPrefix': 'Desde 2020 ayudando a personas de todo el mundo a encontrar su hogar en ',
+    'hero.temporalContextPrefix': 'Con más de 10 años de experiencia ayudando a personas de todo el mundo a encontrar su hogar en ',
 
     // How It Works
     'howItWorks.headline': 'Cómo funciona',
@@ -43,7 +43,7 @@ const translations = {
     'howItWorks.step2.title': 'Búsqueda exhaustiva',
     'howItWorks.step2.description': 'Reviso el 100% del mercado. Te presento las mejores opciones.',
     'howItWorks.step3.title': 'Tu nueva casa',
-    'howItWorks.step3.description': 'Coordino visitas, te acompaño, te asesoro. Firma y mudanza en 7 días.',
+    'howItWorks.step3.description': 'Coordino visitas, te acompaño, te asesoro. Del primer contacto a las llaves en tiempo récord.',
     'howItWorks.cta': 'Empezar ahora',
 
     // Form Section
@@ -71,153 +71,86 @@ const translations = {
     // FAQ
     'faq.headline': 'Preguntas Frecuentes',
     'faq.subheadline': 'Velocidad, Control y Resultados',
-    'faq.q1': '¿Quién hay detrás de Propaxar?',
-    'faq.a1': `Soy Manuel Fernández.
+    'faq.section1.title': 'Lo que realmente importa',
+    'faq.section2.title': 'Cómo funciona esto',
+    'faq.section3.title': 'Confianza y decisión',
 
-Nacido en Frigiliana hace más de 40 años.
+    'faq.q1': '¿Por qué necesito ayuda para encontrar casa?',
+    'faq.a1': `No la necesitas. Puedes hacerlo solo. Pero la pregunta real es: ¿tienes tiempo para revisar 200 anuncios, viajar 3 veces, ver 15 casas equivocadas, y descubrir después que la calle tiene problemas de agua?
 
-He vivido toda mi vida en Axarquía. Conozco cada calle, cada barrio, cada propietario.
+Yo llevo 10 años viviendo esto cada día. Conozco qué funciona y qué no. Te ahorro el camino largo. Tú decides si prefieres el atajo o el camino completo.`,
+    'faq.q2': '¿Qué gano exactamente contratándote?',
+    'faq.a2': `Tres cosas concretas:
 
-No soy una agencia corporativa con oficina en la playa.
+- Tiempo: De 3 meses buscando a 1 semana con resultados
+- Dinero: Te ahorras viajes innecesarios y evitas casas problema
+- Tranquilidad: Alguien que conoce cada calle te dice "sí, esto funciona" o "no, esto no"
 
-Soy un asesor independiente que representa TUS intereses, no los del propietario.
+No se trata de encontrar UNA casa. Se trata de encontrar LA casa.`,
+    'faq.q3': '¿La consulta es gratis? ¿Hay trampa?',
+    'faq.a3': `Es gratis. Sin trampa.
 
-Mi negocio funciona por referencias: Si no te ayudo bien, mi reputación en este pueblo pequeño se destruye.
+Hablamos 15 minutos. Entiendo qué buscas. Te digo si puedo ayudarte. Si tiene sentido trabajar juntos, te explico cómo. Si no, te digo la verdad y no perdemos tiempo.
 
-Por eso cada cliente recibe mi atención personal directa.
+Prefiero 10 clientes buenos que 50 clientes equivocados.`,
+    'faq.q4': '¿Me vas a vender algo que no necesito?',
+    'faq.a4': `No puedo.
 
-Trabaja con alguien que conoce esta zona mejor que nadie.`,
-    'faq.q2': '¿Qué incluye exactamente tu servicio?',
-    'faq.a2': `Depende de tu caso, pero siempre incluye:
+Mi negocio es recomendaciones. Si te vendo basura, me dejas mala reseña en Google y pierdo 10 clientes futuros.
 
-CORE (Todos los servicios):
-✓ Consulta personalizada detallada
-✓ Acceso 100% mercado (agencias + directos + off-market)
-✓ Pre-selección de mejores opciones
-✓ Dossier con análisis honesto de cada propiedad
-✓ Auditoría técnica (problemas ocultos, zona real, vecinos)
-✓ Coordinación de todas las visitas
-✓ Acompañamiento presencial (traducción si necesario)
-✓ Negociación de precio/condiciones
-✓ Revisión de contrato de alquiler/compra
-✓ Conexión con profesionales (abogado, gestor, si necesitas)
+Prefiero decirte "esto no es lo que buscas" que venderte algo equivocado. A largo plazo, la honestidad me da más dinero que el cortoplacismo.`,
+    'faq.q5': '¿Cuánto cuesta trabajar contigo?',
+    'faq.a5': `Depende de cómo trabajemos juntos. Hay diferentes formas de colaborar según tu situación.
 
-ADICIONALES (Según tu necesidad):
-✓ Gestión NIE y empadronamiento
-✓ Alta de suministros (luz, agua, internet, móvil)
-✓ Tour de inmersión local
-✓ Soporte post-mudanza (30 días)
+En la consulta inicial te explico las opciones con precios claros. Tú decides si tiene sentido. Cero sorpresas, todo transparente ANTES de empezar.`,
 
-Todo personalizado según lo que necesites.
-La inversión varía según servicios incluidos.
-Lo discutimos en la consulta inicial.`,
-    'faq.q3': '¿Por qué debería usar un experto local en vez de buscar solo?',
-    'faq.a3': `Porque conocer la zona de verdad marca la diferencia.
+    'faq.q6': '¿Qué pasa después de rellenar el formulario?',
+    'faq.a6': `Simple:
 
-BUSCANDO SOLO:
-- 40% de anuncios están desactualizados (ya alquilados)
-- Fotos engañosas, descripciones inexactas
-- Contactas 10 agencias, la mitad no responde
-- Visitas propiedades que no encajan
-- Descubres problemas DESPUÉS de firmar
-- 3-4 semanas de frustración
+Hoy: Rellenas formulario (2 minutos)
+En 5 minutos: Email confirmación con detalles
+En 24 horas: Te llamo (o WhatsApp, tú eliges)
+15 minutos después: Sabes exactamente qué sigue
 
-CON EXPERTO LOCAL:
-- Conozco qué está disponible DE VERDAD
-- Sé qué barrios y calles son buenos vs turísticos/ruidosos
-- Pruebo disponibilidad, calidad y velocidad de conexiones a internet personalmente (crítico para nómadas)
-- Detecto problemas antes de que pierdas tiempo
-- 7-10 días de primera llamada a firma
+No hay misterio. No hay esperas eternas. Todo directo.`,
+    'faq.q7': '¿Necesito viajar a España ya mismo?',
+    'faq.a7': `No.
 
-No pagas por 'buscar en Google por ti'.
-Pagas por 40 años de inteligencia local que te ahorran semanas de errores costosos.`,
-    'faq.q5': '¿Cómo me proteges de estafas o engaños?',
-    'faq.a5': `El mercado inmobiliario online está lleno de trampas: fotos retocadas, ubicaciones falsas o 'vicios ocultos' (humedades, ruidos insoportables, mala conexión).
+Primero hablamos, entiendo qué buscas, y cuando tengamos opciones que realmente encajan, ENTONCES vienes.
 
-Yo realizo una Auditoría Técnica real. Si una casa tiene un problema, te lo diré al instante.
+La mayoría de mis clientes hacen 1 solo viaje y firman. Nada de venir "a explorar" sin plan. Eso es perder tiempo y dinero.`,
+    'faq.q8': '¿Puedo seguir buscando por mi cuenta mientras tanto?',
+    'faq.a8': `Claro.
 
-Mi lealtad es contigo, no con la venta. Te prevengo de cualquier intento de engaño porque conozco cada calle y cada historial de las viviendas del pueblo.`,
-    'faq.q6': 'No puedo viajar a España ahora, ¿puedo alquilar a distancia?',
-    'faq.a6': `Sí, sin problema.
+No hay exclusividad. Si encuentras algo bueno por tu cuenta, perfecto. Si yo encuentro algo mejor, genial.
 
-La mayoría de mis clientes firman desde su país.
+El objetivo es que consigas tu casa. No importa cómo.`,
+    'faq.q9': '¿Necesito hablar español?',
+    'faq.a9': `No.
 
-Visito las casas por ti y te grabo videos completos. Te digo exactamente lo que funciona mal, lo que está roto, y lo que el propietario no menciona. Si hay humedad, lo ves. Si los vecinos son ruidosos, te lo digo.
+Hablo inglés fluido. Toda la comunicación puede ser en inglés: llamadas, emails, contratos, visitas. También traduzco documentos si necesitas.
 
-Hablamos por videollamada, me haces preguntas, decides.
+Pero vivir aquí sin español básico es complicado. Te recomiendo aprender lo esencial si vienes a largo plazo.`,
 
-Si quieres esa casa, reviso el contrato contigo línea por línea. Firmas digital desde tu país.
+    'faq.q10': '¿Quién eres exactamente?',
+    'faq.a10': `Manuel Fernández. Agente inmobiliario. 10 años de experiencia en Frigiliana, Nerja y Torrox. Vivo aquí.
 
-Cuando aterrizas en España, te espero con las llaves en la puerta.
+No soy una agencia con 20 agentes que rotan cada mes. Soy yo quien te busca, quien te llama, quien te acompaña. Siempre la misma persona del principio al final.`,
+    'faq.q11': '¿Cómo sé que puedo confiar en ti?',
+    'faq.a11': `No lo sabes hasta que hablamos.
 
-Sin sorpresas.`,
-    'faq.q7': '¿Me ayudas con los suministros y el desembarco (luz, agua, internet)?',
-    'faq.a7': `Sí.
+Lee los testimonios arriba si quieres. Búscame en Google si quieres. Pero la realidad es: hablas conmigo 15 minutos y decides si te genera confianza.
 
-Con el paquete Lifestyle Complete, yo me encargo del 'trabajo sucio'. Cambio de titularidad de suministros, gestión de trámites y una inmersión local para que sepas dónde comprar, a quién llamar y cómo moverte.
+La consulta es gratis precisamente para eso. Sin riesgo.`,
+    'faq.q12': '¿Qué necesito preparar antes de llamar?',
+    'faq.a12': `Solo 4 cosas:
 
-Te ahorro meses de burocracia y errores de principiante.`,
-    'faq.q8': '¿Cuál es el siguiente paso?',
-    'faq.a8': `Simple:
+- Cuándo quieres mudarte (mes aproximado)
+- Cuánto quieres gastar al mes (rango está bien)
+- Dónde (Frigiliana/Nerja/Torrox/Cómpeta)
+- 3 cosas imprescindibles de tu casa ideal
 
-1. Completa el formulario arriba (2 minutos)
-   O llámame/escríbeme directo: +34 662 317 561
-
-2. Agendamos consulta inicial (15-30 min, gratis)
-   Según tu disponibilidad.
-
-3. En la consulta:
-   • Entiendo tu situación
-   • Evalúo si puedo ayudarte
-   • Te explico cómo trabajaría en tu caso
-
-4. Si encajamos:
-   • Te envío propuesta personalizada
-   • Incluye servicios, inversión, timeline
-   • Decides si seguimos o no
-
-Sin presión. Sin compromiso hasta que tú decidas.
-La mayoría de mis clientes deciden seguir después de la consulta porque ven claramente el valor.
-
-¿Hablamos?`,
-    'faq.q9': '¿Cómo funciona la consulta inicial exactamente?',
-    'faq.a9': `15-30 minutos por teléfono o videollamada donde voy a preguntarte:
-
-✓ Qué tipo de casa buscas (dormitorios, zona, presupuesto)
-✓ Cuándo necesitas mudarte (urgencia real)
-✓ Situación personal (familia, mascotas, trabajo remoto)
-✓ Requisitos específicos (internet, parking, jardín, etc.)
-✓ Deal-breakers absolutos (qué no aceptarías nunca)
-
-Uso un checklist completo para no olvidar nada.
-
-Al final de la llamada:
-- Te digo claramente si puedo ayudarte o no
-- Si sí, te explico cómo trabajaría en tu caso específico
-- Te envío propuesta personalizada en 24h
-
-Sin presión. Sin compromiso hasta que tú decidas.`,
-    'faq.q10': '¿Qué información necesito preparar antes de la consulta?',
-    'faq.a10': `Para aprovechar al máximo la llamada, ten claro:
-
-BÁSICO (esencial):
-- Presupuesto real (no "depende", un rango concreto)
-- Fecha de mudanza (aunque sea aproximada)
-- Zona preferida (Frigiliana, Nerja, Torrox, flexible)
-
-ÚTIL (si lo sabes):
-- Dormitorios/baños necesarios
-- Si necesitas parking, jardín, terraza
-- Trabajo remoto (velocidad internet necesaria)
-- Mascotas (tipo y número)
-- Preferencias de ubicación (tranquilo, cerca playa, etc.)
-
-NO NECESITAS:
-- NIE o documentación (eso viene después)
-- Decisión tomada (la consulta es para decidir)
-- Fotos o referencias (las discutimos en la llamada)
-
-Cuanto más claro tengas lo que buscas, más rápido encuentro tu casa perfecta.`,
+Eso es todo. El resto lo hablamos en la llamada. No necesitas preparar presentación PowerPoint de tu vida.`,
 
     // Final CTA
     'finalCta.headlinePrefix': 'Tu casa en ',
@@ -249,7 +182,7 @@ Cuanto más claro tengas lo que buscas, más rápido encuentro tu casa perfecta.
     'hero.stat2.label': 'Average time',
     'hero.stat3.number': '100%',
     'hero.stat3.label': 'Market coverage',
-    'hero.temporalContextPrefix': 'Since 2020 helping people from all over the world find their home in ',
+    'hero.temporalContextPrefix': 'With over 10 years of experience helping people from all over the world find their home in ',
 
     // How It Works
     'howItWorks.headline': 'How it works',
@@ -259,7 +192,7 @@ Cuanto más claro tengas lo que buscas, más rápido encuentro tu casa perfecta.
     'howItWorks.step2.title': 'Exhaustive search',
     'howItWorks.step2.description': 'I review 100% of the market. I present you the best options.',
     'howItWorks.step3.title': 'Your new home',
-    'howItWorks.step3.description': 'I coordinate visits, accompany you, advise you. Signed and moved in 7 days.',
+    'howItWorks.step3.description': 'I coordinate visits, accompany you, advise you. From first contact to keys in record time.',
     'howItWorks.cta': 'Start now',
 
     // Form Section
@@ -287,153 +220,86 @@ Cuanto más claro tengas lo que buscas, más rápido encuentro tu casa perfecta.
     // FAQ
     'faq.headline': 'Frequently Asked Questions',
     'faq.subheadline': 'Speed, Control and Results',
-    'faq.q1': 'Who is behind Propaxar?',
-    'faq.a1': `I'm Manuel Fernández.
+    'faq.section1.title': 'What really matters',
+    'faq.section2.title': 'How this works',
+    'faq.section3.title': 'Trust and decision',
 
-Born in Frigiliana over 40 years ago.
+    'faq.q1': 'Why do I need help finding a home?',
+    'faq.a1': `You don't. You can do it alone. But the real question is: do you have time to review 200 listings, travel 3 times, see 15 wrong homes, and then discover the street has water problems?
 
-I've lived my entire life in Axarquía. I know every street, every neighborhood, every landlord.
+I've been living this every day for 10 years. I know what works and what doesn't. I save you the long road. You decide if you prefer the shortcut or the full journey.`,
+    'faq.q2': 'What do I actually gain by hiring you?',
+    'faq.a2': `Three concrete things:
 
-I'm not a corporate agency with a beach office.
+- Time: From 3 months searching to 1 week with results
+- Money: You save on unnecessary trips and avoid problem houses
+- Peace of mind: Someone who knows every street tells you "yes, this works" or "no, this doesn't"
 
-I'm an independent advisor who represents YOUR interests, not the landlord's.
+It's not about finding A home. It's about finding THE home.`,
+    'faq.q3': 'Is the consultation free? Is there a catch?',
+    'faq.a3': `It's free. No catch.
 
-My business runs on referrals: If I don't help you well, my reputation in this small town is destroyed.
+We talk for 15 minutes. I understand what you're looking for. I tell you if I can help. If it makes sense to work together, I explain how. If not, I tell you the truth and we don't waste time.
 
-That's why every client receives my direct personal attention.
+I prefer 10 good clients over 50 wrong ones.`,
+    'faq.q4': 'Are you going to sell me something I don\'t need?',
+    'faq.a4': `I can't.
 
-Work with someone who knows this area better than anyone.`,
-    'faq.q2': "What's included in your service?",
-    'faq.a2': `Depends on your case, but always includes:
+My business is referrals. If I sell you garbage, you leave me a bad Google review and I lose 10 future clients.
 
-CORE (All services):
-✓ Detailed personalized consultation
-✓ 100% market access (agencies + direct owners + off-market)
-✓ Pre-selection of best options
-✓ Dossier with honest analysis of each property
-✓ Technical audit (hidden issues, real neighborhood, neighbors)
-✓ Coordination of all viewings
-✓ In-person accompaniment (translation if needed)
-✓ Price/terms negotiation
-✓ Rental/purchase contract review
-✓ Connection to professionals (lawyer, gestor, if needed)
+I'd rather tell you "this isn't what you're looking for" than sell you something wrong. In the long run, honesty makes me more money than short-termism.`,
+    'faq.q5': 'How much does it cost to work with you?',
+    'faq.a5': `It depends on how we work together. There are different ways to collaborate depending on your situation.
 
-ADDITIONAL (Based on your needs):
-✓ NIE and registration management
-✓ Utilities setup (electricity, water, internet, mobile)
-✓ Local immersion tour
-✓ Post-move support (30 days)
+In the initial consultation I explain the options with clear pricing. You decide if it makes sense. Zero surprises, everything transparent BEFORE we start.`,
 
-Everything customized to what you need.
-Investment varies based on services included.
-We discuss it in the initial consultation.`,
-    'faq.q3': 'Why should I use a local expert instead of searching myself?',
-    'faq.a3': `Because truly knowing the area makes all the difference.
+    'faq.q6': 'What happens after I fill out the form?',
+    'faq.a6': `Simple:
 
-SEARCHING ALONE:
-- 40% of listings are outdated (already rented)
-- Misleading photos, inaccurate descriptions
-- You contact 10 agencies, half don't respond
-- You visit properties that don't fit
-- You discover problems AFTER signing
-- 3-4 weeks of frustration
+Today: You fill out the form (2 minutes)
+In 5 minutes: Confirmation email with details
+Within 24 hours: I call you (or WhatsApp, your choice)
+15 minutes later: You know exactly what's next
 
-WITH LOCAL EXPERT:
-- I know what's ACTUALLY available
-- I know which neighborhoods and streets are good vs touristy/noisy
-- I personally test availability, quality and speed of internet connections (critical for nomads)
-- I spot problems before you waste time
-- 7-10 days from first call to signed contract
+No mystery. No endless waiting. Everything direct.`,
+    'faq.q7': 'Do I need to travel to Spain right now?',
+    'faq.a7': `No.
 
-You're not paying for 'searching Google for you'.
-You're paying for 40 years of local intelligence that saves you weeks of costly mistakes.`,
-    'faq.q5': 'How do you protect me from scams or deception?',
-    'faq.a5': `The online real estate market is full of traps: retouched photos, fake locations, or 'hidden defects' (humidity, unbearable noise, bad connection).
+First we talk, I understand what you're looking for, and when we have options that truly fit, THEN you come.
 
-I perform a real Technical Audit. If a house has a problem, I'll tell you instantly.
+Most of my clients make 1 single trip and sign. No coming "to explore" without a plan. That's wasting time and money.`,
+    'faq.q8': 'Can I keep searching on my own in the meantime?',
+    'faq.a8': `Of course.
 
-My loyalty is with you, not with the sale. I prevent any attempt at deception because I know every street and every property history in town.`,
-    'faq.q6': "I can't travel to Spain now, can I rent remotely?",
-    'faq.a6': `Yes, no problem.
+There's no exclusivity. If you find something good on your own, perfect. If I find something better, great.
 
-Most of my clients sign from their home country.
+The goal is for you to get your home. Doesn't matter how.`,
+    'faq.q9': 'Do I need to speak Spanish?',
+    'faq.a9': `No.
 
-I visit the houses for you and record complete videos. I tell you exactly what doesn't work, what's broken, and what the landlord doesn't mention. If there's humidity, you see it. If neighbors are noisy, I tell you.
+I speak fluent English. All communication can be in English: calls, emails, contracts, viewings. I also translate documents if needed.
 
-We talk via video call, you ask questions, you decide.
+But living here without basic Spanish is complicated. I recommend learning the essentials if you're coming long-term.`,
 
-If you want that house, I review the contract with you line by line. You sign digitally from your country.
+    'faq.q10': 'Who are you exactly?',
+    'faq.a10': `Manuel Fernández. Real estate agent. 10 years of experience in Frigiliana, Nerja and Torrox. I live here.
 
-When you land in Spain, I meet you at the door with the keys.
+I'm not an agency with 20 agents who rotate every month. I'm the one who searches for you, who calls you, who accompanies you. Always the same person from start to finish.`,
+    'faq.q11': 'How do I know I can trust you?',
+    'faq.a11': `You don't until we talk.
 
-No surprises.`,
-    'faq.q7': 'Do you help with utilities and landing (electricity, water, internet)?',
-    'faq.a7': `Yes.
+Read the testimonials above if you want. Look me up on Google if you want. But the reality is: you talk to me for 15 minutes and decide if I generate trust.
 
-With the Lifestyle Complete package, I handle the 'dirty work'. Transfer of utility ownership, paperwork management, and local immersion so you know where to shop, who to call, and how to get around.
+The consultation is free precisely for that. No risk.`,
+    'faq.q12': 'What do I need to prepare before calling?',
+    'faq.a12': `Just 4 things:
 
-I save you months of bureaucracy and beginner mistakes.`,
-    'faq.q8': "What's the next step?",
-    'faq.a8': `Simple:
+- When you want to move (approximate month)
+- How much you want to spend per month (a range is fine)
+- Where (Frigiliana/Nerja/Torrox/Cómpeta)
+- 3 must-haves for your ideal home
 
-1. Complete the form above (2 minutes)
-   Or call/text me directly: +34 662 317 561
-
-2. We schedule initial consultation (15-30 min, free)
-   According to your availability.
-
-3. In the consultation:
-   • I understand your situation
-   • I evaluate if I can help you
-   • I explain how I would work on your case
-
-4. If we're a fit:
-   • I send you personalized proposal
-   • Includes services, investment, timeline
-   • You decide if we proceed or not
-
-No pressure. No commitment until you decide.
-Most of my clients decide to proceed after the consultation because they clearly see the value.
-
-Shall we talk?`,
-    'faq.q9': 'How does the initial consultation work exactly?',
-    'faq.a9': `15-30 minutes by phone or video call where I'll ask you:
-
-✓ What type of home you're looking for (bedrooms, area, budget)
-✓ When you need to move (real urgency)
-✓ Personal situation (family, pets, remote work)
-✓ Specific requirements (internet, parking, garden, etc.)
-✓ Absolute deal-breakers (what you'd never accept)
-
-I use a comprehensive checklist so nothing is forgotten.
-
-At the end of the call:
-- I tell you clearly if I can help you or not
-- If yes, I explain how I'd work on your specific case
-- I send you a personalized proposal within 24h
-
-No pressure. No commitment until you decide.`,
-    'faq.q10': 'What information do I need to prepare before the consultation?',
-    'faq.a10': `To make the most of the call, be clear on:
-
-ESSENTIAL (must have):
-- Real budget (not "depends", a concrete range)
-- Move-in date (even if approximate)
-- Preferred area (Frigiliana, Nerja, Torrox, flexible)
-
-HELPFUL (if you know):
-- Bedrooms/bathrooms needed
-- If you need parking, garden, terrace
-- Remote work (internet speed required)
-- Pets (type and number)
-- Location preferences (quiet, near beach, etc.)
-
-NOT NEEDED:
-- NIE or documentation (that comes later)
-- Decision made (consultation is to decide)
-- Photos or references (we discuss in the call)
-
-The clearer you are about what you're looking for, the faster I find your perfect home.`,
+That's it. We discuss the rest on the call. You don't need to prepare a PowerPoint presentation of your life.`,
 
     // Final CTA
     'finalCta.headlinePrefix': 'Your home in ',
