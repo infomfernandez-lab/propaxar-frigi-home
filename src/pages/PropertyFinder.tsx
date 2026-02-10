@@ -58,11 +58,11 @@ const PropertyFinder = () => {
           <p className="text-[#666] text-lg max-w-[600px] mx-auto mb-8">
             Encuentra tu casa perfecta en La Axarquía. Sin perder tiempo. Sin visitar propiedades incorrectas.
           </p>
-          <div className="inline-block bg-white rounded-xl shadow-lg px-8 py-6">
+          <a href="#cta-section" className="inline-block bg-white rounded-xl shadow-lg px-8 py-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
             <p className="text-[36px] md:text-[48px] font-extrabold text-[#48bb78] leading-none">€180</p>
             <p className="text-[#666] text-sm mt-2 font-medium">Pago inicial · No reembolsable</p>
             <p className="text-[#999] text-xs mt-1">+ €220 cuando alquiles una de nuestras propiedades</p>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -111,7 +111,7 @@ const PropertyFinder = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-12 md:py-16" style={{ background: "linear-gradient(135deg, #667eea, #764ba2)" }}>
+      <section id="cta-section" className="py-12 md:py-16" style={{ background: "linear-gradient(135deg, #667eea, #764ba2)" }}>
         <div className="max-w-[800px] mx-auto px-5 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8">Reserva Tu Servicio Ahora</h3>
 
