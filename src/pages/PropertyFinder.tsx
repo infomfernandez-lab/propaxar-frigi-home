@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const benefits = [
   {
@@ -31,14 +31,14 @@ const benefits = [
 const PropertyFinder = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const handlePayClick = () => {
-    if (!termsAccepted) {
-      alert("Por favor acepta los términos del servicio antes de continuar.");
-      return;
-    }
-    // Replace with real Stripe Payment Link
-    window.location.href = "https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02";
-  };
+  // Load Stripe Buy Button script
+  useEffect(() => {
+    if (document.querySelector('script[src="https://js.stripe.com/v3/buy-button.js"]')) return;
+    const script = document.createElement("script");
+    script.src = "https://js.stripe.com/v3/buy-button.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
@@ -137,16 +137,12 @@ const PropertyFinder = () => {
             </label>
           </div>
 
-          <div>
-            <button
-              onClick={handlePayClick}
-              disabled={!termsAccepted}
-              className={`w-full md:w-auto bg-[#48bb78] hover:bg-[#38a169] text-white text-lg md:text-xl font-bold px-10 py-4 rounded-lg shadow-lg transition-all duration-200 ${
-                !termsAccepted ? "opacity-50 cursor-not-allowed" : "hover:-translate-y-0.5 hover:shadow-xl"
-              }`}
-            >
-              CONTRATAR SERVICIO - €180
-            </button>
+          <div className={`transition-opacity duration-200 ${!termsAccepted ? "opacity-50 pointer-events-none" : ""}`}>
+            {/* @ts-ignore */}
+            <stripe-buy-button
+              buy-button-id="buy_btn_1SyAqmRr8mv99h3kKtozGHTl"
+              publishable-key="pk_live_51QhILbRr8mv99h3kmartLlSlZMtvYX3bXDFHLVfNmn34jh6aWDoUQt2H7qxzKOlHRqVYAUj3CVCznUiNepY6oXqR00iDrVqBTK"
+            />
           </div>
 
           <p className="text-white/80 text-sm mt-5">
