@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PropertyFinder from "./pages/PropertyFinder";
 import TerminosFinder from "./pages/TerminosFinder";
 import ReporteTest from "./pages/ReporteTest";
+import ReportePropaxar from "./pages/ReportePropaxar";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/finder" element={<PropertyFinder />} />
             <Route path="/terminos-finder" element={<TerminosFinder />} />
             <Route path="/reporte-test" element={<ReporteTest />} />
+            <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
