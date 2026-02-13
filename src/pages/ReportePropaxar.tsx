@@ -1,18 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Clock, Search, Target, Award } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import heroImg from "@/assets/hero-frigiliana.jpg";
-
-// Report-specific color tokens
-const COLORS = {
-  green: "142 71% 45%",
-  blueDark: "213 56% 23%",
-  grayText: "215 19% 34%",
-};
 
 const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hola%20Manuel%2C%20he%20visto%20el%20reporte%20y%20me%20gustaría%20hablar.";
 const EMAIL_LINK = "mailto:info@propaxar.com?subject=Reporte%20Inmobiliario%20-%20Consulta";
@@ -31,246 +24,20 @@ function useFadeIn() {
   return { ref, className: `transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}` };
 }
 
-// ─── PROPIEDADES REALES ───
+// ─── DATOS KATINKA ───
 const properties = [
   {
     id: 1,
-    ref: "pa194",
-    name: "Casa Zambra - Camino de la Cruz",
-    price: "€1,600/mes",
-    beds: 3,
-    baths: 2,
-    size: "100m²",
-    rating: 5,
-    badge: "PROPAXAR DIRECT",
-    summary: "Casa rústica en zona premium. Vistas espectaculares 360°, acceso perfecto, luz natural todo el día. Orientación sur. Ideal trabajo remoto.",
-    photos: [
-      "https://propaxar.com/wp-content/uploads/2025/09/3843121-14b2d3a1.jpg",
-      "https://propaxar.com/wp-content/uploads/2025/09/3843121-05a32812.jpg",
-      "https://propaxar.com/wp-content/uploads/2025/09/3843121-524b50d1.jpg",
-      "https://propaxar.com/wp-content/uploads/2025/09/3843121-c46b8798.jpg",
-      "https://propaxar.com/wp-content/uploads/2025/09/3843121-58d0de97.jpg",
-      "https://propaxar.com/wp-content/uploads/2025/09/3843121-e0cd04a0.jpg",
-    ],
-    location: { address: "Camino de la Cruz - Frigiliana Oeste", lat: 36.7928, lng: -3.8970 },
-    pros: [
-      "Ubicación perfecta - zona más demandada Frigiliana",
-      "Acceso perfecto - coche hasta la puerta",
-      "Vistas espectaculares mar, campo, montaña y pueblo",
-      "Orientación sur - luz natural todo el día",
-      "Espacios exteriores amplios y aprovechables",
-      "2 baños completos",
-      "Propietarios locales serios - respuesta rápida",
-    ],
-    cons: [
-      "Casa contigua (pero muy privada)",
-      "Carril al lado - se escuchan coches pasar ocasionalmente (no molesto)",
-      "Internet WiMax 60MB - suficiente pero no fibra",
-    ],
-    analysis: {
-      quality: { stars: 5, text: "Construcción estilo rústico muy bien mantenida. Propietarios cuidan casa impecablemente. Sin humedades, todo funciona perfectamente." },
-      price: { stars: 4, label: "JUSTO", text: "€1,600 precio correcto para zona premium. Casas similares Loma Cruz: €1,100-1,500.\nPotencial negociación: Bajo (5%). Propietarios serios, precio justo desde inicio." },
-      location: { stars: 5, label: "EXCELENTE", text: "Mejor zona Frigiliana campo. Alta demanda constante.\nAcceso rápido desde Frigiliana/Nerja/Torrox por varios caminos.\nOrientación sur perfecta." },
-    },
-    tests: [
-      { label: "Internet", status: "ok", detail: "WiMax 60MB", note: "Instalado y funcionando - Starlink 300MB opcional €70/mes" },
-      { label: "Móvil", status: "ok", detail: "Cobertura perfecta", note: "Movistar/Vodafone - 4-5 barras" },
-      { label: "Ruido día", status: "ok", detail: "Bajo", note: "Carril con tráfico ocasional - no molesto" },
-      { label: "Ruido noche", status: "ok", detail: "Silencioso", note: "Zona residencial tranquila" },
-      { label: "Luz natural", status: "ok", detail: "Excelente", note: "Orientación sur - sol todo el día" },
-      { label: "Agua", status: "ok", detail: "Presión buena", note: "Agua agrícola - sin cortes" },
-    ],
-    insider: {
-      owner: "Muy atenta, mantiene propiedad impecable, seria y rápida si se necesita. Responde mismo día siempre.",
-      history: "Alquilada últimos años larga temporada a extranjeros. Bien mantenida siempre. Sin incidencias nunca. Pintada hace 1 año.",
-      neighbors: "Vecinos tranquilos, casa contigua pero privacidad total. Sin incidencias previas nunca. Ambiente agradable.",
-    },
-    lifestyle: {
-      fits: [
-        "Valoras vistas espectaculares + luz natural",
-        "Quieres zona premium pero tranquila",
-        "Trabajas remoto (internet 60MB suficiente)",
-        "Priorizas acceso perfecto con coche",
-      ],
-      notFits: [
-        "Necesitas fibra 300MB+ obligatorio",
-        "Buscas aislamiento total (hay vecinos cerca)",
-        "Presupuesto ajustado (hay opciones más baratas)",
-      ],
-    },
-    listingUrl: "https://propaxar.com/property/villa-en-frigiliana-6",
-    driveUrl: "https://drive.google.com/drive/folders/1XhEL6ay8jYCKPzayFkCQGvrAjU-0JRA1?usp=drive_link",
-    mapsUrl: "https://www.google.com/maps?q=36.7928,-3.8970",
-    gestion: "Propaxar",
-    parking: "✅",
-    vistas: 5,
-    internet: "60MB",
-    ruido: "Bajo",
-    disponible: "1 Marzo 2026",
-  },
-  {
-    id: 2,
-    ref: "pa220",
-    name: "Casa Fabi - Camino de la Cruz",
-    price: "€1,600/mes",
-    beds: 3,
-    baths: 2,
-    size: "120m²",
-    rating: 4,
-    badge: "PROPAXAR DIRECT",
-    summary: "Casa amplia 120m² en zona alta. Vistas despejadas Mediterráneo y campo. Jardines agradables, piscina bien ubicada. DISPONIBLE YA (1 Feb).",
-    photos: [
-      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8023-scaled.jpeg",
-      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8012-1-scaled.jpeg",
-      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8028-1-scaled.jpeg",
-      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8030-1-scaled.jpeg",
-      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8027-1-scaled.jpeg",
-      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8031-1-scaled.jpeg",
-    ],
-    location: { address: "Camino de la Cruz - Frigiliana Este", lat: 36.7930, lng: -3.8960 },
-    pros: [
-      "Disponible YA (1 Febrero) - antes que otras",
-      "Casa más grande - 120m² espaciosa",
-      "Vistas despejadas Mediterráneo + campo",
-      "Jardines y exteriores agradables",
-      "Piscina buen tamaño y ubicación",
-      "Buena privacidad",
-      "2 baños completos",
-    ],
-    cons: [
-      "Escalera acceso vivienda (no todo en planta baja)",
-      "Se escuchan vehículos ocasionalmente (sin molestia)",
-      "Precio algo elevado para zona (€1,600 vs €1,200-1,500 similares)",
-      "Internet WiMax 60MB - no fibra",
-    ],
-    analysis: {
-      quality: { stars: 3, text: "Construcción buena calidad. Mantenimiento interior correcto. Algunos detalles menores pendientes pero nada importante." },
-      price: { stars: 3, label: "ALGO ALTO", text: "€1,600 un poco por encima media zona. Similares €1,200-1,500.\nPotencial negociación: Moderado (8-10%). Podrías conseguir €1,450-1,500." },
-      location: { stars: 4, label: "MUY BUENA", text: "Una de mejores zonas campo Frigiliana. Zona alta demanda.\nBuen acceso, cerca carretera principal." },
-    },
-    tests: [
-      { label: "Internet", status: "ok", detail: "WiMax 60MB", note: "Instalado - Starlink 300MB opcional" },
-      { label: "Móvil", status: "ok", detail: "Cobertura perfecta", note: "4-5 barras todas operadoras" },
-      { label: "Ruido día", status: "ok", detail: "Moderado", note: "Tráfico ocasional carril" },
-      { label: "Ruido noche", status: "ok", detail: "Silencioso", note: "Zona tranquila" },
-      { label: "Luz natural", status: "ok", detail: "Muy buena", note: "Orientación correcta" },
-      { label: "Agua", status: "ok", detail: "Presión correcta", note: "Agua agrícola fiable" },
-    ],
-    insider: {
-      owner: "Hombre mayor serio y atento. Formal en todo. Sin problemas nunca.",
-      history: "Siempre alquilada larga estancia. Mantenimiento regular. Inquilinos previos extranjeros contentos.",
-      neighbors: "Vecinos al lado pero no pegados. Vecindario agradable y formal. Ninguna incidencia registrada nunca.",
-    },
-    lifestyle: {
-      fits: [
-        "Familia o pareja - necesitas espacio (120m²)",
-        "Valoras vistas mar + campo",
-        "Quieres mudarte YA (disponible 1 Feb)",
-        "Priorizas tamaño sobre precio",
-      ],
-      notFits: [
-        "Presupuesto ajustado €1,200-1,400 máximo",
-        "Movilidad reducida (hay escaleras)",
-        "Necesitas fibra rápida obligatorio",
-      ],
-    },
-    listingUrl: "https://propaxar.com/property/villa-en-frigiliana-4/",
-    driveUrl: "#",
-    mapsUrl: "https://www.google.com/maps?q=36.7930,-3.8960",
-    gestion: "Propaxar",
-    parking: "✅",
-    vistas: 5,
-    internet: "60MB",
-    ruido: "Moderado",
-    disponible: "1 Febrero 2026 (YA)",
-  },
-  {
-    id: 3,
-    ref: "pa224",
-    name: "Casa Loma de la Cruz - María del Mar",
-    price: "€1,600/mes",
-    beds: 3,
-    baths: 1,
-    size: "75m²",
-    rating: 3,
-    badge: "PROPAXAR DIRECT",
-    summary: "Casa sólida en Loma Cruz. Construcción alta calidad, bien mantenida. Zona premium. Parking propio. Algo pequeña (75m²) y solo 1 baño.",
-    photos: [
-      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7565-scaled.jpg",
-      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7652-scaled.jpg",
-      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7649-scaled.jpg",
-      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7645-scaled.jpg",
-      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7641-scaled.jpg",
-      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7637-scaled.jpg",
-    ],
-    location: { address: "Camino de la Cruz - Loma de la Cruz", lat: 36.7925, lng: -3.8968 },
-    pros: [
-      "Construcción alta calidad - sólida",
-      "Muy bien mantenida - pintada reciente",
-      "Ventanas nuevas instaladas",
-      "Parking propio + entrada vehículos privada",
-      "Zona Loma Cruz - alta demanda",
-      "Buen aislamiento paredes/tejados",
-    ],
-    cons: [
-      "Solo 75m² - algo pequeña para 3 dormitorios",
-      "Solo 1 baño (vs 2 otras opciones)",
-      "Habitaciones tamaño medio - no grandes",
-      "Precio €1,600 algo elevado para tamaño (similares €1,000-1,500)",
-      "Sol solo mediodía y tarde (no mañana)",
-    ],
-    analysis: {
-      quality: { stars: 4, text: "Construcción sólida, muy bien mantenida. Propietaria cuida casa. Renovaciones recientes (pintura, ventanas). Sin problemas." },
-      price: { stars: 2, label: "ELEVADO", text: "€1,600 alto para 75m². Similares 3 dorms: €1,000-1,500.\nPotencial negociación: Muy bajo (5%). Propietaria mantiene precio firme." },
-      location: { stars: 4, label: "EXCELENTE", text: "Loma Cruz - mejor zona campo Frigiliana. Alta demanda constante.\nAcceso bueno, parking propio." },
-    },
-    tests: [
-      { label: "Internet", status: "ok", detail: "WiMax 60MB", note: "Instalado - Starlink 300MB opcional" },
-      { label: "Móvil", status: "ok", detail: "Cobertura buena", note: "4 barras" },
-      { label: "Ruido día", status: "ok", detail: "Silencioso", note: "Sin ruidos" },
-      { label: "Ruido noche", status: "ok", detail: "Muy silencioso", note: "Área tranquila total" },
-      { label: "Luz natural", status: "ok", detail: "Buena tarde", note: "Sol mediodía-tarde" },
-      { label: "Agua", status: "ok", detail: "Presión buena", note: "Agua agrícola fiable" },
-    ],
-    insider: {
-      owner: "Persona seria y comunicativa. Responde rápido siempre. Cuida mucho su propiedad.",
-      history: "Alquilada siempre por años. Pintada recientemente. Ventanas nuevas. Mantenimiento impecable constante.",
-      neighbors: "Vecinos cerca pero alta privacidad. Área sin ruidos, tranquila. Sin incidencias.",
-    },
-    lifestyle: {
-      fits: [
-        "Solo 2 personas (pareja) - espacio suficiente",
-        "Valoras calidad construcción + mantenimiento",
-        "Quieres zona premium Loma Cruz",
-        "Priorizas tranquilidad absoluta",
-      ],
-      notFits: [
-        "Familia 3-4 personas (pequeña + 1 baño)",
-        "Presupuesto ajustado (cara para tamaño)",
-        "Necesitas espacio grande (solo 75m²)",
-      ],
-    },
-    listingUrl: "https://propaxar.com/property/villa-en-frigiliana-8/",
-    driveUrl: "https://drive.google.com/drive/folders/1-aYgULtFXuoSE8vj88io7lh2kOJj_LNV?usp=drive_link",
-    mapsUrl: "https://www.google.com/maps?q=36.7925,-3.8968",
-    gestion: "Propaxar",
-    parking: "✅",
-    vistas: 4,
-    internet: "60MB",
-    ruido: "Muy bajo",
-    disponible: "1 Marzo 2026",
-  },
-  {
-    id: 4,
     ref: "pa223",
     name: "Villa Patricia - Frigiliana Norte",
     price: "€900/mes",
     beds: 2,
     baths: 2,
     size: "90m²",
-    rating: 4,
-    badge: "PROPAXAR DIRECT",
-    summary: "MEJOR PRECIO - €900/mes. Casa tranquila zona norte. Orientación sur, luz natural. Exteriores amplios + huerto. Solo 2 dorms. Disponible Abril.",
+    rating: 5,
+    badge: "✅ DENTRO PRESUPUESTO",
+    badgeColor: "hsl(142 71% 45%)",
+    summary: "ÚNICA opción en tu presupuesto €700-1,000. Casa tranquila zona norte, orientación sur, exteriores amplios + huerto. Ahorro €8,400/año vs otras.",
     photos: [
       "https://propaxar.com/wp-content/uploads/2026/01/IMG_4099-scaled.jpg",
       "https://propaxar.com/wp-content/uploads/2026/01/IMG_4202-scaled.jpg",
@@ -281,24 +48,24 @@ const properties = [
     ],
     location: { address: "Villa Patricia, Diseminado - Frigiliana Norte", lat: 36.7945, lng: -3.8940 },
     pros: [
-      "PRECIO EXCELENTE - €900 (€700 menos que otras)",
+      "PRECIO EXCELENTE - €900 (€700 menos que otras opciones)",
       "Ubicación muy tranquila - pocos vecinos",
       "Orientación sur - mucha luz natural",
       "Exteriores amplios con diferentes zonas",
       "Huerto incluido",
       "2 baños completos",
       "Ningún vecino detrás ni a los lados",
+      "Mascotas permitidas ✅",
     ],
     cons: [
-      "Solo 2 dormitorios (vs 3 otras opciones)",
+      "Solo 2 dormitorios (dijiste mínimo 2, así que OK)",
       "Acceso 300m carril agrícola sin asfaltar",
       "Zona norte - algo alejada centro (3 min coche)",
       "Disponible solo Abril (mes después)",
-      "Casa más pequeña 90m²",
     ],
     analysis: {
       quality: { stars: 3, text: "Casa sólida construida principios 2000. Bien mantenida. Estructura buena, sin problemas importantes." },
-      price: { stars: 4, label: "MUY BUENO", text: "€900 justo. Similares zona norte: €900-1,300.\nAhorro: €8,400/año vs opciones €1,600.\nPotencial negociación: Moderado (5%). Podrías €850." },
+      price: { stars: 5, label: "EXCELENTE", text: "€900 justo. Similares zona norte: €900-1,300.\nAhorro: €8,400/año vs opciones €1,600.\nPotencial negociación: Moderado (5%). Podrías €850." },
       location: { stars: 3, label: "BUENA", text: "Zona muy tranquila. Acceso carretera principal 3 min.\nAlgo alejada centro pero compensado por precio/tranquilidad." },
     },
     tests: [
@@ -311,31 +78,248 @@ const properties = [
     ],
     insider: {
       owner: "Persona seria. Inquilinos anteriores contentos siempre.",
-      history: "Alquilada actualmente a Katinka hasta 31 Marzo 2026. Disponible 1 Abril. Sin incidencias nunca.",
+      history: "Alquilada actualmente a inquilino hasta 31 Marzo 2026. Disponible 1 Abril. Sin incidencias nunca.",
       neighbors: "Zona silenciosa, pocos vecinos. Ninguno detrás ni a los lados. Privacidad total.",
     },
     lifestyle: {
       fits: [
-        "Presupuesto ajustado PRIORIDAD (ahorro €8,400/año)",
+        "Presupuesto €700-1,000 ES PRIORIDAD (única opción)",
         "Pareja o persona sola (2 dorms suficiente)",
         "Valoras tranquilidad/naturaleza sobre ubicación",
         "Quieres huerto cultivar tus verduras",
+        "Tienes coche (zona algo alejada)",
       ],
       notFits: [
-        "Familia 3+ personas (solo 2 dormitorios)",
+        "Necesitas 3+ dormitorios obligatorio",
         "Priorizas estar cerca centro pueblo",
         "No tienes coche (zona alejada)",
+        "Necesitas mudarte antes de Abril",
       ],
     },
     listingUrl: "https://propaxar.com/property/villa-en-frigiliana-7",
-    driveUrl: "https://drive.google.com/drive/folders/19AFahLBxd8K2Iz2TgKcKohYhADeThRSk?usp=drive_link",
+    driveUrl: "https://drive.google.com/drive/folders/19AFahLBxd8K2Iz2TgKcKohYhADeThRSk",
     mapsUrl: "https://www.google.com/maps?q=36.7945,-3.8940",
-    gestion: "Propaxar",
+    gestion: "Agencia",
     parking: "✅",
     vistas: 4,
     internet: "60MB",
     ruido: "Muy bajo",
     disponible: "1 Abril 2026",
+  },
+  {
+    id: 2,
+    ref: "pa194",
+    name: "Casa Zambra - Loma Cruz Oeste",
+    price: "€1,600/mes",
+    beds: 3,
+    baths: 2,
+    size: "100m²",
+    rating: 5,
+    badge: "⚠️ FUERA PRESUPUESTO",
+    badgeColor: "hsl(39 76% 61%)",
+    summary: "Zona premium. Vistas espectaculares 360°, acceso perfecto. PERO €1,600/mes = 60% más caro que tu presupuesto.",
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-14b2d3a1.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-05a32812.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-524b50d1.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-c46b8798.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-58d0de97.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-e0cd04a0.jpg",
+    ],
+    location: { address: "Camino de la Cruz - Frigiliana Oeste", lat: 36.7928, lng: -3.8970 },
+    pros: [
+      "Ubicación perfecta - zona más demandada Frigiliana",
+      "Vistas espectaculares mar, campo, montaña y pueblo",
+      "Orientación sur - luz natural todo el día",
+      "3 dormitorios + 2 baños",
+      "Construcción calidad excelente",
+      "Mascotas permitidas ✅",
+    ],
+    cons: [
+      "PRECIO: €1,600/mes = €600 FUERA tu presupuesto",
+      "Internet WiMax 60MB - no fibra",
+    ],
+    analysis: {
+      quality: { stars: 5, text: "Construcción estilo rústico muy bien mantenida. Propietarios cuidan casa impecablemente." },
+      price: { stars: 4, label: "JUSTO", text: "€1,600 correcto para zona premium. PERO 60% más caro que tu presupuesto máximo." },
+      location: { stars: 5, label: "EXCELENTE", text: "Mejor zona Frigiliana campo. Alta demanda constante." },
+    },
+    tests: [
+      { label: "Internet", status: "ok", detail: "WiMax 60MB", note: "Starlink 300MB opcional €70/mes" },
+      { label: "Móvil", status: "ok", detail: "Cobertura perfecta", note: "4-5 barras" },
+      { label: "Ruido día", status: "ok", detail: "Bajo", note: "Zona tranquila" },
+      { label: "Ruido noche", status: "ok", detail: "Silencioso", note: "Sin ruidos" },
+      { label: "Luz natural", status: "ok", detail: "Excelente", note: "Orientación sur" },
+      { label: "Agua", status: "ok", detail: "Presión buena", note: "Sin cortes" },
+    ],
+    insider: {
+      owner: "Muy atenta, responde mismo día siempre.",
+      history: "Alquilada últimos años larga temporada. Bien mantenida siempre. Sin incidencias.",
+      neighbors: "Vecinos tranquilos. Sin incidencias previas nunca. Ambiente agradable.",
+    },
+    lifestyle: {
+      fits: [
+        "PUEDES SUBIR presupuesto a €1,600/mes",
+        "Valoras ubicación premium sobre precio",
+        "Necesitas 3 dormitorios",
+      ],
+      notFits: [
+        "Presupuesto máximo €1,000/mes (€600 diferencia)",
+        "Priorizas ahorro sobre ubicación",
+      ],
+    },
+    listingUrl: "https://propaxar.com/property/villa-en-frigiliana-6",
+    driveUrl: "https://drive.google.com/drive/folders/1XhEL6ay8jYCKPzayFkCQGvrAjU-0JRA1",
+    mapsUrl: "https://www.google.com/maps?q=36.7928,-3.8970",
+    gestion: "Agencia",
+    parking: "✅",
+    vistas: 5,
+    internet: "60MB",
+    ruido: "Bajo",
+    disponible: "1 Marzo 2026",
+  },
+  {
+    id: 3,
+    ref: "pa220",
+    name: "Casa Fabi - Loma Cruz Este",
+    price: "€1,600/mes",
+    beds: 3,
+    baths: 2,
+    size: "120m²",
+    rating: 4,
+    badge: "⚠️ FUERA PRESUPUESTO",
+    badgeColor: "hsl(39 76% 61%)",
+    summary: "Casa amplia 120m², disponible YA. PERO €1,600/mes = 60% más caro que presupuesto.",
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8023-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8012-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8028-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8030-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8027-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8031-1-scaled.jpeg",
+    ],
+    location: { address: "Camino de la Cruz - Frigiliana Este", lat: 36.7930, lng: -3.8960 },
+    pros: [
+      "Disponible YA (1 Febrero) - antes que otras",
+      "Casa más grande - 120m²",
+      "Vistas despejadas Mediterráneo + campo",
+      "Mascotas permitidas ✅",
+    ],
+    cons: [
+      "PRECIO: €1,600/mes = €600 FUERA presupuesto",
+      "Escalera acceso (no planta baja)",
+    ],
+    analysis: {
+      quality: { stars: 3, text: "Construcción buena calidad. Mantenimiento interior correcto." },
+      price: { stars: 3, label: "ALGO ALTO", text: "€1,600 por encima media. PERO 60% más que tu presupuesto." },
+      location: { stars: 4, label: "MUY BUENA", text: "Zona alta demanda. Buen acceso." },
+    },
+    tests: [
+      { label: "Internet", status: "ok", detail: "WiMax 60MB", note: "Instalado" },
+      { label: "Móvil", status: "ok", detail: "Cobertura perfecta", note: "4-5 barras" },
+      { label: "Ruido día", status: "ok", detail: "Moderado", note: "Tráfico ocasional" },
+      { label: "Ruido noche", status: "ok", detail: "Silencioso", note: "Tranquilo" },
+      { label: "Luz natural", status: "ok", detail: "Muy buena", note: "Correcta" },
+      { label: "Agua", status: "ok", detail: "Presión correcta", note: "Fiable" },
+    ],
+    insider: {
+      owner: "Hombre mayor serio y atento. Formal en todo. Sin problemas nunca.",
+      history: "Siempre alquilada larga estancia. Mantenimiento regular.",
+      neighbors: "Vecinos al lado pero no pegados. Sin incidencias nunca.",
+    },
+    lifestyle: {
+      fits: [
+        "PUEDES SUBIR presupuesto a €1,600/mes",
+        "Necesitas espacio (120m²)",
+        "Quieres mudarte YA (disponible Feb)",
+      ],
+      notFits: [
+        "Presupuesto máximo €1,000/mes",
+        "Movilidad reducida (hay escaleras)",
+      ],
+    },
+    listingUrl: "https://propaxar.com/property/villa-en-frigiliana-4/",
+    driveUrl: "#",
+    mapsUrl: "https://www.google.com/maps?q=36.7930,-3.8960",
+    gestion: "Agencia",
+    parking: "✅",
+    vistas: 5,
+    internet: "60MB",
+    ruido: "Moderado",
+    disponible: "1 Febrero 2026 (YA)",
+  },
+  {
+    id: 4,
+    ref: "pa224",
+    name: "Casa Loma Cruz - María del Mar",
+    price: "€1,600/mes",
+    beds: 3,
+    baths: 1,
+    size: "75m²",
+    rating: 3,
+    badge: "⚠️ FUERA PRESUPUESTO",
+    badgeColor: "hsl(39 76% 61%)",
+    summary: "Loma Cruz premium. Bien mantenida. PERO €1,600/mes = 60% más caro + pequeña (75m²) + solo 1 baño.",
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7565-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7652-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7649-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7645-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7641-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7637-scaled.jpg",
+    ],
+    location: { address: "Camino de la Cruz - Loma de la Cruz", lat: 36.7925, lng: -3.8968 },
+    pros: [
+      "Construcción sólida, muy bien mantenida",
+      "Parking propio",
+      "Zona Loma Cruz premium",
+      "Mascotas permitidas ✅",
+    ],
+    cons: [
+      "PRECIO: €1,600/mes = €600 FUERA presupuesto",
+      "Solo 75m² - pequeña",
+      "Solo 1 baño",
+      "Precio alto para tamaño",
+    ],
+    analysis: {
+      quality: { stars: 4, text: "Construcción sólida. Propietaria cuida mucho. Renovaciones recientes." },
+      price: { stars: 2, label: "ALTO", text: "€1,600 alto para 75m². MUCHO más que tu presupuesto." },
+      location: { stars: 4, label: "EXCELENTE", text: "Loma Cruz - mejor zona. Alta demanda." },
+    },
+    tests: [
+      { label: "Internet", status: "ok", detail: "WiMax 60MB", note: "Starlink opcional" },
+      { label: "Móvil", status: "ok", detail: "Cobertura buena", note: "4 barras" },
+      { label: "Ruido día", status: "ok", detail: "Silencioso", note: "Sin ruidos" },
+      { label: "Ruido noche", status: "ok", detail: "Muy silencioso", note: "Tranquila total" },
+      { label: "Luz natural", status: "ok", detail: "Buena tarde", note: "Sol mediodía-tarde" },
+      { label: "Agua", status: "ok", detail: "Presión buena", note: "Fiable" },
+    ],
+    insider: {
+      owner: "Persona seria y comunicativa. Responde rápido siempre. Cuida mucho su propiedad.",
+      history: "Alquilada siempre por años. Pintada reciente. Ventanas nuevas. Impecable.",
+      neighbors: "Vecinos cerca pero privacidad alta. Sin ruidos. Sin incidencias.",
+    },
+    lifestyle: {
+      fits: [
+        "PUEDES SUBIR presupuesto a €1,600/mes",
+        "Solo 2 personas (espacio suficiente)",
+        "Valoras calidad sobre precio",
+      ],
+      notFits: [
+        "Presupuesto máximo €1,000/mes",
+        "Familia 3-4 personas (pequeña + 1 baño)",
+        "Necesitas espacio grande",
+      ],
+    },
+    listingUrl: "https://propaxar.com/property/villa-en-frigiliana-8/",
+    driveUrl: "https://drive.google.com/drive/folders/1-aYgULtFXuoSE8vj88io7lh2kOJj_LNV",
+    mapsUrl: "https://www.google.com/maps?q=36.7925,-3.8968",
+    gestion: "Agencia",
+    parking: "✅",
+    vistas: 4,
+    internet: "60MB",
+    ruido: "Muy bajo",
+    disponible: "1 Marzo 2026",
   },
 ];
 
@@ -360,8 +344,8 @@ function PropertyCard({ p }: { p: typeof properties[0] }) {
         <div className="relative h-52 bg-gray-200 overflow-hidden">
           <img src={p.photos[0]} alt={p.name} className="w-full h-full object-cover" loading="lazy" />
           {p.badge && (
-            <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold text-white" style={{ background: "hsl(142 71% 45%)" }}>
-              🏠 {p.badge} ✨
+            <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold text-white" style={{ background: p.badgeColor }}>
+              {p.badge}
             </span>
           )}
           <span className="absolute top-3 right-3 px-2 py-1 rounded text-xs font-bold text-white bg-black/50">
@@ -374,7 +358,7 @@ function PropertyCard({ p }: { p: typeof properties[0] }) {
           <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{p.price} · {p.beds} dorm · {p.baths} baños · {p.size}</p>
           <div className="flex items-center gap-2">
             <Stars count={p.rating} />
-            <span className="text-sm font-medium">Mi Recomendación: {p.rating}/5</span>
+            <span className="text-sm font-medium">Para tu perfil: {p.rating}/5</span>
           </div>
           <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>"{p.summary}"</p>
           <Button
@@ -481,7 +465,7 @@ function PropertyCard({ p }: { p: typeof properties[0] }) {
 
             {/* Insider info */}
             <div>
-              <h4 className="font-bold mb-3" style={{ color: "hsl(213 56% 23%)" }}>👤 INFORMACIÓN PRIVILEGIADA (Solo yo sé esto)</h4>
+              <h4 className="font-bold mb-3" style={{ color: "hsl(213 56% 23%)" }}>👤 INFORMACIÓN PRIVILEGIADA</h4>
               {([["PROPIETARIO/A", p.insider.owner], ["HISTORIA", p.insider.history], ["VECINOS", p.insider.neighbors]] as const).map(([label, text]) => (
                 <div key={label} className="mb-3">
                   <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(215 19% 34%)" }}>{label}:</p>
@@ -517,11 +501,6 @@ function PropertyCard({ p }: { p: typeof properties[0] }) {
                   <ExternalLink className="w-4 h-4 mr-2" /> Ver en propaxar.com
                 </Button>
               </a>
-              <a href={p.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
-                <Button variant="outline" className="w-full font-semibold" style={{ borderRadius: 8 }}>
-                  <MapPin className="w-4 h-4 mr-2" /> Google Maps
-                </Button>
-              </a>
             </div>
           </div>
         )}
@@ -549,7 +528,7 @@ export default function ReportePropaxar() {
     el.querySelectorAll("[data-no-print]").forEach((n) => (n as HTMLElement).style.display = "none");
     await html2pdf().set({
       margin: 10,
-      filename: `Reporte_Frigiliana_Propaxar_${new Date().toISOString().slice(0, 10)}.pdf`,
+      filename: `Reporte_Katinka_${new Date().toISOString().slice(0, 10)}.pdf`,
       image: { type: "jpeg", quality: 0.95 },
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
@@ -571,8 +550,10 @@ export default function ReportePropaxar() {
         <div className="absolute inset-0 bg-black/55" />
         <div ref={heroFade.ref} className={`relative z-10 px-6 max-w-xl ${heroFade.className}`}>
           <img src="/propaxar-vision.png" alt="Propaxar" className="h-10 mx-auto mb-6 opacity-90" />
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight text-white mb-2">REPORTE INMOBILIARIO<br />PERSONALIZADO</h1>
-          <p className="text-xl md:text-2xl font-medium mt-4 text-white/90">Cliente Demo</p>
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight text-white mb-2">
+            REPORTE INMOBILIARIO<br />PERSONALIZADO
+          </h1>
+          <p className="text-xl md:text-2xl font-medium mt-4 text-white/90">Katinka</p>
           <p className="text-base text-white/70">Frigiliana · Febrero 2026</p>
           <p className="text-sm mt-6 text-white/60">Elaborado por Manuel Fernández<br />Analista Inmobiliario · 10 años experiencia</p>
           <ChevronDown className="mx-auto mt-10 w-8 h-8 animate-bounce text-white/60" />
@@ -586,9 +567,9 @@ export default function ReportePropaxar() {
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Resumen de tu Búsqueda</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { icon: <Search className="w-7 h-7" />, title: "BÚSQUEDA", items: ["35 propiedades mercado", "15 visitadas personalmente", "4 seleccionadas finales"] },
-                { icon: <Target className="w-7 h-7" />, title: "TU PERFIL", items: ["Presupuesto: €900-1,600/mes", "Zona: Frigiliana campo", "Must-haves: Piscina, Parking, Mascotas OK"] },
-                { icon: <Award className="w-7 h-7" />, title: "MI RECOMENDACIÓN", items: ["Mejor opción: Propiedad #1", "Casa Zambra Loma Cruz", "€1,600/mes · 3 dormitorios · 2 baños"] },
+                { icon: <Search className="w-7 h-7" />, title: "BÚSQUEDA", items: ["35 propiedades mercado", "4 seleccionadas", "SOLO 1 en presupuesto"] },
+                { icon: <Target className="w-7 h-7" />, title: "TU PERFIL", items: ["Presupuesto: €700-1,000/mes", "Dormitorios: 2+", "Mascotas: Sí"] },
+                { icon: <Award className="w-7 h-7" />, title: "MI RECOMENDACIÓN", items: ["ÚNICA opción: Villa Patricia", "€900/mes · 2 dormitorios", "Resto fuera presupuesto"] },
               ].map((c, i) => (
                 <Card key={i} className="border-0 text-center" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
                   <CardContent className="p-6 space-y-3">
@@ -605,12 +586,12 @@ export default function ReportePropaxar() {
         {/* ─── 3. ESTADO MERCADO ─── */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={marketFade.ref}>
           <div className={marketFade.className}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Mercado Actual - Febrero 2026</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Realidad del Mercado - Febrero 2026</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>Precios promedio Frigiliana campo</h3>
-                  {[["2 dormitorios + piscina", "€900-1,200/mes"], ["3 dormitorios + piscina", "€1,200-1,600/mes"], ["3 dorms + piscina zona premium", "€1,500-1,800/mes"]].map(([k, v]) => (
+                  <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>Precios promedio Frigiliana</h3>
+                  {[["2 dorms básico", "€700-900/mes"], ["2 dorms + piscina", "€900-1,200/mes"], ["3 dorms zona premium", "€1,500-1,800/mes"]].map(([k, v]) => (
                     <div key={k} className="flex justify-between py-2 border-b last:border-0 text-sm">
                       <span>{k}</span><span className="font-semibold">{v}</span>
                     </div>
@@ -619,9 +600,10 @@ export default function ReportePropaxar() {
               </Card>
               <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>Mi análisis</h3>
+                  <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>Mi análisis para ti</h3>
                   <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>
-                    "Mercado equilibrado en febrero. Buena disponibilidad zona Loma Cruz (zona premium más demandada). Las 4 propiedades seleccionadas son TODAS Propaxar Direct - te reembolso €180 si alquilas cualquiera. Servicio gratis total."
+                    <strong>IMPORTANTE Katinka:</strong> Mercado Frigiliana campo tiene pocas opciones €700-1,000. La mayoría está €1,200-1,600.
+                    Villa Patricia es RARA oportunidad en tu rango - no verás muchas así.
                   </p>
                 </CardContent>
               </Card>
@@ -632,8 +614,10 @@ export default function ReportePropaxar() {
         {/* ─── 4. PROPIEDADES ─── */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={propsFade.ref}>
           <div className={propsFade.className}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>4 Propiedades Seleccionadas para Ti</h2>
-            <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>Todas son PROPAXAR DIRECT ✨ = Reembolso €180 garantizado</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>4 Propiedades Analizadas</h2>
+            <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>
+              ✅ 1 dentro presupuesto · ⚠️ 3 fuera presupuesto (€1,600/mes)
+            </p>
             <div className="grid md:grid-cols-2 gap-6">
               {properties.map((p) => <PropertyCard key={p.id} p={p} />)}
             </div>
@@ -648,7 +632,7 @@ export default function ReportePropaxar() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    {["Ref", "Nombre", "Precio", "Dorms", "Baños", "M²", "Parking", "Vistas", "Disponible", "⭐"].map((h) => (
+                    {["Ref", "Nombre", "Precio", "Dorms", "Baños", "M²", "Disponible", "Tu perfil"].map((h) => (
                       <TableHead key={h} className="text-xs font-bold whitespace-nowrap">{h}</TableHead>
                     ))}
                   </TableRow>
@@ -658,14 +642,12 @@ export default function ReportePropaxar() {
                     <TableRow key={p.id}>
                       <TableCell className="font-bold text-xs">{p.ref.toUpperCase()}</TableCell>
                       <TableCell className="font-semibold text-sm whitespace-nowrap">{p.name.split(" - ")[0]}</TableCell>
-                      <TableCell className="text-sm">{p.price.replace("/mes", "")}</TableCell>
+                      <TableCell className={p.id === 1 ? "text-sm font-bold text-green-600" : "text-sm text-red-600"}>{p.price}</TableCell>
                       <TableCell className="text-sm">{p.beds}</TableCell>
                       <TableCell className="text-sm">{p.baths}</TableCell>
                       <TableCell className="text-sm">{p.size}</TableCell>
-                      <TableCell className="text-sm">{p.parking}</TableCell>
-                      <TableCell><Stars count={p.vistas} /></TableCell>
                       <TableCell className="text-xs">{p.disponible}</TableCell>
-                      <TableCell className="font-bold text-base">{p.rating}</TableCell>
+                      <TableCell className="font-bold text-base">{p.rating}/5</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -679,31 +661,30 @@ export default function ReportePropaxar() {
           <div className={recoFade.className}>
             <Card className="border-0 overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 38%))", borderRadius: 16 }}>
               <CardContent className="p-8 text-white space-y-4">
-                <h2 className="text-2xl font-bold text-white">🥇 MI RECOMENDACIÓN PRINCIPAL</h2>
-                <p className="text-lg font-semibold text-white">Propiedad #1 - Casa Zambra Loma Cruz (pa194)</p>
-                <p className="text-lg font-semibold text-white">€1,600/mes · 3 dormitorios · 2 baños · 100m²</p>
+                <h2 className="text-2xl font-bold text-white">🥇 MI RECOMENDACIÓN KATINKA</h2>
+                <p className="text-lg font-semibold text-white">Villa Patricia (pa223)</p>
+                <p className="text-lg font-semibold text-white">€900/mes · 2 dormitorios · 2 baños</p>
                 <div className="text-sm leading-relaxed text-white/90 space-y-2">
-                  <p><strong>POR QUÉ ES TU CASA PERFECTA:</strong></p>
-                  <p>✅ Ubicación zona premium Loma Cruz (mejor zona Frigiliana campo)</p>
-                  <p>✅ Vistas espectaculares 360° (mar + campo + montaña + pueblo)</p>
-                  <p>✅ Construcción calidad + mantenimiento impecable</p>
-                  <p>✅ Acceso perfecto - coche hasta puerta</p>
-                  <p>✅ Orientación sur - luz natural todo el día</p>
-                  <p>✅ 2 baños completos (vs 1 baño otras opciones)</p>
-                  <p>✅ Propietarios locales serios - respuesta rápida siempre</p>
-                  <p className="mt-4"><strong>REEMBOLSO €180 + SERVICIO GRATIS ✨</strong></p>
+                  <p><strong>POR QUÉ ES TU ÚNICA OPCIÓN REALISTA:</strong></p>
+                  <p>✅ €900/mes = DENTRO tu presupuesto (€700-1,000)</p>
+                  <p>✅ 2 dormitorios = Cumple tu mínimo</p>
+                  <p>✅ Mascotas permitidas ✅</p>
+                  <p>✅ 2 baños completos (más cómodo)</p>
+                  <p>✅ Huerto incluido (extra único)</p>
+                  <p>✅ AHORRO: €8,400/año vs otras opciones</p>
+                  <p className="mt-4"><strong>Las otras 3 casas están a €1,600/mes = €600 más que tu presupuesto máximo.</strong></p>
+                  <p>Las incluí para que veas qué hay en mercado, pero son 60% más caras.</p>
                 </div>
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" data-no-print>
                   <Button className="mt-4 text-base font-bold px-10 py-5" style={{ background: "#fff", color: "hsl(142 71% 35%)", borderRadius: 10 }}>
-                    QUIERO VER ESTA CASA
+                    QUIERO VER VILLA PATRICIA
                   </Button>
                 </a>
               </CardContent>
             </Card>
             <div className="mt-6 space-y-2 text-sm" style={{ color: "hsl(215 19% 34%)" }}>
-              <p><strong>🥈 Segunda opción:</strong> Propiedad #4 (Villa Patricia) si priorizas precio sobre ubicación (ahorro €8,400/año)</p>
-              <p><strong>🥉 Tercera opción:</strong> Propiedad #2 (Casa Fabi) si necesitas 120m² espaciosos + disponible YA (1 Feb)</p>
-              <p><strong>⚠️ Descarto:</strong> Propiedad #3 (María del Mar) - precio alto €1,600 para solo 75m² + 1 baño</p>
+              <p><strong>⚠️ Sobre las otras 3:</strong> Si puedes/quieres subir presupuesto a €1,600/mes, Casa Zambra (pa194) es excelente opción - zona premium, 3 dorms, vistas espectaculares.</p>
+              <p><strong>💡 ¿Quieres que busque más opciones €700-1,000?</strong> Puedo seguir buscando, pero honestamente son escasas en Frigiliana campo.</p>
             </div>
           </div>
         </section>
@@ -714,10 +695,10 @@ export default function ReportePropaxar() {
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Próximos Pasos</h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { num: "1️⃣", title: "LEE EL REPORTE", desc: "Tómate 1-2 días con calma" },
-                { num: "2️⃣", title: "MARCA FAVORITAS", desc: "Anota las 2-3 que más te gustan" },
-                { num: "3️⃣", title: "AVÍSAME WHATSAPP", desc: "Coordino visitas en 24-48h" },
-                { num: "4️⃣", title: "VEN A VERLAS", desc: "Te acompaño personalmente" },
+                { num: "1️⃣", title: "REVISA REPORTE", desc: "Tómate 1-2 días" },
+                { num: "2️⃣", title: "DECIDE PRESUPUESTO", desc: "¿€900 OK o puedes €1,600?" },
+                { num: "3️⃣", title: "AVÍSAME WHATSAPP", desc: "Coordino visita Villa Patricia" },
+                { num: "4️⃣", title: "VEN A VERLA", desc: "Te acompaño personalmente" },
               ].map((s, i) => (
                 <div key={i} className="text-center space-y-2">
                   <div className="text-3xl">{s.num}</div>
@@ -727,9 +708,14 @@ export default function ReportePropaxar() {
               ))}
             </div>
             <div className="mt-10 p-6 rounded-xl text-center" style={{ background: "hsl(39 76% 61%/0.15)", borderRadius: 12 }}>
-              <p className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>💡 IMPORTANTE</p>
-              <p className="text-sm mt-2" style={{ color: "hsl(215 19% 34%)" }}>Casas buenas Loma Cruz se alquilan rápido (7-14 días típico). Si ves algo que te gusta, avísame pronto.</p>
-              <p className="text-sm mt-1" style={{ color: "hsl(215 19% 34%)" }}>Reporte válido <strong>6 MESES</strong>. Si mercado cambia antes de mudarte, actualizo <strong>GRATIS</strong>.</p>
+              <p className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>💡 IMPORTANTE KATINKA</p>
+              <p className="text-sm mt-2" style={{ color: "hsl(215 19% 34%)" }}>
+                Villa Patricia es RARA en mercado - pocas casas €900 con piscina + 2 baños.
+                Si te interesa, avísame pronto. Disponible 1 Abril.
+              </p>
+              <p className="text-sm mt-1" style={{ color: "hsl(215 19% 34%)" }}>
+                Reporte válido <strong>6 MESES</strong>. Seguimiento incluido hasta que encuentres.
+              </p>
             </div>
           </div>
         </section>
