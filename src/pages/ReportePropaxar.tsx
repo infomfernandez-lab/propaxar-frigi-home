@@ -81,7 +81,7 @@ const properties = [
       { label: "Agua", status: "ok", detail: "Presión buena", note: "Agua agrícola - sin cortes" },
     ],
     insider: {
-      owner: "Loli Triviño - Propietaria española local. Muy atenta, mantiene propiedad impecable, seria y rápida si se necesita. Responde mismo día siempre.",
+      owner: "Muy atenta, mantiene propiedad impecable, seria y rápida si se necesita. Responde mismo día siempre.",
       history: "Alquilada últimos años larga temporada a extranjeros. Bien mantenida siempre. Sin incidencias nunca. Pintada hace 1 año.",
       neighbors: "Vecinos tranquilos, casa contigua pero privacidad total. Sin incidencias previas nunca. Ambiente agradable.",
     },
@@ -157,7 +157,7 @@ const properties = [
       { label: "Agua", status: "ok", detail: "Presión correcta", note: "Agua agrícola fiable" },
     ],
     insider: {
-      owner: "Sebastian Noberto - Propietario español local, hombre mayor serio y atento. Formal en todo. Sin problemas nunca.",
+      owner: "Hombre mayor serio y atento. Formal en todo. Sin problemas nunca.",
       history: "Siempre alquilada larga estancia. Mantenimiento regular. Inquilinos previos extranjeros contentos.",
       neighbors: "Vecinos al lado pero no pegados. Vecindario agradable y formal. Ninguna incidencia registrada nunca.",
     },
@@ -233,7 +233,7 @@ const properties = [
       { label: "Agua", status: "ok", detail: "Presión buena", note: "Agua agrícola fiable" },
     ],
     insider: {
-      owner: "María del Mar Martín - Propietaria española local. Persona seria y comunicativa. Responde rápido siempre. Cuida mucho su propiedad.",
+      owner: "Persona seria y comunicativa. Responde rápido siempre. Cuida mucho su propiedad.",
       history: "Alquilada siempre por años. Pintada recientemente. Ventanas nuevas. Mantenimiento impecable constante.",
       neighbors: "Vecinos cerca pero alta privacidad. Área sin ruidos, tranquila. Sin incidencias.",
     },
@@ -310,7 +310,7 @@ const properties = [
       { label: "Agua", status: "ok", detail: "Presión buena", note: "Agua agrícola sin problemas" },
     ],
     insider: {
-      owner: "Jose Manuel Cobos - Propietario español local, persona seria. Inquilinos anteriores contentos siempre.",
+      owner: "Persona seria. Inquilinos anteriores contentos siempre.",
       history: "Alquilada actualmente a Katinka hasta 31 Marzo 2026. Disponible 1 Abril. Sin incidencias nunca.",
       neighbors: "Zona silenciosa, pocos vecinos. Ninguno detrás ni a los lados. Privacidad total.",
     },
@@ -403,16 +403,19 @@ function PropertyCard({ p }: { p: typeof properties[0] }) {
                 <MapPin className="w-4 h-4" /> UBICACIÓN
               </h4>
               <p className="text-sm mb-2">{p.location.address}</p>
-              <div className="rounded-lg overflow-hidden h-48 bg-gray-100">
+              <a href={p.mapsUrl} target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden h-48 bg-gray-100 relative group cursor-pointer">
                 <iframe
                   title={`Mapa ${p.name}`}
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  style={{ border: 0, pointerEvents: "none" }}
                   loading="lazy"
                   src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${p.location.lat},${p.location.lng}&zoom=16`}
                 />
-              </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 px-3 py-1 rounded-full text-xs font-semibold shadow">Abrir en Google Maps</span>
+                </div>
+              </a>
             </div>
 
             {/* Pros */}
