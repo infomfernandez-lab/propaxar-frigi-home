@@ -44,7 +44,14 @@ const properties = [
     rating: 5,
     badge: "PROPAXAR DIRECT",
     summary: "Casa rústica en zona premium. Vistas espectaculares 360°, acceso perfecto, luz natural todo el día. Orientación sur. Ideal trabajo remoto.",
-    photos: Array(6).fill("/placeholder.svg"),
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-14b2d3a1.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-05a32812.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-524b50d1.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-c46b8798.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-58d0de97.jpg",
+      "https://propaxar.com/wp-content/uploads/2025/09/3843121-e0cd04a0.jpg",
+    ],
     location: { address: "Camino de la Cruz - Frigiliana Oeste", lat: 36.7928, lng: -3.8970 },
     pros: [
       "Ubicación perfecta - zona más demandada Frigiliana",
@@ -112,7 +119,14 @@ const properties = [
     rating: 4,
     badge: "PROPAXAR DIRECT",
     summary: "Casa amplia 120m² en zona alta. Vistas despejadas Mediterráneo y campo. Jardines agradables, piscina bien ubicada. DISPONIBLE YA (1 Feb).",
-    photos: Array(5).fill("/placeholder.svg"),
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8023-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8012-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8028-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8030-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8027-1-scaled.jpeg",
+      "https://propaxar.com/wp-content/uploads/2025/09/IMG_8031-1-scaled.jpeg",
+    ],
     location: { address: "Camino de la Cruz - Frigiliana Este", lat: 36.7930, lng: -3.8960 },
     pros: [
       "Disponible YA (1 Febrero) - antes que otras",
@@ -181,7 +195,14 @@ const properties = [
     rating: 3,
     badge: "PROPAXAR DIRECT",
     summary: "Casa sólida en Loma Cruz. Construcción alta calidad, bien mantenida. Zona premium. Parking propio. Algo pequeña (75m²) y solo 1 baño.",
-    photos: Array(4).fill("/placeholder.svg"),
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7565-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7652-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7649-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7645-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7641-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/02/IMG_7637-scaled.jpg",
+    ],
     location: { address: "Camino de la Cruz - Loma de la Cruz", lat: 36.7925, lng: -3.8968 },
     pros: [
       "Construcción alta calidad - sólida",
@@ -250,7 +271,14 @@ const properties = [
     rating: 4,
     badge: "PROPAXAR DIRECT",
     summary: "MEJOR PRECIO - €900/mes. Casa tranquila zona norte. Orientación sur, luz natural. Exteriores amplios + huerto. Solo 2 dorms. Disponible Abril.",
-    photos: Array(5).fill("/placeholder.svg"),
+    photos: [
+      "https://propaxar.com/wp-content/uploads/2026/01/IMG_4099-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/01/IMG_4202-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/01/IMG_4178-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/01/IMG_4127-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/01/IMG_4108-scaled.jpg",
+      "https://propaxar.com/wp-content/uploads/2026/01/IMG_4105-scaled.jpg",
+    ],
     location: { address: "Villa Patricia, Diseminado - Frigiliana Norte", lat: 36.7945, lng: -3.8940 },
     pros: [
       "PRECIO EXCELENTE - €900 (€700 menos que otras)",
