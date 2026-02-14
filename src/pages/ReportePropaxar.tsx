@@ -618,7 +618,7 @@ export default function ReportePropaxar() {
             <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>
               ✅ 1 dentro presupuesto · ⚠️ 3 fuera presupuesto (€1,600/mes)
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               {properties.map((p) => <PropertyCard key={p.id} p={p} />)}
             </div>
           </div>
