@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award } from "lucide-react";
+import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, Package, Trash2, Droplets, TrendingUp } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -519,6 +520,7 @@ export default function ReportePropaxar() {
   const compFade = useFadeIn();
   const recoFade = useFadeIn();
   const stepsFade = useFadeIn();
+  const logisticsFade = useFadeIn();
   const pdfFade = useFadeIn();
 
   const handleDownloadPdf = async () => {
@@ -720,7 +722,79 @@ export default function ReportePropaxar() {
           </div>
         </section>
 
-        {/* ─── 8. DESCARGAR PDF ─── */}
+        {/* ─── 8. LOGÍSTICA DE VIDA EN EL CAMPO ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={logisticsFade.ref}>
+          <div className={logisticsFade.className}>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>
+              Logística de Vida en el Campo
+            </h2>
+            <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>The Insider's Truth</p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  icon: <Package className="w-7 h-7" />,
+                  title: "Envío de Paquetes y Amazon",
+                  text: "Importante: En los diseminados de Frigiliana no existe entrega puerta a puerta. Te gestionamos el alta en un Punto de Recogida (Parcel Point) local para que recibas tus compras sin problemas.",
+                },
+                {
+                  icon: <Trash2 className="w-7 h-7" />,
+                  title: "Recogida de Basura",
+                  text: "El camión de basura no accede a los carriles rurales. Los residuos deben depositarse en los puntos limpios situados en la carretera principal. Es la norma para preservar el entorno natural.",
+                },
+                {
+                  icon: <Droplets className="w-7 h-7" />,
+                  title: "Agua y Electricidad",
+                  text: "He verificado personalmente que esta propiedad cuenta con depósito de reserva. En el campo, esto es vital para garantizar suministro continuo durante los días de riego de la comunidad.",
+                },
+              ].map((c, i) => (
+                <Card key={i} className="border" style={{ borderColor: "hsl(212 26% 83%)", borderRadius: 12 }}>
+                  <CardContent className="p-6 space-y-3">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                      {c.icon}
+                    </div>
+                    <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{c.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.text}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Gráfica Evolución del Mercado */}
+            <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
+              <CardContent className="p-6 md:p-8">
+                <div className="flex items-center gap-2 mb-1">
+                  <TrendingUp className="w-5 h-5" style={{ color: "hsl(142 71% 45%)" }} />
+                  <h3 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>Evolución del Mercado en Frigiliana</h3>
+                </div>
+                <p className="text-xs mb-6" style={{ color: "hsl(215 19% 34%)" }}>
+                  Precio medio +6% anual · Disponibilidad alquiler larga temporada &lt;1%
+                </p>
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={[
+                      { year: "2020", precio: 650 },
+                      { year: "2021", precio: 690 },
+                      { year: "2022", precio: 730 },
+                      { year: "2023", precio: 780 },
+                      { year: "2024", precio: 830 },
+                      { year: "2025", precio: 880 },
+                      { year: "2026", precio: 935 },
+                    ]}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(212 26% 83%)" />
+                      <XAxis dataKey="year" tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} />
+                      <YAxis tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} tickFormatter={(v) => `€${v}`} />
+                      <Tooltip formatter={(value: number) => [`€${value}/mes`, "Precio medio"]} />
+                      <Line type="monotone" dataKey="precio" stroke="hsl(213 56% 23%)" strokeWidth={2.5} dot={{ fill: "hsl(213 56% 23%)", r: 4 }} activeDot={{ r: 6, fill: "hsl(142 71% 45%)" }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* ─── 9. DESCARGAR PDF ─── */}
         <section className="py-16 px-4 md:px-8 max-w-3xl mx-auto text-center" ref={pdfFade.ref} data-no-print>
           <div className={pdfFade.className}>
             <Card className="border-0" style={{ boxShadow: "0 4px 24px hsl(0 0% 0%/0.08)", borderRadius: 16 }}>
