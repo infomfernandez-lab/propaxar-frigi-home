@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import heroImg from "@/assets/hero-frigiliana.jpg";
 
-const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hola%20Manuel%2C%20he%20visto%20el%20reporte%20y%20me%20gustaría%20hablar.";
+const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hola%20Manuel%2C%20me%20gustaría%20organizar%20una%20visita%20para%20Villa%20Patricia.%20%C2%BFCuándo%20sería%20posible%3F";
 const EMAIL_LINK = "mailto:info@propaxar.com?subject=Reporte%20Inmobiliario%20-%20Consulta";
 
 // Scroll fade-in hook
@@ -550,12 +550,12 @@ export default function ReportePropaxar() {
         <div className="absolute inset-0 bg-black/55" />
         <div ref={heroFade.ref} className={`relative z-10 px-6 max-w-xl ${heroFade.className}`}>
           <img src="/propaxar-vision.png" alt="Propaxar" className="h-10 mx-auto mb-6 opacity-90" />
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight text-white mb-2">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white mb-3">
             REPORTE INMOBILIARIO<br />PERSONALIZADO
           </h1>
-          <p className="text-xl md:text-2xl font-medium mt-4 text-white/90">Katinka</p>
-          <p className="text-base text-white/70">Frigiliana · Febrero 2026</p>
-          <p className="text-sm mt-6 text-white/60">Elaborado por Manuel Fernández<br />Analista Inmobiliario · 10 años experiencia</p>
+          <p className="text-2xl md:text-3xl font-medium mt-5 text-white/90">Katinka</p>
+          <p className="text-lg md:text-xl text-white/70 mt-1">Frigiliana · Febrero 2026</p>
+          <p className="text-base mt-6 text-white/60">Elaborado por Manuel Fernández<br />Analista Inmobiliario</p>
           <ChevronDown className="mx-auto mt-10 w-8 h-8 animate-bounce text-white/60" />
         </div>
       </section>
