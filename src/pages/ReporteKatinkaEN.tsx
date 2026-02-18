@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import heroImg from "@/assets/hero-frigiliana.jpg";
 
 const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hello%20Manuel%2C%20I%20would%20like%20to%20arrange%20a%20visit%20for%20Villa%20Patricia.%20When%20would%20it%20be%20possible%3F";
-const EMAIL_LINK = "mailto:manuel@propaxar.es?subject=Report%20Inquiry%20-%20Katinka";
+const EMAIL_LINK = "mailto:info@propaxar.com?subject=Report%20Inquiry%20-%20Katinka";
 
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
@@ -949,7 +949,7 @@ export default function ReporteKatinkaEN() {
         <img src="/propaxar-vision.png" alt="Propaxar" className="h-8 mx-auto mb-6 brightness-200" />
         <p className="text-xl font-bold mb-1 text-white">PROPAXAR</p>
         <p className="text-sm text-white/70 mb-4">Your Local Expert in Frigiliana</p>
-        <p className="text-base font-semibold mb-1 text-white">Manuel Monje</p>
+        <p className="text-base font-semibold mb-1 text-white">Manuel Fernandez</p>
         <div className="flex flex-col sm:flex-row justify-center gap-3 mb-6">
           <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
             <Button className="font-semibold" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 8 }}>
@@ -958,7 +958,7 @@ export default function ReporteKatinkaEN() {
           </a>
           <a href={EMAIL_LINK}>
             <Button variant="outline" className="font-semibold border-white/30 text-white hover:bg-white/10" style={{ borderRadius: 8 }}>
-              <Mail className="w-4 h-4 mr-2" /> manuel@propaxar.es
+              <Mail className="w-4 h-4 mr-2" /> info@propaxar.com
             </Button>
           </a>
         </div>
