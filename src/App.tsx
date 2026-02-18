@@ -9,6 +9,7 @@ import PropertyFinder from "./pages/PropertyFinder";
 import TerminosFinder from "./pages/TerminosFinder";
 import ReporteTest from "./pages/ReporteTest";
 import ReportePropaxar from "./pages/ReportePropaxar";
+import ReporteKatinkaEN from "./pages/ReporteKatinkaEN";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/reporte-test" element={<ReporteTest />} />
             <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
             <Route path="/reporte/:slug" element={<ReportePropaxar />} />
+            <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
