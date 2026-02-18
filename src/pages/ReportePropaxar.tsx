@@ -626,107 +626,11 @@ export default function ReportePropaxar() {
           </div>
         </section>
 
-        {/* ─── 5. COMPARATIVA ─── */}
-        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={compFade.ref}>
-          <div className={compFade.className}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Comparativa Rápida</h2>
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    {["Ref", "Nombre", "Precio", "Dorms", "Baños", "M²", "Disponible", "Tu perfil"].map((h) => (
-                      <TableHead key={h} className="text-xs font-bold whitespace-nowrap">{h}</TableHead>
-                    ))}
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {properties.map((p) => (
-                    <TableRow key={p.id}>
-                      <TableCell className="font-bold text-xs">{p.ref.toUpperCase()}</TableCell>
-                      <TableCell className="font-semibold text-sm whitespace-nowrap">{p.name.split(" - ")[0]}</TableCell>
-                      <TableCell className={p.id === 1 ? "text-sm font-bold text-green-600" : "text-sm text-red-600"}>{p.price}</TableCell>
-                      <TableCell className="text-sm">{p.beds}</TableCell>
-                      <TableCell className="text-sm">{p.baths}</TableCell>
-                      <TableCell className="text-sm">{p.size}</TableCell>
-                      <TableCell className="text-xs">{p.disponible}</TableCell>
-                      <TableCell className="font-bold text-base">{p.rating}/5</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── 6. RECOMENDACIÓN ─── */}
-        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={recoFade.ref}>
-          <div className={recoFade.className}>
-            <Card className="border-0 overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 38%))", borderRadius: 16 }}>
-              <CardContent className="p-8 text-white space-y-4">
-                <h2 className="text-2xl font-bold text-white">🥇 MI RECOMENDACIÓN KATINKA</h2>
-                <p className="text-lg font-semibold text-white">Villa Patricia (pa223)</p>
-                <p className="text-lg font-semibold text-white">€900/mes · 2 dormitorios · 2 baños</p>
-                <div className="text-sm leading-relaxed text-white/90 space-y-2">
-                  <p><strong>POR QUÉ ES TU ÚNICA OPCIÓN REALISTA:</strong></p>
-                  <p>✅ €900/mes = DENTRO tu presupuesto (€700-1,000)</p>
-                  <p>✅ 2 dormitorios = Cumple tu mínimo</p>
-                  <p>✅ Mascotas permitidas ✅</p>
-                  <p>✅ 2 baños completos (más cómodo)</p>
-                  <p>✅ Huerto incluido (extra único)</p>
-                  <p>✅ AHORRO: €8,400/año vs otras opciones</p>
-                  <p className="mt-4"><strong>Las otras 3 casas están a €1,600/mes = €600 más que tu presupuesto máximo.</strong></p>
-                  <p>Las incluí para que veas qué hay en mercado, pero son 60% más caras.</p>
-                </div>
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" data-no-print>
-                  <Button className="mt-4 text-base font-bold px-10 py-5" style={{ background: "#fff", color: "hsl(142 71% 35%)", borderRadius: 10 }}>
-                    QUIERO VER VILLA PATRICIA
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
-            <div className="mt-6 space-y-2 text-sm" style={{ color: "hsl(215 19% 34%)" }}>
-              <p><strong>⚠️ Sobre las otras 3:</strong> Si puedes/quieres subir presupuesto a €1,600/mes, Casa Zambra (pa194) es excelente opción - zona premium, 3 dorms, vistas espectaculares.</p>
-              <p><strong>💡 ¿Quieres que busque más opciones €700-1,000?</strong> Puedo seguir buscando, pero honestamente son escasas en Frigiliana campo.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── 7. PRÓXIMOS PASOS ─── */}
-        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={stepsFade.ref}>
-          <div className={stepsFade.className}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Próximos Pasos</h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { num: "1️⃣", title: "REVISA REPORTE", desc: "Tómate 1-2 días" },
-                { num: "2️⃣", title: "DECIDE PRESUPUESTO", desc: "¿€900 OK o puedes €1,600?" },
-                { num: "3️⃣", title: "AVÍSAME WHATSAPP", desc: "Coordino visita Villa Patricia" },
-                { num: "4️⃣", title: "VEN A VERLA", desc: "Te acompaño personalmente" },
-              ].map((s, i) => (
-                <div key={i} className="text-center space-y-2">
-                  <div className="text-3xl">{s.num}</div>
-                  <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{s.title}</h3>
-                  <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{s.desc}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-10 p-6 rounded-xl text-center" style={{ background: "hsl(39 76% 61%/0.15)", borderRadius: 12 }}>
-              <p className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>💡 IMPORTANTE KATINKA</p>
-              <p className="text-sm mt-2" style={{ color: "hsl(215 19% 34%)" }}>
-                Villa Patricia es RARA en mercado - pocas casas €900 con piscina + 2 baños.
-                Si te interesa, avísame pronto. Disponible 1 Abril.
-              </p>
-              <p className="text-sm mt-1" style={{ color: "hsl(215 19% 34%)" }}>
-                Reporte válido <strong>6 MESES</strong>. Seguimiento incluido hasta que encuentres.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── 8. LOGÍSTICA DE VIDA EN EL CAMPO ─── */}
+        {/* ─── 5. LOGÍSTICA DE VIDA EN EL CAMPO VS PUEBLO ─── */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={logisticsFade.ref}>
           <div className={logisticsFade.className}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>
-              Logística de Vida en el Campo
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-1" style={{ color: "hsl(213 56% 23%)" }}>
+              Logística de vida en el campo vs pueblo
             </h2>
             <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>The Insider's Truth</p>
 
@@ -735,26 +639,38 @@ export default function ReportePropaxar() {
                 {
                   icon: <Package className="w-7 h-7" />,
                   title: "Envío de Paquetes y Amazon",
-                  text: "Importante: En los diseminados de Frigiliana no existe entrega puerta a puerta. Te gestionamos el alta en un Punto de Recogida (Parcel Point) local para que recibas tus compras sin problemas.",
+                  campo: "En los diseminados de Frigiliana no existe entrega puerta a puerta. Te gestionamos el alta en un Punto de Recogida (Parcel Point) local para que recibas tus compras sin problemas.",
+                  pueblo: "Cada vivienda tiene su propia dirección con entrega puerta a puerta. También puedes usar un Parcel Point si lo prefieres.",
                 },
                 {
                   icon: <Trash2 className="w-7 h-7" />,
                   title: "Recogida de Basura",
-                  text: "El camión de basura no accede a los carriles rurales. Los residuos deben depositarse en los puntos limpios situados en la carretera principal. Es la norma para preservar el entorno natural.",
+                  campo: "El camión de basura no accede a los carriles rurales. Los residuos deben depositarse en los puntos limpios situados en la carretera principal. Es la norma para preservar el entorno natural.",
+                  pueblo: "La recogida se hace casa por casa. Debes depositar tu basura en el exterior después de las 21:30h. Si lo haces antes pueden sancionarte.",
                 },
                 {
                   icon: <Droplets className="w-7 h-7" />,
-                  title: "Agua y Electricidad",
-                  text: "He verificado personalmente que esta propiedad cuenta con depósito de reserva. En el campo, esto es vital para garantizar suministro continuo durante los días de riego de la comunidad.",
+                  title: "Agua",
+                  campo: "El agua en las casas rurales suele proceder de pozos comunitarios o privados.",
+                  pueblo: "El agua procede de la red municipal de aguas, generalmente gestionada por la empresa pública Aqualia.",
                 },
               ].map((c, i) => (
                 <Card key={i} className="border" style={{ borderColor: "hsl(212 26% 83%)", borderRadius: 12 }}>
-                  <CardContent className="p-6 space-y-3">
+                  <CardContent className="p-6 space-y-4">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
                       {c.icon}
                     </div>
                     <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{c.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.text}</p>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>🌿 En el Campo</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.campo}</p>
+                      </div>
+                      <div className="border-t pt-3" style={{ borderColor: "hsl(212 26% 90%)" }}>
+                        <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 40%)" }}>🏘️ En el Pueblo</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.pueblo}</p>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -791,6 +707,102 @@ export default function ReportePropaxar() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </section>
+
+        {/* ─── 6. COMPARATIVA ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={compFade.ref}>
+          <div className={compFade.className}>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Comparativa Rápida</h2>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    {["Ref", "Nombre", "Precio", "Dorms", "Baños", "M²", "Disponible", "Tu perfil"].map((h) => (
+                      <TableHead key={h} className="text-xs font-bold whitespace-nowrap">{h}</TableHead>
+                    ))}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {properties.map((p) => (
+                    <TableRow key={p.id}>
+                      <TableCell className="font-bold text-xs">{p.ref.toUpperCase()}</TableCell>
+                      <TableCell className="font-semibold text-sm whitespace-nowrap">{p.name.split(" - ")[0]}</TableCell>
+                      <TableCell className={p.id === 1 ? "text-sm font-bold text-green-600" : "text-sm text-red-600"}>{p.price}</TableCell>
+                      <TableCell className="text-sm">{p.beds}</TableCell>
+                      <TableCell className="text-sm">{p.baths}</TableCell>
+                      <TableCell className="text-sm">{p.size}</TableCell>
+                      <TableCell className="text-xs">{p.disponible}</TableCell>
+                      <TableCell className="font-bold text-base">{p.rating}/5</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 7. RECOMENDACIÓN ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={recoFade.ref}>
+          <div className={recoFade.className}>
+            <Card className="border-0 overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 38%))", borderRadius: 16 }}>
+              <CardContent className="p-8 text-white space-y-4">
+                <h2 className="text-2xl font-bold text-white">🥇 MI RECOMENDACIÓN KATINKA</h2>
+                <p className="text-lg font-semibold text-white">Villa Patricia (pa223)</p>
+                <p className="text-lg font-semibold text-white">€900/mes · 2 dormitorios · 2 baños</p>
+                <div className="text-sm leading-relaxed text-white/90 space-y-2">
+                  <p><strong>POR QUÉ ES TU ÚNICA OPCIÓN REALISTA:</strong></p>
+                  <p>✅ €900/mes = DENTRO tu presupuesto (€700-1,000)</p>
+                  <p>✅ 2 dormitorios = Cumple tu mínimo</p>
+                  <p>✅ Mascotas permitidas ✅</p>
+                  <p>✅ 2 baños completos (más cómodo)</p>
+                  <p>✅ Huerto incluido (extra único)</p>
+                  <p>✅ AHORRO: €8,400/año vs otras opciones</p>
+                  <p className="mt-4"><strong>Las otras 3 casas están a €1,600/mes = €600 más que tu presupuesto máximo.</strong></p>
+                  <p>Las incluí para que veas qué hay en mercado, pero son 60% más caras.</p>
+                </div>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" data-no-print>
+                  <Button className="mt-4 text-base font-bold px-10 py-5" style={{ background: "#fff", color: "hsl(142 71% 35%)", borderRadius: 10 }}>
+                    QUIERO VER VILLA PATRICIA
+                  </Button>
+                </a>
+              </CardContent>
+            </Card>
+            <div className="mt-6 space-y-2 text-sm" style={{ color: "hsl(215 19% 34%)" }}>
+              <p><strong>⚠️ Sobre las otras 3:</strong> Si puedes/quieres subir presupuesto a €1,600/mes, Casa Zambra (pa194) es excelente opción - zona premium, 3 dorms, vistas espectaculares.</p>
+              <p><strong>💡 ¿Quieres que busque más opciones €700-1,000?</strong> Puedo seguir buscando, pero honestamente son escasas en Frigiliana campo.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 8. PRÓXIMOS PASOS ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={stepsFade.ref}>
+          <div className={stepsFade.className}>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Próximos Pasos</h2>
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { num: "1️⃣", title: "REVISA REPORTE", desc: "Tómate 1-2 días" },
+                { num: "2️⃣", title: "DECIDE PRESUPUESTO", desc: "¿€900 OK o puedes €1,600?" },
+                { num: "3️⃣", title: "AVÍSAME WHATSAPP", desc: "Coordino visita Villa Patricia" },
+                { num: "4️⃣", title: "VEN A VERLA", desc: "Te acompaño personalmente" },
+              ].map((s, i) => (
+                <div key={i} className="text-center space-y-2">
+                  <div className="text-3xl">{s.num}</div>
+                  <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{s.title}</h3>
+                  <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{s.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10 p-6 rounded-xl text-center" style={{ background: "hsl(39 76% 61%/0.15)", borderRadius: 12 }}>
+              <p className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>💡 IMPORTANTE KATINKA</p>
+              <p className="text-sm mt-2" style={{ color: "hsl(215 19% 34%)" }}>
+                Villa Patricia es RARA en mercado - pocas casas €900 con piscina + 2 baños.
+                Si te interesa, avísame pronto. Disponible 1 Abril.
+              </p>
+              <p className="text-sm mt-1" style={{ color: "hsl(215 19% 34%)" }}>
+                Reporte válido <strong>6 MESES</strong>. Seguimiento incluido hasta que encuentres.
+              </p>
+            </div>
           </div>
         </section>
 
