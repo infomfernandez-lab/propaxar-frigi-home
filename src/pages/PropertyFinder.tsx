@@ -1,148 +1,335 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type Lang = "es" | "en";
 
-const translations = {
-  header: { es: "Tu Consultor Personal de Vivienda en La Axarquía", en: "Your Personal Housing Consultant in La Axarquía" },
-  heroTitle: { es: "Property Finder Service", en: "Property Finder Service" },
-  heroDesc: { es: "Encuentra tu casa perfecta en La Axarquía. Sin perder tiempo. Sin visitar propiedades incorrectas.", en: "Find your perfect home in La Axarquía. No wasted time. No wrong properties." },
-  initialPayment: { es: "Pago inicial · No reembolsable*", en: "Initial payment · Non-refundable*" },
-  initialPaymentNote: { es: "*Excepto si alquilas propiedad gestionada por Propaxar (ver detalles abajo)", en: "*Except if you rent a property managed by Propaxar (see details below)" },
-  plusRent: { es: "+ €220 cuando alquiles una de nuestras propiedades", en: "+ €220 when you rent one of our properties" },
-  orFree: { es: "o €0 si alquilas propiedad Propaxar", en: "or €0 if you rent Propaxar property" },
-  benefits: {
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02";
+const WHATSAPP_BASE = "https://wa.me/34662317561";
+const EMAIL = "info@propaxar.com";
+const PHONE = "+34 662 317 561";
+
+// ─── translations ──────────────────────────────────────────────────────────────
+const t = {
+  // header
+  headerSub: {
+    es: "Tu Consultor Personal de Vivienda en La Axarquía",
+    en: "Your Personal Housing Consultant in La Axarquía",
+  },
+
+  // hero
+  heroLabel:  { es: "REPORTE DE MERCADO PROPAXAR", en: "PROPAXAR MARKET REPORT" },
+  heroTitle:  { es: "Tu Análisis Personalizado de Alquileres en Frigiliana", en: "Your Personalised Rental Analysis in Frigiliana" },
+  heroDesc:   { es: "Deja de perder tiempo con propiedades irrelevantes. Recibe un reporte profesional adaptado a TU búsqueda.", en: "Stop wasting time on irrelevant properties. Receive a professional report tailored to YOUR search." },
+  heroPill1:  { es: "€250 · Pago único", en: "€250 · One-time payment" },
+  heroPill2:  { es: "Entrega 24-48h", en: "Delivered in 24-48h" },
+  heroPill3:  { es: "6 meses de seguimiento incluido", en: "6 months follow-up included" },
+  heroCTA:    { es: "SOLICITA TU REPORTE →", en: "GET YOUR REPORT →" },
+
+  // what's included
+  includedTitle: { es: "Qué Incluye Tu Reporte", en: "What's Included in Your Report" },
+  includedItems: {
     es: [
-      { icon: "🔍", title: "Búsqueda Exhaustiva del Mercado", description: "Rastreamos TODO: Idealista, Fotocasa, agencias locales, y propiedades off-market que nadie más conoce." },
-      { icon: "⭐", title: "Solo las MEJORES Propiedades", description: "No pierdes tiempo viendo casas incorrectas. Te muestro solo las mejores que cumplen tus criterios." },
-      { icon: "🗓️", title: "Coordinación Completa de Visitas", description: "Yo organizo todo con propietarios y agentes. Tú solo vienes y ves las mejores opciones." },
-      { icon: "🏆", title: "10 Años de Experiencia Local", description: "Conozco cada rincón, cada calle, cada oportunidad. Te evito errores costosos que un extranjero no ve." },
-      { icon: "⚡", title: "Resultados en 48-72 Horas", description: "Recibes tu selección de propiedades en 2-3 días. Nada de esperar semanas para ver opciones." },
+      { icon: "🔍", title: "Análisis Personalizado (4-8 propiedades)", desc: "Propiedades seleccionadas manualmente que encajan con TU presupuesto, dormitorios, mascotas y fecha de entrada. Sin listados genéricos." },
+      { icon: "📊", title: "Realidad Honesta del Mercado", desc: "Precios reales, disponibilidad e información privilegiada que solo un experto local conoce. Sin filtros." },
+      { icon: "⭐", title: "Recomendación Profesional", desc: "Orientación clara sobre qué propiedad se ajusta mejor a TU perfil y por qué. Ahorra horas de confusión." },
+      { icon: "🗺️", title: "Guía Logística", desc: "Vida campo vs pueblo, entrega de paquetes, sistemas de agua, recogida de basura — la verdad que nadie más te cuenta." },
+      { icon: "🔄", title: "Seguimiento 6 Meses", desc: "Actualizaciones semanales con nuevas propiedades, cambios de precios e insights del mercado hasta que encuentres tu hogar." },
+      { icon: "💚", title: "Reembolso Total si Alquilas con Nosotros", desc: "Si acabas alquilando una propiedad Propaxar Direct, reembolsamos el 100% del coste del reporte." },
     ],
     en: [
-      { icon: "🔍", title: "Exhaustive Market Search", description: "We search EVERYTHING: Idealista, Fotocasa, local agencies, and off-market properties nobody else knows about." },
-      { icon: "⭐", title: "Only the BEST Properties", description: "No wasting time viewing wrong homes. We show you only the best ones that match your criteria." },
-      { icon: "🗓️", title: "Full Visit Coordination", description: "We organise everything with owners and agents. You just come and see the best options." },
-      { icon: "🏆", title: "10 Years of Local Experience", description: "We know every corner, every street, every opportunity. We help you avoid costly mistakes foreigners don't see." },
-      { icon: "⚡", title: "Results in 48-72 Hours", description: "You receive your property selection in 2-3 days. No waiting weeks to see options." },
+      { icon: "🔍", title: "Personalised Analysis (4-8 properties)", desc: "Hand-picked properties matching YOUR budget, bedrooms, pets and move-in date. No generic listings." },
+      { icon: "📊", title: "Honest Market Reality", desc: "Real prices, availability and insider knowledge only a local expert holds. No filters." },
+      { icon: "⭐", title: "Professional Recommendation", desc: "Clear guidance on which property best suits YOUR profile and why. Save hours of confusion." },
+      { icon: "🗺️", title: "Logistics Guide", desc: "Country vs town living, package delivery, water systems, waste collection — the truth nobody else tells you." },
+      { icon: "🔄", title: "6-Month Follow-up", desc: "Weekly updates with new properties, price changes and market insights until you find your home." },
+      { icon: "💚", title: "Full Refund if You Rent with Us", desc: "If you end up renting a Propaxar Direct property, we refund 100% of the report cost." },
     ],
   },
-  pricingTitle: { es: "Cómo Funciona el Pago", en: "How Payment Works" },
-  pricingStep1Title: { es: "PASO 1: €180 al contratar", en: "STEP 1: €180 upon booking" },
-  pricingStep1Note: { es: "(No reembolsable, cubre búsqueda exhaustiva)", en: "(Non-refundable, covers exhaustive search)" },
-  pricingStep2Title: { es: "PASO 2: Depende de qué propiedad alquilas", en: "STEP 2: Depends on which property you rent" },
-  pricingOptionA: { es: "Opción A - Propiedad de TERCEROS:", en: "Option A - THIRD-PARTY Property:" },
-  pricingOptionADetail: { es: "+ €220 adicionales = €400 TOTAL", en: "+ €220 additional = €400 TOTAL" },
-  pricingOptionB: { es: "Opción B - Propiedad PROPAXAR:", en: "Option B - PROPAXAR Property:" },
-  pricingOptionBDetail: { es: "€0 adicionales (reembolso de €180) = GRATIS ✨", en: "€0 additional (€180 refund) = FREE ✨" },
-  pricingOptionC: { es: "Opción C - No alquilas ninguna:", en: "Option C - You don't rent any:" },
-  pricingOptionCDetail: { es: "Solo €180 (búsqueda ya realizada)", en: "Only €180 (search already completed)" },
-  pricingFootnote: { es: "Algunas de las mejores propiedades de La Axarquía las gestionamos directamente. Si tu casa perfecta es una de estas, el servicio te sale GRATIS.", en: "Some of the best properties in La Axarquía are managed directly by us. If your perfect home is one of these, the service is FREE." },
-  advantageTitle: { es: "✨ VENTAJA EXCLUSIVA PROPAXAR", en: "✨ EXCLUSIVE PROPAXAR ADVANTAGE" },
-  advantageDesc: { es: "Si encuentras tu casa perfecta entre nuestras propiedades gestionadas directamente:", en: "If you find your perfect home among our directly managed properties:" },
-  advantageFree: { es: "💰 SERVICIO COMPLETAMENTE GRATIS", en: "💰 COMPLETELY FREE SERVICE" },
-  advantageRefund: { es: "(Reembolso íntegro de los €180)", en: "(Full refund of €180)" },
-  advantageNote: { es: "Gestionamos algunas de las mejores propiedades de Frigiliana, Nerja y Cómpeta sin intermediarios.", en: "We manage some of the best properties in Frigiliana, Nerja and Cómpeta without intermediaries." },
-  ctaTitle: { es: "Reserva Tu Servicio Ahora", en: "Book Your Service Now" },
-  termsLabel: { es: "He leído y acepto los", en: "I have read and accept the" },
-  termsLink: { es: "Términos del Servicio", en: "Terms of Service" },
-  termsError: { es: "Debes aceptar los términos del servicio", en: "You must accept the terms of service" },
-  ctaButton: { es: "RESERVAR MI BÚSQUEDA - €180", en: "BOOK MY SEARCH - €180" },
-  securePay: { es: "🔒 Pago 100% seguro con Stripe · Procesamiento instantáneo", en: "🔒 100% secure payment with Stripe · Instant processing" },
-  contactTitle: { es: "¿Dudas Antes de Contratar?", en: "Have Questions Before Booking?" },
-  contactSub: { es: "Habla conmigo directamente", en: "Talk to me directly" },
+
+  // how it works
+  howTitle: { es: "Proceso Simple en 3 Pasos", en: "Simple 3-Step Process" },
+  howSteps: {
+    es: [
+      { num: "1", icon: "💳", title: "Compra y Cuéntanos Tus Necesidades", desc: "Completa el pago y rellena el formulario rápido: presupuesto, dormitorios, mascotas, fecha de entrada, preferencias." },
+      { num: "2", icon: "🏡", title: "Creamos Tu Reporte Personalizado", desc: "Yo personalmente analizo el mercado, selecciono propiedades, verifico disponibilidad y construyo tu reporte. Entrega en 24-48h." },
+      { num: "3", icon: "📬", title: "Recibe y Obtén Actualizaciones Semanales", desc: "Tu URL personalizada permanece activa 6 meses. Cada viernes la actualizo con nuevas propiedades y cambios del mercado." },
+    ],
+    en: [
+      { num: "1", icon: "💳", title: "Purchase & Tell Us Your Needs", desc: "Complete the payment and fill in the quick form: budget, bedrooms, pets, move-in date, preferences." },
+      { num: "2", icon: "🏡", title: "We Build Your Personalised Report", desc: "I personally analyse the market, select properties, verify availability and build your report. Delivered in 24-48h." },
+      { num: "3", icon: "📬", title: "Receive & Get Weekly Updates", desc: "Your personalised URL stays active for 6 months. Every Friday I update it with new properties and market changes." },
+    ],
+  },
+
+  // pricing
+  pricingTitle:   { es: "Inversión", en: "Investment" },
+  pricingAmount:  { es: "€250", en: "€250" },
+  pricingOnce:    { es: "Pago Único · Sin cargos recurrentes", en: "One-time Payment · No recurring charges" },
+  othersLabel:    { es: "Lo Que Cobran Otros:", en: "What Others Charge:" },
+  othersItems: {
+    es: [
+      "❌ Portales genéricos: €0 (pero horas perdidas)",
+      "❌ Agencias tradicionales: \"Gratis\" (pero costes ocultos, presión)",
+      "❌ Investigación DIY: Semanas de tu tiempo + frustración",
+    ],
+    en: [
+      "❌ Generic portals: €0 (but hours wasted)",
+      "❌ Traditional agencies: \"Free\" (but hidden costs, pressure)",
+      "❌ DIY research: Weeks of your time + frustration",
+    ],
+  },
+  youGetLabel:  { es: "Lo Que Obtienes Con Propaxar:", en: "What You Get with Propaxar:" },
+  youGetItems: {
+    es: [
+      "✅ Análisis profesional adaptado a TI",
+      "✅ Entrega en 24-48h",
+      "✅ 6 meses de soporte activo",
+      "✅ Conocimiento local privilegiado",
+      "✅ Reembolso total si alquilas nuestra propiedad",
+    ],
+    en: [
+      "✅ Professional analysis tailored to YOU",
+      "✅ Delivered in 24-48h",
+      "✅ 6 months of active support",
+      "✅ Insider local knowledge",
+      "✅ Full refund if you rent our property",
+    ],
+  },
+  pricingSpecial: {
+    es: "ESPECIAL: Si acabas alquilando una propiedad gestionada por Propaxar Direct, reembolsamos los €250 completos. Literalmente no arriesgas nada.",
+    en: "SPECIAL: If you end up renting a Propaxar Direct property, we refund the full €250. Literally zero risk.",
+  },
+  pricingCTA: { es: "SOLICITA TU REPORTE - €250 →", en: "GET YOUR REPORT - €250 →" },
+
+  // testimonials
+  testimonialsTitle: { es: "Qué Dicen los Clientes", en: "What Clients Say" },
+  testimonials: {
+    es: [
+      { quote: "Este reporte me ahorró semanas. Habría mirado 10+ casas equivocadas. Manuel me mostró exactamente qué encajaba con mi presupuesto y necesidades.", name: "Katinka D.", origin: "Países Bajos · Mudada a Frigiliana Feb 2026" },
+      { quote: "Estaba lista para pagar €1,600 por una casa que ni siquiera me gustaba. El reporte me ayudó a encontrar una mejor a €900. Vale cada euro.", name: "Cliente Verificada", origin: "Europa · Feb 2026" },
+      { quote: "Solo la sección de logística vale €250. Nadie te habla de entrega de paquetes, sistemas de agua o recogida de basura hasta que ya estás mudado y batallando.", name: "Cliente Verificado", origin: "Europa · Ene 2026" },
+    ],
+    en: [
+      { quote: "This report saved me weeks. I would have viewed 10+ wrong houses. Manuel showed me exactly what matched my budget and needs.", name: "Katinka D.", origin: "Netherlands · Moved to Frigiliana Feb 2026" },
+      { quote: "I was about to pay €1,600 for a house I didn't even like. The report helped me find a better one at €900. Worth every cent.", name: "Verified Client", origin: "Europe · Feb 2026" },
+      { quote: "The logistics section alone is worth €250. Nobody tells you about package delivery, water systems or waste collection until you're already moved in and struggling.", name: "Verified Client", origin: "Europe · Jan 2026" },
+    ],
+  },
+
+  // faq
+  faqTitle: { es: "Preguntas Frecuentes", en: "Frequently Asked Questions" },
+  faqs: {
+    es: [
+      { q: "¿Cuánto tarda?", a: "24-48 horas después de la compra. Entrega urgente disponible si necesitas antes." },
+      { q: "¿Y si no encuentro nada en el reporte?", a: "Por eso incluimos 6 meses de seguimiento. Actualizaré tu reporte cada semana con nuevas propiedades hasta que encuentres tu hogar." },
+      { q: "¿Y si ninguna propiedad encaja con mi presupuesto?", a: "Te diré la verdad sobre la realidad del mercado. Si tu presupuesto es poco realista, lo sabrás antes de perder tiempo. El reporte te ayuda a ajustar expectativas o presupuesto en consecuencia." },
+      { q: "¿Es solo para Frigiliana?", a: "Sí. Me especializo exclusivamente en Frigiliana y zonas rurales circundantes (Axarquía). El conocimiento local profundo es lo que hace esto valioso." },
+      { q: "¿Cuál es la política de reembolso?", a: "Si alquilas una propiedad gestionada Propaxar Direct, reembolso completo. Si no estás contento con la calidad del reporte, lo resolveremos. Mi reputación depende de clientes felices." },
+      { q: "¿Tengo que usar Propaxar para alquilar?", a: "No. El reporte es tuyo. Puedes usarlo como quieras. Solo espero que cuando veas el valor, elijas trabajar conmigo para el alquiler." },
+    ],
+    en: [
+      { q: "How long does it take?", a: "24-48 hours after purchase. Express delivery available if you need it sooner." },
+      { q: "What if I don't find anything in the report?", a: "That's why we include 6 months of follow-up. I'll update your report every week with new properties until you find your home." },
+      { q: "What if no property fits my budget?", a: "I'll tell you the truth about market reality. If your budget is unrealistic, you'll know before wasting time. The report helps you adjust expectations or budget accordingly." },
+      { q: "Is it only for Frigiliana?", a: "Yes. I specialise exclusively in Frigiliana and surrounding rural areas (Axarquía). Deep local knowledge is what makes this valuable." },
+      { q: "What is the refund policy?", a: "If you rent a Propaxar Direct managed property, full refund. If you're unhappy with the report quality, we'll sort it out. My reputation depends on happy clients." },
+      { q: "Do I have to use Propaxar to rent?", a: "No. The report is yours. Use it however you want. I just hope that once you see the value, you'll choose to work with me for the rental." },
+    ],
+  },
+
+  // form
+  formTitle:     { es: "Solicita Tu Reporte Personalizado", en: "Request Your Personalised Report" },
+  formSubtitle:  { es: "Completa el formulario y serás redirigido al pago seguro.", en: "Fill in the form and you'll be redirected to secure payment." },
+  labelName:     { es: "Nombre Completo", en: "Full Name" },
+  labelEmail:    { es: "Email", en: "Email" },
+  labelPhone:    { es: "Teléfono (WhatsApp)", en: "Phone (WhatsApp)" },
+  labelLang:     { es: "Idioma Preferido", en: "Preferred Language" },
+  labelBudget:   { es: "Presupuesto mensual (€/mes)", en: "Monthly budget (€/month)" },
+  labelBeds:     { es: "Dormitorios mínimos", en: "Minimum bedrooms" },
+  labelPets:     { es: "¿Mascotas?", en: "Pets?" },
+  labelMovein:   { es: "Fecha de entrada (aprox.)", en: "Move-in date (approx.)" },
+  labelNotes:    { es: "Otras preferencias o notas", en: "Other preferences or notes" },
+  labelTerms:    { es: "Acepto los", en: "I accept the" },
+  termsLink:     { es: "Términos y Condiciones", en: "Terms & Conditions" },
+  termsError:    { es: "Debes aceptar los términos para continuar", en: "You must accept the terms to continue" },
+  submitBtn:     { es: "PAGAR €250 →", en: "PAY €250 →" },
+  submitNote:    { es: "🔒 Pago 100% seguro con Stripe", en: "🔒 100% secure payment with Stripe" },
+  yesLabel:      { es: "Sí", en: "Yes" },
+  noLabel:       { es: "No", en: "No" },
+  esLabel:       { es: "Español", en: "Spanish" },
+  enLabel:       { es: "Inglés", en: "English" },
+
+  // final cta
+  finalTitle: { es: "¿Listo Para Dejar de Perder Tiempo?", en: "Ready to Stop Wasting Time?" },
+  finalDesc:  { es: "Recibe tu reporte personalizado de mercado Frigiliana en 24-48h.", en: "Receive your personalised Frigiliana market report in 24-48h." },
+  finalCTA:   { es: "SOLICITA TU REPORTE - €250 →", en: "GET YOUR REPORT - €250 →" },
+  finalNote:  { es: "Pago seguro vía Stripe · Sin cargos recurrentes · Tarifa única", en: "Secure payment via Stripe · No recurring charges · One-time fee" },
+  finalQ:     { es: "¿Preguntas?", en: "Questions?" },
+  finalOr:    { es: "o email:", en: "or email:" },
+
+  // footer
   footerRights: { es: "Todos los derechos reservados.", en: "All rights reserved." },
+  footerSub:    { es: "Especialistas en Frigiliana · La Axarquía · Costa del Sol", en: "Specialists in Frigiliana · La Axarquía · Costa del Sol" },
 };
 
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02";
+// ─── helpers ────────────────────────────────────────────────────────────────
+const tr = (key: keyof typeof t, lang: Lang): string => {
+  const entry = t[key] as Record<Lang, string>;
+  return entry[lang] ?? "";
+};
 
+// ─── sub-components ─────────────────────────────────────────────────────────
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-[#e5e7eb] rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-4 text-left font-semibold text-[#333] hover:bg-[#f8faff] transition-colors"
+      >
+        <span>{q}</span>
+        <span className={`text-[#2c5282] text-xl transition-transform duration-200 ${open ? "rotate-45" : ""}`}>+</span>
+      </button>
+      {open && (
+        <div className="px-6 pb-5 text-[#555] leading-relaxed border-t border-[#e5e7eb] pt-4 bg-[#fafbff]">
+          {a}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── main component ──────────────────────────────────────────────────────────
 const PropertyFinder = () => {
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [showTermsError, setShowTermsError] = useState(false);
   const [lang, setLang] = useState<Lang>(() => {
-    try {
-      const saved = localStorage.getItem("finder-lang");
-      return saved === "en" ? "en" : "es";
-    } catch { return "es"; }
+    try { return localStorage.getItem("finder-lang") === "en" ? "en" : "es"; }
+    catch { return "es"; }
   });
 
-  const t = (key: keyof typeof translations) => (translations[key] as Record<Lang, string>)[lang];
-
   useEffect(() => {
-    localStorage.setItem("finder-lang", lang);
+    try { localStorage.setItem("finder-lang", lang); } catch {}
   }, [lang]);
 
-  const benefits = translations.benefits[lang];
-  const termsHref = lang === "en" ? "/terminos-finder?lang=en" : "/terminos-finder";
+  // form state
+  const [form, setForm] = useState({
+    name: "", email: "", phone: "", prefLang: lang,
+    budget: "", beds: "", pets: "", movein: "", notes: "",
+  });
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [showTermsError, setShowTermsError] = useState(false);
+  const formRef = useRef<HTMLElement>(null);
 
-  const handleBooking = () => {
-    if (!termsAccepted) {
-      setShowTermsError(true);
-      return;
-    }
-    window.location.href = STRIPE_PAYMENT_LINK;
+  const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!termsAccepted) { setShowTermsError(true); return; }
+
+    // Build WhatsApp message with search details then redirect to Stripe
+    const msg = lang === "es"
+      ? `Hola Manuel, acabo de solicitar un Reporte de Mercado Propaxar.\n\nNombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\nIdioma: ${form.prefLang === "es" ? "Español" : "Inglés"}\nPresupuesto: €${form.budget}/mes\nDormitorios: ${form.beds}+\nMascotas: ${form.pets === "yes" ? "Sí" : "No"}\nEntrada: ${form.movein}\nNotas: ${form.notes}`
+      : `Hi Manuel, I just requested a Propaxar Market Report.\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nLanguage: ${form.prefLang === "es" ? "Spanish" : "English"}\nBudget: €${form.budget}/month\nBedrooms: ${form.beds}+\nPets: ${form.pets === "yes" ? "Yes" : "No"}\nMove-in: ${form.movein}\nNotes: ${form.notes}`;
+
+    // Open WhatsApp with details, then redirect to Stripe
+    window.open(WHATSAPP_BASE + "?text=" + encodeURIComponent(msg), "_blank");
+    setTimeout(() => { window.location.href = STRIPE_PAYMENT_LINK; }, 800);
   };
+
+  const termsHref = lang === "en" ? "/terminos-finder?lang=en" : "/terminos-finder";
+  const includedItems = t.includedItems[lang];
+  const howSteps = t.howSteps[lang];
+  const othersItems = t.othersItems[lang];
+  const youGetItems = t.youGetItems[lang];
+  const testimonials = t.testimonials[lang];
+  const faqs = t.faqs[lang];
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
-      {/* Header */}
-      <header className="bg-white border-b border-[#e5e7eb] py-6">
-        <div className="max-w-[800px] mx-auto px-5 flex items-center justify-between">
+
+      {/* ── HEADER ──────────────────────────────────────────────────────────── */}
+      <header className="bg-white border-b border-[#e5e7eb] py-4 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-[900px] mx-auto px-5 flex items-center justify-between">
           <a href="https://propaxar.es" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <img
               src="https://propaxar.com/wp-content/uploads/2024/08/logo_small_icon_only_inverted_orDKnNi.png"
               alt="Propaxar"
-              className="h-10 w-auto"
+              className="h-9 w-auto"
             />
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#2c5282] tracking-tight">PROPAXAR</h1>
-              <p className="text-[#666] mt-1 text-base">{t("header")}</p>
+              <p className="text-2xl font-bold text-[#2c5282] tracking-tight leading-tight">PROPAXAR</p>
+              <p className="text-[#666] text-xs">{tr("headerSub", lang)}</p>
             </div>
           </a>
-          {/* Language Selector */}
-          <div className="flex items-center gap-1 text-sm font-medium text-[#333] shrink-0">
+
+          <div className="flex items-center gap-3">
+            {/* scroll to form CTA (sm+) */}
             <button
-              onClick={() => setLang("es")}
-              className={`px-2 py-1 transition-colors ${lang === "es" ? "text-[#2c5282] underline underline-offset-4 font-bold" : "hover:text-[#2c5282]"}`}
+              onClick={scrollToForm}
+              className="hidden sm:inline-block bg-[#2c5282] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#1e3a5f] transition-colors"
             >
-              🇪🇸 ES
+              {lang === "es" ? "Solicitar →" : "Get Report →"}
             </button>
-            <span className="text-[#ccc]">|</span>
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 transition-colors ${lang === "en" ? "text-[#2c5282] underline underline-offset-4 font-bold" : "hover:text-[#2c5282]"}`}
-            >
-              🇬🇧 EN
-            </button>
+            {/* Language selector */}
+            <div className="flex items-center gap-0.5 text-sm font-medium text-[#333] shrink-0 border border-[#e5e7eb] rounded-lg overflow-hidden">
+              <button
+                onClick={() => setLang("es")}
+                className={`px-3 py-1.5 transition-colors ${lang === "es" ? "bg-[#2c5282] text-white" : "hover:bg-[#f0f4ff]"}`}
+              >
+                🇪🇸 ES
+              </button>
+              <button
+                onClick={() => setLang("en")}
+                className={`px-3 py-1.5 transition-colors ${lang === "en" ? "bg-[#2c5282] text-white" : "hover:bg-[#f0f4ff]"}`}
+              >
+                🇬🇧 EN
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="bg-[#f5f5f5] py-12 md:py-16">
-        <div className="max-w-[800px] mx-auto px-5 text-center">
-          <span className="text-5xl md:text-6xl block mb-4" role="img" aria-label="house">🏠</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#333] mb-3">{t("heroTitle")}</h2>
-          <p className="text-[#666] text-lg max-w-[600px] mx-auto mb-8">{t("heroDesc")}</p>
-          <a href="#cta-section" className="inline-block bg-white rounded-xl shadow-lg px-8 py-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
-            <p className="text-[36px] md:text-[48px] font-extrabold text-[#48bb78] leading-none">€180</p>
-            <p className="text-[#666] text-sm mt-2 font-medium">{t("initialPayment")}</p>
-            <p className="text-[#999] text-xs mt-1">{t("plusRent")}</p>
-            <p className="text-[#48bb78] text-xs mt-1 font-medium">{t("orFree")}</p>
-            <p className="text-[#999] text-[10px] mt-2 max-w-[250px] mx-auto leading-tight">{t("initialPaymentNote")}</p>
-          </a>
+      {/* ── HERO ────────────────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-24" style={{ background: "linear-gradient(135deg, #1e3a5f 0%, #2c5282 60%, #3b6cb7 100%)" }}>
+        <div className="max-w-[900px] mx-auto px-5 text-center">
+          <span className="inline-block bg-[#ffd700]/20 text-[#ffd700] text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-[#ffd700]/30">
+            {tr("heroLabel", lang)}
+          </span>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
+            {tr("heroTitle", lang)}
+          </h1>
+          <p className="text-white/80 text-lg md:text-xl max-w-[620px] mx-auto mb-8 leading-relaxed">
+            {tr("heroDesc", lang)}
+          </p>
+          {/* pills */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            {[tr("heroPill1", lang), tr("heroPill2", lang), tr("heroPill3", lang)].map((pill, i) => (
+              <span key={i} className="bg-white/15 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full border border-white/20">
+                ✓ {pill}
+              </span>
+            ))}
+          </div>
+          <button
+            onClick={scrollToForm}
+            className="bg-[#48bb78] hover:bg-[#38a169] text-white text-xl font-extrabold px-10 py-5 rounded-xl shadow-2xl hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(72,187,120,0.4)] transition-all duration-200"
+          >
+            {tr("heroCTA", lang)}
+          </button>
+          <p className="text-white/50 text-xs mt-4">🔒 {lang === "es" ? "Pago 100% seguro con Stripe" : "100% secure payment with Stripe"}</p>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-[800px] mx-auto px-5">
-          <div className="space-y-8">
-            {benefits.map((b, i) => (
-              <div key={i} className="flex gap-5 items-start">
-                <span className="text-3xl md:text-4xl shrink-0 mt-0.5">{b.icon}</span>
-                <div>
-                  <h3 className="text-lg font-bold text-[#333] mb-1">{b.title}</h3>
-                  <p className="text-[#666] leading-relaxed">{b.description}</p>
+      {/* ── WHAT'S INCLUDED ─────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-[#f8faff]">
+        <div className="max-w-[900px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] text-center mb-12">{tr("includedTitle", lang)}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {includedItems.map((item, i) => (
+              <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-[#e8f0fe] hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+                <div className="flex gap-4 items-start">
+                  <span className="text-3xl shrink-0">{item.icon}</span>
+                  <div>
+                    <h3 className="font-bold text-[#1e3a5f] mb-1.5">{item.title}</h3>
+                    <p className="text-[#555] text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -150,134 +337,310 @@ const PropertyFinder = () => {
         </div>
       </section>
 
-      {/* Pricing Model */}
-      <section className="py-12 md:py-16 bg-[#f5f5f5]">
-        <div className="max-w-[800px] mx-auto px-5">
-          <div className="bg-[#fffbeb] border-2 border-[#ffd700] rounded-xl p-6 md:p-8">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-3xl">💰</span>
-              <h3 className="text-xl md:text-2xl font-bold text-[#333]">{t("pricingTitle")}</h3>
-            </div>
-            <div className="space-y-5 text-[#333]">
-              {/* Step 1 */}
-              <div>
-                <p className="font-bold text-lg">{t("pricingStep1Title")}</p>
-                <p className="text-[#666] text-sm">{t("pricingStep1Note")}</p>
+      {/* ── HOW IT WORKS ────────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-[900px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] text-center mb-12">{tr("howTitle", lang)}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {howSteps.map((step, i) => (
+              <div key={i} className="text-center">
+                <div className="relative inline-block mb-5">
+                  <span className="text-5xl">{step.icon}</span>
+                  <span className="absolute -top-1 -right-3 bg-[#2c5282] text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+                    {step.num}
+                  </span>
+                </div>
+                <h3 className="font-bold text-[#1e3a5f] mb-2">{step.title}</h3>
+                <p className="text-[#555] text-sm leading-relaxed">{step.desc}</p>
+                {i < howSteps.length - 1 && (
+                  <div className="hidden md:block absolute translate-x-full top-1/2 text-[#2c5282] text-2xl">→</div>
+                )}
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <hr className="border-[#ffd700]/50" />
-
-              {/* Step 2 */}
+      {/* ── PRICING ─────────────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-[#f8faff]">
+        <div className="max-w-[900px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] text-center mb-10">{tr("pricingTitle", lang)}</h2>
+          <div className="max-w-[680px] mx-auto bg-white rounded-2xl shadow-xl border-2 border-[#2c5282] overflow-hidden">
+            {/* price band */}
+            <div className="bg-[#2c5282] py-8 text-center">
+              <p className="text-6xl font-extrabold text-white mb-1">{tr("pricingAmount", lang)}</p>
+              <p className="text-white/70 text-sm">{tr("pricingOnce", lang)}</p>
+            </div>
+            {/* comparison */}
+            <div className="p-8 grid md:grid-cols-2 gap-8">
               <div>
-                <p className="font-bold text-lg mb-3">{t("pricingStep2Title")}</p>
-                <div className="space-y-3 ml-2">
-                  <div className="bg-white/60 rounded-lg p-3">
-                    <p className="font-semibold text-[#333]">{t("pricingOptionA")}</p>
-                    <p className="text-[#666]">{t("pricingOptionADetail")}</p>
-                  </div>
-                  <div className="bg-[#f0fff4] rounded-lg p-3 border border-[#48bb78]/30">
-                    <p className="font-semibold text-[#48bb78]">{t("pricingOptionB")}</p>
-                    <p className="text-[#48bb78] font-bold">{t("pricingOptionBDetail")}</p>
-                  </div>
-                  <div className="bg-white/60 rounded-lg p-3">
-                    <p className="font-semibold text-[#333]">{t("pricingOptionC")}</p>
-                    <p className="text-[#666]">{t("pricingOptionCDetail")}</p>
-                  </div>
+                <p className="font-bold text-[#333] mb-3">{tr("othersLabel", lang)}</p>
+                <ul className="space-y-2">
+                  {othersItems.map((item, i) => (
+                    <li key={i} className="text-sm text-[#555]">{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="font-bold text-[#333] mb-3">{tr("youGetLabel", lang)}</p>
+                <ul className="space-y-2">
+                  {youGetItems.map((item, i) => (
+                    <li key={i} className="text-sm text-[#333] font-medium">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            {/* special note */}
+            <div className="mx-8 mb-8 bg-[#f0fff4] border border-[#48bb78]/40 rounded-xl p-4 text-sm text-[#2d6a4f]">
+              💚 {tr("pricingSpecial", lang)}
+            </div>
+            <div className="px-8 pb-8 text-center">
+              <button
+                onClick={scrollToForm}
+                className="w-full bg-[#48bb78] hover:bg-[#38a169] text-white text-lg font-extrabold py-4 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              >
+                {tr("pricingCTA", lang)}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ────────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-[900px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] text-center mb-10">{tr("testimonialsTitle", lang)}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-[#f8faff] rounded-xl p-6 border border-[#e8f0fe]">
+                <p className="text-[#333] text-sm leading-relaxed mb-4 italic">"{t.quote}"</p>
+                <p className="font-bold text-[#2c5282] text-sm">— {t.name}</p>
+                <p className="text-[#888] text-xs mt-0.5">{t.origin}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ─────────────────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-[#f8faff]">
+        <div className="max-w-[700px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] text-center mb-10">{tr("faqTitle", lang)}</h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => <FaqItem key={i} q={faq.q} a={faq.a} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CHECKOUT FORM ───────────────────────────────────────────────────── */}
+      <section ref={formRef} id="checkout-form" className="py-16 md:py-20 bg-white">
+        <div className="max-w-[640px] mx-auto px-5">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">{tr("formTitle", lang)}</h2>
+            <p className="text-[#555]">{tr("formSubtitle", lang)}</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="bg-[#f8faff] rounded-2xl p-7 border border-[#e8f0fe] shadow-lg space-y-5">
+            {/* row: name + email */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelName", lang)} *</label>
+                <input
+                  required type="text" value={form.name}
+                  onChange={e => setForm({ ...form, name: e.target.value })}
+                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
+                  placeholder={lang === "es" ? "Tu nombre completo" : "Your full name"}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelEmail", lang)} *</label>
+                <input
+                  required type="email" value={form.email}
+                  onChange={e => setForm({ ...form, email: e.target.value })}
+                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
+                  placeholder="email@ejemplo.com"
+                />
+              </div>
+            </div>
+
+            {/* row: phone + preferred language */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelPhone", lang)} *</label>
+                <input
+                  required type="tel" value={form.phone}
+                  onChange={e => setForm({ ...form, phone: e.target.value })}
+                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
+                  placeholder="+34 600 000 000"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelLang", lang)}</label>
+                <div className="flex gap-2">
+                  {(["es", "en"] as Lang[]).map(l => (
+                    <button
+                      key={l} type="button"
+                      onClick={() => setForm({ ...form, prefLang: l })}
+                      className={`flex-1 py-2.5 rounded-lg text-sm font-semibold border transition-colors ${
+                        form.prefLang === l
+                          ? "bg-[#2c5282] text-white border-[#2c5282]"
+                          : "bg-white text-[#333] border-[#d1d5db] hover:border-[#2c5282]"
+                      }`}
+                    >
+                      {l === "es" ? tr("esLabel", lang) : tr("enLabel", lang)}
+                    </button>
+                  ))}
                 </div>
               </div>
-
-              <hr className="border-[#ffd700]/50" />
-
-              <p className="text-[#666] text-sm italic text-center">{t("pricingFootnote")}</p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Exclusive Advantage */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-[800px] mx-auto px-5">
-          <div className="bg-[#f0fff4] border-2 border-[#48bb78] rounded-xl p-6 md:p-8 text-center">
-            <h3 className="text-xl md:text-2xl font-bold text-[#333] mb-3">{t("advantageTitle")}</h3>
-            <p className="text-[#666] mb-4">{t("advantageDesc")}</p>
-            <p className="text-2xl md:text-3xl font-extrabold text-[#48bb78] mb-1">{t("advantageFree")}</p>
-            <p className="text-[#48bb78] font-medium mb-4">{t("advantageRefund")}</p>
-            <p className="text-[#666] text-sm">{t("advantageNote")}</p>
-          </div>
-        </div>
-      </section>
+            <hr className="border-[#e8f0fe]" />
 
-      {/* CTA */}
-      <section id="cta-section" className="py-12 md:py-16" style={{ background: "linear-gradient(135deg, #667eea, #764ba2)" }}>
-        <div className="max-w-[800px] mx-auto px-5 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-8">{t("ctaTitle")}</h3>
-
-          <div className="bg-white/15 backdrop-blur-sm rounded-lg p-5 inline-block mb-6">
-            <label className="flex items-center gap-3 cursor-pointer text-white select-none">
-              <input
-                type="checkbox"
-                checked={termsAccepted}
-                onChange={(e) => {
-                  setTermsAccepted(e.target.checked);
-                  if (e.target.checked) setShowTermsError(false);
-                }}
-                className="w-5 h-5 rounded accent-[#48bb78] cursor-pointer"
-              />
-              <span className="text-sm md:text-base">
-                {t("termsLabel")}{" "}
-                <a
-                  href={termsHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline font-medium hover:text-[#ffd700] transition-colors"
+            {/* row: budget + beds */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelBudget", lang)} *</label>
+                <input
+                  required type="number" min="0" value={form.budget}
+                  onChange={e => setForm({ ...form, budget: e.target.value })}
+                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
+                  placeholder="ej. 900"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelBeds", lang)} *</label>
+                <select
+                  required value={form.beds}
+                  onChange={e => setForm({ ...form, beds: e.target.value })}
+                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
                 >
-                  {t("termsLink")}
-                </a>
-              </span>
-            </label>
-          </div>
+                  <option value="">—</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                </select>
+              </div>
+            </div>
 
-          {showTermsError && (
-            <p className="text-[#ff6b6b] text-sm font-medium mb-4">{t("termsError")}</p>
-          )}
+            {/* row: pets + movein */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelPets", lang)}</label>
+                <div className="flex gap-2">
+                  {[
+                    { val: "yes", label: tr("yesLabel", lang) },
+                    { val: "no",  label: tr("noLabel", lang) },
+                  ].map(opt => (
+                    <button
+                      key={opt.val} type="button"
+                      onClick={() => setForm({ ...form, pets: opt.val })}
+                      className={`flex-1 py-2.5 rounded-lg text-sm font-semibold border transition-colors ${
+                        form.pets === opt.val
+                          ? "bg-[#2c5282] text-white border-[#2c5282]"
+                          : "bg-white text-[#333] border-[#d1d5db] hover:border-[#2c5282]"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelMovein", lang)}</label>
+                <input
+                  type="date" value={form.movein}
+                  onChange={e => setForm({ ...form, movein: e.target.value })}
+                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
+                />
+              </div>
+            </div>
 
-          <div>
+            {/* notes */}
+            <div>
+              <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelNotes", lang)}</label>
+              <textarea
+                rows={3} value={form.notes}
+                onChange={e => setForm({ ...form, notes: e.target.value })}
+                className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white resize-none"
+                placeholder={lang === "es" ? "Ej. Sin escaleras, jardín grande, zona tranquila..." : "E.g. No stairs, large garden, quiet area..."}
+              />
+            </div>
+
+            {/* terms */}
+            <div>
+              <label className="flex items-start gap-3 cursor-pointer select-none">
+                <input
+                  type="checkbox" checked={termsAccepted}
+                  onChange={e => { setTermsAccepted(e.target.checked); if (e.target.checked) setShowTermsError(false); }}
+                  className="w-5 h-5 mt-0.5 rounded accent-[#2c5282] cursor-pointer shrink-0"
+                />
+                <span className="text-sm text-[#555]">
+                  {tr("labelTerms", lang)}{" "}
+                  <a href={termsHref} target="_blank" rel="noopener noreferrer" className="text-[#2c5282] underline font-medium hover:text-[#1e3a5f]">
+                    {tr("termsLink", lang)}
+                  </a>
+                </span>
+              </label>
+              {showTermsError && <p className="text-red-500 text-xs mt-1.5">{tr("termsError", lang)}</p>}
+            </div>
+
+            {/* submit */}
             <button
-              onClick={handleBooking}
-              className={`text-white text-lg md:text-xl font-bold px-10 py-5 rounded-xl shadow-lg transition-all duration-200 ${
+              type="submit"
+              className={`w-full text-white text-lg font-extrabold py-4 rounded-xl shadow-lg transition-all duration-200 ${
                 termsAccepted
-                  ? "bg-[#48bb78] hover:bg-[#38a169] hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"
-                  : "bg-gray-400 cursor-not-allowed opacity-60"
+                  ? "bg-[#48bb78] hover:bg-[#38a169] hover:-translate-y-0.5 cursor-pointer"
+                  : "bg-gray-300 cursor-not-allowed opacity-60"
               }`}
             >
-              {t("ctaButton")}
+              {tr("submitBtn", lang)}
             </button>
-          </div>
-
-          <p className="text-white/80 text-sm mt-5">{t("securePay")}</p>
+            <p className="text-center text-[#888] text-xs">{tr("submitNote", lang)}</p>
+          </form>
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="py-12 md:py-16 bg-[#f7fafc]">
-        <div className="max-w-[800px] mx-auto px-5 text-center">
-          <h3 className="text-2xl font-bold text-[#333] mb-2">{t("contactTitle")}</h3>
-          <p className="text-[#666] mb-6">{t("contactSub")}</p>
-          <a
-            href="https://wa.me/34662317561?text=Hola%20Manuel,%20tengo%20preguntas%20sobre%20el%20Property%20Finder"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25d366] hover:bg-[#1da851] text-white text-lg font-bold px-8 py-4 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+      {/* ── FINAL CTA ───────────────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #1e3a5f, #2c5282)" }}>
+        <div className="max-w-[700px] mx-auto px-5 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">{tr("finalTitle", lang)}</h2>
+          <p className="text-white/80 mb-8 text-lg">{tr("finalDesc", lang)}</p>
+          <button
+            onClick={scrollToForm}
+            className="bg-[#48bb78] hover:bg-[#38a169] text-white text-xl font-extrabold px-10 py-5 rounded-xl shadow-2xl hover:-translate-y-0.5 transition-all duration-200 mb-4"
           >
-            📱 WhatsApp {lang === "es" ? "Directo" : "Direct"}
-          </a>
+            {tr("finalCTA", lang)}
+          </button>
+          <p className="text-white/60 text-sm mb-6">{tr("finalNote", lang)}</p>
+          <p className="text-white/80 text-sm">
+            {tr("finalQ", lang)}{" "}
+            <a href={`https://wa.me/34662317561`} target="_blank" rel="noopener noreferrer" className="underline hover:text-[#ffd700]">
+              WhatsApp {PHONE}
+            </a>
+            {" "}· {tr("finalOr", lang)}{" "}
+            <a href={`mailto:${EMAIL}`} className="underline hover:text-[#ffd700]">{EMAIL}</a>
+          </p>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-6 text-center text-[#999] text-sm border-t border-[#e5e7eb]">
-        <p>© {new Date().getFullYear()} Propaxar. {t("footerRights")}</p>
-        <p className="mt-1">Property Finder Service · La Axarquía, Costa del Sol, Málaga, {lang === "es" ? "España" : "Spain"}</p>
+      {/* ── FOOTER ──────────────────────────────────────────────────────────── */}
+      <footer className="py-8 bg-[#1a1a2e] text-center text-[#888] text-sm">
+        <img
+          src="https://propaxar.com/wp-content/uploads/2024/08/logo_small_icon_only_inverted_orDKnNi.png"
+          alt="Propaxar"
+          className="h-7 mx-auto mb-3 opacity-60"
+        />
+        <p className="text-[#ccc] font-semibold mb-0.5">PROPAXAR</p>
+        <p className="text-[#666] text-xs mb-3">{tr("footerSub", lang)}</p>
+        <p className="text-[#555] text-xs">
+          <a href={`mailto:${EMAIL}`} className="hover:text-[#888]">{EMAIL}</a>
+          {" · "}
+          <a href="https://wa.me/34662317561" target="_blank" rel="noopener noreferrer" className="hover:text-[#888]">{PHONE}</a>
+          {" · "}
+          <a href="https://propaxar.es" target="_blank" rel="noopener noreferrer" className="hover:text-[#888]">propaxar.es</a>
+        </p>
+        <p className="mt-3 text-[#444] text-xs">© {new Date().getFullYear()} Propaxar. {tr("footerRights", lang)}</p>
       </footer>
     </div>
   );
