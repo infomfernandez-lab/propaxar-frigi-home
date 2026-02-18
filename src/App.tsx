@@ -26,6 +26,7 @@ const App = () => (
             <Route path="/terminos-finder" element={<TerminosFinder />} />
             <Route path="/reporte-test" element={<ReporteTest />} />
             <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
+            <Route path="/reporte/:slug" element={<ReportePropaxar />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
