@@ -10,6 +10,7 @@ import TerminosFinder from "./pages/TerminosFinder";
 import ReporteTest from "./pages/ReporteTest";
 import ReportePropaxar from "./pages/ReportePropaxar";
 import ReporteKatinkaEN from "./pages/ReporteKatinkaEN";
+import ComprarReporte from "./pages/ComprarReporte";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
             <Route path="/reporte/:slug" element={<ReportePropaxar />} />
             <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
+            <Route path="/comprar-reporte" element={<ComprarReporte />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
