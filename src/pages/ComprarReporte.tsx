@@ -351,8 +351,6 @@ export default function ComprarReporte() {
         <section>
           <div className="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 rounded-2xl overflow-hidden text-white">
             <div className="px-8 py-10 text-center">
-              <h2 className="text-3xl md:text-4xl font-black mb-2">{t.ctaTitle[lang]}</h2>
-              <p className="text-blue-200 text-lg mb-8">{t.ctaDesc[lang]}</p>
 
               <div className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-8 max-w-sm mx-auto">
                 <div className="flex gap-2 justify-center mb-4">
@@ -368,7 +366,23 @@ export default function ComprarReporte() {
                   <span className="text-blue-300 line-through text-xl font-bold">€450</span>
                   <span className="text-5xl font-black">€250</span>
                 </div>
-                <p className="text-blue-200 text-sm mb-6">{t.payOnce[lang]}</p>
+                <p className="text-blue-200 text-sm mb-5">{t.payOnce[lang]}</p>
+
+                {/* T&C checkbox — duplicated here so user doesn't need to scroll up */}
+                <label className="flex items-start gap-2 cursor-pointer text-left mb-4">
+                  <input
+                    type="checkbox"
+                    checked={accepted}
+                    onChange={e => setAccepted(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 rounded accent-green-400 flex-shrink-0"
+                  />
+                  <span className="text-xs text-blue-200 leading-snug">
+                    {t.termsText[lang]}{' '}
+                    <Link to="/terminos-finder" className="text-white underline hover:no-underline">
+                      {t.termsLink[lang]}
+                    </Link>
+                  </span>
+                </label>
 
                 <button
                   onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
@@ -379,7 +393,7 @@ export default function ComprarReporte() {
                       : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60'
                   }`}
                 >
-                  {accepted ? t.ctaBtn[lang] : (lang === 'es' ? '⬆ Acepta los T&C arriba para continuar' : '⬆ Accept T&C above to continue')}
+                  {t.ctaBtn[lang]}
                 </button>
 
                 <div className="flex flex-wrap justify-center gap-3 text-xs text-blue-200">
