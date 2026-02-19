@@ -44,7 +44,7 @@ const t = {
   },
   features: {
     es: [
-      { icon: '🏘️', title: '4-8 Propiedades Seleccionadas', desc: 'Escogidas manualmente para tu presupuesto, dormitorios, mascotas y fecha de entrada. Sin propiedades irrelevantes ni pérdida de tiempo.', tag: '✓ 100% relevantes para ti' },
+      { icon: '🏘️', title: 'Propiedades Seleccionadas', desc: 'Escogidas manualmente para tu presupuesto, dormitorios, mascotas y fecha de entrada. Sin propiedades irrelevantes ni pérdida de tiempo.', tag: '✓ 100% relevantes para ti' },
       { icon: '📊', title: 'Análisis Honesto del Mercado', desc: 'Precios reales, disponibilidad actual e información privilegiada que solo un experto local con 10+ años conoce. Sin filtros ni marketing.', tag: '✓ Información que nadie más da' },
       { icon: '🎯', title: 'Recomendación Clara y Directa', desc: 'Qué propiedad se ajusta mejor a tu perfil y por qué. Ahorra horas de confusión y decisiones equivocadas. Te digo la verdad aunque no te guste.', tag: '✓ Sin ambigüedades' },
       { icon: '📦', title: 'Guía Logística Insider', desc: 'Campo vs pueblo, entrega de paquetes, sistemas de agua, recogida de basura. La verdad brutal que descubres cuando ya te mudaste... pero ANTES.', tag: '✓ Evita sorpresas desagradables' },
@@ -52,7 +52,7 @@ const t = {
       { icon: '🎁', title: 'Reembolso Total Garantizado', desc: 'Si acabas alquilando una propiedad Propaxar Direct, reembolsamos los €250 completos. Literalmente no arriesgas nada. Solo ganas.', tag: '✓ Riesgo cero para ti', highlight: true },
     ],
     en: [
-      { icon: '🏘️', title: '4-8 Hand-Selected Properties', desc: 'Manually chosen to match your budget, bedrooms, pets and move-in date. No irrelevant listings, no wasted time.', tag: '✓ 100% relevant to you' },
+      { icon: '🏘️', title: 'Hand-Selected Properties', desc: 'Manually chosen to match your budget, bedrooms, pets and move-in date. No irrelevant listings, no wasted time.', tag: '✓ 100% relevant to you' },
       { icon: '📊', title: 'Honest Market Analysis', desc: 'Real prices, current availability and insider knowledge only a local expert with 10+ years holds. No filters, no marketing spin.', tag: '✓ Information nobody else shares' },
       { icon: '🎯', title: 'Clear, Direct Recommendation', desc: "Which property fits your profile best and why. Save hours of confusion and wrong decisions. I tell you the truth even if you don't like it.", tag: '✓ No ambiguity' },
       { icon: '📦', title: 'Insider Logistics Guide', desc: 'Country vs town, package delivery, water systems, waste collection. The brutal truth you discover after you move in… but BEFORE.', tag: '✓ Avoid nasty surprises' },
