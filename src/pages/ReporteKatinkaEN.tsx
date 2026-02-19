@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import heroImg from "@/assets/hero-frigiliana.jpg";
+import heroImg from "@/assets/frigiliana-street.jpg";
 
 const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hello%20Manuel%2C%20I%20would%20like%20to%20arrange%20a%20visit%20for%20Villa%20Patricia.%20When%20would%20it%20be%20possible%3F";
 const EMAIL_LINK = "mailto:info@propaxar.com?subject=Report%20Inquiry%20-%20Katinka";
