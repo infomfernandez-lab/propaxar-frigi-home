@@ -327,40 +327,38 @@ const Stars = ({ count, max = 5 }: { count: number; max?: number }) => (
 // ─── Lightbox ───
 function Lightbox({ images, initialIndex, onClose }: { images: string[]; initialIndex: number; onClose: () => void }) {
   const [idx, setIdx] = useState(initialIndex);
+  const safeImages = images && images.length > 0 ? images : [];
+  const currentSrc = safeImages[idx] ?? "";
 
-  const prev = () => setIdx((i) => (i === 0 ? images.length - 1 : i - 1));
-  const next = () => setIdx((i) => (i + 1) % images.length);
+  const prev = () => setIdx((i) => (i === 0 ? safeImages.length - 1 : i - 1));
+  const next = () => setIdx((i) => (i + 1) % safeImages.length);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const handleEsc = (e: KeyboardEvent) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     };
-    document.addEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleKey);
     return () => {
-      document.removeEventListener("keydown", handleEsc);
+      document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  if (!currentSrc) return null;
 
   return (
     <div
       style={{ position: "fixed", inset: 0, zIndex: 99999, backgroundColor: "black" }}
       onClick={onClose}
     >
-      {/* DEBUG: Muestra info */}
-      <div style={{ position: "absolute", top: 70, left: 12, backgroundColor: "red", color: "white", padding: 12, fontSize: 11, zIndex: 100000, maxWidth: "80vw", wordBreak: "break-all" }}>
-        <p>Image URL: {images[idx]}</p>
-        <p>Index: {idx} / {images.length}</p>
-      </div>
-
-      {/* Close button - white on black, always visible */}
+      {/* Close button */}
       <button
         onClick={(e) => { e.stopPropagation(); onClose(); }}
         style={{
-          position: "absolute", top: 12, right: 12, zIndex: 100000,
+          position: "fixed", top: 12, right: 12, zIndex: 100000,
           backgroundColor: "white", color: "black", border: "none",
           borderRadius: "50%", width: 50, height: 50,
           fontSize: 28, fontWeight: "bold", cursor: "pointer",
@@ -373,11 +371,11 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
       </button>
 
       {/* Prev button */}
-      {images.length > 1 && (
+      {safeImages.length > 1 && (
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
           style={{
-            position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
+            position: "fixed", left: 12, top: "50%", transform: "translateY(-50%)",
             zIndex: 100000, backgroundColor: "white", color: "black", border: "none",
             borderRadius: "50%", width: 50, height: 50,
             fontSize: 24, fontWeight: "bold", cursor: "pointer",
@@ -390,24 +388,32 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
         </button>
       )}
 
-      {/* Image centered */}
+      {/* Image */}
       <div
-        style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "70px 80px" }}
+        style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "70px 60px" }}
         onClick={(e) => e.stopPropagation()}
       >
         <img
-          src={images[idx]}
+          key={currentSrc}
+          src={currentSrc}
           alt={`Photo ${idx + 1}`}
-          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }}
+          onError={(e) => {
+            console.error("Lightbox image failed to load:", currentSrc);
+            (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23999" font-size="16"%3EImage unavailable%3C/text%3E%3C/svg%3E';
+          }}
+          onLoad={() => console.log("Lightbox image loaded OK:", currentSrc)}
         />
       </div>
 
       {/* Next button */}
-      {images.length > 1 && (
+      {safeImages.length > 1 && (
         <button
           onClick={(e) => { e.stopPropagation(); next(); }}
           style={{
-            position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+            position: "fixed", right: 12, top: "50%", transform: "translateY(-50%)",
             zIndex: 100000, backgroundColor: "white", color: "black", border: "none",
             borderRadius: "50%", width: 50, height: 50,
             fontSize: 24, fontWeight: "bold", cursor: "pointer",
@@ -421,16 +427,16 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
       )}
 
       {/* Counter */}
-      {images.length > 1 && (
+      {safeImages.length > 1 && (
         <div
           style={{
-            position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)",
+            position: "fixed", bottom: 16, left: "50%", transform: "translateX(-50%)",
             backgroundColor: "white", color: "black", borderRadius: 999,
             padding: "6px 16px", fontWeight: "bold", fontSize: 14,
             boxShadow: "0 2px 8px rgba(0,0,0,0.4)"
           }}
         >
-          {idx + 1} / {images.length}
+          {idx + 1} / {safeImages.length}
         </div>
       )}
     </div>
