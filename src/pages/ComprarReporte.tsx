@@ -81,12 +81,12 @@ const t = {
   guaranteesDesc: { es: 'No te pido fe ciega. Te doy garantías reales.', en: "I don't ask for blind faith. I give you real guarantees." },
   guarantees: {
     es: [
-      { icon: '🔒', title: 'Pago 100% Seguro', desc: 'Procesado por Stripe. Misma tecnología que Amazon. Tus datos protegidos.' },
+      { icon: '🔒', title: 'Pago 100% Seguro', desc: 'Procesado por Stripe. Tus datos protegidos.' },
       { icon: '💰', title: 'Reembolso Total', desc: 'Si alquilas Propaxar Direct: 100% devuelto. No satisfecho en 7 días: lo hablamos.' },
       { icon: '👤', title: 'Experto Local Real', desc: 'No eres un número. Soy Manuel, 10+ años Frigiliana. WhatsApp directo conmigo.' },
     ],
     en: [
-      { icon: '🔒', title: '100% Secure Payment', desc: 'Processed by Stripe. Same technology as Amazon. Your data protected.' },
+      { icon: '🔒', title: '100% Secure Payment', desc: 'Processed by Stripe. Your data protected.' },
       { icon: '💰', title: 'Full Refund', desc: 'If you rent Propaxar Direct: 100% back. Not satisfied in 7 days: let\'s talk.' },
       { icon: '👤', title: 'Real Local Expert', desc: "You're not a number. I'm Manuel, 10+ years in Frigiliana. Direct WhatsApp access to me." },
     ],
@@ -145,12 +145,7 @@ export default function ComprarReporte() {
       {/* ── Top bar: lang toggle ── */}
       <div className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-          <img
-            src="/propaxar-vision.png"
-            alt="Propaxar"
-            className="h-7 object-contain"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-          />
+          <div />
           <Link
             to={`/comprar-reporte${langToggle}`}
             className="text-sm font-bold px-4 py-1.5 rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition"
