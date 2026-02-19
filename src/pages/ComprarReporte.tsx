@@ -87,7 +87,7 @@ const t = {
     ],
     en: [
       { icon: '🔒', title: '100% Secure Payment', desc: 'Processed by Stripe. Your data protected.' },
-      { icon: '💰', title: 'Full Refund', desc: 'If you rent Propaxar Direct: 100% back. Not satisfied in 7 days: let\'s talk.' },
+      { icon: '💰', title: 'Full Refund', desc: "If you rent Propaxar Direct: 100% back. Not satisfied in 7 days: let's talk." },
       { icon: '👤', title: 'Real Local Expert', desc: "You're not a number. I'm Manuel, 10+ years in Frigiliana. Direct WhatsApp access to me." },
     ],
   },
@@ -131,24 +131,24 @@ export default function ComprarReporte() {
     ? `?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), lang: 'en' }).toString()}`
     : `?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), lang: 'es' }).toString()}`;
 
-  const whatsappMsg = encodeURIComponent(
-    lang === 'es'
-      ? `Hola Manuel, quiero comprar el Reporte de Mercado Frigiliana.${nombre ? ` Soy ${nombre}.` : ''}${presupuesto ? ` Presupuesto: €${presupuesto}/mes.` : ''}${dormitorios ? ` Dormitorios: ${dormitorios}+.` : ''}${mascotas ? ` Mascotas: ${mascotas === 'si' || mascotas === 'yes' ? 'Sí' : 'No'}.` : ''}`
-      : `Hi Manuel, I want to buy the Frigiliana Market Report.${nombre ? ` I'm ${nombre}.` : ''}${presupuesto ? ` Budget: €${presupuesto}/month.` : ''}${dormitorios ? ` Bedrooms: ${dormitorios}+.` : ''}${mascotas ? ` Pets: ${mascotas === 'si' || mascotas === 'yes' ? 'Yes' : 'No'}.` : ''}`
-  );
-
   const petsDisplay = (p: string) =>
     p === 'si' || p === 'yes' ? t.petsYes[lang] : t.petsNo[lang];
 
+  /* ─── Shared styles ─────────────────────────────────────────────── */
+  const cardStyle = { backgroundColor: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' };
+  const bodyFont  = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* ── Top bar: lang toggle ── */}
-      <div className="sticky top-0 z-50 bg-[#2d3e4e]/95 backdrop-blur border-b border-white/10">
-        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div />
+    <div style={{ fontFamily: bodyFont, backgroundColor: '#f5f5f5', color: '#1a1a1a', minHeight: '100vh' }}>
+
+      {/* ── Top bar ── */}
+      <div style={{ backgroundColor: '#2d3e4e', position: 'sticky', top: 0, zIndex: 50 }}>
+        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-end">
           <Link
             to={`/comprar-reporte${langToggle}`}
-            className="text-sm font-bold px-4 py-1.5 rounded-full border-2 border-white/50 text-white hover:bg-white hover:text-[#2d3e4e] transition"
+            style={{ border: '1px solid rgba(255,255,255,0.45)', color: 'white', borderRadius: '6px', padding: '6px 14px', fontSize: '13px', fontWeight: 600, textDecoration: 'none', transition: 'background 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
             {t.langToggleLabel[lang]}
           </Link>
@@ -156,121 +156,140 @@ export default function ComprarReporte() {
       </div>
 
       {/* ── HERO ── */}
-      <section className="relative bg-gradient-to-br from-[#2d3e4e] via-[#3d5a73] to-[#2d3e4e] text-white overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
-
-        <div className="relative max-w-3xl mx-auto px-4 pt-14 pb-20 text-center">
+      <section
+        className="relative text-white overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}
+      >
+        <div className="relative max-w-3xl mx-auto px-6 pt-16 pb-24 text-center">
           {nombre && (
-            <div className="inline-block bg-white/15 backdrop-blur rounded-full px-5 py-2 text-base font-semibold mb-6">
+            <div
+              className="inline-block rounded-lg px-5 py-2 text-sm font-semibold mb-8"
+              style={{ backgroundColor: 'rgba(255,255,255,0.12)' }}
+            >
               {t.greeting[lang](nombre)}
             </div>
           )}
 
-          <h1 className="text-4xl md:text-5xl font-black leading-tight mb-5 whitespace-pre-line">
+          <h1
+            className="font-black leading-tight mb-5 whitespace-pre-line"
+            style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.025em', lineHeight: 1.1 }}
+          >
             {t.heroTitle[lang]}
           </h1>
 
-          <p className="text-white/75 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg mb-10 max-w-xl mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
             {t.heroDesc[lang]}
           </p>
 
-        {/* Price callout */}
-          <div className="inline-block bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-8 py-6 w-full max-w-sm">
-            <div className="flex gap-2 justify-center mb-3">
-              <span className="bg-amber-400 text-amber-900 text-xs font-black px-3 py-1 rounded-full tracking-wide">
+          {/* Price card */}
+          <div
+            className="mx-auto w-full max-w-sm rounded-lg px-8 py-7"
+            style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
+          >
+            <div className="flex gap-2 justify-center mb-4">
+              <span className="rounded-lg px-3 py-1 text-xs font-black tracking-wide" style={{ backgroundColor: '#f59e0b', color: '#78350f' }}>
                 {t.offerBadge[lang]}
               </span>
-              <span className="bg-green-400 text-green-900 text-xs font-black px-3 py-1 rounded-full tracking-wide">
+              <span className="rounded-lg px-3 py-1 text-xs font-black tracking-wide" style={{ backgroundColor: '#4ade80', color: '#14532d' }}>
                 {t.refundBadge[lang]}
               </span>
             </div>
-            <p className="text-xs font-bold tracking-widest uppercase text-white/60 mb-1">{t.investLabel[lang]}</p>
+            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.investLabel[lang]}</p>
             <div className="flex items-center justify-center gap-3 mb-2">
-              <span className="text-white/40 line-through text-2xl font-bold">€450</span>
+              <span className="line-through text-2xl font-bold" style={{ color: 'rgba(255,255,255,0.35)' }}>€450</span>
               <span className="text-5xl font-black">€250</span>
             </div>
-            <p className="text-white/60 text-sm mb-4">{t.vatNote[lang]}</p>
+            <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.vatNote[lang]}</p>
 
             {/* T&C checkbox */}
-            <label className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all border ${
-              accepted
-                ? 'bg-green-400/15 border-green-400/40'
-                : 'bg-white/10 border-white/30 border-dashed animate-pulse'
-            }`}>
+            <label
+              className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all ${!accepted ? 'animate-pulse' : ''}`}
+              style={{
+                border: accepted ? '1px solid rgba(74,222,128,0.5)' : '1px dashed rgba(255,255,255,0.35)',
+                backgroundColor: accepted ? 'rgba(74,222,128,0.12)' : 'rgba(255,255,255,0.08)',
+              }}
+            >
               <input
                 type="checkbox"
                 checked={accepted}
                 onChange={e => setAccepted(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded accent-green-400 flex-shrink-0"
+                className="mt-0.5 h-4 w-4 rounded flex-shrink-0"
+                style={{ accentColor: '#4ade80' }}
               />
-               <span className="text-xs leading-snug">
-                 {!accepted && <span className="block text-amber-300 font-bold text-xs mb-0.5">👆 {lang === 'es' ? 'Marca esto para continuar' : 'Tick this to continue'}</span>}
-                 <span className="text-white/70">
-                   {t.termsText[lang]}{' '}
-                   <Link to="/terminos-finder" className="text-white underline hover:no-underline">
-                     {t.termsLink[lang]}
-                   </Link>
-                 </span>
-               </span>
+              <span className="text-xs leading-snug">
+                {!accepted && (
+                  <span className="block font-bold text-xs mb-0.5" style={{ color: '#fcd34d' }}>
+                    👆 {lang === 'es' ? 'Marca esto para continuar' : 'Tick this to continue'}
+                  </span>
+                )}
+                <span style={{ color: 'rgba(255,255,255,0.7)' }}>
+                  {t.termsText[lang]}{' '}
+                  <Link to="/terminos-finder" className="text-white underline hover:no-underline">
+                    {t.termsLink[lang]}
+                  </Link>
+                </span>
+              </span>
             </label>
 
             <button
               onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
               disabled={!accepted}
-              className={`w-full font-black text-lg py-4 rounded-xl transition-all shadow-lg ${
-                accepted
-                  ? 'bg-green-400 hover:bg-green-300 active:bg-green-500 text-green-900 active:scale-[0.98]'
-                  : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60'
-              }`}
+              className="w-full font-bold text-lg py-4 rounded-lg transition-all"
+              style={{
+                backgroundColor: accepted ? '#4ade80' : '#9ca3af',
+                color: accepted ? '#14532d' : '#6b7280',
+                cursor: accepted ? 'pointer' : 'not-allowed',
+                opacity: accepted ? 1 : 0.65,
+                boxShadow: accepted ? '0 4px 14px rgba(74,222,128,0.3)' : 'none',
+                border: 'none',
+              }}
             >
               {t.ctaBtn[lang]}
             </button>
           </div>
         </div>
 
-        {/* Wave divider */}
+        {/* Wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 48h1440V24C1200 0 960 48 720 24S240 0 0 24V48z" fill="#f9fafb" />
+            <path d="M0 48h1440V24C1200 0 960 48 720 24S240 0 0 24V48z" fill="#f5f5f5" />
           </svg>
         </div>
       </section>
 
-      <div className="max-w-4xl mx-auto px-4 py-10 space-y-14">
+      <div className="max-w-4xl mx-auto px-4 py-12 space-y-16">
 
         {/* ── SEARCH SUMMARY ── */}
         {hasSearch && (
-          <section className="bg-white rounded-2xl shadow-sm border border-[#3d5a73]/20 overflow-hidden">
-            <div className="bg-[#3d5a73]/10 border-b border-[#3d5a73]/20 px-6 py-4">
-              <p className="text-[#2d3e4e] font-bold text-base">{t.searchTitle[lang]}</p>
+          <section className="bg-white rounded-lg overflow-hidden" style={cardStyle}>
+            <div className="px-6 py-4 border-b" style={{ backgroundColor: '#f0f4f8', borderColor: '#d1dde8' }}>
+              <p className="font-bold text-base" style={{ color: '#2d3e4e' }}>{t.searchTitle[lang]}</p>
             </div>
             <div className="px-6 py-5 flex flex-wrap gap-4">
               {presupuesto && (
-                <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 flex-1 min-w-[140px]">
+                <div className="flex items-center gap-3 rounded-lg px-4 py-3 flex-1 min-w-[140px]" style={{ backgroundColor: '#f5f5f5' }}>
                   <span className="text-2xl">💰</span>
                   <div>
-                    <p className="text-xs text-gray-400 uppercase font-semibold tracking-wide">{t.budgetLabel[lang]}</p>
-                    <p className="font-bold text-gray-900">€{presupuesto}/mes</p>
+                    <p className="text-xs uppercase font-semibold tracking-wide" style={{ color: '#9ca3af' }}>{t.budgetLabel[lang]}</p>
+                    <p className="font-bold" style={{ color: '#1a1a1a' }}>€{presupuesto}/mes</p>
                   </div>
                 </div>
               )}
               {dormitorios && (
-                <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 flex-1 min-w-[140px]">
+                <div className="flex items-center gap-3 rounded-lg px-4 py-3 flex-1 min-w-[140px]" style={{ backgroundColor: '#f5f5f5' }}>
                   <span className="text-2xl">🛏️</span>
                   <div>
-                    <p className="text-xs text-gray-400 uppercase font-semibold tracking-wide">{t.bedroomLabel[lang]}</p>
-                    <p className="font-bold text-gray-900">{dormitorios}{t.bedroomSuffix[lang]}</p>
+                    <p className="text-xs uppercase font-semibold tracking-wide" style={{ color: '#9ca3af' }}>{t.bedroomLabel[lang]}</p>
+                    <p className="font-bold" style={{ color: '#1a1a1a' }}>{dormitorios}{t.bedroomSuffix[lang]}</p>
                   </div>
                 </div>
               )}
               {mascotas && (
-                <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 flex-1 min-w-[140px]">
+                <div className="flex items-center gap-3 rounded-lg px-4 py-3 flex-1 min-w-[140px]" style={{ backgroundColor: '#f5f5f5' }}>
                   <span className="text-2xl">🐕</span>
                   <div>
-                    <p className="text-xs text-gray-400 uppercase font-semibold tracking-wide">{t.petsLabel[lang]}</p>
-                    <p className="font-bold text-gray-900">{petsDisplay(mascotas)}</p>
+                    <p className="text-xs uppercase font-semibold tracking-wide" style={{ color: '#9ca3af' }}>{t.petsLabel[lang]}</p>
+                    <p className="font-bold" style={{ color: '#1a1a1a' }}>{petsDisplay(mascotas)}</p>
                   </div>
                 </div>
               )}
@@ -280,52 +299,70 @@ export default function ComprarReporte() {
 
         {/* ── WHAT'S INCLUDED ── */}
         <section>
-          <div className="text-center mb-10">
-            <span className="inline-block bg-[#3d5a73]/15 text-[#2d3e4e] text-xs font-black px-4 py-1.5 rounded-full tracking-widest uppercase mb-3">
+          <div className="text-center mb-12">
+            <span
+              className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4"
+              style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}
+            >
               {t.includedLabel[lang]}
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">{t.includedTitle[lang]}</h2>
-            <p className="text-gray-500 text-lg max-w-xl mx-auto">{t.includedDesc[lang]}</p>
+            <h2
+              className="font-black mb-3"
+              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.1 }}
+            >
+              {t.includedTitle[lang]}
+            </h2>
+            <p className="text-lg max-w-xl mx-auto" style={{ color: '#666666' }}>{t.includedDesc[lang]}</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {t.features[lang].map((f, i) => (
               <div
                 key={i}
-                className={`rounded-2xl p-6 border transition hover:-translate-y-1 hover:shadow-md ${
-                  f.highlight
-                    ? 'bg-gradient-to-br from-amber-50 to-green-50 border-amber-200'
-                    : 'bg-white border-gray-100 shadow-sm'
-                }`}
+                className="rounded-lg p-6 transition-transform hover:-translate-y-1"
+                style={{
+                  backgroundColor: '#fff',
+                  border: f.highlight ? '2px solid #4ade80' : '1px solid #e5e7eb',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+                }}
               >
-                <span className="text-4xl mb-4 block">{f.icon}</span>
-                <h3 className="font-bold text-gray-900 text-base mb-2">{f.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-3">{f.desc}</p>
-                <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                  f.highlight ? 'bg-green-100 text-green-700' : 'bg-[#3d5a73]/10 text-[#2d3e4e]'
-                }`}>{f.tag}</span>
+                <span className="text-3xl mb-4 block">{f.icon}</span>
+                <h3 className="font-bold text-base mb-2" style={{ color: '#1a1a1a' }}>{f.title}</h3>
+                <p className="text-sm leading-relaxed mb-3" style={{ color: '#666666' }}>{f.desc}</p>
+                <span
+                  className="text-xs font-bold px-2.5 py-1 rounded-lg"
+                  style={{
+                    backgroundColor: f.highlight ? 'rgba(74,222,128,0.15)' : 'rgba(61,90,115,0.10)',
+                    color: f.highlight ? '#15803d' : '#2d3e4e',
+                  }}
+                >
+                  {f.tag}
+                </span>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── TIMELINE ── */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="bg-[#2d3e4e] px-8 py-6 text-white">
-            <h2 className="text-2xl font-black">{t.timelineTitle[lang]}</h2>
+        <section className="bg-white rounded-lg overflow-hidden" style={cardStyle}>
+          <div className="px-8 py-6 text-white" style={{ backgroundColor: '#2d3e4e' }}>
+            <h2 className="text-2xl font-black" style={{ letterSpacing: '-0.02em' }}>{t.timelineTitle[lang]}</h2>
           </div>
           <div className="px-8 py-8">
             <div className="relative">
-              <div className="absolute left-5 top-6 bottom-6 w-0.5 bg-[#3d5a73]/20" />
+              <div className="absolute left-5 top-6 bottom-6 w-0.5" style={{ backgroundColor: '#d1dde8' }} />
               <div className="space-y-8">
                 {t.steps[lang].map((step, i) => (
                   <div key={i} className="flex gap-5">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#3d5a73] text-white flex items-center justify-center font-black text-base z-10">
+                    <div
+                      className="flex-shrink-0 w-10 h-10 rounded-full text-white flex items-center justify-center font-black text-base z-10"
+                      style={{ backgroundColor: '#3d5a73' }}
+                    >
                       {step.num}
                     </div>
                     <div className="pt-1.5">
-                      <h3 className="font-bold text-gray-900 mb-1">{step.title}</h3>
-                      <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                      <h3 className="font-bold mb-1" style={{ color: '#1a1a1a' }}>{step.title}</h3>
+                      <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>{step.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -336,14 +373,19 @@ export default function ComprarReporte() {
 
         {/* ── GUARANTEES ── */}
         <section className="text-center">
-          <h2 className="text-3xl font-black text-gray-900 mb-2">{t.guaranteesTitle[lang]}</h2>
-          <p className="text-gray-500 mb-8">{t.guaranteesDesc[lang]}</p>
-          <div className="grid sm:grid-cols-3 gap-5">
+          <h2
+            className="font-black mb-2"
+            style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: '#1a1a1a', letterSpacing: '-0.02em' }}
+          >
+            {t.guaranteesTitle[lang]}
+          </h2>
+          <p className="mb-10" style={{ color: '#666666' }}>{t.guaranteesDesc[lang]}</p>
+          <div className="grid sm:grid-cols-3 gap-4">
             {t.guarantees[lang].map((g, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+              <div key={i} className="bg-white rounded-lg p-6" style={cardStyle}>
                 <span className="text-4xl block mb-3">{g.icon}</span>
-                <h3 className="font-bold text-gray-900 mb-2">{g.title}</h3>
-                <p className="text-gray-500 text-sm">{g.desc}</p>
+                <h3 className="font-bold mb-2" style={{ color: '#1a1a1a' }}>{g.title}</h3>
+                <p className="text-sm" style={{ color: '#666666' }}>{g.desc}</p>
               </div>
             ))}
           </div>
@@ -351,40 +393,52 @@ export default function ComprarReporte() {
 
         {/* ── FINAL CTA ── */}
         <section>
-          <div className="bg-gradient-to-br from-[#2d3e4e] via-[#3d5a73] to-[#2d3e4e] rounded-2xl overflow-hidden text-white">
+          <div
+            className="rounded-lg overflow-hidden text-white"
+            style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}
+          >
             <div className="px-8 py-10 text-center">
-
-              <div className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-8 max-w-sm mx-auto">
+              <div
+                className="mx-auto w-full max-w-sm rounded-lg p-8"
+                style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
+              >
                 <div className="flex gap-2 justify-center mb-4">
-                  <span className="bg-amber-400 text-amber-900 text-xs font-black px-3 py-1 rounded-full">
+                  <span className="rounded-lg px-3 py-1 text-xs font-black" style={{ backgroundColor: '#f59e0b', color: '#78350f' }}>
                     {t.discountBadge[lang]}
                   </span>
-                  <span className="bg-green-400 text-green-900 text-xs font-black px-3 py-1 rounded-full">
+                  <span className="rounded-lg px-3 py-1 text-xs font-black" style={{ backgroundColor: '#4ade80', color: '#14532d' }}>
                     {t.monthsBadge[lang]}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-center gap-3 mb-1">
-                  <span className="text-white/40 line-through text-xl font-bold">€450</span>
+                  <span className="line-through text-xl font-bold" style={{ color: 'rgba(255,255,255,0.35)' }}>€450</span>
                   <span className="text-5xl font-black">€250</span>
                 </div>
-                <p className="text-white/60 text-sm mb-5">{t.payOnce[lang]}</p>
+                <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.payOnce[lang]}</p>
 
-                {/* T&C checkbox — duplicated here so user doesn't need to scroll up */}
-                <label className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all border ${
-                  accepted
-                    ? 'bg-green-400/15 border-green-400/40'
-                    : 'bg-white/10 border-white/30 border-dashed animate-pulse'
-                }`}>
+                {/* T&C checkbox */}
+                <label
+                  className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all ${!accepted ? 'animate-pulse' : ''}`}
+                  style={{
+                    border: accepted ? '1px solid rgba(74,222,128,0.5)' : '1px dashed rgba(255,255,255,0.35)',
+                    backgroundColor: accepted ? 'rgba(74,222,128,0.12)' : 'rgba(255,255,255,0.08)',
+                  }}
+                >
                   <input
                     type="checkbox"
                     checked={accepted}
                     onChange={e => setAccepted(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded accent-green-400 flex-shrink-0"
+                    className="mt-0.5 h-4 w-4 rounded flex-shrink-0"
+                    style={{ accentColor: '#4ade80' }}
                   />
                   <span className="text-xs leading-snug">
-                    {!accepted && <span className="block text-amber-300 font-bold text-xs mb-0.5">👆 {lang === 'es' ? 'Marca esto para continuar' : 'Tick this to continue'}</span>}
-                    <span className="text-white/70">
+                    {!accepted && (
+                      <span className="block font-bold text-xs mb-0.5" style={{ color: '#fcd34d' }}>
+                        👆 {lang === 'es' ? 'Marca esto para continuar' : 'Tick this to continue'}
+                      </span>
+                    )}
+                    <span style={{ color: 'rgba(255,255,255,0.7)' }}>
                       {t.termsText[lang]}{' '}
                       <Link to="/terminos-finder" className="text-white underline hover:no-underline">
                         {t.termsLink[lang]}
@@ -396,16 +450,20 @@ export default function ComprarReporte() {
                 <button
                   onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
                   disabled={!accepted}
-                  className={`w-full font-black text-xl py-5 rounded-xl transition-all shadow-lg mb-4 ${
-                    accepted
-                      ? 'bg-green-400 hover:bg-green-300 active:bg-green-500 text-green-900 active:scale-[0.98]'
-                      : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60'
-                  }`}
+                  className="w-full font-bold text-xl py-5 rounded-lg transition-all mb-4"
+                  style={{
+                    backgroundColor: accepted ? '#4ade80' : '#9ca3af',
+                    color: accepted ? '#14532d' : '#6b7280',
+                    cursor: accepted ? 'pointer' : 'not-allowed',
+                    opacity: accepted ? 1 : 0.65,
+                    boxShadow: accepted ? '0 4px 14px rgba(74,222,128,0.3)' : 'none',
+                    border: 'none',
+                  }}
                 >
                   {t.ctaBtn[lang]}
                 </button>
 
-                <div className="flex flex-wrap justify-center gap-3 text-xs text-white/60">
+                <div className="flex flex-wrap justify-center gap-3 text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   <span>{t.ctaTrustA[lang]}</span>
                   <span>·</span>
                   <span>{t.ctaTrustB[lang]}</span>
@@ -414,15 +472,21 @@ export default function ComprarReporte() {
                 </div>
               </div>
 
-              <div className="mt-6 bg-white/10 rounded-xl px-6 py-4 max-w-md mx-auto text-left">
-                <p className="text-xs font-black text-amber-300 mb-1">{t.lastGuaranteeLabel[lang]}</p>
-                <p className="text-sm text-white/75">{t.lastGuaranteeText[lang]}</p>
+              <div
+                className="mt-6 rounded-lg px-6 py-4 max-w-md mx-auto text-left"
+                style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}
+              >
+                <p className="text-xs font-black mb-1" style={{ color: '#fcd34d' }}>{t.lastGuaranteeLabel[lang]}</p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>{t.lastGuaranteeText[lang]}</p>
               </div>
             </div>
 
             {/* Contact strip */}
-            <div className="border-t border-white/20 bg-black/10 px-8 py-6 text-center">
-              <p className="text-white/70 text-sm font-semibold mb-4">{t.contactPre[lang]}</p>
+            <div
+              className="border-t px-8 py-6 text-center"
+              style={{ borderColor: 'rgba(255,255,255,0.15)', backgroundColor: 'rgba(0,0,0,0.12)' }}
+            >
+              <p className="text-sm font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>{t.contactPre[lang]}</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
                 <a
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -432,18 +496,20 @@ export default function ComprarReporte() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-xl transition"
+                  className="inline-flex items-center gap-2 text-white font-bold px-6 py-3 rounded-lg transition hover:opacity-90"
+                  style={{ backgroundColor: '#22c55e' }}
                 >
                   {t.whatsappBtn[lang]}
                 </a>
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl transition border border-white/20"
+                  className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-lg transition hover:bg-white/20"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.2)' }}
                 >
                   {t.emailBtn[lang]}
                 </a>
               </div>
-              <p className="text-xs text-blue-300">
+              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 {t.termsText[lang]}{' '}
                 <Link to="/terminos-finder" className="text-white underline hover:no-underline">
                   {t.termsLink[lang]}
@@ -455,7 +521,6 @@ export default function ComprarReporte() {
 
       </div>
 
-      {/* Bottom padding */}
       <div className="h-10" />
     </div>
   );
