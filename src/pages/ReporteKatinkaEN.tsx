@@ -333,6 +333,12 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
   const next = useCallback(() => setIdx((i) => (i + 1) % images.length), [images.length]);
 
   useEffect(() => {
+    // Block body scroll
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = "unset"; };
+  }, []);
+
+  useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") prev();
@@ -344,56 +350,65 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      {/* Close */}
+      {/* Close - fixed to viewport, always visible */}
       <button
-        className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-2 hover:bg-black/70 transition-colors z-10"
-        onClick={onClose}
+        className="fixed top-4 right-4 z-50 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition"
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
         aria-label="Close"
       >
         <X className="w-6 h-6" />
       </button>
 
-      {/* Prev */}
-      <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full p-3 hover:bg-black/70 transition-colors z-10"
-        onClick={(e) => { e.stopPropagation(); prev(); }}
-        aria-label="Previous"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
+      {/* Prev - hidden on mobile (use swipe) */}
+      {images.length > 1 && (
+        <button
+          className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 hidden md:flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition"
+          onClick={(e) => { e.stopPropagation(); prev(); }}
+          aria-label="Previous"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+      )}
 
-      {/* Image */}
-      <img
-        src={images[idx]}
-        alt={`Photo ${idx + 1}`}
-        className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-        onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-        onTouchEnd={(e) => {
-          if (touchStart === null) return;
-          const diff = touchStart - e.changedTouches[0].clientX;
-          if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
-          setTouchStart(null);
-        }}
-        loading="lazy"
-      />
+      {/* Image - perfectly centered, no dead space */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        <img
+          src={images[idx]}
+          alt={`Photo ${idx + 1}`}
+          className="object-contain rounded-lg shadow-2xl"
+          style={{ maxHeight: "calc(100vh - 8rem)", maxWidth: "calc(100vw - 2rem)" }}
+          onClick={(e) => e.stopPropagation()}
+          onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+          onTouchEnd={(e) => {
+            if (touchStart === null) return;
+            const diff = touchStart - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+            setTouchStart(null);
+          }}
+          loading="lazy"
+        />
+      </div>
 
-      {/* Next */}
-      <button
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full p-3 hover:bg-black/70 transition-colors z-10"
-        onClick={(e) => { e.stopPropagation(); next(); }}
-        aria-label="Next"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+      {/* Next - hidden on mobile (use swipe) */}
+      {images.length > 1 && (
+        <button
+          className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 hidden md:flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition"
+          onClick={(e) => { e.stopPropagation(); next(); }}
+          aria-label="Next"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      )}
 
       {/* Counter */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm bg-black/40 px-3 py-1 rounded-full">
-        {idx + 1} / {images.length}
-      </div>
+      {images.length > 1 && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+          {idx + 1} / {images.length}
+        </div>
+      )}
     </div>
   );
 }
