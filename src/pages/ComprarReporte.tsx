@@ -1,4 +1,5 @@
 import { useSearchParams, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const STRIPE_URL = 'https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02';
 const WHATSAPP_NUMBER = '34662317561';
@@ -115,6 +116,7 @@ const t = {
 
 export default function ComprarReporte() {
   const [searchParams] = useSearchParams();
+  const [accepted, setAccepted] = useState(false);
 
   const nombre      = searchParams.get('n') || '';
   const presupuesto = searchParams.get('b') || '';
@@ -179,8 +181,8 @@ export default function ComprarReporte() {
             {t.heroDesc[lang]}
           </p>
 
-          {/* Price callout */}
-          <div className="inline-block bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-8 py-6">
+        {/* Price callout */}
+          <div className="inline-block bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-8 py-6 w-full max-w-sm">
             <div className="flex gap-2 justify-center mb-3">
               <span className="bg-amber-400 text-amber-900 text-xs font-black px-3 py-1 rounded-full tracking-wide">
                 {t.offerBadge[lang]}
@@ -190,11 +192,39 @@ export default function ComprarReporte() {
               </span>
             </div>
             <p className="text-xs font-bold tracking-widest uppercase text-blue-200 mb-1">{t.investLabel[lang]}</p>
-            <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center justify-center gap-3 mb-2">
               <span className="text-blue-300 line-through text-2xl font-bold">€450</span>
               <span className="text-5xl font-black">€250</span>
             </div>
-            <p className="text-blue-200 text-sm mt-2">{t.vatNote[lang]}</p>
+            <p className="text-blue-200 text-sm mb-4">{t.vatNote[lang]}</p>
+
+            {/* T&C checkbox */}
+            <label className="flex items-start gap-2 cursor-pointer text-left mb-4">
+              <input
+                type="checkbox"
+                checked={accepted}
+                onChange={e => setAccepted(e.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded accent-green-400 flex-shrink-0"
+              />
+              <span className="text-xs text-blue-200 leading-snug">
+                {t.termsText[lang]}{' '}
+                <Link to="/terminos-finder" className="text-white underline hover:no-underline">
+                  {t.termsLink[lang]}
+                </Link>
+              </span>
+            </label>
+
+            <button
+              onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
+              disabled={!accepted}
+              className={`w-full font-black text-lg py-4 rounded-xl transition-all shadow-lg ${
+                accepted
+                  ? 'bg-green-400 hover:bg-green-300 active:bg-green-500 text-green-900 active:scale-[0.98]'
+                  : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60'
+              }`}
+            >
+              {t.ctaBtn[lang]}
+            </button>
           </div>
         </div>
 
@@ -341,10 +371,15 @@ export default function ComprarReporte() {
                 <p className="text-blue-200 text-sm mb-6">{t.payOnce[lang]}</p>
 
                 <button
-                  onClick={() => { window.location.href = STRIPE_URL; }}
-                  className="w-full bg-green-400 hover:bg-green-300 active:bg-green-500 text-green-900 font-black text-xl py-5 rounded-xl transition-all active:scale-[0.98] shadow-lg mb-4"
+                  onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
+                  disabled={!accepted}
+                  className={`w-full font-black text-xl py-5 rounded-xl transition-all shadow-lg mb-4 ${
+                    accepted
+                      ? 'bg-green-400 hover:bg-green-300 active:bg-green-500 text-green-900 active:scale-[0.98]'
+                      : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60'
+                  }`}
                 >
-                  {t.ctaBtn[lang]}
+                  {accepted ? t.ctaBtn[lang] : (lang === 'es' ? '⬆ Acepta los T&C arriba para continuar' : '⬆ Accept T&C above to continue')}
                 </button>
 
                 <div className="flex flex-wrap justify-center gap-3 text-xs text-blue-200">
