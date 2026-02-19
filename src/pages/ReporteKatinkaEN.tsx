@@ -350,6 +350,12 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
       style={{ position: "fixed", inset: 0, zIndex: 99999, backgroundColor: "black" }}
       onClick={onClose}
     >
+      {/* DEBUG: Muestra info */}
+      <div style={{ position: "absolute", top: 70, left: 12, backgroundColor: "red", color: "white", padding: 12, fontSize: 11, zIndex: 100000, maxWidth: "80vw", wordBreak: "break-all" }}>
+        <p>Image URL: {images[idx]}</p>
+        <p>Index: {idx} / {images.length}</p>
+      </div>
+
       {/* Close button - white on black, always visible */}
       <button
         onClick={(e) => { e.stopPropagation(); onClose(); }}
