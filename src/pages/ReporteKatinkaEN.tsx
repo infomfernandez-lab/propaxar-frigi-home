@@ -327,85 +327,103 @@ const Stars = ({ count, max = 5 }: { count: number; max?: number }) => (
 // ─── Lightbox ───
 function Lightbox({ images, initialIndex, onClose }: { images: string[]; initialIndex: number; onClose: () => void }) {
   const [idx, setIdx] = useState(initialIndex);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  const prev = useCallback(() => setIdx((i) => (i - 1 + images.length) % images.length), [images.length]);
-  const next = useCallback(() => setIdx((i) => (i + 1) % images.length), [images.length]);
+  const prev = () => setIdx((i) => (i === 0 ? images.length - 1 : i - 1));
+  const next = () => setIdx((i) => (i + 1) % images.length);
 
   useEffect(() => {
-    // Block body scroll
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = "unset"; };
-  }, []);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [onClose, prev, next]);
+    document.addEventListener("keydown", handleEsc);
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+      style={{ position: "fixed", inset: 0, zIndex: 99999, backgroundColor: "black" }}
       onClick={onClose}
     >
-      {/* Close - fixed to viewport, always visible */}
+      {/* Close button - white on black, always visible */}
       <button
-        className="fixed top-4 right-4 z-50 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition"
         onClick={(e) => { e.stopPropagation(); onClose(); }}
+        style={{
+          position: "absolute", top: 12, right: 12, zIndex: 100000,
+          backgroundColor: "white", color: "black", border: "none",
+          borderRadius: "50%", width: 50, height: 50,
+          fontSize: 28, fontWeight: "bold", cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.5)"
+        }}
         aria-label="Close"
       >
-        <X className="w-6 h-6" />
+        ×
       </button>
 
-      {/* Prev - hidden on mobile (use swipe) */}
+      {/* Prev button */}
       {images.length > 1 && (
         <button
-          className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 hidden md:flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition"
           onClick={(e) => { e.stopPropagation(); prev(); }}
+          style={{
+            position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
+            zIndex: 100000, backgroundColor: "white", color: "black", border: "none",
+            borderRadius: "50%", width: 50, height: 50,
+            fontSize: 24, fontWeight: "bold", cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.5)"
+          }}
           aria-label="Previous"
         >
-          <ChevronLeft className="w-6 h-6" />
+          ←
         </button>
       )}
 
-      {/* Image - perfectly centered, no dead space */}
-      <div className="relative w-full h-full flex items-center justify-center">
+      {/* Image centered */}
+      <div
+        style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "70px 80px" }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <img
           src={images[idx]}
           alt={`Photo ${idx + 1}`}
-          className="object-contain rounded-lg shadow-2xl"
-          style={{ maxHeight: "calc(100vh - 8rem)", maxWidth: "calc(100vw - 2rem)" }}
-          onClick={(e) => e.stopPropagation()}
-          onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-          onTouchEnd={(e) => {
-            if (touchStart === null) return;
-            const diff = touchStart - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
-            setTouchStart(null);
-          }}
-          loading="lazy"
+          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
         />
       </div>
 
-      {/* Next - hidden on mobile (use swipe) */}
+      {/* Next button */}
       {images.length > 1 && (
         <button
-          className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 hidden md:flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition"
           onClick={(e) => { e.stopPropagation(); next(); }}
+          style={{
+            position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+            zIndex: 100000, backgroundColor: "white", color: "black", border: "none",
+            borderRadius: "50%", width: 50, height: 50,
+            fontSize: 24, fontWeight: "bold", cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.5)"
+          }}
           aria-label="Next"
         >
-          <ChevronRight className="w-6 h-6" />
+          →
         </button>
       )}
 
       {/* Counter */}
       {images.length > 1 && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+        <div
+          style={{
+            position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)",
+            backgroundColor: "white", color: "black", borderRadius: 999,
+            padding: "6px 16px", fontWeight: "bold", fontSize: 14,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.4)"
+          }}
+        >
           {idx + 1} / {images.length}
         </div>
       )}
