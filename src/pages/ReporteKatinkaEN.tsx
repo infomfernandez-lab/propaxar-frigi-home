@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, Package, Trash2, Droplets, TrendingUp, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, CardContent } from "@/components/ui/card";
@@ -349,7 +350,7 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
 
   if (!currentSrc) return null;
 
-  return (
+  return createPortal(
     <div
       style={{ position: "fixed", inset: 0, zIndex: 99999, backgroundColor: "black" }}
       onClick={onClose}
@@ -439,7 +440,8 @@ function Lightbox({ images, initialIndex, onClose }: { images: string[]; initial
           {idx + 1} / {safeImages.length}
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
 
