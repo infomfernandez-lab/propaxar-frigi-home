@@ -41,7 +41,7 @@ const content = {
           { type: 'p', text: '1.1. El Reporte de Mercado Propaxar ("el Servicio") es un análisis personalizado del mercado inmobiliario de alquileres de larga temporada en Frigiliana y zonas circundantes (Axarquía, Málaga, España).' },
           { type: 'p', text: '1.2. El Servicio incluye:' },
           { type: 'ul', items: [
-            'Reporte personalizado con 4-8 propiedades seleccionadas manualmente',
+            'Reporte personalizado con todas las propiedades disponibles, típicamente de 1-8 según las preferencias del cliente y la disponibilidad del mercado en el momento de la generación del reporte.',
             'Análisis profesional adaptado a criterios específicos del cliente (presupuesto, dormitorios, mascotas, fecha de entrada)',
             'Información privilegiada sobre logística de vida rural vs pueblo',
             'Análisis honesto del mercado actual y precios reales',
@@ -182,7 +182,7 @@ const content = {
         title: 'Ley Aplicable y Jurisdicción',
         content: [
           { type: 'p', text: '12.1. Estos términos y condiciones se rigen por las leyes del Reino de España.' },
-          { type: 'p', text: '12.2. Para la resolución de cualquier controversia, las partes se someten a la jurisdicción de los Juzgados y Tribunales de Málaga capital, España.' },
+          { type: 'p', text: '12.2. Para la resolución de cualquier controversia, las partes se someten a la jurisdicción de los Juzgados y Tribunales de Torrox (Málaga), España.' },
           { type: 'p', text: '12.3. Antes de iniciar acciones legales, las partes se comprometen a intentar resolver cualquier disputa de buena fe mediante comunicación directa.' },
           { type: 'p', text: '12.4. La versión en español de estos términos prevalece en caso de conflicto o ambigüedad con traducciones a otros idiomas.' },
         ],
@@ -240,7 +240,7 @@ const content = {
           { type: 'p', text: '1.1. The Propaxar Market Report ("the Service") is a personalised analysis of the long-term rental real estate market in Frigiliana and surrounding areas (Axarquía, Málaga, Spain).' },
           { type: 'p', text: '1.2. The Service includes:' },
           { type: 'ul', items: [
-            'Personalised report with 4-8 manually selected properties',
+            'Personalised report with all available properties, typically 1-8 depending on the client\'s preferences and market availability at the time of report generation.',
             'Professional analysis tailored to the client\'s specific criteria (budget, bedrooms, pets, move-in date)',
             'Insider information on rural vs. town living logistics',
             'Honest analysis of the current market and real prices',
@@ -381,7 +381,7 @@ const content = {
         title: 'Applicable Law and Jurisdiction',
         content: [
           { type: 'p', text: '12.1. These terms and conditions are governed by the laws of the Kingdom of Spain.' },
-          { type: 'p', text: '12.2. For the resolution of any dispute, the parties submit to the jurisdiction of the Courts of Málaga capital, Spain.' },
+          { type: 'p', text: '12.2. For the resolution of any dispute, the parties submit to the jurisdiction of the Courts of Torrox (Málaga), Spain.' },
           { type: 'p', text: '12.3. Before initiating legal action, the parties commit to attempting to resolve any dispute in good faith through direct communication.' },
           { type: 'p', text: '12.4. The Spanish version of these terms prevails in case of conflict or ambiguity with translations to other languages.' },
         ],
