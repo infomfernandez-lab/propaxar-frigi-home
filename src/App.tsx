@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import PropertyFinder from "./pages/PropertyFinder";
 import TerminosFinder from "./pages/TerminosFinder";
@@ -16,28 +17,30 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <LanguageProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/finder" element={<PropertyFinder />} />
-            <Route path="/terminos-finder" element={<TerminosFinder />} />
-            <Route path="/reporte-test" element={<ReporteTest />} />
-            <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
-            <Route path="/reporte/:slug" element={<ReportePropaxar />} />
-            <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
-            <Route path="/comprar-reporte" element={<ComprarReporte />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </LanguageProvider>
+  <HelmetProvider>
+    <LanguageProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/finder" element={<PropertyFinder />} />
+              <Route path="/terminos-finder" element={<TerminosFinder />} />
+              <Route path="/reporte-test" element={<ReporteTest />} />
+              <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
+              <Route path="/reporte/:slug" element={<ReportePropaxar />} />
+              <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
+              <Route path="/comprar-reporte" element={<ComprarReporte />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </LanguageProvider>
+  </HelmetProvider>
 );
 
 export default App;

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { Helmet } from "react-helmet-async";
 import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, Package, Trash2, Droplets, TrendingUp, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, CardContent } from "@/components/ui/card";
@@ -688,10 +689,33 @@ export default function ReporteKatinkaEN() {
   validUntil.setMonth(validUntil.getMonth() + 6);
   const validStr = validUntil.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 
+  const reportUrl = "https://propaxar.es/reporte/katinka-durkstra-a7k9m2-en";
+  const metaTitle = "📊 Katinka Durkstra, here's your Frigiliana report";
+  const metaDescription = `${properties.length} properties analyzed in your €700-1,000 budget | Updated weekly × 6 months | Local expert`;
+  const ogImage = "https://propaxar.es/images/frigiliana-hero.jpg";
+
   return (
     <>
-      {/* SEO: noindex for private client report */}
-      <meta name="robots" content="noindex, nofollow" />
+      <Helmet>
+        <html lang="en" />
+        <title>Market Report - Katinka Durkstra | Propaxar</title>
+        <meta name="robots" content="noindex, nofollow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={reportUrl} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:alt" content="Frigiliana village view" />
+        <meta property="og:site_name" content="Propaxar" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={ogImage} />
+      </Helmet>
 
       {/* ─── 1. HERO ─── */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
