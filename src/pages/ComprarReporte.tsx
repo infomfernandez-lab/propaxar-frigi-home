@@ -199,18 +199,25 @@ export default function ComprarReporte() {
             <p className="text-blue-200 text-sm mb-4">{t.vatNote[lang]}</p>
 
             {/* T&C checkbox */}
-            <label className="flex items-start gap-2 cursor-pointer text-left mb-4">
+            <label className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all border ${
+              accepted
+                ? 'bg-green-400/15 border-green-400/40'
+                : 'bg-white/10 border-white/30 border-dashed animate-pulse'
+            }`}>
               <input
                 type="checkbox"
                 checked={accepted}
                 onChange={e => setAccepted(e.target.checked)}
                 className="mt-0.5 h-4 w-4 rounded accent-green-400 flex-shrink-0"
               />
-              <span className="text-xs text-blue-200 leading-snug">
-                {t.termsText[lang]}{' '}
-                <Link to="/terminos-finder" className="text-white underline hover:no-underline">
-                  {t.termsLink[lang]}
-                </Link>
+              <span className="text-xs leading-snug">
+                {!accepted && <span className="block text-amber-300 font-bold text-xs mb-0.5">👆 {lang === 'es' ? 'Marca esto para continuar' : 'Tick this to continue'}</span>}
+                <span className="text-blue-200">
+                  {t.termsText[lang]}{' '}
+                  <Link to="/terminos-finder" className="text-white underline hover:no-underline">
+                    {t.termsLink[lang]}
+                  </Link>
+                </span>
               </span>
             </label>
 
@@ -369,18 +376,25 @@ export default function ComprarReporte() {
                 <p className="text-blue-200 text-sm mb-5">{t.payOnce[lang]}</p>
 
                 {/* T&C checkbox — duplicated here so user doesn't need to scroll up */}
-                <label className="flex items-start gap-2 cursor-pointer text-left mb-4">
+                <label className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all border ${
+                  accepted
+                    ? 'bg-green-400/15 border-green-400/40'
+                    : 'bg-white/10 border-white/30 border-dashed animate-pulse'
+                }`}>
                   <input
                     type="checkbox"
                     checked={accepted}
                     onChange={e => setAccepted(e.target.checked)}
                     className="mt-0.5 h-4 w-4 rounded accent-green-400 flex-shrink-0"
                   />
-                  <span className="text-xs text-blue-200 leading-snug">
-                    {t.termsText[lang]}{' '}
-                    <Link to="/terminos-finder" className="text-white underline hover:no-underline">
-                      {t.termsLink[lang]}
-                    </Link>
+                  <span className="text-xs leading-snug">
+                    {!accepted && <span className="block text-amber-300 font-bold text-xs mb-0.5">👆 {lang === 'es' ? 'Marca esto para continuar' : 'Tick this to continue'}</span>}
+                    <span className="text-blue-200">
+                      {t.termsText[lang]}{' '}
+                      <Link to="/terminos-finder" className="text-white underline hover:no-underline">
+                        {t.termsLink[lang]}
+                      </Link>
+                    </span>
                   </span>
                 </label>
 
