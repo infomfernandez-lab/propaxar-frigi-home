@@ -917,7 +917,7 @@ export default function ReporteKatinkaEN() {
                   urgencyColor: "hsl(213 56% 43%)",
                   description: "Spanish rental law (LAU) protects tenants. Key things to verify in your contract.",
                   steps: [
-                    "Minimum duration: 5 years (for individual landlords)",
+                    "Minimum duration (for individual landlords)",
                     "Deposit: max 2 months rent (1 month legally + 1 month guarantee)",
                     "Rent increases: tied to CPI (INE index), max once per year",
                     "I review ALL contracts before you sign",
