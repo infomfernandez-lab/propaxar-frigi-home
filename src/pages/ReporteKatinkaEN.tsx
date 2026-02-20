@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Helmet } from "react-helmet-async";
-import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, Package, Trash2, Droplets, TrendingUp, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, Package, Trash2, Droplets, TrendingUp, X, ChevronLeft, ChevronRight, FileText, Globe, CreditCard, Shield } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -105,6 +105,8 @@ const properties = [
     parking: "✅",
     internet: "60MB",
     noise: "Very low",
+    neighborDirection: "east" as const,
+    nearestNeighborDistance: "75m",
   },
   {
     id: 2,
@@ -175,6 +177,8 @@ const properties = [
     parking: "✅",
     internet: "60MB",
     noise: "Low",
+    neighborDirection: "south" as const,
+    nearestNeighborDistance: "40m",
   },
   {
     id: 3,
@@ -243,6 +247,8 @@ const properties = [
     parking: "✅",
     internet: "60MB",
     noise: "Moderate",
+    neighborDirection: "multiple" as const,
+    nearestNeighborDistance: "30m",
   },
   {
     id: 4,
@@ -314,6 +320,8 @@ const properties = [
     parking: "✅",
     internet: "60MB",
     noise: "Very low",
+    neighborDirection: "west" as const,
+    nearestNeighborDistance: "50m",
   },
 ];
 
@@ -325,6 +333,50 @@ const Stars = ({ count, max = 5 }: { count: number; max?: number }) => (
     ))}
   </span>
 );
+
+// ─── Neighbor Map SVG ───
+function NeighborMap({ direction, distance }: { direction: string; distance: string }) {
+  const dirPositions: Record<string, { cx: number; cy: number }[]> = {
+    north: [{ cx: 100, cy: 25 }],
+    south: [{ cx: 100, cy: 175 }],
+    east: [{ cx: 175, cy: 100 }],
+    west: [{ cx: 25, cy: 100 }],
+    multiple: [{ cx: 175, cy: 100 }, { cx: 100, cy: 175 }],
+  };
+  const neighbors = dirPositions[direction] || dirPositions.east;
+
+  return (
+    <div className="mt-3 flex flex-col items-center">
+      <svg viewBox="0 0 200 200" width="180" height="180" className="rounded-lg" style={{ background: "hsl(142 71% 45%/0.06)" }}>
+        {/* Grid */}
+        <line x1="0" y1="100" x2="200" y2="100" stroke="hsl(212 26% 83%)" strokeWidth="0.5" strokeDasharray="4" />
+        <line x1="100" y1="0" x2="100" y2="200" stroke="hsl(212 26% 83%)" strokeWidth="0.5" strokeDasharray="4" />
+        {/* Compass */}
+        <text x="100" y="12" textAnchor="middle" fontSize="9" fill="hsl(215 19% 55%)">N</text>
+        <text x="100" y="197" textAnchor="middle" fontSize="9" fill="hsl(215 19% 55%)">S</text>
+        <text x="8" y="104" textAnchor="middle" fontSize="9" fill="hsl(215 19% 55%)">W</text>
+        <text x="192" y="104" textAnchor="middle" fontSize="9" fill="hsl(215 19% 55%)">E</text>
+        {/* Your house */}
+        <rect x="82" y="82" width="36" height="36" rx="6" fill="hsl(213 56% 23%)" />
+        <text x="100" y="104" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">YOU</text>
+        {/* Neighbors */}
+        {neighbors.map((n, i) => (
+          <g key={i}>
+            <circle cx={n.cx} cy={n.cy} r="14" fill="hsl(39 76% 61%/0.3)" stroke="hsl(39 76% 61%)" strokeWidth="1.5" />
+            <text x={n.cx} y={n.cy + 3} textAnchor="middle" fontSize="7" fill="hsl(39 76% 61%)">🏠</text>
+            {/* Distance line */}
+            <line x1="100" y1="100" x2={n.cx} y2={n.cy} stroke="hsl(215 19% 55%)" strokeWidth="0.8" strokeDasharray="3" />
+          </g>
+        ))}
+        {/* Distance label */}
+        <text x="100" y="145" textAnchor="middle" fontSize="9" fill="hsl(213 56% 23%)" fontWeight="bold">
+          ≈ {distance}
+        </text>
+      </svg>
+      <p className="text-xs mt-1" style={{ color: "hsl(215 19% 55%)" }}>Nearest neighbour: {distance} {direction}</p>
+    </div>
+  );
+}
 
 // ─── Lightbox ───
 function Lightbox({ images, initialIndex, onClose }: { images: string[]; initialIndex: number; onClose: () => void }) {
@@ -620,6 +672,8 @@ function PropertyCard({ p }: { p: typeof properties[0] }) {
                   <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{text}</p>
                 </div>
               ))}
+              {/* Neighbor Map */}
+              <NeighborMap direction={p.neighborDirection} distance={p.nearestNeighborDistance} />
             </div>
 
             {/* Lifestyle fit */}
@@ -669,6 +723,7 @@ export default function ReporteKatinkaEN() {
   const recoFade = useFadeIn();
   const stepsFade = useFadeIn();
   const pdfFade = useFadeIn();
+  const docsFade = useFadeIn();
 
   const handleDownloadPdf = async () => {
     const html2pdf = (await import("html2pdf.js")).default;
@@ -801,6 +856,125 @@ export default function ReporteKatinkaEN() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </section>
+
+        {/* ─── 3.5 DOCUMENTATION & LEGAL REQUIREMENTS ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={docsFade.ref}>
+          <div className={docsFade.className}>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>
+              Documentation & Legal Requirements
+            </h2>
+            <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>
+              What you need to rent legally in Spain
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-6 mb-8">
+              {[
+                {
+                  icon: <FileText className="w-7 h-7" />,
+                  title: "NIE (Foreigners' ID Number)",
+                  urgency: "ESSENTIAL",
+                  urgencyColor: "hsl(0 72% 51%)",
+                  description: "Required for ALL contracts, bank accounts, utilities. Without it, you literally cannot rent.",
+                  steps: [
+                    "Apply at Spanish Consulate (home country) or Police Station (Spain)",
+                    "Processing: 2-4 weeks from abroad, 1-2 weeks in Spain",
+                    "Documents: passport, application form EX-15, proof of reason (rental contract draft)",
+                  ],
+                  tip: "💡 Start this NOW if you don't have one. It's the #1 blocker.",
+                },
+                {
+                  icon: <CreditCard className="w-7 h-7" />,
+                  title: "Spanish Bank Account",
+                  urgency: "ESSENTIAL",
+                  urgencyColor: "hsl(0 72% 51%)",
+                  description: "Most landlords require rent via Spanish bank transfer. Also needed for utilities (Endesa, Aqualia).",
+                  steps: [
+                    "Open at any bank with NIE + passport (Sabadell, CaixaBank, BBVA)",
+                    "Some banks allow opening remotely (N26, Openbank)",
+                    "Processing: same day in branch with NIE",
+                  ],
+                  tip: "💡 I can recommend a branch in Nerja where they speak English.",
+                },
+                {
+                  icon: <Globe className="w-7 h-7" />,
+                  title: "Empadronamiento (Town Registration)",
+                  urgency: "WITHIN 3 MONTHS",
+                  urgencyColor: "hsl(39 76% 51%)",
+                  description: "Mandatory registration at your local town hall. Required for healthcare (SAS), voting, and residency.",
+                  steps: [
+                    "Go to Frigiliana Town Hall (Ayuntamiento) with rental contract + passport",
+                    "Free of charge, done same day",
+                    "Needed for: public healthcare, schools, residency application",
+                  ],
+                  tip: "💡 I'll accompany you to Town Hall - they don't speak English.",
+                },
+                {
+                  icon: <Shield className="w-7 h-7" />,
+                  title: "Rental Contract Essentials",
+                  urgency: "AT SIGNING",
+                  urgencyColor: "hsl(213 56% 43%)",
+                  description: "Spanish rental law (LAU) protects tenants. Key things to verify in your contract.",
+                  steps: [
+                    "Minimum duration: 5 years by law (for individual landlords)",
+                    "Deposit: max 2 months rent (1 month legally + 1 month guarantee)",
+                    "Rent increases: tied to CPI (INE index), max once per year",
+                    "I review ALL contracts before you sign",
+                  ],
+                  tip: "💡 Never sign without understanding every clause. I translate and explain everything.",
+                },
+              ].map((doc, i) => (
+                <Card key={i} className="border-0 overflow-hidden" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
+                  <CardContent className="p-6 space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                        {doc.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{doc.title}</h3>
+                        <span className="inline-block text-xs font-bold mt-1 px-2 py-0.5 rounded-full text-white" style={{ background: doc.urgencyColor }}>
+                          {doc.urgency}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{doc.description}</p>
+                    <ul className="space-y-1">
+                      {doc.steps.map((s, j) => (
+                        <li key={j} className="text-sm flex items-start gap-2">
+                          <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(142 71% 45%)" }} />
+                          <span style={{ color: "hsl(215 19% 34%)" }}>{s}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-xs font-medium" style={{ color: "hsl(213 56% 40%)" }}>{doc.tip}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Additional documents brief */}
+            <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
+              <CardContent className="p-6">
+                <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>📄 Also Good to Know</h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { title: "Certificado Digital", desc: "For online government services (taxes, Social Security). Apply at FNMT after getting NIE." },
+                    { title: "Home Insurance", desc: "Some landlords require it. €150-300/year. Covers fire, theft, liability." },
+                    { title: "Driving Licence", desc: "Non-EU? Exchange within 6 months at Tráfico Málaga (Avda. Sor Teresa Prat, 15)." },
+                    { title: "Tax Obligations", desc: "If residing >183 days/year: Spanish tax return (IRPF). I recommend a gestor for year 1." },
+                  ].map((d, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <FileText className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(213 56% 40%)" }} />
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color: "hsl(213 56% 23%)" }}>{d.title}</p>
+                        <p className="text-xs" style={{ color: "hsl(215 19% 45%)" }}>{d.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
