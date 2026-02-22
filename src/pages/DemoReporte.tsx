@@ -747,19 +747,21 @@ export default function DemoReporte() {
         {/* ─── 4. PROPERTIES ANALYZED ─── */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={propsFade.ref}>
           <div className={propsFade.className}>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>4 Properties Analyzed</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>Properties Analyzed</h2>
             <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>
-              ✅ 1 within budget · ⚠ 3 over budget (€1,600/month)
+              Showing 1 of 6-8 properties · Full report includes all
             </p>
             <div className="grid grid-cols-1 gap-6">
-              {/* Properties 1-2: fully visible */}
+              {/* Property 1: fully visible */}
               <DemoPropertyCard p={properties[0]} />
-              <DemoPropertyCard p={properties[1]} />
 
-              {/* Properties 3-4: blurred with lock overlay */}
+              {/* Separator */}
+              <div className="border-t" style={{ borderColor: "hsl(212 26% 83%)" }} />
+
+              {/* ALL Other Properties - BLURRED */}
               <div className="relative">
                 <div className="filter blur-sm pointer-events-none select-none">
-                  {properties.slice(2).map((p) => (
+                  {properties.slice(1).map((p) => (
                     <Card key={p.id} className="overflow-hidden border-0 mb-6" style={{ boxShadow: "0 4px 24px hsl(0 0% 0%/0.08)", borderRadius: 12 }}>
                       <div className="relative h-52 bg-gray-200 overflow-hidden">
                         <img src={p.photos[0]} alt={p.name} className="w-full h-full object-cover" loading="lazy" />
@@ -774,38 +776,43 @@ export default function DemoReporte() {
                   ))}
                 </div>
 
-                {/* Lock overlay */}
+                {/* Lock overlay covering ALL blurred properties */}
                 <div className="absolute inset-0 flex items-center justify-center z-10">
                   <div className="text-center p-8 max-w-md">
                     <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: "hsl(213 56% 23%/0.1)" }}>
                       <Lock className="w-8 h-8" style={{ color: "hsl(213 56% 23%)" }} />
                     </div>
                     <h3 className="text-xl font-bold mb-2" style={{ color: "hsl(213 56% 23%)" }}>
-                      2 More Properties in Full Report
+                      5-7 More Properties in Full Report
                     </h3>
                     <p className="text-sm mb-6" style={{ color: "hsl(215 19% 34%)" }}>
-                      Unlock complete analysis of 4-8 verified properties tailored to your search criteria
+                      Unlock complete analysis of 6-8 verified properties tailored specifically to your search criteria
                     </p>
-                    <div className="space-y-2 text-left max-w-xs mx-auto mb-6">
-                      {[
-                        "Detailed insider analysis of each property",
-                        "Access & driving difficulty ratings",
-                        "Privacy & neighbor proximity maps",
-                        "Direct contact details & GPS coordinates",
-                      ].map((t, i) => (
-                        <div key={i} className="flex items-start gap-2 text-sm">
-                          <span style={{ color: "hsl(142 71% 45%)" }}>✓</span>
-                          <span style={{ color: "hsl(215 19% 34%)" }}>{t}</span>
-                        </div>
-                      ))}
+                    <div className="text-left max-w-xs mx-auto mb-2">
+                      <p className="text-sm font-bold mb-3" style={{ color: "hsl(213 56% 23%)" }}>Each Property Includes:</p>
+                      <div className="space-y-2">
+                        {[
+                          "Detailed insider analysis and honest review",
+                          "Access & driving difficulty ratings with maps",
+                          "Privacy level & neighbor proximity maps",
+                          "Complete photo galleries",
+                          "Direct contact details & GPS coordinates",
+                          "Professional recommendation which is best for YOU",
+                        ].map((t, i) => (
+                          <div key={i} className="flex items-start gap-2 text-sm">
+                            <span style={{ color: "hsl(142 71% 45%)" }}>✓</span>
+                            <span style={{ color: "hsl(215 19% 34%)" }}>{t}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <a href={CTA_LINK}>
+                    <a href={CTA_LINK} className="block mt-6">
                       <Button className="text-base font-bold px-8 py-5" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
                         Get Your Full Report - €250 →
                       </Button>
                     </a>
                     <p className="text-xs mt-3" style={{ color: "hsl(215 19% 55%)" }}>
-                      Full refund if you rent a Propaxar Direct property
+                      💰 Full refund if you rent a Propaxar Direct property
                     </p>
                   </div>
                 </div>
@@ -895,30 +902,44 @@ export default function DemoReporte() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {/* Properties 1-2: visible */}
-                  {properties.slice(0, 2).map((p) => (
-                    <TableRow key={p.id}>
-                      <TableCell className="font-bold text-xs">{p.ref.toUpperCase()}</TableCell>
-                      <TableCell className="font-semibold text-sm whitespace-nowrap">{p.name}</TableCell>
-                      <TableCell className={p.id === 1 ? "text-sm font-bold text-green-600" : "text-sm text-red-600"}>{p.price}</TableCell>
-                      <TableCell className="text-sm">{p.beds}</TableCell>
-                      <TableCell className="text-sm">{p.baths}</TableCell>
-                      <TableCell className="text-sm">{p.size}</TableCell>
-                      <TableCell className="text-xs">{p.available}</TableCell>
-                      <TableCell className="font-bold text-base">{p.rating}/5 {p.id === 1 ? "✓" : ""}</TableCell>
-                    </TableRow>
-                  ))}
-                  {/* Properties 3-4: blurred rows */}
-                  {properties.slice(2).map((p) => (
-                    <TableRow key={p.id} className="relative">
-                      <TableCell colSpan={8} className="text-center py-3">
-                        <div className="flex items-center justify-center gap-2 text-sm" style={{ color: "hsl(215 19% 55%)" }}>
-                          <Lock className="w-4 h-4" />
-                          <span className="font-medium">Property {p.id} — Available in full report</span>
+                  {/* Property 1: visible */}
+                  <TableRow>
+                    <TableCell className="font-bold text-xs">{properties[0].ref.toUpperCase()}</TableCell>
+                    <TableCell className="font-semibold text-sm whitespace-nowrap">{properties[0].name}</TableCell>
+                    <TableCell className="text-sm font-bold text-green-600">{properties[0].price}</TableCell>
+                    <TableCell className="text-sm">{properties[0].beds}</TableCell>
+                    <TableCell className="text-sm">{properties[0].baths}</TableCell>
+                    <TableCell className="text-sm">{properties[0].size}</TableCell>
+                    <TableCell className="text-xs">{properties[0].available}</TableCell>
+                    <TableCell className="font-bold text-base">{properties[0].rating}/5 ✓</TableCell>
+                  </TableRow>
+                  {/* All other properties: blurred */}
+                  <TableRow>
+                    <TableCell colSpan={8} className="p-0">
+                      <div className="relative">
+                        <div className="filter blur-sm pointer-events-none select-none">
+                          {properties.slice(1).map((p) => (
+                            <div key={p.id} className="flex justify-between px-4 py-3 border-t text-sm" style={{ borderColor: "hsl(212 26% 90%)" }}>
+                              <span>{p.ref.toUpperCase()}</span>
+                              <span>{p.name}</span>
+                              <span>{p.price}</span>
+                              <span>{p.beds}</span>
+                              <span>{p.baths}</span>
+                              <span>{p.size}</span>
+                              <span>{p.available}</span>
+                              <span>{p.rating}/5</span>
+                            </div>
+                          ))}
                         </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: "hsl(215 19% 55%)" }}>
+                            <Lock className="w-4 h-4" />
+                            <span>5-7 more properties in full report</span>
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </div>
@@ -952,10 +973,13 @@ export default function DemoReporte() {
                 <div className="text-center p-6">
                   <Lock className="w-10 h-10 mx-auto mb-3" style={{ color: "hsl(213 56% 23%)" }} />
                   <h3 className="text-xl font-bold mb-2" style={{ color: "hsl(213 56% 23%)" }}>
-                    Professional Recommendation Included
+                    Professional Recommendation
                   </h3>
-                  <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>
-                    Available in full personalized report
+                  <p className="text-sm mb-1" style={{ color: "hsl(215 19% 34%)" }}>
+                    Based on your specific needs and priorities, I analyze all properties and recommend the best match for YOU
+                  </p>
+                  <p className="text-xs font-medium" style={{ color: "hsl(215 19% 55%)" }}>
+                    Included in full personalized report
                   </p>
                 </div>
               </div>
@@ -967,23 +991,25 @@ export default function DemoReporte() {
         <section className="py-20 px-4 md:px-8" style={{ background: "linear-gradient(135deg, hsl(213 56% 23%), hsl(213 56% 18%))" }} ref={ctaFade.ref}>
           <div className={`max-w-3xl mx-auto text-center ${ctaFade.className}`}>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Get Your Personalized Report?
+              Ready to See the Complete Market?
             </h2>
 
             <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto">
-              This demo shows just a glimpse. Your complete report will include 6-8 properties verified available, personalized recommendation, and 6 months of weekly updates.
+              You've seen just ONE example property. Your complete personalized report includes 6-8 verified available properties with this level of detail, plus my professional recommendation.
             </p>
 
             <div className="text-left max-w-md mx-auto mb-10">
-              <p className="text-base font-bold text-white mb-4">What's Included:</p>
+              <p className="text-base font-bold text-white mb-4">Your Complete Report Includes:</p>
               <div className="space-y-3">
                 {[
-                  "6-8 verified available properties matching your criteria",
-                  "Detailed insider analysis of each property",
-                  "Access ratings, privacy maps, logistics info",
-                  "Professional recommendation which property is best for YOU",
-                  "Full contact details & GPS coordinates",
-                  "6 months of weekly market updates",
+                  "6-8 verified available properties",
+                  "Detailed analysis of each one",
+                  "Access & driving ratings",
+                  "Privacy & neighbor maps",
+                  "Professional recommendation",
+                  "All contact details & GPS",
+                  "Weekly updates × 6 months",
+                  "Direct access to Manuel",
                 ].map((t, i) => (
                   <div key={i} className="flex items-start gap-2 text-sm text-white/90">
                     <span style={{ color: "hsl(142 71% 55%)" }}>✓</span>
@@ -993,29 +1019,35 @@ export default function DemoReporte() {
               </div>
             </div>
 
+            {/* Scarcity badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ background: "hsl(39 76% 61%/0.2)", color: "hsl(39 76% 71%)", border: "1px solid hsl(39 76% 61%/0.3)" }}>
+              ⚡ Only 5 spots available this month
+            </div>
+
             <div className="mb-8">
               <p className="text-4xl font-bold text-white mb-1">€250</p>
-              <p className="text-base text-white/70">One-time payment</p>
+              <p className="text-base text-white/70">One-time investment</p>
               <p className="text-sm text-white/60 mt-2">
-                100% refundable if you rent a Propaxar Direct property
+                💰 100% Refundable if you rent Propaxar Direct
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <a href={CTA_LINK}>
                 <Button className="text-lg font-bold px-10 py-6" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
-                  Get Your Report Now →
+                  Get Your Complete Report →
                 </Button>
               </a>
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="text-lg font-bold px-10 py-6 border-white/30 text-white hover:bg-white/10" style={{ borderRadius: 10 }}>
-                  💬 Questions? WhatsApp Me
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Questions? WhatsApp
                 </Button>
               </a>
             </div>
 
             <p className="text-sm text-white/60">
-              📱 +34 662 317 561 | 📧 info@propaxar.com
+              📱 +34 662 317 561 | 📧 info@propaxar.com | 🌐 propaxar.es
             </p>
           </div>
         </section>
