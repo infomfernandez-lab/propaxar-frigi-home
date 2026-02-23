@@ -209,30 +209,8 @@ const PropertyFinder = () => {
     try { localStorage.setItem("finder-lang", lang); } catch {}
   }, [lang]);
 
-  // form state
-  const [form, setForm] = useState({
-    name: "", email: "", phone: "", prefLang: lang,
-    budget: "", beds: "", pets: "", movein: "", notes: "",
-  });
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [showTermsError, setShowTermsError] = useState(false);
-  const formRef = useRef<HTMLElement>(null);
-
-  const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!termsAccepted) { setShowTermsError(true); return; }
-
-    // Build WhatsApp message with search details then redirect to Stripe
-    const msg = lang === "es"
-      ? `Hola Manuel, acabo de solicitar un Reporte de Mercado Propaxar.\n\nNombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\nIdioma: ${form.prefLang === "es" ? "Español" : "Inglés"}\nPresupuesto: €${form.budget}/mes\nDormitorios: ${form.beds}+\nMascotas: ${form.pets === "yes" ? "Sí" : "No"}\nEntrada: ${form.movein}\nNotas: ${form.notes}`
-      : `Hi Manuel, I just requested a Propaxar Market Report.\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nLanguage: ${form.prefLang === "es" ? "Spanish" : "English"}\nBudget: €${form.budget}/month\nBedrooms: ${form.beds}+\nPets: ${form.pets === "yes" ? "Yes" : "No"}\nMove-in: ${form.movein}\nNotes: ${form.notes}`;
-
-    // Open WhatsApp with details, then redirect to Stripe
-    window.open(WHATSAPP_BASE + "?text=" + encodeURIComponent(msg), "_blank");
-    setTimeout(() => { window.location.href = STRIPE_PAYMENT_LINK; }, 800);
-  };
+  const pricingSectionRef = useRef<HTMLElement>(null);
+  const scrollToPricing = () => pricingSectionRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const termsHref = lang === "en" ? "/terminos-finder?lang=en" : "/terminos-finder";
   const includedItems = t.includedItems[lang];
@@ -263,7 +241,7 @@ const PropertyFinder = () => {
           <div className="flex items-center gap-3">
             {/* scroll to form CTA (sm+) */}
             <button
-              onClick={scrollToForm}
+              onClick={scrollToPricing}
               className="hidden sm:inline-block bg-[#2c5282] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#1e3a5f] transition-colors"
             >
               {lang === "es" ? "Solicitar →" : "Get Report →"}
@@ -307,12 +285,19 @@ const PropertyFinder = () => {
               </span>
             ))}
           </div>
-          <button
-            onClick={scrollToForm}
-            className="bg-[#48bb78] hover:bg-[#38a169] text-white text-xl font-extrabold px-10 py-5 rounded-xl shadow-2xl hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(72,187,120,0.4)] transition-all duration-200"
+          <a
+            href={STRIPE_PAYMENT_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#48bb78] hover:bg-[#38a169] text-white text-xl font-extrabold px-10 py-5 rounded-xl shadow-2xl hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(72,187,120,0.4)] transition-all duration-200"
           >
             {tr("heroCTA", lang)}
-          </button>
+          </a>
+          <p className="text-white/50 text-xs mt-2">
+            <a href={termsHref} target="_blank" rel="noopener noreferrer" className="underline hover:text-white/70">
+              {tr("termsLink", lang)}
+            </a>
+          </p>
           <p className="text-white/50 text-xs mt-4">🔒 {lang === "es" ? "Pago 100% seguro con Stripe" : "100% secure payment with Stripe"}</p>
         </div>
       </section>
@@ -362,7 +347,7 @@ const PropertyFinder = () => {
       </section>
 
       {/* ── PRICING ─────────────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 bg-[#f8faff]">
+      <section ref={pricingSectionRef} className="py-16 md:py-20 bg-[#f8faff]">
         <div className="max-w-[900px] mx-auto px-5">
           <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] text-center mb-10">{tr("pricingTitle", lang)}</h2>
           <div className="max-w-[680px] mx-auto bg-white rounded-2xl shadow-xl border-2 border-[#2c5282] overflow-hidden">
@@ -395,12 +380,19 @@ const PropertyFinder = () => {
               💚 {tr("pricingSpecial", lang)}
             </div>
             <div className="px-8 pb-8 text-center">
-              <button
-                onClick={scrollToForm}
-                className="w-full bg-[#48bb78] hover:bg-[#38a169] text-white text-lg font-extrabold py-4 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              <a
+                href={STRIPE_PAYMENT_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-block text-center bg-[#48bb78] hover:bg-[#38a169] text-white text-lg font-extrabold py-4 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200"
               >
                 {tr("pricingCTA", lang)}
-              </button>
+              </a>
+              <p className="text-[#888] text-xs mt-2">
+                <a href={termsHref} target="_blank" rel="noopener noreferrer" className="text-[#2c5282] underline hover:text-[#1e3a5f]">
+                  {tr("termsLink", lang)}
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -432,186 +424,25 @@ const PropertyFinder = () => {
         </div>
       </section>
 
-      {/* ── CHECKOUT FORM ───────────────────────────────────────────────────── */}
-      <section ref={formRef} id="checkout-form" className="py-16 md:py-20 bg-white">
-        <div className="max-w-[640px] mx-auto px-5">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">{tr("formTitle", lang)}</h2>
-            <p className="text-[#555]">{tr("formSubtitle", lang)}</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="bg-[#f8faff] rounded-2xl p-7 border border-[#e8f0fe] shadow-lg space-y-5">
-            {/* row: name + email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelName", lang)} *</label>
-                <input
-                  required type="text" value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
-                  placeholder={lang === "es" ? "Tu nombre completo" : "Your full name"}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelEmail", lang)} *</label>
-                <input
-                  required type="email" value={form.email}
-                  onChange={e => setForm({ ...form, email: e.target.value })}
-                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
-                  placeholder="email@ejemplo.com"
-                />
-              </div>
-            </div>
-
-            {/* row: phone + preferred language */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelPhone", lang)} *</label>
-                <input
-                  required type="tel" value={form.phone}
-                  onChange={e => setForm({ ...form, phone: e.target.value })}
-                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
-                  placeholder="+34 600 000 000"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelLang", lang)}</label>
-                <div className="flex gap-2">
-                  {(["es", "en"] as Lang[]).map(l => (
-                    <button
-                      key={l} type="button"
-                      onClick={() => setForm({ ...form, prefLang: l })}
-                      className={`flex-1 py-2.5 rounded-lg text-sm font-semibold border transition-colors ${
-                        form.prefLang === l
-                          ? "bg-[#2c5282] text-white border-[#2c5282]"
-                          : "bg-white text-[#333] border-[#d1d5db] hover:border-[#2c5282]"
-                      }`}
-                    >
-                      {l === "es" ? tr("esLabel", lang) : tr("enLabel", lang)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <hr className="border-[#e8f0fe]" />
-
-            {/* row: budget + beds */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelBudget", lang)} *</label>
-                <input
-                  required type="number" min="0" value={form.budget}
-                  onChange={e => setForm({ ...form, budget: e.target.value })}
-                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
-                  placeholder="ej. 900"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelBeds", lang)} *</label>
-                <select
-                  required value={form.beds}
-                  onChange={e => setForm({ ...form, beds: e.target.value })}
-                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
-                >
-                  <option value="">—</option>
-                  <option value="1">1+</option>
-                  <option value="2">2+</option>
-                  <option value="3">3+</option>
-                  <option value="4">4+</option>
-                </select>
-              </div>
-            </div>
-
-            {/* row: pets + movein */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelPets", lang)}</label>
-                <div className="flex gap-2">
-                  {[
-                    { val: "yes", label: tr("yesLabel", lang) },
-                    { val: "no",  label: tr("noLabel", lang) },
-                  ].map(opt => (
-                    <button
-                      key={opt.val} type="button"
-                      onClick={() => setForm({ ...form, pets: opt.val })}
-                      className={`flex-1 py-2.5 rounded-lg text-sm font-semibold border transition-colors ${
-                        form.pets === opt.val
-                          ? "bg-[#2c5282] text-white border-[#2c5282]"
-                          : "bg-white text-[#333] border-[#d1d5db] hover:border-[#2c5282]"
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelMovein", lang)}</label>
-                <input
-                  type="date" value={form.movein}
-                  onChange={e => setForm({ ...form, movein: e.target.value })}
-                  className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white"
-                />
-              </div>
-            </div>
-
-            {/* notes */}
-            <div>
-              <label className="block text-sm font-semibold text-[#333] mb-1.5">{tr("labelNotes", lang)}</label>
-              <textarea
-                rows={3} value={form.notes}
-                onChange={e => setForm({ ...form, notes: e.target.value })}
-                className="w-full border border-[#d1d5db] rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2c5282] bg-white resize-none"
-                placeholder={lang === "es" ? "Ej. Sin escaleras, jardín grande, zona tranquila..." : "E.g. No stairs, large garden, quiet area..."}
-              />
-            </div>
-
-            {/* terms */}
-            <div>
-              <label className="flex items-start gap-3 cursor-pointer select-none">
-                <input
-                  type="checkbox" checked={termsAccepted}
-                  onChange={e => { setTermsAccepted(e.target.checked); if (e.target.checked) setShowTermsError(false); }}
-                  className="w-5 h-5 mt-0.5 rounded accent-[#2c5282] cursor-pointer shrink-0"
-                />
-                <span className="text-sm text-[#555]">
-                  {tr("labelTerms", lang)}{" "}
-                  <a href={termsHref} target="_blank" rel="noopener noreferrer" className="text-[#2c5282] underline font-medium hover:text-[#1e3a5f]">
-                    {tr("termsLink", lang)}
-                  </a>
-                </span>
-              </label>
-              {showTermsError && <p className="text-red-500 text-xs mt-1.5">{tr("termsError", lang)}</p>}
-            </div>
-
-            {/* submit */}
-            <button
-              type="submit"
-              className={`w-full text-white text-lg font-extrabold py-4 rounded-xl shadow-lg transition-all duration-200 ${
-                termsAccepted
-                  ? "bg-[#48bb78] hover:bg-[#38a169] hover:-translate-y-0.5 cursor-pointer"
-                  : "bg-gray-300 cursor-not-allowed opacity-60"
-              }`}
-            >
-              {tr("submitBtn", lang)}
-            </button>
-            <p className="text-center text-[#888] text-xs">{tr("submitNote", lang)}</p>
-          </form>
-        </div>
-      </section>
 
       {/* ── FINAL CTA ───────────────────────────────────────────────────────── */}
       <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #1e3a5f, #2c5282)" }}>
         <div className="max-w-[700px] mx-auto px-5 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">{tr("finalTitle", lang)}</h2>
           <p className="text-white/80 mb-8 text-lg">{tr("finalDesc", lang)}</p>
-          <button
-            onClick={scrollToForm}
-            className="bg-[#48bb78] hover:bg-[#38a169] text-white text-xl font-extrabold px-10 py-5 rounded-xl shadow-2xl hover:-translate-y-0.5 transition-all duration-200 mb-4"
+          <a
+            href={STRIPE_PAYMENT_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#48bb78] hover:bg-[#38a169] text-white text-xl font-extrabold px-10 py-5 rounded-xl shadow-2xl hover:-translate-y-0.5 transition-all duration-200 mb-2"
           >
             {tr("finalCTA", lang)}
-          </button>
+          </a>
+          <p className="text-white/50 text-xs mb-4">
+            <a href={termsHref} target="_blank" rel="noopener noreferrer" className="underline hover:text-white/70">
+              {tr("termsLink", lang)}
+            </a>
+          </p>
           <p className="text-white/60 text-sm mb-6">{tr("finalNote", lang)}</p>
           <p className="text-white/80 text-sm">
             {tr("finalQ", lang)}{" "}
