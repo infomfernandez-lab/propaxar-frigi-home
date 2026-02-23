@@ -13,6 +13,7 @@ import ReportePropaxar from "./pages/ReportePropaxar";
 import ReporteKatinkaEN from "./pages/ReporteKatinkaEN";
 import ComprarReporte from "./pages/ComprarReporte";
 import DemoReporte from "./pages/DemoReporte";
+import Empezar from "./pages/Empezar";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
               <Route path="/comprar-reporte" element={<ComprarReporte />} />
               <Route path="/demo-reporte" element={<DemoReporte />} />
+              <Route path="/empezar" element={<Empezar />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
