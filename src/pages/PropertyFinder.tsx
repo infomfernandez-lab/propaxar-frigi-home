@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 type Lang = "es" | "en";
 
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/00w14p63G5Zc5EKfmxgEg02";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/bJe14pbo0drEebg6Q1gEg03";
 const WHATSAPP_BASE = "https://wa.me/34662317561";
 const EMAIL = "info@propaxar.com";
 const PHONE = "+34 662 317 561";
