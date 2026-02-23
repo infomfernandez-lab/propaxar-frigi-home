@@ -814,6 +814,9 @@ export default function DemoReporte() {
                     <p className="text-xs mt-3" style={{ color: "hsl(215 19% 55%)" }}>
                       💰 Full refund if you rent a Propaxar Direct property
                     </p>
+                    <p className="text-xs mt-1" style={{ color: "hsl(215 19% 55%)" }}>
+                      <a href="/terminos-finder" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">Terms & Conditions</a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1032,7 +1035,7 @@ export default function DemoReporte() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
               <a href={CTA_LINK}>
                 <Button className="text-lg font-bold px-10 py-6" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
                   Get Your Complete Report →
@@ -1045,6 +1048,9 @@ export default function DemoReporte() {
                 </Button>
               </a>
             </div>
+            <p className="text-xs text-white/50 mb-6">
+              By purchasing you agree to our <a href="/terminos-finder" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/70">Terms & Conditions</a>
+            </p>
 
             <p className="text-sm text-white/60">
               📱 +34 662 317 561 | 📧 info@propaxar.com | 🌐 propaxar.es
@@ -1085,6 +1091,9 @@ export default function DemoReporte() {
             Get Full Report - €250
           </Button>
         </a>
+        <p className="text-center text-[10px] text-white/50 mt-1">
+          <a href="/terminos-finder" target="_blank" rel="noopener noreferrer" className="underline">Terms & Conditions</a>
+        </p>
       </div>
     </>
   );
