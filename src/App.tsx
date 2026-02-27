@@ -11,6 +11,7 @@ import TerminosFinder from "./pages/TerminosFinder";
 import ReporteTest from "./pages/ReporteTest";
 import ReportePropaxar from "./pages/ReportePropaxar";
 import ReporteKatinkaEN from "./pages/ReporteKatinkaEN";
+import ReporteNadiaEN from "./pages/ReporteNadiaEN";
 import ComprarReporte from "./pages/ComprarReporte";
 import DemoReporte from "./pages/DemoReporte";
 import Empezar from "./pages/Empezar";
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
               <Route path="/reporte/:slug" element={<ReportePropaxar />} />
               <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
+              <Route path="/reporte/nadia-horsted-n-b4x9k2-en" element={<ReporteNadiaEN />} />
               <Route path="/comprar-reporte" element={<ComprarReporte />} />
               <Route path="/demo-reporte" element={<DemoReporte />} />
               <Route path="/empezar" element={<Empezar />} />
