@@ -582,8 +582,8 @@ export default function ReporteNadiaEN() {
   const validStr = validUntil.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 
   const reportUrl = "https://propaxar.es/reporte/nadia-horsted-n-b4x9k2-en";
-  const metaTitle = "📊 Nadia, here's your Frigiliana property report";
-  const metaDescription = "3 hand-picked properties selected for you by Manuel Fernández, your local property expert in La Axarquía.";
+  const metaTitle = "Your Personal Property Report";
+  const metaDescription = "Stop searching. Start finding.";
   const ogImage = "https://propaxar.es/images/frigiliana-hero.jpg";
 
   return (
