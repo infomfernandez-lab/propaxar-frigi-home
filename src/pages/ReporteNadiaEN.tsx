@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Helmet } from "react-helmet-async";
-import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, FileText, Globe, CreditCard, Shield } from "lucide-react";
+import { ChevronDown, ChevronUp, MapPin, Check, AlertTriangle, Star, ExternalLink, MessageCircle, Mail, Download, Search, Target, Award, FileText, Globe, CreditCard, Shield, TrendingUp, Package, Trash2, Droplets } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -32,7 +33,7 @@ const properties = [
     id: 1,
     ref: "pa194",
     name: "Casa Zambra",
-    zone: "Loma de la Cruz",
+    zone: "",
     price: "€1,600/month",
     priceNum: 1600,
     beds: 3,
@@ -105,8 +106,8 @@ const properties = [
   {
     id: 2,
     ref: "pa224",
-    name: "Casa Loma Cruz",
-    zone: "Loma de la Cruz · María del Mar",
+    name: "Cortijo Los Olivos",
+    zone: "",
     price: "€1,600/month",
     priceNum: 1600,
     beds: 3,
@@ -178,8 +179,8 @@ const properties = [
   {
     id: 3,
     ref: "pa226",
-    name: "Comendador Vicoque 1",
-    zone: "Frigiliana Norte",
+    name: "Villa Celia",
+    zone: "",
     price: "€2,500/month",
     priceNum: 2500,
     beds: 4,
@@ -315,7 +316,7 @@ function PropertyCard({ p, defaultOpen = false }: { p: typeof properties[0]; def
         )}
 
         <CardContent className="p-5 space-y-3">
-          <h3 className="text-lg font-bold" style={{ color: "hsl(213 56% 23%)" }}>{p.ref} · {p.name} · {p.zone}</h3>
+          <h3 className="text-lg font-bold" style={{ color: "hsl(213 56% 23%)" }}>{p.ref} · {p.name}{p.zone ? ` · ${p.zone}` : ""}</h3>
 
           {/* Specs grid */}
           <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
@@ -343,11 +344,6 @@ function PropertyCard({ p, defaultOpen = false }: { p: typeof properties[0]; def
             {p.listingUrl && (
               <a href={p.listingUrl} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" size="sm" className="text-xs"><ExternalLink className="w-3 h-3 mr-1" /> View on Propaxar</Button>
-              </a>
-            )}
-            {p.driveUrl && (
-              <a href={p.driveUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="text-xs">📁 Photos (Drive)</Button>
               </a>
             )}
           </div>
@@ -465,13 +461,6 @@ function PropertyCard({ p, defaultOpen = false }: { p: typeof properties[0]; def
                   <ExternalLink className="w-4 h-4 mr-2" /> 🔗 Full Listing
                 </Button>
               </a>
-              {p.driveUrl && (
-                <a href={p.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
-                  <Button variant="outline" className="w-full font-semibold" style={{ borderRadius: 8 }}>
-                    📁 Photos (Drive)
-                  </Button>
-                </a>
-              )}
             </div>
           </div>
         )}
@@ -519,8 +508,8 @@ function ComparisonTable() {
               <TableHead className="text-xs font-bold whitespace-nowrap">Criteria</TableHead>
               <TableHead className="text-xs font-bold whitespace-nowrap">Your Need</TableHead>
               <TableHead className="text-xs font-bold whitespace-nowrap">pa194 Casa Zambra</TableHead>
-              <TableHead className="text-xs font-bold whitespace-nowrap">pa224 Loma Cruz</TableHead>
-              <TableHead className="text-xs font-bold whitespace-nowrap">pa226 Comendador</TableHead>
+              <TableHead className="text-xs font-bold whitespace-nowrap">pa224 Cortijo Los Olivos</TableHead>
+              <TableHead className="text-xs font-bold whitespace-nowrap">pa226 Villa Celia</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -547,6 +536,8 @@ export default function ReporteNadiaEN() {
   const profileFade = useFadeIn();
   const marketFade = useFadeIn();
   const propsFade = useFadeIn();
+  const logisticsFade = useFadeIn();
+  const chartFade = useFadeIn();
   const compFade = useFadeIn();
   const recoFade = useFadeIn();
   const stepsFade = useFadeIn();
@@ -708,7 +699,94 @@ export default function ReporteNadiaEN() {
           </div>
         </section>
 
-        {/* ─── 5. COMPARISON TABLE ─── */}
+        {/* ─── 5. COUNTRY VS TOWN LOGISTICS ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={logisticsFade.ref}>
+          <div className={logisticsFade.className}>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-1" style={{ color: "hsl(213 56% 23%)" }}>
+              Country vs Town Living Logistics
+            </h2>
+            <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>The Insider's Truth</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  icon: <Package className="w-7 h-7" />,
+                  title: "Package Delivery and Amazon",
+                  countryside: "There is no door-to-door delivery in rural Frigiliana areas. We'll help you register at a local Parcel Point so you can receive your purchases without problems.",
+                  town: "Each home has its own address with door-to-door delivery. You can also use a Parcel Point if you prefer.",
+                },
+                {
+                  icon: <Trash2 className="w-7 h-7" />,
+                  title: "Waste Collection",
+                  countryside: "The garbage truck does not access rural lanes. Waste must be deposited at clean points located on the main road. This is the rule to preserve the natural environment.",
+                  town: "Collection is done house by house. You must put your garbage outside after 9:30 PM. If you do it earlier, you may be fined.",
+                },
+                {
+                  icon: <Droplets className="w-7 h-7" />,
+                  title: "Water",
+                  countryside: "Water in rural houses usually comes from community or private wells.",
+                  town: "Water comes from the municipal water network, generally managed by the public company Aqualia.",
+                },
+              ].map((c, i) => (
+                <Card key={i} className="border" style={{ borderColor: "hsl(212 26% 83%)", borderRadius: 12 }}>
+                  <CardContent className="p-6 space-y-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                      {c.icon}
+                    </div>
+                    <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{c.title}</h3>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>🌿 IN THE COUNTRYSIDE</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.countryside}</p>
+                      </div>
+                      <div className="border-t pt-3" style={{ borderColor: "hsl(212 26% 90%)" }}>
+                        <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 40%)" }}>🏘️ IN THE TOWN</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.town}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 6. MARKET EVOLUTION CHART ─── */}
+        <section className="py-12 px-4 md:px-8 max-w-5xl mx-auto" ref={chartFade.ref}>
+          <div className={chartFade.className}>
+            <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
+              <CardContent className="p-6 md:p-8">
+                <div className="flex items-center gap-2 mb-1">
+                  <TrendingUp className="w-5 h-5" style={{ color: "hsl(142 71% 45%)" }} />
+                  <h3 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>Market Evolution in Frigiliana</h3>
+                </div>
+                <p className="text-xs mb-6" style={{ color: "hsl(215 19% 34%)" }}>
+                  Average price +6% yearly · Long-term rental availability &lt;1%
+                </p>
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={[
+                      { year: "2020", price: 650 },
+                      { year: "2021", price: 690 },
+                      { year: "2022", price: 730 },
+                      { year: "2023", price: 780 },
+                      { year: "2024", price: 830 },
+                      { year: "2025", price: 880 },
+                      { year: "2026", price: 935 },
+                    ]}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(212 26% 83%)" />
+                      <XAxis dataKey="year" tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} />
+                      <YAxis tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} tickFormatter={(v) => `€${v}`} />
+                      <Tooltip formatter={(value: number) => [`€${value}/month`, "Average price"]} />
+                      <Line type="monotone" dataKey="price" stroke="hsl(213 56% 23%)" strokeWidth={2.5} dot={{ fill: "hsl(213 56% 23%)", r: 4 }} activeDot={{ r: 6, fill: "hsl(142 71% 45%)" }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* ─── 7. COMPARISON TABLE ─── */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={compFade.ref}>
           <div className={compFade.className}>
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>Property Comparison</h2>
