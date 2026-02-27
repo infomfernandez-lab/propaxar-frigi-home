@@ -553,6 +553,7 @@ export default function ReporteNadiaEN() {
   const heroFade = useFadeIn();
   const profileFade = useFadeIn();
   const marketFade = useFadeIn();
+  const docsFade = useFadeIn();
   const propsFade = useFadeIn();
   const logisticsFade = useFadeIn();
   const chartFade = useFadeIn();
@@ -701,6 +702,123 @@ export default function ReporteNadiaEN() {
                 <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>
                   The rural rental market around Frigiliana remains highly competitive, with quality long-term rental properties at €1,200–2,000/month in very limited supply. The three properties in this report represent the best available options that match your criteria right now. I recommend moving quickly — especially on pa194, which has already attracted interest.
                 </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* ─── 3.5 DOCUMENTATION & LEGAL REQUIREMENTS ─── */}
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={docsFade.ref}>
+          <div className={docsFade.className}>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>
+              Documentation & Legal Requirements
+            </h2>
+            <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>
+              What you need to rent legally in Spain
+            </p>
+            <div className="grid sm:grid-cols-2 gap-6 mb-8">
+              {[
+                {
+                  icon: <FileText className="w-7 h-7" />,
+                  title: "NIE (Foreigners' ID Number)",
+                  urgency: "ESSENTIAL",
+                  urgencyColor: "hsl(0 72% 51%)",
+                  description: "Required for ALL contracts, bank accounts, utilities. Without it, you literally cannot rent.",
+                  steps: [
+                    "Apply at Spanish Consulate (home country) or Police Station (Spain)",
+                    "Processing: 2-4 weeks from abroad, 1-2 weeks in Spain",
+                    "Documents: passport, application form EX-15, proof of reason (rental contract draft)",
+                  ],
+                  tip: "💡 Start this NOW if you don't have one. It's the #1 blocker.",
+                },
+                {
+                  icon: <CreditCard className="w-7 h-7" />,
+                  title: "Spanish Bank Account",
+                  urgency: "ESSENTIAL",
+                  urgencyColor: "hsl(0 72% 51%)",
+                  description: "Most landlords require rent via Spanish bank transfer. Also needed for utilities (Endesa, Aqualia).",
+                  steps: [
+                    "Open at any bank with NIE + passport (Sabadell, CaixaBank, BBVA)",
+                    "Some banks allow opening remotely (N26, Openbank)",
+                    "Processing: same day in branch with NIE",
+                  ],
+                  tip: "💡 I can recommend a branch in Nerja where they speak English.",
+                },
+                {
+                  icon: <Globe className="w-7 h-7" />,
+                  title: "Empadronamiento (Town Registration)",
+                  urgency: "WITHIN 3 MONTHS",
+                  urgencyColor: "hsl(39 76% 51%)",
+                  description: "Mandatory registration at your local town hall. Required for healthcare (SAS), voting, and residency.",
+                  steps: [
+                    "Go to Frigiliana Town Hall (Ayuntamiento) with rental contract + passport",
+                    "Free of charge, done same day",
+                    "Needed for: public healthcare, schools, residency application",
+                  ],
+                  tip: "💡 I'll accompany you to Town Hall - they don't speak English.",
+                },
+                {
+                  icon: <Shield className="w-7 h-7" />,
+                  title: "Rental Contract Essentials",
+                  urgency: "AT SIGNING",
+                  urgencyColor: "hsl(213 56% 43%)",
+                  description: "Spanish rental law (LAU) protects tenants. Key things to verify in your contract.",
+                  steps: [
+                    "Minimum duration (for individual landlords)",
+                    "Deposit: max 2 months rent (1 month legally + 1 month guarantee)",
+                    "Rent increases: tied to CPI (INE index), max once per year",
+                    "I review ALL contracts before you sign",
+                  ],
+                  tip: "💡 Never sign without understanding every clause. I translate and explain everything.",
+                },
+              ].map((doc, i) => (
+                <Card key={i} className="border-0 overflow-hidden" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
+                  <CardContent className="p-6 space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                        {doc.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{doc.title}</h3>
+                        <span className="inline-block text-xs font-bold mt-1 px-2 py-0.5 rounded-full text-white" style={{ background: doc.urgencyColor }}>
+                          {doc.urgency}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{doc.description}</p>
+                    <ul className="space-y-1">
+                      {doc.steps.map((s, j) => (
+                        <li key={j} className="text-sm flex items-start gap-2">
+                          <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(142 71% 45%)" }} />
+                          <span style={{ color: "hsl(215 19% 34%)" }}>{s}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-xs font-medium" style={{ color: "hsl(213 56% 40%)" }}>{doc.tip}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            {/* Additional documents brief */}
+            <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
+              <CardContent className="p-6">
+                <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>📄 Also Good to Know</h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { title: "Certificado Digital", desc: "For online government services (taxes, Social Security). Apply at FNMT after getting NIE." },
+                    { title: "Home Insurance", desc: "Some landlords require it. €150-300/year. Covers fire, theft, liability." },
+                    { title: "Driving Licence", desc: "Non-EU? Exchange within 6 months at Tráfico Málaga (Avda. Sor Teresa Prat, 15)." },
+                    { title: "Tax Obligations", desc: "If residing >183 days/year: Spanish tax return (IRPF). I recommend a gestor for year 1." },
+                  ].map((d, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <FileText className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(213 56% 40%)" }} />
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color: "hsl(213 56% 23%)" }}>{d.title}</p>
+                        <p className="text-xs" style={{ color: "hsl(215 19% 45%)" }}>{d.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </div>
