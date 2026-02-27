@@ -180,13 +180,13 @@ const properties = [
     id: 3,
     ref: "pa226",
     name: "Villa Celia",
-    zone: "",
+    zone: "Frigiliana Norte",
     price: "€2,500/month",
     priceNum: 2500,
-    beds: 4,
+    beds: 5,
     baths: 2,
-    size: "200m²",
-    sizeNum: 200,
+    size: "150m²",
+    sizeNum: 150,
     pool: true,
     furnished: true,
     pets: true,
@@ -198,7 +198,14 @@ const properties = [
     badgeExtraColor: "hsl(39 76% 61%)",
     driveUrl: "",
     listingUrl: "https://propaxar.com/property/villa-en-frigiliana-9/",
-    photos: [],
+    photos: [
+      "/images/properties/villa-celia-01.jpg",
+      "/images/properties/villa-celia-02.jpg",
+      "/images/properties/villa-celia-03.jpg",
+      "/images/properties/villa-celia-04.jpg",
+      "/images/properties/villa-celia-05.jpg",
+      "/images/properties/villa-celia-06.jpg",
+    ],
     criteria: {
       price: "fail" as const,
       beds: "ok" as const,
@@ -214,25 +221,36 @@ const properties = [
       terrace: "ok" as const,
       availableMay: "ok" as const,
     },
-    matchCount: 10,
+    matchCount: 12,
     matchTotal: 16,
     analysis: {
-      quality: { stars: 0, text: "" },
-      location: { stars: 0, text: "" },
-      price: { stars: 0, text: "" },
+      quality: { stars: 4, label: "GOOD", text: "Solid construction, well maintained. Two-storey villa with intelligent layout. Good condition overall. Features air conditioning, fireplace, built-in wardrobes, and home office space." },
+      location: { stars: 4, label: "GOOD", text: "Perfect location right beside the Frigiliana–Torrox road. Easy access, village just minutes away. Strategic position offering privacy with excellent connectivity." },
+      price: { stars: 3, label: "FAIR", text: "At €2,500/month this is correctly priced considering all expenses are included. The house has 150m² usable space plus extensive outdoor areas. Above your budget but justified for the size and inclusions." },
     },
-    professionalAnalysis: null,
+    professionalAnalysis: {
+      access: "Perfect access directly from the Frigiliana–Torrox road. Asphalted all the way — no dirt tracks. Garage and private vehicle entrance. Only 7 minutes from Frigiliana village centre.",
+      water: "Agricultural water supply, good pressure. Reliable service.",
+      internet: "WiMAX antenna up to 60Mb currently installed. Starlink possible (up to 200Mb) for faster remote work speeds. Good mobile coverage.",
+      neighbourhood: "Quiet area overall. During the day, slight road noise may be audible from the nearby road. At night, practically silent. Good privacy despite road proximity.",
+      history: "Always rented for long-term stays. Well-managed property with consistent rental track record.",
+      owner: "Attentive owner. Responsive and reliable. Professional relationship.",
+    },
     pros: [
-      "Exceptional space — 200m²",
-      "4 bedrooms (ideal for home office + guests)",
-      "Large garden and vegetable patch",
-      "Dry land plot",
-      "Premium rural lifestyle",
+      "Exceptional space — 150m² usable + extensive outdoor areas",
+      "5 bedrooms and 2 living rooms (ideal for home office + guests)",
+      "Large garden, vegetable patch, and dry land plot",
+      "Private pool with security fencing — safe for children",
+      "360° views from rooftop terrace: Sierra de Almijara to Mediterranean Sea",
+      "BBQ area and covered porch for outdoor dining",
+      "Perfect asphalted access — no dirt tracks",
+      "All expenses included in rent",
+      "Air conditioning and fireplace",
     ],
     cons: [
       "€500 above your maximum budget",
-      "No detailed inspection data yet",
-      "Rating pending",
+      "Slight road noise during daytime peak hours",
+      "Two-storey layout may not suit everyone",
     ],
   },
 ];
@@ -474,9 +492,9 @@ function ComparisonTable() {
   const fade = useFadeIn();
   const rows: { label: string; need: string; values: { text: string; status: "ok" | "warn" | "fail" | "na" }[] }[] = [
     { label: "Monthly Price", need: "€1,500–2,000", values: [{ text: "€1,600", status: "ok" }, { text: "€1,600", status: "ok" }, { text: "€2,500", status: "fail" }] },
-    { label: "Bedrooms", need: "Min 3", values: [{ text: "3", status: "ok" }, { text: "3", status: "ok" }, { text: "4", status: "ok" }] },
+    { label: "Bedrooms", need: "Min 3", values: [{ text: "3", status: "ok" }, { text: "3", status: "ok" }, { text: "5", status: "ok" }] },
     { label: "Bathrooms", need: "Min 2", values: [{ text: "2", status: "ok" }, { text: "1", status: "fail" }, { text: "2", status: "ok" }] },
-    { label: "Surface", need: "Min 120m²", values: [{ text: "100m²", status: "warn" }, { text: "75m²", status: "fail" }, { text: "200m²", status: "ok" }] },
+    { label: "Surface", need: "Min 120m²", values: [{ text: "100m²", status: "warn" }, { text: "75m²", status: "fail" }, { text: "150m²", status: "ok" }] },
     { label: "Private Pool", need: "Yes", values: [{ text: "✅", status: "ok" }, { text: "✅", status: "ok" }, { text: "✅", status: "ok" }] },
     { label: "Furnished", need: "Yes", values: [{ text: "✅", status: "ok" }, { text: "✅", status: "ok" }, { text: "✅", status: "ok" }] },
     { label: "Pets", need: "Yes", values: [{ text: "✅", status: "ok" }, { text: "✅", status: "ok" }, { text: "✅", status: "ok" }] },
@@ -486,10 +504,10 @@ function ComparisonTable() {
     { label: "Solarium", need: "Yes", values: [{ text: "✅", status: "ok" }, { text: "✅", status: "ok" }, { text: "✅", status: "ok" }] },
     { label: "Terrace", need: "Yes", values: [{ text: "✅", status: "ok" }, { text: "✅", status: "ok" }, { text: "✅", status: "ok" }] },
     { label: "Available < May", need: "Yes", values: [{ text: "Mar", status: "ok" }, { text: "Mar", status: "ok" }, { text: "Mar", status: "ok" }] },
-    { label: "Location Rating", need: "High", values: [{ text: "⭐⭐⭐⭐⭐ 5/5", status: "ok" }, { text: "⭐⭐⭐⭐ 4/5", status: "ok" }, { text: "N/A", status: "na" }] },
-    { label: "Price Rating", need: "Fair", values: [{ text: "⭐⭐⭐⭐ 4/5", status: "ok" }, { text: "⭐⭐ 2/5", status: "fail" }, { text: "N/A", status: "na" }] },
-    { label: "Quality Rating", need: "High", values: [{ text: "⭐⭐⭐⭐⭐ 5/5", status: "ok" }, { text: "⭐⭐⭐⭐ 4/5", status: "ok" }, { text: "N/A", status: "na" }] },
-    { label: "TOTAL MATCH", need: "16 criteria", values: [{ text: "🟢 13/16", status: "ok" }, { text: "🟡 10/16", status: "warn" }, { text: "🟡 10/16", status: "warn" }] },
+    { label: "Location Rating", need: "High", values: [{ text: "⭐⭐⭐⭐⭐ 5/5", status: "ok" }, { text: "⭐⭐⭐⭐ 4/5", status: "ok" }, { text: "⭐⭐⭐⭐ 4/5", status: "ok" }] },
+    { label: "Price Rating", need: "Fair", values: [{ text: "⭐⭐⭐⭐ 4/5", status: "ok" }, { text: "⭐⭐ 2/5", status: "fail" }, { text: "⭐⭐⭐ 3/5", status: "warn" }] },
+    { label: "Quality Rating", need: "High", values: [{ text: "⭐⭐⭐⭐⭐ 5/5", status: "ok" }, { text: "⭐⭐⭐⭐ 4/5", status: "ok" }, { text: "⭐⭐⭐⭐ 4/5", status: "ok" }] },
+    { label: "TOTAL MATCH", need: "16 criteria", values: [{ text: "🟢 13/16", status: "ok" }, { text: "🟡 10/16", status: "warn" }, { text: "🟢 12/16", status: "ok" }] },
   ];
 
   const statusBg = (s: string) => {
@@ -804,7 +822,7 @@ export default function ReporteNadiaEN() {
                 <div className="text-sm leading-relaxed text-white/90 space-y-3">
                   <p>It meets 13 out of 16 of your criteria, is within budget, has 3 bedrooms, 2 bathrooms, private pool, south-facing orientation with spectacular views, and is available from 1 March.</p>
                   <p>The only point to verify: the surface is 100m² vs your stated minimum of 120m². For a couple, 100m² of quality rural construction is typically very comfortable — I recommend you visit and judge for yourself.</p>
-                  <p className="font-semibold mt-4">I suggest we arrange a viewing of pa194 as a priority, followed by pa226 if the budget is flexible.</p>
+                  <p className="font-semibold mt-4">I suggest we arrange a viewing of pa194 as a priority, followed by pa226 Villa Celia if the budget is flexible — it scores 12/16 with 5 bedrooms, 150m², private pool with security fencing, and 360° views.</p>
                 </div>
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" data-no-print>
                   <Button className="mt-4 text-base font-bold px-10 py-5" style={{ background: "#fff", color: "hsl(142 71% 35%)", borderRadius: 10 }}>
