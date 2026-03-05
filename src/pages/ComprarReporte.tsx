@@ -49,7 +49,7 @@ const t = {
       { icon: '🎯', title: 'Recomendación Clara y Directa', desc: 'Qué propiedad se ajusta mejor a tu perfil y por qué. Ahorra horas de confusión y decisiones equivocadas. Te digo la verdad aunque no te guste.', tag: '✓ Sin ambigüedades' },
       { icon: '📦', title: 'Guía Logística Insider', desc: 'Campo vs pueblo, entrega de paquetes, sistemas de agua, recogida de basura. La verdad brutal que descubres cuando ya te mudaste... pero ANTES.', tag: '✓ Evita sorpresas desagradables' },
       { icon: '📅', title: '6 Meses de Seguimiento Activo', desc: 'Actualizaciones cada viernes con nuevas propiedades, cambios de precios e insights del mercado. Hasta que encuentres tu hogar. Yo trabajo, tú relajado.', tag: '✓ 24 actualizaciones incluidas' },
-      { icon: '🎁', title: 'Reembolso Total Garantizado', desc: 'Si acabas alquilando una propiedad Propaxar Direct, reembolsamos los €250 completos. Literalmente no arriesgas nada. Solo ganas.', tag: '✓ Riesgo cero para ti', highlight: true },
+      { icon: '🎁', title: 'Reembolso Total Garantizado', desc: 'Si acabas alquilando una propiedad Propaxar Direct, reembolsamos los €180 completos. Literalmente no arriesgas nada. Solo ganas.', tag: '✓ Riesgo cero para ti', highlight: true },
     ],
     en: [
       { icon: '🏘️', title: 'Hand-Selected Properties', desc: 'Manually chosen to match your budget, bedrooms, pets and move-in date. No irrelevant listings, no wasted time.', tag: '✓ 100% relevant to you' },
@@ -57,7 +57,7 @@ const t = {
       { icon: '🎯', title: 'Clear, Direct Recommendation', desc: "Which property fits your profile best and why. Save hours of confusion and wrong decisions. I tell you the truth even if you don't like it.", tag: '✓ No ambiguity' },
       { icon: '📦', title: 'Insider Logistics Guide', desc: 'Country vs town, package delivery, water systems, waste collection. The brutal truth you discover after you move in… but BEFORE.', tag: '✓ Avoid nasty surprises' },
       { icon: '📅', title: '6 Months Active Follow-Up', desc: 'Every Friday: new properties, price changes and market insights. Until you find your home. I work, you relax.', tag: '✓ 24 updates included' },
-      { icon: '🎁', title: 'Full Refund Guaranteed', desc: 'If you end up renting a Propaxar Direct property, we refund the full €250. Literally zero risk. You can only win.', tag: '✓ Zero risk for you', highlight: true },
+      { icon: '🎁', title: 'Full Refund Guaranteed', desc: 'If you end up renting a Propaxar Direct property, we refund the full €180. Literally zero risk. You can only win.', tag: '✓ Zero risk for you', highlight: true },
     ],
   },
 
@@ -94,7 +94,7 @@ const t = {
 
   ctaTitle:     { es: '¿Listo Para Tu Reporte?', en: 'Ready For Your Report?' },
   ctaDesc:      { es: 'Un click te separa de conocer el 100% del mercado', en: 'One click away from knowing 100% of the market' },
-  discountBadge:{ es: '-44% DESCUENTO', en: '-44% DISCOUNT' },
+  discountBadge:{ es: '-60% DESCUENTO', en: '-60% DISCOUNT' },
   monthsBadge:  { es: '6 MESES INCLUIDOS', en: '6 MONTHS INCLUDED' },
   payOnce:      { es: 'Pago único · 24 actualizaciones · Reembolsable', en: 'One-time payment · 24 updates · Refundable' },
   ctaBtn:       { es: 'Proceder al Pago Seguro →', en: 'Proceed to Secure Payment →' },
@@ -197,7 +197,7 @@ export default function ComprarReporte() {
             <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.investLabel[lang]}</p>
             <div className="flex items-center justify-center gap-3 mb-2">
               <span className="line-through text-2xl font-bold" style={{ color: 'rgba(255,255,255,0.35)' }}>€450</span>
-              <span className="text-5xl font-black">€250</span>
+              <span className="text-5xl font-black">€180</span>
             </div>
             <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.vatNote[lang]}</p>
 
@@ -413,7 +413,7 @@ export default function ComprarReporte() {
 
                 <div className="flex items-center justify-center gap-3 mb-1">
                   <span className="line-through text-xl font-bold" style={{ color: 'rgba(255,255,255,0.35)' }}>€450</span>
-                  <span className="text-5xl font-black">€250</span>
+                  <span className="text-5xl font-black">€180</span>
                 </div>
                 <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.payOnce[lang]}</p>
 

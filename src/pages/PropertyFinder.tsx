@@ -19,7 +19,7 @@ const t = {
   heroLabel:  { es: "REPORTE DE MERCADO PROPAXAR", en: "PROPAXAR MARKET REPORT" },
   heroTitle:  { es: "Tu Análisis Personalizado de Alquileres en Frigiliana", en: "Your Personalised Rental Analysis in Frigiliana" },
   heroDesc:   { es: "Deja de perder tiempo con propiedades irrelevantes. Recibe un reporte profesional adaptado a TU búsqueda.", en: "Stop wasting time on irrelevant properties. Receive a professional report tailored to YOUR search." },
-  heroPill1:  { es: "€250 · Pago único", en: "€250 · One-time payment" },
+  heroPill1:  { es: "€180 · Pago único", en: "€180 · One-time payment" },
   heroPill2:  { es: "Entrega 24-48h", en: "Delivered in 24-48h" },
   heroPill3:  { es: "6 meses de seguimiento incluido", en: "6 months follow-up included" },
   heroCTA:    { es: "SOLICITA TU REPORTE →", en: "GET YOUR REPORT →" },
@@ -62,7 +62,7 @@ const t = {
 
   // pricing
   pricingTitle:   { es: "Inversión", en: "Investment" },
-  pricingAmount:  { es: "€250", en: "€250" },
+  pricingAmount:  { es: "€180", en: "€180" },
   pricingOnce:    { es: "Pago Único · Sin cargos recurrentes", en: "One-time Payment · No recurring charges" },
   othersLabel:    { es: "Lo Que Cobran Otros:", en: "What Others Charge:" },
   othersItems: {
@@ -95,10 +95,10 @@ const t = {
     ],
   },
   pricingSpecial: {
-    es: "ESPECIAL: Si acabas alquilando una propiedad gestionada por Propaxar Direct, reembolsamos los €250 completos. Literalmente no arriesgas nada.",
-    en: "SPECIAL: If you end up renting a Propaxar Direct property, we refund the full €250. Literally zero risk.",
+    es: "ESPECIAL: Si acabas alquilando una propiedad gestionada por Propaxar Direct, reembolsamos los €180 completos. Literalmente no arriesgas nada.",
+    en: "SPECIAL: If you end up renting a Propaxar Direct property, we refund the full €180. Literally zero risk.",
   },
-  pricingCTA: { es: "SOLICITA TU REPORTE - €250 →", en: "GET YOUR REPORT - €250 →" },
+  pricingCTA: { es: "SOLICITA TU REPORTE - €180 →", en: "GET YOUR REPORT - €180 →" },
 
   // testimonials
   testimonialsTitle: { es: "Qué Dicen los Clientes", en: "What Clients Say" },
@@ -106,12 +106,12 @@ const t = {
     es: [
       { quote: "Este reporte me ahorró semanas. Habría mirado 10+ casas equivocadas. Manuel me mostró exactamente qué encajaba con mi presupuesto y necesidades.", name: "Katinka D.", origin: "Países Bajos · Mudada a Frigiliana Feb 2026" },
       { quote: "Estaba lista para pagar €1,600 por una casa que ni siquiera me gustaba. El reporte me ayudó a encontrar una mejor a €900. Vale cada euro.", name: "Cliente Verificada", origin: "Europa · Feb 2026" },
-      { quote: "Solo la sección de logística vale €250. Nadie te habla de entrega de paquetes, sistemas de agua o recogida de basura hasta que ya estás mudado y batallando.", name: "Cliente Verificado", origin: "Europa · Ene 2026" },
+      { quote: "Solo la sección de logística vale €180. Nadie te habla de entrega de paquetes, sistemas de agua o recogida de basura hasta que ya estás mudado y batallando.", name: "Cliente Verificado", origin: "Europa · Ene 2026" },
     ],
     en: [
       { quote: "This report saved me weeks. I would have viewed 10+ wrong houses. Manuel showed me exactly what matched my budget and needs.", name: "Katinka D.", origin: "Netherlands · Moved to Frigiliana Feb 2026" },
       { quote: "I was about to pay €1,600 for a house I didn't even like. The report helped me find a better one at €900. Worth every cent.", name: "Verified Client", origin: "Europe · Feb 2026" },
-      { quote: "The logistics section alone is worth €250. Nobody tells you about package delivery, water systems or waste collection until you're already moved in and struggling.", name: "Verified Client", origin: "Europe · Jan 2026" },
+      { quote: "The logistics section alone is worth €180. Nobody tells you about package delivery, water systems or waste collection until you're already moved in and struggling.", name: "Verified Client", origin: "Europe · Jan 2026" },
     ],
   },
 
@@ -151,7 +151,7 @@ const t = {
   labelTerms:    { es: "Acepto los", en: "I accept the" },
   termsLink:     { es: "Términos y Condiciones", en: "Terms & Conditions" },
   termsError:    { es: "Debes aceptar los términos para continuar", en: "You must accept the terms to continue" },
-  submitBtn:     { es: "PAGAR €250 →", en: "PAY €250 →" },
+  submitBtn:     { es: "PAGAR €180 →", en: "PAY €180 →" },
   submitNote:    { es: "🔒 Pago 100% seguro con Stripe", en: "🔒 100% secure payment with Stripe" },
   yesLabel:      { es: "Sí", en: "Yes" },
   noLabel:       { es: "No", en: "No" },
@@ -161,7 +161,7 @@ const t = {
   // final cta
   finalTitle: { es: "¿Listo Para Dejar de Perder Tiempo?", en: "Ready to Stop Wasting Time?" },
   finalDesc:  { es: "Recibe tu reporte personalizado de mercado Frigiliana en 24-48h.", en: "Receive your personalised Frigiliana market report in 24-48h." },
-  finalCTA:   { es: "SOLICITA TU REPORTE - €250 →", en: "GET YOUR REPORT - €250 →" },
+  finalCTA:   { es: "SOLICITA TU REPORTE - €180 →", en: "GET YOUR REPORT - €180 →" },
   finalNote:  { es: "Pago seguro vía Stripe · Sin cargos recurrentes · Tarifa única", en: "Secure payment via Stripe · No recurring charges · One-time fee" },
   finalQ:     { es: "¿Preguntas?", en: "Questions?" },
   finalOr:    { es: "o email:", en: "or email:" },

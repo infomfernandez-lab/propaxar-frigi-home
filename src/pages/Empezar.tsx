@@ -116,7 +116,7 @@ const Empezar = () => {
 
             {/* Price */}
             <div className="text-center bg-background border-2 border-primary/20 rounded-2xl p-8">
-              <p className="text-4xl md:text-5xl font-extrabold text-foreground mb-2">€250</p>
+              <p className="text-4xl md:text-5xl font-extrabold text-foreground mb-2">€180</p>
               <p className="text-foreground-muted text-lg mb-6">Pago único · Reembolsable si alquilas una propiedad mía</p>
               <a
                 href="/demo-reporte"
@@ -246,7 +246,7 @@ const Empezar = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 btn-primary text-xl px-12 py-5"
               >
-                Empezar Ahora — €250 <ArrowRight className="w-6 h-6" />
+                Empezar Ahora — €180 <ArrowRight className="w-6 h-6" />
               </a>
               <p className="text-sm text-foreground-muted mt-3">
                 Al comprar aceptas los{" "}
@@ -268,7 +268,7 @@ const Empezar = () => {
               GARANTÍA DE REEMBOLSO
             </h2>
             <p className="text-lg text-foreground-muted leading-relaxed mb-8 max-w-[550px] mx-auto">
-              Si finalmente alquilas una propiedad de las que te presento, los €250 del reporte se descuentan íntegramente de mi comisión. <strong className="text-foreground">Riesgo cero para ti.</strong>
+              Si finalmente alquilas una propiedad de las que te presento, los €180 del reporte se descuentan íntegramente de mi comisión. <strong className="text-foreground">Riesgo cero para ti.</strong>
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               {[
@@ -295,8 +295,8 @@ const Empezar = () => {
             <Accordion type="single" collapsible className="space-y-4">
               {[
                 {
-                  q: "¿Por qué debería pagar €250 por un reporte?",
-                  a: "Porque te ahorra semanas de búsqueda ineficiente. Recibes un análisis profesional del mercado completo, verificado por un experto local que conoce cada calle de Frigiliana. Además, si alquilas una propiedad mía, te devuelvo los €250.",
+                  q: "¿Por qué debería pagar €180 por un reporte?",
+                  a: "Porque te ahorra semanas de búsqueda ineficiente. Recibes un análisis profesional del mercado completo, verificado por un experto local que conoce cada calle de Frigiliana. Además, si alquilas una propiedad mía, te devuelvo los €180.",
                 },
                 {
                   q: "¿Qué pasa si no encuentro nada que me guste?",
@@ -356,7 +356,7 @@ const Empezar = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-white text-foreground text-xl font-bold px-12 py-5 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5 mb-4"
             >
-              Comprar Reporte Ahora — €250 <ArrowRight className="w-6 h-6" />
+              Comprar Reporte Ahora — €180 <ArrowRight className="w-6 h-6" />
             </a>
 
             <p className="text-sm text-primary-foreground/70 mb-6">
@@ -381,7 +381,7 @@ const Empezar = () => {
             rel="noopener noreferrer"
             className="block w-full btn-primary text-lg py-4"
           >
-            Comprar Reporte — €250
+            Comprar Reporte — €180
           </a>
           <a href={TERMS_HREF} target="_blank" rel="noopener noreferrer" className="text-xs text-foreground-muted underline mt-1 inline-block">
             Términos y condiciones
