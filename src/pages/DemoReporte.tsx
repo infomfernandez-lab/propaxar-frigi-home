@@ -808,7 +808,7 @@ export default function DemoReporte() {
                     </div>
                     <a href={CTA_LINK} className="block mt-6">
                       <Button className="text-base font-bold px-8 py-5" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
-                        Get Your Full Report - €250 →
+                        Get Your Full Report - €180 →
                       </Button>
                     </a>
                     <p className="text-xs mt-3" style={{ color: "hsl(215 19% 55%)" }}>
@@ -1028,7 +1028,7 @@ export default function DemoReporte() {
             </div>
 
             <div className="mb-8">
-              <p className="text-4xl font-bold text-white mb-1">€250</p>
+              <p className="text-4xl font-bold text-white mb-1">€180</p>
               <p className="text-base text-white/70">One-time investment</p>
               <p className="text-sm text-white/60 mt-2">
                 💰 100% Refundable if you rent Propaxar Direct
@@ -1088,7 +1088,7 @@ export default function DemoReporte() {
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden p-3" style={{ background: "linear-gradient(to top, hsl(213 56% 23%), hsl(213 56% 23%/0.95))" }}>
         <a href={CTA_LINK} className="block">
           <Button className="w-full text-base font-bold py-5" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
-            Get Full Report - €250
+            Get Full Report - €180
           </Button>
         </a>
         <p className="text-center text-[10px] text-white/50 mt-1">

@@ -56,9 +56,9 @@ const content = {
         num: '2',
         title: 'Precio y Pago',
         content: [
-          { type: 'highlight', text: '2.1. Tarifa única: €250 (doscientos cincuenta euros). IVA incluido según legislación española vigente.' },
+          { type: 'highlight', text: '2.1. Tarifa única: €180 (ciento ochenta euros). IVA incluido según legislación española vigente.' },
           { type: 'p', text: '2.2. Método de pago: Procesamiento seguro vía Stripe. Se aceptan tarjetas de crédito y débito Visa, Mastercard, American Express.' },
-          { type: 'p', text: '2.3. Sin cargos recurrentes: El pago único de €250 cubre el reporte inicial completo más 6 meses de actualizaciones semanales. No existen suscripciones ni cargos adicionales.' },
+          { type: 'p', text: '2.3. Sin cargos recurrentes: El pago único de €180 cubre el reporte inicial completo más 6 meses de actualizaciones semanales. No existen suscripciones ni cargos adicionales.' },
           { type: 'p', text: '2.4. Moneda: Todos los precios están expresados en Euros (EUR). Conversiones de otras divisas según tipo de cambio del procesador de pago.' },
           { type: 'p', text: '2.5. Confirmación: Una vez completado el pago, el cliente recibe confirmación automática por email con recibo oficial. Propaxar confirma adicionalmente por WhatsApp el inicio del trabajo.' },
         ],
@@ -67,7 +67,7 @@ const content = {
         num: '3',
         title: 'Política de Reembolso',
         content: [
-          { type: 'success', text: '3.1. REEMBOLSO TOTAL GARANTIZADO (Propaxar Direct): Si el cliente alquila cualquier propiedad gestionada directamente por Propaxar (portfolio "Propaxar Direct"), se reembolsarán los €250 completos del coste del reporte en un plazo máximo de 7 días hábiles tras la firma del contrato de arrendamiento.' },
+          { type: 'success', text: '3.1. REEMBOLSO TOTAL GARANTIZADO (Propaxar Direct): Si el cliente alquila cualquier propiedad gestionada directamente por Propaxar (portfolio "Propaxar Direct"), se reembolsarán los €180 completos del coste del reporte en un plazo máximo de 7 días hábiles tras la firma del contrato de arrendamiento.' },
           { type: 'p', text: '3.2. Garantía de satisfacción: Si el cliente no está satisfecho con la calidad o contenido del reporte, debe contactar a info@propaxar.com dentro de los 7 días naturales siguientes a la entrega del reporte para discutir una resolución. Los reembolsos serán evaluados caso por caso.' },
           { type: 'p', text: '3.3. Condiciones que NO califican para reembolso:' },
           { type: 'ul', items: [
@@ -128,7 +128,7 @@ const content = {
           { type: 'p', text: '7.2. Propiedades de terceros: Las propiedades NO gestionadas por Propaxar provienen de portales públicos y otras agencias. Propaxar verifica esta información pero no controla su origen.' },
           { type: 'p', text: '7.3. Cambios de precio: Los precios de alquiler pueden cambiar sin previo aviso. Los precios en el reporte son precisos en el momento de publicación pero NO están garantizados hasta la firma del contrato.' },
           { type: 'p', text: '7.4. Sin garantía de resultado: Propaxar NO garantiza que el cliente encontrará o asegurará una propiedad de alquiler.' },
-          { type: 'p', text: '7.5. Limitación de responsabilidad: La responsabilidad total de Propaxar bajo estos términos se limita estrictamente al importe pagado por el servicio (€250). Propaxar NO es responsable por:' },
+          { type: 'p', text: '7.5. Limitación de responsabilidad: La responsabilidad total de Propaxar bajo estos términos se limita estrictamente al importe pagado por el servicio (€180). Propaxar NO es responsable por:' },
           { type: 'ul', items: [
             'Daños consecuentes o indirectos',
             'Pérdida de oportunidades de alquiler',
@@ -255,9 +255,9 @@ const content = {
         num: '2',
         title: 'Price and Payment',
         content: [
-          { type: 'highlight', text: '2.1. One-time fee: €250 (two hundred and fifty euros). VAT included under current Spanish legislation.' },
+          { type: 'highlight', text: '2.1. One-time fee: €180 (one hundred and eighty euros). VAT included under current Spanish legislation.' },
           { type: 'p', text: '2.2. Payment method: Secure processing via Stripe. Visa, Mastercard, and American Express credit and debit cards accepted.' },
-          { type: 'p', text: '2.3. No recurring charges: The one-time €250 payment covers the complete initial report plus 6 months of weekly updates. No subscriptions or additional charges exist.' },
+          { type: 'p', text: '2.3. No recurring charges: The one-time €180 payment covers the complete initial report plus 6 months of weekly updates. No subscriptions or additional charges exist.' },
           { type: 'p', text: '2.4. Currency: All prices are expressed in Euros (EUR). Conversions from other currencies are subject to the payment processor\'s exchange rate.' },
           { type: 'p', text: '2.5. Confirmation: Once payment is completed, the client receives automatic email confirmation with official receipt. Propaxar additionally confirms via WhatsApp that work has begun.' },
         ],
@@ -266,7 +266,7 @@ const content = {
         num: '3',
         title: 'Refund Policy',
         content: [
-          { type: 'success', text: '3.1. FULL REFUND GUARANTEED (Propaxar Direct): If the client rents any property managed directly by Propaxar ("Propaxar Direct" portfolio), the full €250 report cost will be refunded within a maximum of 7 business days after signing the rental contract.' },
+          { type: 'success', text: '3.1. FULL REFUND GUARANTEED (Propaxar Direct): If the client rents any property managed directly by Propaxar ("Propaxar Direct" portfolio), the full €180 report cost will be refunded within a maximum of 7 business days after signing the rental contract.' },
           { type: 'p', text: '3.2. Satisfaction guarantee: If the client is not satisfied with the quality or content of the report, they must contact info@propaxar.com within 7 calendar days of report delivery to discuss a resolution. Refunds will be evaluated case by case.' },
           { type: 'p', text: '3.3. Conditions that do NOT qualify for a refund:' },
           { type: 'ul', items: [
@@ -327,7 +327,7 @@ const content = {
           { type: 'p', text: '7.2. Third-party properties: Properties NOT managed by Propaxar come from public portals and other agencies. Propaxar verifies this information but does not control its source.' },
           { type: 'p', text: '7.3. Price changes: Rental prices may change without notice. Prices in the report are accurate at the time of publication but are NOT guaranteed until the contract is signed.' },
           { type: 'p', text: '7.4. No guaranteed outcome: Propaxar does NOT guarantee that the client will find or secure a rental property.' },
-          { type: 'p', text: '7.5. Limitation of liability: Propaxar\'s total liability under these terms is strictly limited to the amount paid for the service (€250). Propaxar is NOT responsible for:' },
+          { type: 'p', text: '7.5. Limitation of liability: Propaxar\'s total liability under these terms is strictly limited to the amount paid for the service (€180). Propaxar is NOT responsible for:' },
           { type: 'ul', items: [
             'Consequential or indirect damages',
             'Lost rental opportunities',
