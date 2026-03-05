@@ -20,7 +20,7 @@ const t = {
     metaTitle: "Encuentra Tu Casa en Frigiliana | Propaxar",
     metaDesc: "Reporte de mercado personalizado para encontrar tu vivienda ideal en Frigiliana. Experto local, entrega en 24-48h, garantía de reembolso.",
     heroH1: "ENCUENTRA TU CASA PERFECTA EN FRIGILIANA",
-    heroSub: "Sin perder tiempo. Sin propiedades ya alquiladas. Con experto local nacido aquí.",
+    heroSub: "Sin perder tiempo. Sin propiedades ya alquiladas. 100% del mercado. Experto local.",
     heroCta: "Ver Cómo Funciona",
     problemTitle: "¿Cansado de esto?",
     pains: [
@@ -87,7 +87,7 @@ const t = {
     metaTitle: "Find Your Home in Frigiliana | Propaxar",
     metaDesc: "Personalised market report to find your ideal property in Frigiliana. Local expert, 24-48h delivery, money-back guarantee.",
     heroH1: "FIND YOUR PERFECT HOME IN FRIGILIANA",
-    heroSub: "No wasted time. No already-rented properties. With a local expert born here.",
+    heroSub: "No wasted time. No already-rented properties. 100% of the market. Local expert.",
     heroCta: "See How It Works",
     problemTitle: "Tired of this?",
     pains: [
