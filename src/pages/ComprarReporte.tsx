@@ -1,7 +1,7 @@
 import { useSearchParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-const STRIPE_URL = 'https://buy.stripe.com/bJe14pbo0drEebg6Q1gEg03';
+const STRIPE_URL = 'https://buy.stripe.com/bJe6oJ9fS73gffkdepgEg05';
 const WHATSAPP_NUMBER = '34662317561';
 const EMAIL = 'info@propaxar.com';
 const PHONE = '+34 662 317 561';

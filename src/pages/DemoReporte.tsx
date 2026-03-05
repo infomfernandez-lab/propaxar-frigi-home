@@ -12,7 +12,7 @@ import heroImg from "@/assets/frigiliana-street.jpg";
 
 const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hello%20Manuel%2C%20I%27m%20interested%20in%20a%20Propaxar%20Market%20Report";
 const EMAIL_LINK = "mailto:info@propaxar.com?subject=Market%20Report%20Inquiry";
-const CTA_LINK = "https://buy.stripe.com/bJe14pbo0drEebg6Q1gEg03";
+const CTA_LINK = "https://buy.stripe.com/bJe6oJ9fS73gffkdepgEg05";
 
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
