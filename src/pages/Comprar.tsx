@@ -94,18 +94,84 @@ export default function ComprarPage() {
       </section>
 
       {/* 3. PERFILES DE COMPRADOR */}
-      <section id="perfiles" className="py-20 bg-background">
+      <section id="perfiles" className="py-24 bg-background">
         <div className="max-w-5xl mx-auto px-5">
           <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">¿Cuál eres tú?</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Tres compradores. Una misma pasión.</h2>
           <p className="text-foreground-muted mb-12 max-w-2xl">
-            No todos buscan lo mismo. Cuéntame qué te trae a Frigiliana y en 24 horas te envío propiedades que encajan exactamente.
+            No todos buscan lo mismo. Cuéntame qué te trae a Frigiliana y en 24 horas te envío propiedades que encajan exactamente con lo que buscas.
           </p>
           <div className="grid md:grid-cols-3 gap-6">
-            {["Residencia permanente", "Segunda residencia / vacaciones", "Inversión rentable"].map((title, i) => (
-              <div key={i} className="bg-card border border-border rounded-xl p-8">
-                <h3 className="font-bold text-foreground text-lg mb-2">{title}</h3>
-                <p className="text-foreground-muted text-sm">Contenido próximamente.</p>
+            {[
+              {
+                color: "#2563EB",
+                bgBadge: "bg-blue-50 text-blue-700",
+                icon: "👨‍👩‍👧",
+                label: "Perfil A",
+                title: "La familia que busca raíces",
+                origin: "🇬🇧 Reino Unido / Irlanda",
+                budget: "250–450k€",
+                items: [
+                  "Casa con terraza o jardín, 2–3 dormitorios",
+                  "Casco histórico o vistas al mar",
+                  "Reforma aceptable si el precio es justo",
+                  "Colegios internacionales Nerja/Vélez",
+                  "Plan: residencia permanente en 3–5 años",
+                ],
+              },
+              {
+                color: "#059669",
+                bgBadge: "bg-emerald-50 text-emerald-700",
+                icon: "💼",
+                label: "Perfil B",
+                title: "El nómada digital",
+                origin: "🇳🇱 Países Bajos / 🇩🇰 Dinamarca",
+                budget: "150–280k€",
+                items: [
+                  "Apartamento o estudio bien acondicionado",
+                  "Fibra óptica, espacio de trabajo",
+                  "Cerca del centro, sin coche obligatorio",
+                  "Alquiler largo plazo o compra para base",
+                  "Presupuesto ajustado, alta exigencia en calidad",
+                ],
+              },
+              {
+                color: "#C9A84C",
+                bgBadge: "bg-amber-50 text-amber-700",
+                icon: "🌿",
+                label: "Perfil C",
+                title: "El inversor con estilo",
+                origin: "🇧🇪 Bélgica / 🇸🇪 Suecia",
+                budget: "300–600k€",
+                items: [
+                  "Casa tradicional andaluza auténtica",
+                  "Potencial VUT + uso propio en verano",
+                  "Terraza con vistas, patio interior",
+                  "Reforma llave en mano si es necesario",
+                  "Rentabilidad secundaria al disfrute personal",
+                ],
+              },
+            ].map((card, i) => (
+              <div
+                key={i}
+                className="bg-card border border-border rounded-[14px] p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                style={{ borderTop: `3px solid ${card.color}` }}
+              >
+                <div className="text-3xl mb-3">{card.icon}</div>
+                <p className="text-[10px] uppercase tracking-[0.15em] text-foreground-muted mb-1">{card.label}</p>
+                <h3 className="font-bold text-foreground text-lg mb-2">{card.title}</h3>
+                <p className="text-foreground-muted text-sm mb-1">{card.origin}</p>
+                <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 ${card.bgBadge}`}>
+                  {card.budget}
+                </span>
+                <ul className="space-y-2">
+                  {card.items.map((item, j) => (
+                    <li key={j} className="text-foreground-muted text-sm flex gap-2">
+                      <span className="text-foreground-muted/50">→</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
