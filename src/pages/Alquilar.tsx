@@ -526,17 +526,7 @@ export default function AlquilarPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="alq-footer">
-        <div className="alq-footer-brand">Propaxar</div>
-        <nav className="alq-footer-nav">
-          <a href="/mercado">Market Report</a>
-          <a href="/invertir">Invertir</a>
-          <a href="/empezar">Comprar</a>
-          <a href="/">Inicio</a>
-        </nav>
-        <div className="alq-footer-copy">© 2026 Propaxar · Frigiliana, Málaga · Manuel Fernandez</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
