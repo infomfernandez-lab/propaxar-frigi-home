@@ -14,9 +14,9 @@ const FinalCTA = () => {
       <div className="max-w-[800px] mx-auto px-5 text-center">
         <h2 className="text-3xl md:text-[40px] font-bold text-white leading-tight mb-4 font-heading">
           {language === 'es' ? (
-            <>¿Listo para <span style={{ color: 'hsl(210, 56%, 55%)' }}>encontrar</span> lo que buscas?</>
+            <>¿Listo para encontrar lo que buscas?</>
           ) : (
-            <>Ready to <span style={{ color: 'hsl(210, 56%, 55%)' }}>find</span> what you're looking for?</>
+            <>Ready to find what you're looking for?</>
           )}
         </h2>
 
