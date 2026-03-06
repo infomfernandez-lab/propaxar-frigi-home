@@ -46,7 +46,7 @@ const t = {
     ],
     description: "Descripción",
     descP1: <>A menudo, en Frigiliana tienes que elegir entre <strong>'vistas increíbles'</strong> (pero con 100 cuestas para llegar a casa) o <strong>'comodidad de acceso'</strong> (pero sin terraza). Este piso rompe esa regla.</>,
-    descP2: <>Ubicado en el Casco Nuevo, este dúplex te ofrece la facilidad de llegar a tu puerta sin esfuerzo y, una vez dentro, te regala una de las mejores terrazas de la zona: <strong>20 metros cuadrados de espacio privado</strong> para vivir al aire libre.</>,
+    descP2: <>Ubicado en el Casco Nuevo, este dúplex te ofrece la facilidad de llegar a tu puerta sin esfuerzo y, una vez dentro, te regala una de las mejores terrazas de la zona: <strong>15 metros cuadrados de espacio privado</strong> para vivir al aire libre.</>,
     descP3: <>Es una propiedad con carácter, dividida en niveles para darte privacidad, y con el tamaño justo para ser tu refugio personal en el pueblo más bonito de España. Perfecto para una persona o pareja que valore la luz natural y el espacio exterior.</>,
     locationTitle: "Ubicación",
     openMaps: "Abrir en Google Maps",
