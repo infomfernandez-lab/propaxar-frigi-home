@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Bed, Bath, Home, Tag, Wind, Mountain, TreePine, MapPin, ChevronLeft, ChevronRight, X, MessageCircle, Mail, Phone } from "lucide-react";
+import { Bed, Bath, Home, Tag, Wind, Mountain, TreePine, MapPin, ChevronLeft, ChevronRight, X, MessageCircle, Mail, Phone, Globe } from "lucide-react";
 
-const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hola%20Manuel%2C%20me%20interesa%20el%20piso%20en%20Frigiliana%20(ref.%20pa225).%20%C2%BFPuedo%20agendar%20una%20visita%3F";
+const WHATSAPP_LINKS = {
+  es: "https://wa.me/34662317561?text=Hola%20Manuel%2C%20me%20interesa%20el%20piso%20en%20Frigiliana%20(ref.%20pa225).%20%C2%BFPuedo%20agendar%20una%20visita%3F",
+  en: "https://wa.me/34662317561?text=Hi%20Manuel%2C%20I%27m%20interested%20in%20the%20apartment%20in%20Frigiliana%20(ref.%20pa225).%20Can%20I%20schedule%20a%20viewing%3F",
+};
 
 const PHOTOS = [
   "/images/properties/piso-frigi-01.jpg",
@@ -21,16 +24,112 @@ const PHOTOS = [
   "/images/properties/piso-frigi-14.jpg",
 ];
 
-const FEATURES = [
-  { icon: Wind, label: "Aire acondicionado" },
-  { icon: MapPin, label: "Cerca de servicios locales" },
-  { icon: TreePine, label: "Terraza" },
-  { icon: Mountain, label: "Vistas a la montaña" },
-];
+const t = {
+  es: {
+    title: "Piso en Frigiliana — 750€/mes | Propaxar",
+    metaDesc: "Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 20m² con vistas a la montaña. 750€/mes. Ref. pa225.",
+    ref: "Ref. pa225 · Alquiler residencial",
+    heading: "Piso en Frigiliana",
+    location: "Casco Nuevo, Frigiliana, Málaga",
+    perMonth: "/mes",
+    type: "Tipo",
+    typeValue: "Piso",
+    bedrooms: "Dormitorios",
+    bathroom: "Baño",
+    reference: "Referencia",
+    features: "Características",
+    featuresList: [
+      { icon: Wind, label: "Aire acondicionado" },
+      { icon: MapPin, label: "Cerca de servicios locales" },
+      { icon: TreePine, label: "Terraza" },
+      { icon: Mountain, label: "Vistas a la montaña" },
+    ],
+    description: "Descripción",
+    descP1: <>A menudo, en Frigiliana tienes que elegir entre <strong>'vistas increíbles'</strong> (pero con 100 cuestas para llegar a casa) o <strong>'comodidad de acceso'</strong> (pero sin terraza). Este piso rompe esa regla.</>,
+    descP2: <>Ubicado en el Casco Nuevo, este dúplex te ofrece la facilidad de llegar a tu puerta sin esfuerzo y, una vez dentro, te regala una de las mejores terrazas de la zona: <strong>20 metros cuadrados de espacio privado</strong> para vivir al aire libre.</>,
+    descP3: <>Es una propiedad con carácter, dividida en niveles para darte privacidad, y con el tamaño justo para ser tu refugio personal en el pueblo más bonito de España. Perfecto para una persona o pareja que valore la luz natural y el espacio exterior.</>,
+    locationTitle: "Ubicación",
+    openMaps: "Abrir en Google Maps",
+    gallery: "Galería completa",
+    rentalType: "/mes · Alquiler residencial",
+    whatsapp: "WhatsApp — Agendar visita",
+    sendEmail: "Enviar email",
+    agentName: "Manuel C. Fernández",
+    agentRole: "Consultor inmobiliario · Frigiliana",
+    agentBio: "40 años de conocimiento local. Conozco cada propiedad y cada propietario de Frigiliana. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo.",
+    highlights: "Lo que destaca",
+    highlightsList: [
+      "Terraza privada de 20m²",
+      "Casco Nuevo — acceso fácil sin cuestas",
+      "Dúplex con niveles para privacidad",
+      "Vistas a la montaña",
+      "Aire acondicionado incluido",
+      "Cerca de todos los servicios",
+    ],
+    address: "C. Ermita · Casco Nuevo, Frigiliana 29788",
+  },
+  en: {
+    title: "Apartment in Frigiliana — 750€/month | Propaxar",
+    metaDesc: "1-bedroom duplex in Frigiliana's Casco Nuevo. 20m² terrace with mountain views. 750€/month. Ref. pa225.",
+    ref: "Ref. pa225 · Residential rental",
+    heading: "Apartment in Frigiliana",
+    location: "Casco Nuevo, Frigiliana, Málaga",
+    perMonth: "/month",
+    type: "Type",
+    typeValue: "Apartment",
+    bedrooms: "Bedrooms",
+    bathroom: "Bathroom",
+    reference: "Reference",
+    features: "Features",
+    featuresList: [
+      { icon: Wind, label: "Air conditioning" },
+      { icon: MapPin, label: "Close to local amenities" },
+      { icon: TreePine, label: "Terrace" },
+      { icon: Mountain, label: "Mountain views" },
+    ],
+    description: "Description",
+    descP1: <>In Frigiliana, you often have to choose between <strong>'incredible views'</strong> (but 100 steep hills to get home) or <strong>'easy access'</strong> (but no terrace). This apartment breaks that rule.</>,
+    descP2: <>Located in the Casco Nuevo, this duplex gives you the ease of reaching your door effortlessly and, once inside, rewards you with one of the best terraces in the area: <strong>20 square metres of private space</strong> for outdoor living.</>,
+    descP3: <>A property with character, split across levels for privacy, and just the right size to be your personal retreat in Spain's most beautiful village. Perfect for an individual or couple who values natural light and outdoor space.</>,
+    locationTitle: "Location",
+    openMaps: "Open in Google Maps",
+    gallery: "Full Gallery",
+    rentalType: "/month · Residential rental",
+    whatsapp: "WhatsApp — Schedule viewing",
+    sendEmail: "Send email",
+    agentName: "Manuel C. Fernández",
+    agentRole: "Property consultant · Frigiliana",
+    agentBio: "40 years of local knowledge. I know every property and every owner in Frigiliana. I help you find exactly what you're looking for — without wasting time.",
+    highlights: "Highlights",
+    highlightsList: [
+      "Private 20m² terrace",
+      "Casco Nuevo — easy access, no steep hills",
+      "Duplex with split levels for privacy",
+      "Mountain views",
+      "Air conditioning included",
+      "Close to all amenities",
+    ],
+    address: "C. Ermita · Casco Nuevo, Frigiliana 29788",
+  },
+};
+
+type Lang = "es" | "en";
 
 const PisoFrigiliana = () => {
+  const [lang, setLang] = useState<Lang>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang");
+    if (urlLang === "en" || urlLang === "es") return urlLang;
+    return (localStorage.getItem("finder-lang") as Lang) || "es";
+  });
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem("finder-lang", lang);
+  }, [lang]);
+
+  const c = t[lang];
 
   const openLightbox = (idx: number) => {
     setLightboxIdx(idx);
@@ -38,16 +137,31 @@ const PisoFrigiliana = () => {
   };
 
   const closeLightbox = () => setLightboxOpen(false);
-
   const prevImage = () => setLightboxIdx((p) => (p - 1 + PHOTOS.length) % PHOTOS.length);
   const nextImage = () => setLightboxIdx((p) => (p + 1) % PHOTOS.length);
+
+  const toggleLang = () => setLang((l) => (l === "es" ? "en" : "es"));
 
   return (
     <>
       <Helmet>
-        <title>Piso en Frigiliana — 750€/mes | Propaxar</title>
-        <meta name="description" content="Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 20m² con vistas a la montaña. 750€/mes. Ref. pa225." />
+        <title>{c.title}</title>
+        <meta name="description" content={c.metaDesc} />
       </Helmet>
+
+      {/* Language toggle — fixed top-right */}
+      <button
+        onClick={toggleLang}
+        className="fixed top-4 right-4 z-50 flex items-center gap-2 bg-card/95 backdrop-blur-md border border-border shadow-lg px-3.5 py-2 hover:bg-card transition-colors group"
+        aria-label="Toggle language"
+      >
+        <Globe className="w-4 h-4 text-primary" />
+        <span className="text-xs font-bold tracking-wide">
+          <span className={lang === "es" ? "text-primary" : "text-muted"}>ES</span>
+          <span className="text-muted mx-1">|</span>
+          <span className={lang === "en" ? "text-primary" : "text-muted"}>EN</span>
+        </span>
+      </button>
 
       <main className="bg-background min-h-screen pt-6">
 
@@ -55,32 +169,31 @@ const PisoFrigiliana = () => {
         <header className="max-w-[1100px] mx-auto px-5 pt-6 pb-4">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <p className="text-xs font-mono tracking-widest uppercase text-muted mb-2">Ref. pa225 · Alquiler residencial</p>
+              <p className="text-xs font-mono tracking-widest uppercase text-muted mb-2">{c.ref}</p>
               <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground leading-tight">
-                Piso en Frigiliana
+                {c.heading}
               </h1>
               <p className="flex items-center gap-2 text-muted mt-2 text-sm">
                 <MapPin className="w-4 h-4" />
-                Casco Nuevo, Frigiliana, Málaga
+                {c.location}
               </p>
             </div>
             <div className="text-right">
               <div className="font-display text-4xl md:text-5xl font-bold text-primary">750€</div>
-              <div className="text-sm text-muted font-medium">/mes</div>
+              <div className="text-sm text-muted font-medium">{c.perMonth}</div>
             </div>
           </div>
         </header>
 
-        {/* Photo Gallery */}
+        {/* Hero Photo */}
         <section className="max-w-[1100px] mx-auto px-5 pb-8">
-          {/* Main hero image + grid */}
           <div
             className="cursor-pointer overflow-hidden border border-border"
             onClick={() => openLightbox(0)}
           >
             <img
               src={PHOTOS[0]}
-              alt="Piso en Frigiliana - Vista principal"
+              alt={`${c.heading} - Vista principal`}
               className="w-full object-cover max-h-[500px] hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -89,15 +202,15 @@ const PisoFrigiliana = () => {
         {/* Content Grid */}
         <section className="max-w-[1100px] mx-auto px-5 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left column - Details */}
+            {/* Left column */}
             <div className="lg:col-span-2 space-y-8">
               {/* Quick stats */}
               <div className="grid grid-cols-4 gap-4 border border-border bg-card p-6">
                 {[
-                  { icon: Home, label: "Tipo", value: "Piso" },
-                  { icon: Bed, label: "Dormitorios", value: "1" },
-                  { icon: Bath, label: "Baño", value: "1" },
-                  { icon: Tag, label: "Referencia", value: "pa225" },
+                  { icon: Home, label: c.type, value: c.typeValue },
+                  { icon: Bed, label: c.bedrooms, value: "1" },
+                  { icon: Bath, label: c.bathroom, value: "1" },
+                  { icon: Tag, label: c.reference, value: "pa225" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
                     <stat.icon className="w-5 h-5 mx-auto mb-2 text-muted" />
@@ -109,9 +222,9 @@ const PisoFrigiliana = () => {
 
               {/* Features */}
               <div className="border border-border bg-card p-6">
-                <h2 className="font-display text-lg font-bold text-foreground mb-4">Características</h2>
+                <h2 className="font-display text-lg font-bold text-foreground mb-4">{c.features}</h2>
                 <div className="grid grid-cols-2 gap-3">
-                  {FEATURES.map((f, i) => (
+                  {c.featuresList.map((f, i) => (
                     <div key={i} className="flex items-center gap-3 text-sm text-foreground">
                       <div className="w-8 h-8 bg-background flex items-center justify-center border border-border">
                         <f.icon className="w-4 h-4 text-primary" />
@@ -124,24 +237,18 @@ const PisoFrigiliana = () => {
 
               {/* Description */}
               <div className="border border-border bg-card p-6">
-                <h2 className="font-display text-lg font-bold text-foreground mb-4">Descripción</h2>
+                <h2 className="font-display text-lg font-bold text-foreground mb-4">{c.description}</h2>
                 <div className="space-y-4 text-sm text-foreground leading-relaxed">
-                  <p>
-                    A menudo, en Frigiliana tienes que elegir entre <strong>'vistas increíbles'</strong> (pero con 100 cuestas para llegar a casa) o <strong>'comodidad de acceso'</strong> (pero sin terraza). Este piso rompe esa regla.
-                  </p>
-                  <p>
-                    Ubicado en el Casco Nuevo, este dúplex te ofrece la facilidad de llegar a tu puerta sin esfuerzo y, una vez dentro, te regala una de las mejores terrazas de la zona: <strong>20 metros cuadrados de espacio privado</strong> para vivir al aire libre.
-                  </p>
-                  <p>
-                    Es una propiedad con carácter, dividida en niveles para darte privacidad, y con el tamaño justo para ser tu refugio personal en el pueblo más bonito de España. Perfecto para una persona o pareja que valore la luz natural y el espacio exterior.
-                  </p>
+                  <p>{c.descP1}</p>
+                  <p>{c.descP2}</p>
+                  <p>{c.descP3}</p>
                 </div>
               </div>
 
               {/* Location */}
               <div className="border border-border bg-card p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-display text-lg font-bold text-foreground">Ubicación</h2>
+                  <h2 className="font-display text-lg font-bold text-foreground">{c.locationTitle}</h2>
                   <a
                     href="https://www.google.com/maps/place/C.+Ermita,+29788+Frigiliana,+M%C3%A1laga"
                     target="_blank"
@@ -149,7 +256,7 @@ const PisoFrigiliana = () => {
                     className="text-xs font-mono text-muted hover:text-primary transition-colors flex items-center gap-1.5"
                   >
                     <MapPin className="w-3 h-3" />
-                    Abrir en Google Maps
+                    {c.openMaps}
                   </a>
                 </div>
                 <a
@@ -166,20 +273,20 @@ const PisoFrigiliana = () => {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Ubicación del piso en Frigiliana"
+                    title={c.locationTitle}
                   />
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors flex items-center justify-center">
                     <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-card/95 backdrop-blur-sm text-foreground text-xs font-semibold px-4 py-2 border border-border shadow-sm">
-                      Abrir en Google Maps ↗
+                      {c.openMaps} ↗
                     </span>
                   </div>
                 </a>
-                <p className="text-xs text-muted mt-3 font-mono">C. Ermita · Casco Nuevo, Frigiliana 29788</p>
+                <p className="text-xs text-muted mt-3 font-mono">{c.address}</p>
               </div>
 
               {/* Full Gallery */}
               <div className="border border-border bg-card p-6">
-                <h2 className="font-display text-lg font-bold text-foreground mb-4">Galería completa</h2>
+                <h2 className="font-display text-lg font-bold text-foreground mb-4">{c.gallery}</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   {PHOTOS.map((photo, i) => (
                     <div
@@ -199,32 +306,31 @@ const PisoFrigiliana = () => {
               </div>
             </div>
 
-            {/* Right column - Contact card */}
+            {/* Right column - Contact */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-4">
                 {/* Price card */}
                 <div className="border border-border bg-card p-6">
                   <div className="text-center mb-6">
                     <div className="font-display text-4xl font-bold text-primary">750€</div>
-                    <div className="text-sm text-muted">/mes · Alquiler residencial</div>
+                    <div className="text-sm text-muted">{c.rentalType}</div>
                   </div>
-
                   <div className="space-y-3">
                     <a
-                      href={WHATSAPP_LINK}
+                      href={WHATSAPP_LINKS[lang]}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full bg-[hsl(142,71%,45%)] hover:bg-[hsl(142,71%,40%)] text-white font-semibold py-3 px-4 transition-colors text-sm"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      WhatsApp — Agendar visita
+                      {c.whatsapp}
                     </a>
                     <a
                       href="mailto:info@propaxar.com?subject=Consulta%20Piso%20Frigiliana%20pa225"
                       className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 px-4 transition-colors text-sm"
                     >
                       <Mail className="w-4 h-4" />
-                      Enviar email
+                      {c.sendEmail}
                     </a>
                     <a
                       href="tel:+34662317561"
@@ -243,28 +349,18 @@ const PisoFrigiliana = () => {
                       M
                     </div>
                     <div>
-                      <div className="font-bold text-foreground text-sm">Manuel C. Fernández</div>
-                      <div className="text-xs text-muted">Consultor inmobiliario · Frigiliana</div>
+                      <div className="font-bold text-foreground text-sm">{c.agentName}</div>
+                      <div className="text-xs text-muted">{c.agentRole}</div>
                     </div>
                   </div>
-                  <p className="text-xs text-muted leading-relaxed">
-                    40 años de conocimiento local. Conozco cada propiedad y cada propietario de Frigiliana.
-                    Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo.
-                  </p>
+                  <p className="text-xs text-muted leading-relaxed">{c.agentBio}</p>
                 </div>
 
                 {/* Highlights */}
                 <div className="border border-border bg-card p-6">
-                  <h3 className="font-display text-sm font-bold text-foreground mb-3 uppercase tracking-wide">Lo que destaca</h3>
+                  <h3 className="font-display text-sm font-bold text-foreground mb-3 uppercase tracking-wide">{c.highlights}</h3>
                   <ul className="space-y-2">
-                    {[
-                      "Terraza privada de 20m²",
-                      "Casco Nuevo — acceso fácil sin cuestas",
-                      "Dúplex con niveles para privacidad",
-                      "Vistas a la montaña",
-                      "Aire acondicionado incluido",
-                      "Cerca de todos los servicios",
-                    ].map((item, i) => (
+                    {c.highlightsList.map((item, i) => (
                       <li key={i} className="flex items-start gap-2 text-xs text-foreground">
                         <span className="text-[hsl(var(--success))] font-bold mt-0.5">✓</span>
                         {item}
@@ -289,22 +385,13 @@ const PisoFrigiliana = () => {
       {/* Lightbox */}
       {lightboxOpen && (
         <div className="fixed inset-0 z-[999] bg-black/90 flex items-center justify-center" onClick={closeLightbox}>
-          <button
-            className="absolute top-4 right-4 text-white/80 hover:text-white z-10"
-            onClick={closeLightbox}
-          >
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white z-10" onClick={closeLightbox}>
             <X className="w-8 h-8" />
           </button>
-          <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10"
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-          >
+          <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
             <ChevronLeft className="w-10 h-10" />
           </button>
-          <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10"
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-          >
+          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
             <ChevronRight className="w-10 h-10" />
           </button>
           <img
