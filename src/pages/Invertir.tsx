@@ -50,7 +50,7 @@ export default function InvertirPage() {
       <section className="inv-hero" style={{ paddingTop: '64px' }}>
         <div className="inv-hero-bg" />
         
-        <div className="inv-hero-eyebrow">Inversión inmobiliaria — Frigiliana, Costa del Sol</div>
+        <div className="inv-hero-eyebrow">Inversión inmobiliaria · Frigiliana · La Axarquía</div>
         <h1 className="inv-hero-h1">
           12–14% de retorno.<br />
           <em>Verificado.</em> Cada año.
