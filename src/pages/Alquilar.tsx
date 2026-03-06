@@ -446,7 +446,7 @@ export default function AlquilarPage() {
           {!sent ? (
             <>
               <div className="alq-form-card-title">Buscar mi alquiler en Frigiliana</div>
-              <div className="alq-form-card-sub">Gratis · Sin compromiso · Bilingüe EN/ES/NL</div>
+              <div className="alq-form-card-sub">Gratis · Sin compromiso · Bilingüe EN / ES</div>
               <div className="alq-field-row">
                 <div className="alq-field">
                   <label>Tu nombre *</label>
