@@ -430,7 +430,7 @@ export default function AlquilarPage() {
           </p>
           <ul className="alq-promise-list">
             <li>Propiedades residenciales a precio justo — no precio vacacional</li>
-            <li>Off-market: propietarios directos que no publican en portales</li>
+            <li>Acceso a propiedades que no están publicadas online</li>
             <li>Revisión del contrato incluida — que firmes con seguridad</li>
             <li>Consejo de timing: cuándo tienes más poder de negociación</li>
             <li>Sin coste para el inquilino</li>
