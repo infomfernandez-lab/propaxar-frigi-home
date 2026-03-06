@@ -27,7 +27,7 @@ const PHOTOS = [
 const t = {
   es: {
     title: "Piso en Frigiliana — 750€/mes | Propaxar",
-    metaDesc: "Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 20m² con vistas a la montaña. 750€/mes. Ref. pa225.",
+    metaDesc: "Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 15m² con vistas a la montaña. 750€/mes. Ref. pa225.",
     ref: "Ref. pa225 · Alquiler residencial",
     heading: "Piso en Frigiliana",
     location: "Casco Nuevo, Frigiliana, Málaga",
