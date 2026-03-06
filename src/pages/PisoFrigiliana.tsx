@@ -89,7 +89,7 @@ const t = {
     ],
     description: "Description",
     descP1: <>In Frigiliana, you often have to choose between <strong>'incredible views'</strong> (but 100 steep hills to get home) or <strong>'easy access'</strong> (but no terrace). This apartment breaks that rule.</>,
-    descP2: <>Located in the Casco Nuevo, this duplex gives you the ease of reaching your door effortlessly and, once inside, rewards you with one of the best terraces in the area: <strong>20 square metres of private space</strong> for outdoor living.</>,
+    descP2: <>Located in the Casco Nuevo, this duplex gives you the ease of reaching your door effortlessly and, once inside, rewards you with one of the best terraces in the area: <strong>15 square metres of private space</strong> for outdoor living.</>,
     descP3: <>A property with character, split across levels for privacy, and just the right size to be your personal retreat in Spain's most beautiful village. Perfect for an individual or couple who values natural light and outdoor space.</>,
     locationTitle: "Location",
     openMaps: "Open in Google Maps",
