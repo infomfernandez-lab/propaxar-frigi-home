@@ -179,38 +179,98 @@ export default function ComprarPage() {
       </section>
 
       {/* 4. DATOS DE MERCADO */}
-      <section className="py-20 bg-card">
+      <section className="py-24 bg-card">
         <div className="max-w-5xl mx-auto px-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">Datos de mercado</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Los números que importan.</h2>
-          <p className="text-foreground-muted mb-12 max-w-2xl">Contenido próximamente.</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">El mercado en datos</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Por qué 2025 es el momento de comprar en Frigiliana</h2>
+          <p className="text-foreground-muted mb-12 max-w-2xl">
+            Datos verificados de fuentes oficiales. Actualizados mensualmente en el Market Report.
+          </p>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-border rounded-xl p-8 bg-background">
-              <h3 className="font-bold text-foreground mb-2">Panel 1</h3>
-              <p className="text-foreground-muted text-sm">Placeholder.</p>
+            {/* Panel precios */}
+            <div className="border border-border rounded-xl p-7 bg-background">
+              <h3 className="font-bold text-foreground text-lg mb-1">Precios Frigiliana 2025</h3>
+              <p className="text-foreground-muted text-xs mb-6">Fuentes verificadas · Dic. 2025</p>
+              <div className="space-y-4">
+                {[
+                  { label: "€/m² medio", val: "3.295€", delta: "▲ +6,4%" },
+                  { label: "1 dormitorio", val: "~239.000€", delta: "Desde 130k" },
+                  { label: "2 dormitorios", val: "~365.000€", delta: "El más demandado" },
+                  { label: "3 dormitorios", val: "~480.000€", delta: "Casa típica" },
+                  { label: "4+ dormitorios", val: "~790.000€", delta: "Premium con vistas" },
+                  { label: "Precio máximo", val: "3.899€/m²", delta: "Nov. 2025" },
+                ].map((r, i) => (
+                  <div key={i} className="flex items-center justify-between">
+                    <span className="text-foreground-muted text-sm">{r.label}</span>
+                    <div className="text-right">
+                      <span className="font-bold text-foreground mr-3">{r.val}</span>
+                      <span className="text-xs" style={{ color: "hsl(160, 84%, 39%)" }}>{r.delta}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="border border-border rounded-xl p-8 bg-background">
-              <h3 className="font-bold text-foreground mb-2">Panel 2</h3>
-              <p className="text-foreground-muted text-sm">Placeholder.</p>
+
+            {/* Panel compradores */}
+            <div className="border border-border rounded-xl p-7 bg-background">
+              <h3 className="font-bold text-foreground text-lg mb-1">Compradores extranjeros Málaga</h3>
+              <p className="text-foreground-muted text-xs mb-6">32,3% del total · Registradores 2025</p>
+              <div className="space-y-3">
+                {[
+                  { flag: "🇬🇧", country: "Reino Unido", pct: 15, badge: null },
+                  { flag: "🇳🇱", country: "Países Bajos", pct: 8, badge: null },
+                  { flag: "🇸🇪", country: "Suecia", pct: 8, badge: null },
+                  { flag: "🇩🇪", country: "Alemania", pct: 7.5, badge: null },
+                  { flag: "🇧🇪", country: "Bélgica", pct: 6.5, badge: null },
+                  { flag: "🇩🇰", country: "Dinamarca", pct: 5.5, badge: null },
+                  { flag: "🇮🇪", country: "Irlanda", pct: 4, badge: null },
+                  { flag: "🇺🇸", country: "Estados Unidos", pct: 3.5, badge: "🔥 +26%" },
+                ].map((r, i) => (
+                  <div key={i}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm text-foreground-muted">{r.flag} {r.country}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-foreground text-sm">{r.pct}%</span>
+                        {r.badge && (
+                          <span className="text-[10px] bg-red-50 text-red-600 font-semibold px-2 py-0.5 rounded-full">{r.badge}</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="w-full h-2 bg-border rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${(r.pct / 15) * 100}%`, background: "hsl(222, 28%, 16%)" }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* 5. EL PROCESO */}
-      <section id="proceso" className="py-20 bg-background">
+      <section id="proceso" className="py-24 bg-background">
         <div className="max-w-5xl mx-auto px-5">
           <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">El proceso</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">De la idea a las llaves.</h2>
-          <p className="text-foreground-muted mb-12 max-w-2xl">Contenido próximamente.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Paso a paso. Sin sorpresas.</h2>
+          <p className="text-foreground-muted mb-12 max-w-2xl">
+            Comprar en España siendo extranjero tiene pasos específicos. Los gestionamos todos. Tú solo decides qué propiedad te gusta.
+          </p>
           <div className="grid md:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map(n => (
-              <div key={n} className="bg-card border border-border rounded-xl p-8">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm mb-4" style={{ background: "hsl(222, 28%, 16%)" }}>
-                  {n}
-                </div>
-                <h3 className="font-bold text-foreground mb-2">Paso {n}</h3>
-                <p className="text-foreground-muted text-sm">Placeholder.</p>
+            {[
+              { n: "01", title: "NIE + Cuenta bancaria", text: "El primer trámite obligatorio antes de cualquier operación. Gestionamos la cita y te acompañamos si estás en España.", time: "1–2 semanas (previo)" },
+              { n: "02", title: "Búsqueda y propuestas", text: "Te enviamos propiedades que encajan con tu perfil, incluyendo las que no están publicadas.", time: "Desde día 1" },
+              { n: "03", title: "Visitas y negociación", text: "Organizamos visitas presenciales o videollamada 360°. Negociamos el precio y condiciones. Redactamos la oferta.", time: "1–3 semanas" },
+              { n: "04", title: "Contrato de arras", text: "Reserva del 10% del precio. Contrato privado que protege a ambas partes. Revisión legal incluida.", time: "Semana 3–4" },
+              { n: "05", title: "Due diligence", text: "Verificamos cargas, deudas, cédula de habitabilidad. Todo antes de firmar ante notario.", time: "2–4 semanas" },
+              { n: "06", title: "Escritura y llaves", text: "Firma ante notario en Nerja o Málaga. Registro de la propiedad. Cambio de suministros. Las llaves son tuyas.", time: "Mes 2–3 desde inicio" },
+            ].map((step, i) => (
+              <div key={i} className="bg-card border border-border rounded-xl p-7 relative">
+                <div className="text-5xl font-black text-border/60 absolute top-4 right-5 leading-none">{step.n}</div>
+                <h3 className="font-bold text-foreground text-lg mb-2 mt-1">{step.title}</h3>
+                <p className="text-foreground-muted text-sm leading-relaxed mb-4">{step.text}</p>
+                <span className="inline-block text-[11px] font-semibold px-3 py-1 rounded-full text-white" style={{ background: "hsl(222, 28%, 16%)" }}>
+                  ⏱ {step.time}
+                </span>
               </div>
             ))}
           </div>
