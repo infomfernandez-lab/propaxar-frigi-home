@@ -8,8 +8,8 @@ const QualificationCards = () => {
   const cards = [
     {
       icon: '🏡',
-      borderColor: 'hsl(210, 53%, 24%)',
-      linkColor: 'hsl(210, 53%, 24%)',
+      borderColor: '#374151',
+      linkColor: '#374151',
       title: language === 'es' ? 'Quiero alquilar en Frigiliana' : 'I want to rent in Frigiliana',
       text: language === 'es'
         ? 'Larga temporada o segunda residencia. Acceso a propiedades seleccionadas, incluyendo las que no están en portales.'
