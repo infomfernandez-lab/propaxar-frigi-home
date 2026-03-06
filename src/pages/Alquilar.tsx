@@ -127,8 +127,8 @@ export default function AlquilarPage() {
           Lo que ningún portal<br /><em>sabe explicarte.</em>
         </h2>
         <p className="alq-wow-lead">
-          Idealista te da el precio. Fotocasa te da las fotos.
-          Ninguno te dice cuándo buscar, qué contratos evitar, qué zonas tienen fibra real,
+          Los portales te dan el precio y las fotos.
+          Nadie te dice cuándo buscar, qué contratos evitar, qué zonas tienen fibra real,
           o que hay propiedades que nunca se publican.
         </p>
         <div className="alq-wow-cards">
