@@ -53,6 +53,7 @@ export default function MercadoPage() {
 
   return (
     <div className="mercado-page">
+      <Navigation />
       <Helmet>
         <title>Mercado Inmobiliario Frigiliana — Datos Mensuales | Propaxar</title>
         <meta name="description" content="Reporte mensual gratuito del mercado inmobiliario de Frigiliana y Axarquía. Precios, turismo, regulación y rentabilidad. Datos de 18 fuentes oficiales." />
