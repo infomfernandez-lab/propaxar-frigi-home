@@ -24,14 +24,12 @@ const Navigation = () => {
       <div className="max-w-[1200px] mx-auto px-5 md:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center">
             <div
-              className="w-[34px] h-[34px] rounded-full flex items-center justify-center text-sm font-bold"
-              style={{ backgroundColor: 'hsl(210, 53%, 24%)', color: '#fff' }}
+              className="w-[34px] h-[34px] rounded-full flex items-center justify-center text-sm font-bold bg-white/20 text-white"
             >
               P
             </div>
-            <span className="text-white font-heading font-bold text-lg">Propaxar</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -77,8 +75,8 @@ const Navigation = () => {
             {/* Desktop CTA */}
             <Link
               to="/empezar"
-              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 text-white transition-all"
-              style={{ backgroundColor: 'hsl(210, 53%, 24%)', borderRadius: '7px' }}
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 transition-all"
+              style={{ backgroundColor: '#fff', color: '#1E2535', borderRadius: '7px' }}
             >
               {t('nav.start')} <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -110,8 +108,8 @@ const Navigation = () => {
             ))}
             <Link
               to="/empezar"
-              className="mt-4 flex items-center justify-center gap-2 text-white font-semibold px-6 py-3.5 transition-all"
-              style={{ backgroundColor: 'hsl(210, 53%, 24%)', borderRadius: '7px' }}
+              className="mt-4 flex items-center justify-center gap-2 font-semibold px-6 py-3.5 transition-all"
+              style={{ backgroundColor: '#fff', color: '#1E2535', borderRadius: '7px' }}
             >
               {t('nav.start')} <ArrowRight className="w-4 h-4" />
             </Link>
