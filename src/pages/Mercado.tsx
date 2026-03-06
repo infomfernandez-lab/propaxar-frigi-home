@@ -13,12 +13,12 @@ const AXARQUIA = [
 ];
 
 const SEASON = [
-  { m: "E", occ: 38, c: "#3A4A5E" }, { m: "F", occ: 44, c: "#3A4A5E" },
-  { m: "M", occ: 52, c: "#3A6E5E" }, { m: "A", occ: 68, c: "#3A6E5E" },
-  { m: "M", occ: 74, c: "#8B6E2A" }, { m: "J", occ: 83, c: "#8B6E2A" },
-  { m: "J", occ: 94, c: "#C9A84C" }, { m: "A", occ: 98, c: "#C24B3A" },
-  { m: "S", occ: 87, c: "#8B6E2A" }, { m: "O", occ: 72, c: "#3A6E5E" },
-  { m: "N", occ: 48, c: "#3A4A5E" }, { m: "D", occ: 40, c: "#3A4A5E" },
+  { m: "E", occ: 38, c: "#6b7b8d" }, { m: "F", occ: 44, c: "#6b7b8d" },
+  { m: "M", occ: 52, c: "#4d6a7a" }, { m: "A", occ: 68, c: "#4d6a7a" },
+  { m: "M", occ: 74, c: "#3d5a73" }, { m: "J", occ: 83, c: "#3d5a73" },
+  { m: "J", occ: 94, c: "#2d3e4e" }, { m: "A", occ: 98, c: "#2d3e4e" },
+  { m: "S", occ: 87, c: "#3d5a73" }, { m: "O", occ: 72, c: "#4d6a7a" },
+  { m: "N", occ: 48, c: "#6b7b8d" }, { m: "D", occ: 40, c: "#6b7b8d" },
 ];
 
 const TICKER = [
@@ -272,7 +272,7 @@ export default function MercadoPage() {
           <div className="season-wrap">
             {SEASON.map((s, i) => (
               <div className="s-col" key={i}>
-                <span className="s-val" style={{ color: s.occ > 85 ? "#C24B3A" : s.occ > 65 ? "#C9A84C" : "var(--muted)" }}>{s.occ}%</span>
+                <span className="s-val" style={{ color: s.occ > 85 ? "hsl(var(--destructive))" : s.occ > 65 ? "hsl(var(--primary))" : "hsl(var(--foreground-subtle))" }}>{s.occ}%</span>
                 <div className="s-bar" style={{ height: `${s.occ}%`, background: s.c }} />
                 <span className="s-label">{s.m}</span>
               </div>
@@ -280,13 +280,13 @@ export default function MercadoPage() {
           </div>
           <div style={{ display: "flex", gap: 16, marginTop: 20, flexWrap: "wrap" }}>
             {[
-              ["Agosto pico", "251€/noche", "var(--red)"],
-              ["Media anual", "124€/noche", "var(--gold)"],
-              ["263 noches", "reservadas/año", "var(--muted)"],
+              ["Agosto pico", "251€/noche", "hsl(var(--destructive))"],
+              ["Media anual", "124€/noche", "hsl(var(--primary))"],
+              ["263 noches", "reservadas/año", "hsl(var(--foreground-subtle))"],
             ].map(([a, b, c], i) => (
               <div key={i} style={{ borderLeft: `2px solid ${c}`, paddingLeft: 10 }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: c, fontWeight: 500 }}>{a}</div>
-                <div style={{ fontSize: 12, color: "var(--warm)" }}>{b}</div>
+                <div style={{ fontSize: 10, color: c, fontWeight: 600 }}>{a}</div>
+                <div style={{ fontSize: 12, color: "hsl(var(--foreground-muted))" }}>{b}</div>
               </div>
             ))}
           </div>
@@ -373,11 +373,11 @@ export default function MercadoPage() {
             </form>
           ) : (
             <div className="capture-form" style={{ textAlign: "center", padding: "48px 32px" }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>✓</div>
+              <div style={{ fontSize: 48, marginBottom: 16, color: "hsl(var(--success))" }}>✓</div>
               <div className="form-title">Suscripción confirmada</div>
-              <p style={{ fontSize: 14, color: "var(--warm)", marginTop: 12, lineHeight: 1.7 }}>
+              <p style={{ fontSize: 14, color: "hsl(var(--foreground-muted))", marginTop: 12, lineHeight: 1.7 }}>
                 Recibirás el próximo informe el<br />
-                <strong style={{ color: "var(--gold)" }}>primer lunes de abril.</strong><br />
+                <strong style={{ color: "hsl(var(--primary))" }}>primer lunes de abril.</strong><br />
                 Mientras tanto, explora los datos en esta página o contacta directamente con Manuel.
               </p>
             </div>
