@@ -90,7 +90,7 @@ export default function InvertirPage() {
       <div className="inv-proof-bar">
         {[
           { icon: "✓", text: <><strong>40 años</strong> de conocimiento local en Frigiliana</> },
-          { icon: "✓", text: <><strong>18 fuentes</strong> de datos verificadas, actualizadas mensualmente</> },
+          { icon: "✓", text: <><strong>18 fuentes</strong> de datos verificadas · Market Report mensual</> },
           { icon: "✓", text: <><strong>Nº1 VUT rural</strong> Málaga — 355 establecimientos registrados</> },
           { icon: "✓", text: <><strong>32,3%</strong> compradores extranjeros en Málaga provincia</> },
         ].map((p, i) => (
