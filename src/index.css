@@ -176,15 +176,16 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 text-base font-semibold text-primary-foreground transition-all duration-200 ease-out;
-    background-color: hsl(var(--accent));
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 text-base font-semibold transition-all duration-200 ease-out;
+    background-color: #fff;
+    color: #1E2535;
     border-radius: 7px;
   }
 
   .btn-primary:hover {
-    background-color: hsl(var(--accent-l));
+    background-color: #f0f0f0;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px 0 hsl(var(--accent) / 0.3);
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.15);
   }
 
   .btn-primary:active {
