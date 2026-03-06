@@ -56,7 +56,7 @@ const t = {
     sendEmail: "Enviar email",
     agentName: "Manuel C. Fernández",
     agentRole: "Consultor inmobiliario · Frigiliana",
-    agentBio: "40 años de conocimiento local. Conozco cada propiedad y cada propietario de Frigiliana. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo.",
+    agentBio: "40 años de conocimiento local. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo.",
     highlights: "Lo que destaca",
     highlightsList: [
       "Terraza privada de 15m²",
