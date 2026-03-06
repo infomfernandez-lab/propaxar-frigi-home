@@ -278,31 +278,83 @@ export default function ComprarPage() {
       </section>
 
       {/* 6. COSTES DE COMPRA */}
-      <section className="py-20 bg-card">
+      <section className="py-24 bg-card">
         <div className="max-w-5xl mx-auto px-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">Costes de compra</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Lo que cuesta comprar aquí — de verdad.</h2>
-          <p className="text-foreground-muted mb-12 max-w-2xl">Contenido próximamente.</p>
-          <div className="border border-border rounded-xl p-8 bg-background">
-            <p className="text-foreground-muted text-sm">Tabla de costes placeholder.</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">Costes reales</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Lo que nadie te dice hasta que firmas.</h2>
+          <p className="text-foreground-muted mb-12 max-w-2xl">
+            Sobre un precio de compra de 350.000€, esto es lo que pagarás en total. Sin sorpresas desde la primera reunión.
+          </p>
+          <div className="bg-background border border-border rounded-xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-card text-foreground-muted text-[11px] uppercase tracking-wider">
+                    <th className="text-left px-6 py-3 font-medium">Concepto</th>
+                    <th className="text-right px-6 py-3 font-medium">Importe</th>
+                    <th className="text-right px-6 py-3 font-medium">%</th>
+                    <th className="text-left px-6 py-3 font-medium">Nota</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {[
+                    { concept: "Precio de compra (ejemplo)", amount: "350.000€", pct: "100%", note: "Precio acordado", highlight: false },
+                    { concept: "ITP — Impuesto Transmisiones Patrimoniales", amount: "24.500€", pct: "7%", note: "Vivienda usada Andalucía", highlight: false },
+                    { concept: "Notaría", amount: "2.800€", pct: "0,8%", note: "Escritura pública", highlight: false },
+                    { concept: "Registro de la Propiedad", amount: "1.400€", pct: "0,4%", note: "Inscripción registral", highlight: false },
+                    { concept: "Gestoría / Tramitación", amount: "1.200€", pct: "0,35%", note: "Opcional pero recomendada", highlight: false },
+                    { concept: "NIE + Cuenta bancaria española", amount: "150€", pct: "—", note: "Trámite previo obligatorio", highlight: false },
+                  ].map((r, i) => (
+                    <tr key={i}>
+                      <td className="px-6 py-3 text-foreground">{r.concept}</td>
+                      <td className="px-6 py-3 text-right font-semibold text-foreground">{r.amount}</td>
+                      <td className="px-6 py-3 text-right text-foreground-muted">{r.pct}</td>
+                      <td className="px-6 py-3 text-foreground-muted">{r.note}</td>
+                    </tr>
+                  ))}
+                  <tr className="border-t-2 border-foreground/20">
+                    <td className="px-6 py-4 font-bold" style={{ color: "hsl(222, 28%, 16%)" }}>TOTAL gastos de compra</td>
+                    <td className="px-6 py-4 text-right font-bold text-lg" style={{ color: "hsl(222, 28%, 16%)" }}>~30.000€</td>
+                    <td className="px-6 py-4 text-right font-bold" style={{ color: "hsl(222, 28%, 16%)" }}>~8,7%</td>
+                    <td className="px-6 py-4 text-foreground-muted font-medium">Sobre precio de compra</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="px-6 py-4 text-xs text-foreground-muted border-t border-border">
+              * Para vivienda nueva el IVA es 10% en lugar de ITP 7%. Importes orientativos. Siempre solicitamos presupuesto notarial exacto antes de la firma.
+            </p>
           </div>
         </div>
       </section>
 
       {/* 7. BIO MANUEL */}
-      <section className="py-20" style={{ background: "hsl(222, 28%, 16%)" }}>
-        <div className="max-w-4xl mx-auto px-5 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Manuel Fernández</h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">Contenido próximamente.</p>
-          <div className="grid grid-cols-3 gap-8">
+      <section className="py-24" style={{ background: "hsl(222, 28%, 16%)" }}>
+        <div className="max-w-[800px] mx-auto px-5 text-center">
+          <div className="mb-10">
+            <span className="text-5xl leading-none" style={{ color: "#C9A84C" }}>"</span>
+            <blockquote className="text-xl md:text-2xl text-white italic leading-relaxed mt-2" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+              Sé qué propietarios quieren vender antes de colgar el cartel.
+              Sé qué casas tienen problemas que no se ven en las fotos.
+              Sé qué precio es justo y cuál está inflado.
+              Eso no se aprende en un curso.
+            </blockquote>
+            <span className="text-5xl leading-none" style={{ color: "#C9A84C" }}>"</span>
+          </div>
+          <p className="text-white font-bold text-lg mb-1">Manuel Carlos Fernández Ramírez</p>
+          <p className="text-white/60 text-xs font-mono tracking-wide mb-10">
+            Propaxar Frigiliana · Especialista inmobiliario Axarquía
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { val: "40 años", label: "En Frigiliana" },
-              { val: "100+", label: "Propiedades gestionadas" },
-              { val: "70%+", label: "Clientes internacionales" },
+              { val: "40 años", label: "en Frigiliana" },
+              { val: "Bilingüe", label: "ES / EN" },
+              { val: "Red local", label: "propietarios directos" },
+              { val: "<24h", label: "tiempo de respuesta" },
             ].map((s, i) => (
               <div key={i}>
-                <div className="text-2xl font-bold text-white">{s.val}</div>
-                <div className="text-white/50 text-xs mt-1">{s.label}</div>
+                <div className="text-xl font-bold text-white">{s.val}</div>
+                <div className="text-white/40 text-xs mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -310,51 +362,122 @@ export default function ComprarPage() {
       </section>
 
       {/* 8. FORMULARIO DE CONTACTO */}
-      <section id="contacto" className="py-20 bg-background">
-        <div className="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-12">
+      <section id="contacto" className="py-24 bg-card">
+        <div className="max-w-5xl mx-auto px-5 grid md:grid-cols-[5fr_4fr] gap-12">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">Contacto</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Cuéntame qué buscas.</h2>
-            <p className="text-foreground-muted mb-6">Contenido próximamente.</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">Empezar la búsqueda</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Cuéntame qué buscas. Yo me encargo del resto.</h2>
+            <p className="text-foreground-muted mb-8 leading-relaxed">
+              Completa el formulario. En 24 horas laborables te envío una selección de propiedades que encajan, incluyendo las que no están publicadas.
+            </p>
+            <ul className="space-y-3 mb-10">
+              {[
+                "Acceso a propiedades fuera del mercado público",
+                "Análisis de precio: ¿está bien valorada?",
+                "Gestión NIE, gestoría, notaría desde el inicio",
+                "Acompañamiento total hasta escritura y llaves",
+                "Sin coste para el comprador — honorarios al vendedor",
+              ].map((item, i) => (
+                <li key={i} className="flex gap-2 text-sm text-foreground-muted">
+                  <span style={{ color: "hsl(160, 84%, 39%)" }}>✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="space-y-2 text-sm text-foreground-muted">
+              <p>📱 <strong className="text-foreground">WhatsApp: +34 662 317 561</strong> (ES / EN)</p>
+              <p>✉️ <strong className="text-foreground">Email: info@propaxar.es</strong></p>
+              <p>📅 <strong className="text-foreground">Videollamada disponible:</strong> Lunes a Viernes</p>
+            </div>
           </div>
-          <div className="bg-card border border-border rounded-xl p-8">
+
+          <div className="bg-background border border-border rounded-[14px] p-7 shadow-sm">
             {!sent ? (
               <>
-                <h3 className="font-bold text-foreground text-lg mb-1">Buscar mi propiedad</h3>
-                <p className="text-foreground-muted text-xs mb-6">Gratis · Sin compromiso · Bilingüe EN / ES</p>
+                <h3 className="font-bold text-foreground text-lg mb-1">Iniciar búsqueda de propiedad</h3>
+                <p className="text-foreground-muted text-xs font-mono mb-6">Sin compromiso · Respuesta en &lt;24h · EN / ES</p>
                 <div className="space-y-4">
-                  <input className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground" placeholder="Tu nombre *" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
-                  <input className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground" type="email" placeholder="Email *" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-                  <select className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground" value={form.perfil} onChange={e => setForm({ ...form, perfil: e.target.value })}>
-                    <option value="">¿Qué tipo de comprador eres?</option>
-                    <option>Residencia permanente</option>
-                    <option>Segunda residencia</option>
-                    <option>Inversión</option>
-                  </select>
-                  <select className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground" value={form.presupuesto} onChange={e => setForm({ ...form, presupuesto: e.target.value })}>
-                    <option value="">Presupuesto</option>
-                    <option>Hasta 200.000€</option>
-                    <option>200.000 – 350.000€</option>
-                    <option>350.000 – 500.000€</option>
-                    <option>Más de 500.000€</option>
-                  </select>
-                  <textarea className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground" rows={3} placeholder="¿Algo más que deba saber?" value={form.nota} onChange={e => setForm({ ...form, nota: e.target.value })} />
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">Nombre *</label>
+                    <input className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" placeholder="Tu nombre completo" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">País de origen</label>
+                    <select className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" value={form.pais} onChange={e => setForm({ ...form, pais: e.target.value })}>
+                      <option value="">Seleccionar</option>
+                      <option>Reino Unido</option>
+                      <option>Países Bajos</option>
+                      <option>Bélgica</option>
+                      <option>Dinamarca</option>
+                      <option>Suecia</option>
+                      <option>Alemania</option>
+                      <option>Irlanda</option>
+                      <option>Estados Unidos</option>
+                      <option>España</option>
+                      <option>Otro</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">Email *</label>
+                    <input className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" type="email" placeholder="tu@email.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">Tipo de propiedad</label>
+                    <select className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" value={form.tipo} onChange={e => setForm({ ...form, tipo: e.target.value })}>
+                      <option value="">Seleccionar</option>
+                      <option>Apartamento</option>
+                      <option>Casa</option>
+                      <option>Villa</option>
+                      <option>Casa rural</option>
+                      <option>Terreno</option>
+                      <option>Indiferente</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">Presupuesto</label>
+                    <select className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" value={form.presupuesto} onChange={e => setForm({ ...form, presupuesto: e.target.value })}>
+                      <option value="">Seleccionar</option>
+                      <option>Hasta 150.000€</option>
+                      <option>150–250k€</option>
+                      <option>250–400k€</option>
+                      <option>400–600k€</option>
+                      <option>Más de 600k€</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">¿Cuándo piensas comprar?</label>
+                    <select className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" value={form.cuando} onChange={e => setForm({ ...form, cuando: e.target.value })}>
+                      <option value="">Seleccionar</option>
+                      <option>Ahora mismo</option>
+                      <option>En los próximos 3 meses</option>
+                      <option>En 3–12 meses</option>
+                      <option>Más de un año</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-foreground-muted mb-1">¿Qué más debo saber?</label>
+                    <textarea className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-card text-foreground" rows={3} placeholder="Dormitorios, uso previsto, zonas preferidas, requisitos especiales..." value={form.nota} onChange={e => setForm({ ...form, nota: e.target.value })} />
+                  </div>
                   <button
                     className="w-full py-3 rounded-[7px] text-white font-semibold text-sm"
                     style={{ background: "hsl(222, 28%, 16%)" }}
                     onClick={() => { if (form.nombre && form.email) setSent(true); }}
                   >
-                    Enviar consulta →
+                    Enviar — empezar mi búsqueda →
                   </button>
-                  <p className="text-[11px] text-foreground-muted text-center">Datos tratados conforme al RGPD. Respuesta en 24h.</p>
+                  <p className="text-[10px] text-foreground-muted text-center">
+                    Sin coste para compradores. Honorarios exclusivamente al vendedor. RGPD — datos no compartidos con terceros.
+                  </p>
                 </div>
               </>
             ) : (
-              <div className="text-center py-10">
-                <div className="text-5xl mb-4" style={{ color: "hsl(160, 84%, 39%)" }}>✓</div>
-                <h3 className="font-bold text-foreground text-lg mb-2">Consulta recibida</h3>
-                <p className="text-foreground-muted text-sm">
-                  Hola {form.nombre}. Revisaré tu perfil y te contacto en menos de 24h.
+              <div className="text-center py-12">
+                <div className="text-6xl mb-5">🏡</div>
+                <h3 className="font-bold text-foreground text-xl mb-3">¡Búsqueda iniciada!</h3>
+                <p className="text-foreground-muted text-sm leading-relaxed">
+                  Hola {form.nombre}. He recibido tu solicitud.
+                  Mañana por la mañana te escribo con propiedades
+                  seleccionadas — incluyendo las fuera del mercado público.
                   <br /><br />
                   <strong className="text-foreground">Manuel · Propaxar Frigiliana</strong>
                 </p>
