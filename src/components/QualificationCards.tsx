@@ -39,6 +39,17 @@ const QualificationCards = () => {
       link: language === 'es' ? 'Ver análisis' : 'View analysis',
       href: '/invertir',
     },
+    {
+      icon: '🏢',
+      borderColor: '#C9A84C',
+      linkColor: '#C9A84C',
+      title: language === 'es' ? 'Tengo una propiedad en Frigiliana' : 'I own a property in Frigiliana',
+      text: language === 'es'
+        ? 'Gestión integral de tu inmueble. Alquiler de larga temporada o vacacional. Ocupación máxima, sin gestiones para ti.'
+        : 'Full property management. Long-term or vacation rental. Maximum occupancy, zero hassle for you.',
+      link: language === 'es' ? 'Conocer el servicio' : 'Learn more',
+      href: '/propietarios',
+    },
   ];
 
   return (
