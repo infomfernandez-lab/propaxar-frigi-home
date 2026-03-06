@@ -302,17 +302,7 @@ export default function InvertirPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="inv-footer">
-        <div className="inv-footer-brand">Propaxar</div>
-        <nav className="inv-footer-nav">
-          <a href="/mercado">Market Report</a>
-          <a href="/empezar">Comprar</a>
-          <a href="/empezar">Alquilar</a>
-          <a href="/empezar">Contacto</a>
-        </nav>
-        <div className="inv-footer-copy">© 2026 Propaxar · Frigiliana, Málaga · Manuel C. Fernández Ramírez</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
