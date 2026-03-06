@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 export default function ComprarPage() {
   const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ nombre: "", email: "", perfil: "", presupuesto: "", cuando: "", nota: "" });
+  const [form, setForm] = useState({ nombre: "", email: "", pais: "", tipo: "", presupuesto: "", cuando: "", nota: "" });
 
   return (
     <div className="min-h-screen bg-background">
