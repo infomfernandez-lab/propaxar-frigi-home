@@ -104,11 +104,11 @@ export default function AlquilarPage() {
       {/* TRUST */}
       <div className="alq-trust">
         {[
-          { icon: "🔍", strong: "Propiedades off-market", text: "Que no están en Idealista ni Fotocasa" },
+          { icon: "🔍", strong: "Propiedades off-market", text: "Acceso a propiedades que no están publicadas online" },
           { icon: "📋", strong: "Revisión de contrato", text: "LAU vs temporada — que sepas lo que firmas" },
           { icon: "📅", strong: "Timing de mercado", text: "Cuándo salen más propiedades residenciales" },
           { icon: "💬", strong: "Negociación directa", text: "Con propietarios que llevan años de relación" },
-          { icon: "🌐", strong: "EN / ES / NL", text: "Comunicación en tu idioma" },
+          { icon: "🌐", strong: "EN · ES", text: "Comunicación en tu idioma" },
         ].map((t, i) => (
           <div className="alq-trust-item" key={i}>
             <span className="alq-trust-icon">{t.icon}</span>
