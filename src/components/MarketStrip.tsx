@@ -16,7 +16,7 @@ const MarketStrip = () => {
           <div className="flex items-center gap-3">
             <span
               className="text-xs font-semibold px-2.5 py-1 rounded-md"
-              style={{ backgroundColor: 'hsl(210, 53%, 24%)', color: '#fff' }}
+              style={{ backgroundColor: 'rgba(255,255,255,0.15)', color: '#fff' }}
             >
               {language === 'es' ? 'Gratis · Mensual' : 'Free · Monthly'}
             </span>
