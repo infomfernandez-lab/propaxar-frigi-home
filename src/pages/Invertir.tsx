@@ -266,7 +266,7 @@ export default function InvertirPage() {
               <div className="inv-field-row">
                 <div className="inv-field">
                   <label>Teléfono / WhatsApp</label>
-                  <input placeholder="+34 600 000 000" value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} />
+                  <input placeholder="+34 662 317 561" value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} />
                 </div>
                 <div className="inv-field">
                   <label>Presupuesto aproximado</label>
