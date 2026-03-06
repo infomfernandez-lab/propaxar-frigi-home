@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import "./Alquilar.css";
 
 const MONTHS = [
@@ -32,25 +34,13 @@ export default function AlquilarPage() {
   const [activeMonth, setActiveMonth] = useState<number | null>(null);
 
   return (
-    <div className="alquilar-page">
+    <div className="alquilar-page pt-[60px]">
       <Helmet>
         <title>Alquilar en Frigiliana — Precios Reales y Datos Exclusivos | Propaxar</title>
         <meta name="description" content="Encuentra alquiler residencial en Frigiliana a precio justo. Datos reales de coste de vida, calendario de mercado y propiedades off-market. Consulta gratuita." />
       </Helmet>
 
-      {/* NAV */}
-      <nav className="alq-nav">
-        <a href="/" className="alq-nav-logo">Propaxar</a>
-        <div className="alq-nav-links">
-          <a href="/mercado" className="alq-nav-link">Market Report</a>
-          <a href="/invertir" className="alq-nav-link">Invertir</a>
-          <a href="/empezar" className="alq-nav-link">Comprar</a>
-          <a href="/alquilar" className="alq-nav-link active">Alquilar</a>
-        </div>
-        <button className="alq-nav-cta" onClick={() => document.getElementById('buscar')?.scrollIntoView({ behavior: 'smooth' })}>
-          Iniciar búsqueda
-        </button>
-      </nav>
+      <Navigation />
 
       {/* HERO */}
       <section className="alq-hero">
@@ -536,17 +526,7 @@ export default function AlquilarPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="alq-footer">
-        <div className="alq-footer-brand">Propaxar</div>
-        <nav className="alq-footer-nav">
-          <a href="/mercado">Market Report</a>
-          <a href="/invertir">Invertir</a>
-          <a href="/empezar">Comprar</a>
-          <a href="/">Inicio</a>
-        </nav>
-        <div className="alq-footer-copy">© 2026 Propaxar · Frigiliana, Málaga · Manuel Fernandez</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
