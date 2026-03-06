@@ -182,7 +182,6 @@ export default function InvertirPage() {
           <p style={{ fontSize: 11, color: "hsl(var(--foreground-subtle))", marginTop: 20, lineHeight: 1.6 }}>
             Nota: {sc.note} · Fuentes: datos de mercado verificados, operadores locales Frigiliana · 18 fuentes · Los gastos de compra (ITP 7% + notaría ~1,5% + gestoría ~1,5%) no están incluidos en el modelo de retorno.
           </p>
-          </p>
         </div>
       </section>
 
