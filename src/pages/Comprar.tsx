@@ -17,24 +17,25 @@ export default function ComprarPage() {
       <Navigation />
 
       {/* 1. HERO */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-[60px]">
+      <section className="relative min-h-screen flex items-center justify-center pt-[64px]">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/comprar-hero.png')" }}
+          style={{ backgroundImage: "url('https://propaxar.com/wp-content/uploads/2026/01/Gemini_Generated_Image_wyt8u3wyt8u3wyt8.png')" }}
         />
         <div className="absolute inset-0" style={{ background: "rgba(17,24,39,0.65)" }} />
-        <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-white/60 mb-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-5 text-center pb-32">
+          <p className="inline-block text-[11px] uppercase tracking-[0.2em] text-white/40 border border-white/20 rounded-full px-5 py-2 mb-8">
             Comprar en Frigiliana · La Axarquía · Málaga
           </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Tu casa en el pueblo más bonito de España.
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Frigiliana. Calles blancas, vistas al Mediterráneo, comunidad de expats consolidada.
-            El pueblo que buscas — con alguien que lo conoce de verdad.
+          <p className="text-lg md:text-xl text-white/80 max-w-[560px] mx-auto mb-10 leading-relaxed">
+            Frigiliana. Calles blancas, vistas al Mediterráneo,
+            comunidad de expats consolidada. El pueblo que buscas
+            — con alguien que lo conoce de verdad.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <button
               onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
               className="px-8 py-3 rounded-[7px] bg-white font-semibold text-sm"
@@ -49,17 +50,22 @@ export default function ComprarPage() {
               Ver el proceso →
             </button>
           </div>
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-1 text-white/50 text-xs">
+            <span>✓ Consulta gratuita · Sin compromiso</span>
+            <span>✓ Respuesta en 24h</span>
+            <span>✓ EN · ES</span>
+          </div>
         </div>
         {/* Hero stats strip */}
-        <div className="absolute bottom-0 left-0 right-0 bg-black/40 backdrop-blur-sm">
-          <div className="max-w-5xl mx-auto px-5 py-5 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="absolute bottom-0 left-0 right-0" style={{ background: "rgba(17,24,39,0.85)" }}>
+          <div className="max-w-5xl mx-auto px-5 py-5 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 text-center">
             {[
               { icon: "🏡", val: "374.000€", label: "Precio medio listado Frigiliana" },
               { icon: "📈", val: "+6,4% anual", label: "Revalorización 2025" },
               { icon: "🌍", val: "32,3% extranjeros", label: "Compradores Málaga provincia" },
               { icon: "✈️", val: "26,7M pasajeros", label: "Aeropuerto Málaga 2025" },
             ].map((s, i) => (
-              <div key={i}>
+              <div key={i} className="px-4">
                 <div className="text-2xl mb-1">{s.icon}</div>
                 <div className="text-white font-bold text-lg">{s.val}</div>
                 <div className="text-white/60 text-xs">{s.label}</div>
