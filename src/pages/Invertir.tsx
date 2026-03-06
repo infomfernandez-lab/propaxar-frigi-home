@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import "./Invertir.css";
 
 const SCENARIOS = [
@@ -42,22 +44,10 @@ export default function InvertirPage() {
         <meta name="description" content="Modelos de inversión inmobiliaria en Frigiliana con rentabilidad verificada. Datos reales de 901 propiedades VUT. Consulta gratuita con experto local." />
       </Helmet>
 
-      {/* NAV */}
-      <nav className="inv-nav">
-        <a href="/" className="inv-nav-logo">Propaxar</a>
-        <div className="inv-nav-links">
-          <a href="/mercado" className="inv-nav-link">Market Report</a>
-          <a href="/invertir" className="inv-nav-link active">Invertir</a>
-          <a href="/empezar" className="inv-nav-link">Comprar</a>
-          <a href="/empezar" className="inv-nav-link">Alquilar</a>
-        </div>
-        <button className="inv-nav-cta" onClick={() => document.getElementById('consulta')?.scrollIntoView({ behavior: 'smooth' })}>
-          Consulta gratuita
-        </button>
-      </nav>
+      <Navigation />
 
       {/* HERO */}
-      <section className="inv-hero">
+      <section className="inv-hero" style={{ paddingTop: '64px' }}>
         <div className="inv-hero-bg" />
         <div className="inv-hero-grid-lines" />
         <div className="inv-hero-eyebrow">Inversión inmobiliaria — Frigiliana, Costa del Sol</div>
@@ -276,7 +266,7 @@ export default function InvertirPage() {
               <div className="inv-field-row">
                 <div className="inv-field">
                   <label>Teléfono / WhatsApp</label>
-                  <input placeholder="+34 600 000 000" value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} />
+                  <input placeholder="+34 662 317 561" value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} />
                 </div>
                 <div className="inv-field">
                   <label>Presupuesto aproximado</label>
@@ -312,17 +302,7 @@ export default function InvertirPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="inv-footer">
-        <div className="inv-footer-brand">Propaxar</div>
-        <nav className="inv-footer-nav">
-          <a href="/mercado">Market Report</a>
-          <a href="/empezar">Comprar</a>
-          <a href="/empezar">Alquilar</a>
-          <a href="/empezar">Contacto</a>
-        </nav>
-        <div className="inv-footer-copy">© 2026 Propaxar · Frigiliana, Málaga · Manuel C. Fernández Ramírez</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
