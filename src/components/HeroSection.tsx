@@ -40,6 +40,7 @@ const HeroSection = () => {
             <button
               onClick={handleCTAClick}
               className="btn-primary text-lg px-10 py-4"
+              style={{ backgroundColor: '#fff', color: '#1E2535' }}
             >
               {language === 'es' ? 'Empezar ahora' : 'Start now'}
               <ArrowRight className="w-5 h-5" />
