@@ -289,6 +289,11 @@ export default function InvertirPage() {
                 Enviar consulta gratuita →
               </button>
               <div className="inv-form-legal">Datos tratados conforme al RGPD. No compartimos información con terceros. Respuesta garantizada en 24h laborables.</div>
+              <div style={{ marginTop: 20, fontSize: 13, color: "hsl(var(--foreground-muted))", lineHeight: 1.8 }}>
+                <p>📱 <strong style={{ color: "hsl(var(--foreground))" }}>WhatsApp: +34 662 317 561</strong> (ES / EN)</p>
+                <p>✉️ <strong style={{ color: "hsl(var(--foreground))" }}>info@propaxar.es</strong></p>
+                <p>⏱ Respuesta en menos de 24h laborables</p>
+              </div>
             </>
           ) : (
             <div style={{ textAlign: "center", padding: "40px 0" }}>
