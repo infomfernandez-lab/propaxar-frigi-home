@@ -110,7 +110,7 @@ export default function InvertirPage() {
         </h2>
         <p className="inv-section-lead">
           Tres modelos basados en propiedades reales de Frigiliana.
-          Ingresos Airbnb verificados con datos de 901 listings activos.
+          Ingresos verificados con datos de 901 propiedades activas.
           Gastos calculados con operadores locales.
         </p>
 
