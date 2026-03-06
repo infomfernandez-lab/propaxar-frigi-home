@@ -175,6 +175,45 @@ const PisoFrigiliana = () => {
                 </div>
               </div>
 
+              {/* Location */}
+              <div className="border border-border bg-card p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="font-display text-lg font-bold text-foreground">Ubicación</h2>
+                  <a
+                    href="https://www.google.com/maps/place/C.+Ermita,+29788+Frigiliana,+M%C3%A1laga"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-muted hover:text-primary transition-colors flex items-center gap-1.5"
+                  >
+                    <MapPin className="w-3 h-3" />
+                    Abrir en Google Maps
+                  </a>
+                </div>
+                <a
+                  href="https://www.google.com/maps/place/C.+Ermita,+29788+Frigiliana,+M%C3%A1laga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block relative group overflow-hidden border border-border"
+                >
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3790.2290712553013!2d-3.8949735999999997!3d36.7879436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7224b98b241ba1%3A0xe820b3a59482ebe0!2sC.%20Ermita%2C%2029788%20Frigiliana%2C%20M%C3%A1laga!5e1!3m2!1ses!2ses!4v1772797075045!5m2!1ses!2ses"
+                    width="100%"
+                    height="300"
+                    style={{ border: 0, pointerEvents: "none" }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación del piso en Frigiliana"
+                  />
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-card/95 backdrop-blur-sm text-foreground text-xs font-semibold px-4 py-2 border border-border shadow-sm">
+                      Abrir en Google Maps ↗
+                    </span>
+                  </div>
+                </a>
+                <p className="text-xs text-muted mt-3 font-mono">C. Ermita · Casco Nuevo, Frigiliana 29788</p>
+              </div>
+
               {/* Full Gallery */}
               <div className="border border-border bg-card p-6">
                 <h2 className="font-display text-lg font-bold text-foreground mb-4">Galería completa</h2>
