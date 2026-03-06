@@ -99,7 +99,7 @@ const t = {
     sendEmail: "Send email",
     agentName: "Manuel C. Fernández",
     agentRole: "Property consultant · Frigiliana",
-    agentBio: "40 years of local knowledge. I know every property and every owner in Frigiliana. I help you find exactly what you're looking for — without wasting time.",
+    agentBio: "40 years of local knowledge. I help you find exactly what you're looking for — without wasting time.",
     highlights: "Highlights",
     highlightsList: [
       "Private 15m² terrace",
