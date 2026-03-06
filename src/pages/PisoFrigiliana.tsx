@@ -397,7 +397,7 @@ const PisoFrigiliana = () => {
           <img
             src={PHOTOS[lightboxIdx]}
             alt={`Foto ${lightboxIdx + 1}`}
-            className="max-w-[90vw] max-h-[85vh] object-contain"
+            className="w-[90vw] h-[85vh] object-contain"
             onClick={(e) => e.stopPropagation()}
           />
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">
