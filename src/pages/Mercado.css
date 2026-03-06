@@ -658,7 +658,9 @@
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .nations-grid { grid-template-columns: 1fr; }
   .mercado-capture { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; }
-  .sources-bar, .mercado-footer { padding: 24px; }
+  .reporte-upsell-card { grid-template-columns: 1fr; }
+  .reporte-upsell-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 28px 24px; }
+  .reporte-upsell-right { padding: 28px 24px; }
+  .sources-bar { padding: 24px; }
   .mercado-ribbon { padding: 7px 24px; }
-  .mercado-footer { flex-direction: column; gap: 16px; text-align: center; }
 }
