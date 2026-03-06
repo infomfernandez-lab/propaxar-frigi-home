@@ -1,87 +1,73 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const { language, setLanguage, t } = useLanguage();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsMobileMenuOpen(false);
-  };
+  const location = useLocation();
 
   const navLinks = [
-    { label: t('nav.howItWorks'), id: 'how-it-works' },
-    { label: t('nav.services'), id: 'form-section' },
-    { label: t('nav.testimonials'), id: 'testimonials' },
-    { label: t('nav.faq'), id: 'faq-section' },
-    { label: t('nav.contact'), id: 'final-cta' },
+    { label: t('nav.rent'), href: '/alquilar' },
+    { label: t('nav.buy'), href: '/comprar' },
+    { label: t('nav.invest'), href: '/invertir' },
+    { label: 'Market Report', href: '/mercado' },
   ];
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-card shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-[1200px] mx-auto px-5 md:px-10">
-        <div className="flex items-center justify-between h-[70px]">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-[60px]" style={{ backgroundColor: 'hsl(222, 28%, 16%)' }}>
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8 h-full">
+        <div className="flex items-center justify-between h-full">
           {/* Logo */}
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
-            <img 
-              src="https://propaxar.com/wp-content/uploads/2024/08/logo_small_icon_only_inverted_orDKnNi.png"
-              alt="Propaxar - Housing Consultant Frigiliana"
-              className="h-[60px] w-auto"
-            />
-          </button>
+          <Link to="/" className="flex items-center gap-2.5">
+            <div
+              className="w-[34px] h-[34px] rounded-full flex items-center justify-center text-sm font-bold"
+              style={{ backgroundColor: 'hsl(210, 53%, 24%)', color: '#fff' }}
+            >
+              P
+            </div>
+            <span className="text-white font-heading font-bold text-lg">Propaxar</span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className={`text-[15px] font-medium transition-colors hover:text-primary ${
-                  isScrolled ? "text-foreground" : "text-white"
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`text-[14px] font-medium px-3.5 py-2 rounded-md transition-colors ${
+                  location.pathname === link.href
+                    ? 'text-white/95 bg-white/[0.07]'
+                    : 'text-white/60 hover:text-white/95 hover:bg-white/[0.07]'
                 }`}
               >
                 {link.label}
-              </button>
+              </Link>
             ))}
           </div>
 
           {/* Right Side */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {/* Language Toggle */}
-            <div className={`flex items-center text-sm font-medium ${isScrolled ? "text-foreground" : "text-white"}`}>
+            <div className="flex items-center text-[13px] font-medium text-white/60">
               <button
                 onClick={() => setLanguage('es')}
-                className={`px-2 py-1 rounded transition-colors ${
-                  language === 'es' ? 'text-primary font-bold' : 'hover:text-primary'
+                className={`px-1.5 py-1 transition-colors ${
+                  language === 'es' ? 'text-white font-bold' : 'hover:text-white/90'
                 }`}
               >
                 ES
               </button>
-              <span className="opacity-50">|</span>
+              <span className="opacity-30">|</span>
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-2 py-1 rounded transition-colors ${
-                  language === 'en' ? 'text-primary font-bold' : 'hover:text-primary'
+                className={`px-1.5 py-1 transition-colors ${
+                  language === 'en' ? 'text-white font-bold' : 'hover:text-white/90'
                 }`}
               >
                 EN
@@ -89,46 +75,46 @@ const Navigation = () => {
             </div>
 
             {/* Desktop CTA */}
-            <button
-              onClick={() => scrollToSection('form-section')}
-              className="hidden md:flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg transition-all"
+            <Link
+              to="/empezar"
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 text-white transition-all"
+              style={{ backgroundColor: 'hsl(210, 53%, 24%)', borderRadius: '7px' }}
             >
-              {t('nav.start')}
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              {t('nav.start')} <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
 
             {/* Mobile Hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
+              className="lg:hidden p-2 text-white/80"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[70px] bg-card z-40 animate-fade-in">
-          <div className="flex flex-col p-6 gap-4">
+        <div className="lg:hidden fixed inset-0 top-[60px] z-40 animate-fade-in" style={{ backgroundColor: 'hsl(222, 28%, 16%)' }}>
+          <div className="flex flex-col p-6 gap-1">
             {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-lg font-medium text-foreground py-3 border-b border-border text-left hover:text-primary transition-colors"
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-base font-medium text-white/70 py-3 border-b border-white/10 hover:text-white transition-colors"
               >
                 {link.label}
-              </button>
+              </Link>
             ))}
-            <button
-              onClick={() => scrollToSection('form-section')}
-              className="mt-4 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-4 rounded-lg transition-all"
+            <Link
+              to="/empezar"
+              className="mt-4 flex items-center justify-center gap-2 text-white font-semibold px-6 py-3.5 transition-all"
+              style={{ backgroundColor: 'hsl(210, 53%, 24%)', borderRadius: '7px' }}
             >
-              {t('nav.start')}
-              <ArrowRight className="w-5 h-5" />
-            </button>
+              {t('nav.start')} <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       )}
