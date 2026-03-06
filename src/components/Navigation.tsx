@@ -75,8 +75,8 @@ const Navigation = () => {
             {/* Desktop CTA */}
             <Link
               to="/empezar"
-              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 text-white transition-all"
-              style={{ backgroundColor: 'hsl(210, 53%, 24%)', borderRadius: '7px' }}
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 transition-all"
+              style={{ backgroundColor: '#fff', color: '#1E2535', borderRadius: '7px' }}
             >
               {t('nav.start')} <ArrowRight className="w-3.5 h-3.5" />
             </Link>
