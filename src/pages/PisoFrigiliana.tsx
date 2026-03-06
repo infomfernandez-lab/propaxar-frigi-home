@@ -27,7 +27,7 @@ const PHOTOS = [
 const t = {
   es: {
     title: "Piso en Frigiliana — 750€/mes | Propaxar",
-    metaDesc: "Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 20m² con vistas a la montaña. 750€/mes. Ref. pa225.",
+    metaDesc: "Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 15m² con vistas a la montaña. 750€/mes. Ref. pa225.",
     ref: "Ref. pa225 · Alquiler residencial",
     heading: "Piso en Frigiliana",
     location: "Casco Nuevo, Frigiliana, Málaga",
@@ -46,7 +46,7 @@ const t = {
     ],
     description: "Descripción",
     descP1: <>A menudo, en Frigiliana tienes que elegir entre <strong>'vistas increíbles'</strong> (pero con 100 cuestas para llegar a casa) o <strong>'comodidad de acceso'</strong> (pero sin terraza). Este piso rompe esa regla.</>,
-    descP2: <>Ubicado en el Casco Nuevo, este dúplex te ofrece la facilidad de llegar a tu puerta sin esfuerzo y, una vez dentro, te regala una de las mejores terrazas de la zona: <strong>20 metros cuadrados de espacio privado</strong> para vivir al aire libre.</>,
+    descP2: <>Ubicado en el Casco Nuevo, este dúplex te ofrece la facilidad de llegar a tu puerta sin esfuerzo y, una vez dentro, te regala una de las mejores terrazas de la zona: <strong>15 metros cuadrados de espacio privado</strong> para vivir al aire libre.</>,
     descP3: <>Es una propiedad con carácter, dividida en niveles para darte privacidad, y con el tamaño justo para ser tu refugio personal en el pueblo más bonito de España. Perfecto para una persona o pareja que valore la luz natural y el espacio exterior.</>,
     locationTitle: "Ubicación",
     openMaps: "Abrir en Google Maps",
@@ -59,7 +59,7 @@ const t = {
     agentBio: "40 años de conocimiento local. Conozco cada propiedad y cada propietario de Frigiliana. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo.",
     highlights: "Lo que destaca",
     highlightsList: [
-      "Terraza privada de 20m²",
+      "Terraza privada de 15m²",
       "Casco Nuevo — acceso fácil sin cuestas",
       "Dúplex con niveles para privacidad",
       "Vistas a la montaña",
@@ -70,7 +70,7 @@ const t = {
   },
   en: {
     title: "Apartment in Frigiliana — 750€/month | Propaxar",
-    metaDesc: "1-bedroom duplex in Frigiliana's Casco Nuevo. 20m² terrace with mountain views. 750€/month. Ref. pa225.",
+    metaDesc: "1-bedroom duplex in Frigiliana's Casco Nuevo. 15m² terrace with mountain views. 750€/month. Ref. pa225.",
     ref: "Ref. pa225 · Residential rental",
     heading: "Apartment in Frigiliana",
     location: "Casco Nuevo, Frigiliana, Málaga",
@@ -89,7 +89,7 @@ const t = {
     ],
     description: "Description",
     descP1: <>In Frigiliana, you often have to choose between <strong>'incredible views'</strong> (but 100 steep hills to get home) or <strong>'easy access'</strong> (but no terrace). This apartment breaks that rule.</>,
-    descP2: <>Located in the Casco Nuevo, this duplex gives you the ease of reaching your door effortlessly and, once inside, rewards you with one of the best terraces in the area: <strong>20 square metres of private space</strong> for outdoor living.</>,
+    descP2: <>Located in the Casco Nuevo, this duplex gives you the ease of reaching your door effortlessly and, once inside, rewards you with one of the best terraces in the area: <strong>15 square metres of private space</strong> for outdoor living.</>,
     descP3: <>A property with character, split across levels for privacy, and just the right size to be your personal retreat in Spain's most beautiful village. Perfect for an individual or couple who values natural light and outdoor space.</>,
     locationTitle: "Location",
     openMaps: "Open in Google Maps",
@@ -102,7 +102,7 @@ const t = {
     agentBio: "40 years of local knowledge. I know every property and every owner in Frigiliana. I help you find exactly what you're looking for — without wasting time.",
     highlights: "Highlights",
     highlightsList: [
-      "Private 20m² terrace",
+      "Private 15m² terrace",
       "Casco Nuevo — easy access, no steep hills",
       "Duplex with split levels for privacy",
       "Mountain views",
