@@ -102,7 +102,7 @@ const t = {
     agentBio: "40 years of local knowledge. I know every property and every owner in Frigiliana. I help you find exactly what you're looking for — without wasting time.",
     highlights: "Highlights",
     highlightsList: [
-      "Private 20m² terrace",
+      "Private 15m² terrace",
       "Casco Nuevo — easy access, no steep hills",
       "Duplex with split levels for privacy",
       "Mountain views",
