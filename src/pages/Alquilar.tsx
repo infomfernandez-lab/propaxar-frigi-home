@@ -297,11 +297,11 @@ export default function AlquilarPage() {
               </p>
             </div>
             <div className="alq-insight-card" style={{ borderLeftColor: "hsl(var(--primary))" }}>
-              <div className="alq-insight-card-title">💡 El contacto directo vale meses de búsqueda</div>
+            <div className="alq-insight-card-title">💡 El contacto directo vale meses de búsqueda</div>
               <p className="alq-insight-card-text">
-                Las mejores propiedades en Frigiliana nunca llegan a Idealista.
+                Las mejores propiedades en Frigiliana nunca se publican online.
                 Un propietario con quien tengo relación de años me llama antes de
-                publicar. Eso es lo que ningún portal puede darte.
+                anunciar nada. Eso es lo que ningún portal puede darte.
               </p>
             </div>
           </div>
