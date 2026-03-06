@@ -19,6 +19,9 @@ const translations = {
     'nav.contact': 'Contacto',
     'nav.start': 'Empezar',
     'nav.subtitle': 'Housing Consultant',
+    'nav.rent': 'Alquilar',
+    'nav.buy': 'Comprar',
+    'nav.invest': 'Invertir',
 
     // Hero
     'hero.line1': 'Deja de buscar.',
@@ -168,6 +171,9 @@ Eso es todo. El resto lo hablamos en la llamada. No necesitas preparar presentac
     'nav.contact': 'Contact',
     'nav.start': 'Start',
     'nav.subtitle': 'Housing Consultant',
+    'nav.rent': 'Rent',
+    'nav.buy': 'Buy',
+    'nav.invest': 'Invest',
 
     // Hero
     'hero.line1': 'Stop searching.',
