@@ -34,7 +34,7 @@ export default function AlquilarPage() {
   const [activeMonth, setActiveMonth] = useState<number | null>(null);
 
   return (
-    <div className="alquilar-page">
+    <div className="alquilar-page pt-[60px]">
       <Helmet>
         <title>Alquilar en Frigiliana — Precios Reales y Datos Exclusivos | Propaxar</title>
         <meta name="description" content="Encuentra alquiler residencial en Frigiliana a precio justo. Datos reales de coste de vida, calendario de mercado y propiedades off-market. Consulta gratuita." />
