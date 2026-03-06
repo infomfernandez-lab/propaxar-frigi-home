@@ -74,37 +74,15 @@ const PisoFrigiliana = () => {
         {/* Photo Gallery */}
         <section className="max-w-[1100px] mx-auto px-5 pb-8">
           {/* Main hero image + grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-            {/* Main large image */}
-            <div
-              className="md:col-span-2 md:row-span-2 cursor-pointer overflow-hidden border border-border"
-              onClick={() => openLightbox(0)}
-            >
-              <img
-                src={PHOTOS[0]}
-                alt="Piso en Frigiliana - Vista principal"
-                className="w-full h-full object-cover min-h-[280px] md:min-h-[420px] hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            {/* 4 smaller images */}
-            {PHOTOS.slice(1, 5).map((photo, i) => (
-              <div
-                key={i}
-                className="cursor-pointer overflow-hidden border border-border relative"
-                onClick={() => openLightbox(i + 1)}
-              >
-                <img
-                  src={photo}
-                  alt={`Piso en Frigiliana - Foto ${i + 2}`}
-                  className="w-full h-full object-cover min-h-[130px] md:min-h-[205px] hover:scale-105 transition-transform duration-500"
-                />
-                {i === 3 && (
-                  <div className="absolute inset-0 bg-primary/60 flex items-center justify-center">
-                    <span className="text-primary-foreground font-bold text-lg">+{PHOTOS.length - 5} fotos</span>
-                  </div>
-                )}
-              </div>
-            ))}
+          <div
+            className="cursor-pointer overflow-hidden border border-border"
+            onClick={() => openLightbox(0)}
+          >
+            <img
+              src={PHOTOS[0]}
+              alt="Piso en Frigiliana - Vista principal"
+              className="w-full object-cover max-h-[500px] hover:scale-105 transition-transform duration-500"
+            />
           </div>
         </section>
 
