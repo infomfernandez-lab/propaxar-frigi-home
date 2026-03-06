@@ -19,6 +19,9 @@ const translations = {
     'nav.contact': 'Contacto',
     'nav.start': 'Empezar',
     'nav.subtitle': 'Housing Consultant',
+    'nav.rent': 'Alquilar',
+    'nav.buy': 'Comprar',
+    'nav.invest': 'Invertir',
 
     // Hero
     'hero.line1': 'Deja de buscar.',
