@@ -26,7 +26,7 @@ const MarketStrip = () => {
                 : 'Market Report — real market data from Frigiliana. First Monday of each month.'}
             </p>
           </div>
-          <span className="flex items-center gap-1 text-sm font-semibold" style={{ color: 'hsl(210, 56%, 55%)' }}>
+          <span className="flex items-center gap-1 text-sm font-semibold text-white/80">
             {language === 'es' ? 'Ver el informe' : 'View the report'} <ArrowRight className="w-4 h-4" />
           </span>
         </div>

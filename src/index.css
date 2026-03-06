@@ -212,7 +212,7 @@
   .stat-number {
     @apply text-[32px] font-bold;
     font-family: var(--font-heading);
-    color: hsl(var(--accent));
+    color: hsl(var(--ink));
   }
 
   .stat-label {

@@ -48,6 +48,7 @@ const HeroSection = () => {
             <Link
               to="/mercado"
               className="btn-ghost text-lg px-10 py-4"
+              style={{ borderColor: 'rgba(255,255,255,0.4)' }}
             >
               {language === 'es' ? 'Ver Market Report' : 'View Market Report'}
             </Link>

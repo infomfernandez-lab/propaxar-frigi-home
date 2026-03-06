@@ -26,7 +26,7 @@ const FinalCTA = () => {
             : 'Tell me what you need. I\'ll respond within 24h.'}
         </p>
 
-        <button onClick={handleCTAClick} className="btn-primary text-lg px-12 py-4">
+        <button onClick={handleCTAClick} className="btn-primary text-lg px-12 py-4" style={{ backgroundColor: '#fff', color: '#1E2535' }}>
           {language === 'es' ? 'Empezar ahora' : 'Start now'}
           <ArrowRight className="w-5 h-5" />
         </button>
