@@ -380,7 +380,7 @@ export default function AlquilarPage() {
         </p>
         <div className="alq-advantage-list">
           {[
-            { icon: "🏡", title: "Propiedades off-market", text: "Antes de que aparezcan en Idealista. Propietarios que confían en mí para encontrar buenos inquilinos directamente." },
+            { icon: "🏡", title: "Propiedades off-market", text: "Propietarios que confían en mí directamente. Algunas de las mejores propiedades de Frigiliana nunca se publican." },
             { icon: "⚖️", title: "Revisión legal del contrato", text: "LAU residencial vs temporada. Que sepas exactamente qué derechos tienes antes de firmar." },
             { icon: "📅", title: "Estrategia de timing", text: "Te digo cuándo y cómo buscar para maximizar tu poder de negociación y acceso al mejor stock." },
             { icon: "💬", title: "Negociación directa", text: "Con propietarios con quien tengo relación de años. El precio de lista no siempre es el precio final." },
