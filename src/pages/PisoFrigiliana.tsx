@@ -70,7 +70,7 @@ const t = {
   },
   en: {
     title: "Apartment in Frigiliana — 750€/month | Propaxar",
-    metaDesc: "1-bedroom duplex in Frigiliana's Casco Nuevo. 20m² terrace with mountain views. 750€/month. Ref. pa225.",
+    metaDesc: "1-bedroom duplex in Frigiliana's Casco Nuevo. 15m² terrace with mountain views. 750€/month. Ref. pa225.",
     ref: "Ref. pa225 · Residential rental",
     heading: "Apartment in Frigiliana",
     location: "Casco Nuevo, Frigiliana, Málaga",
