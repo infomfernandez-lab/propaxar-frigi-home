@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Bed, Bath, Home, Tag, Wind, Mountain, TreePine, MapPin, ChevronLeft, ChevronRight, X, MessageCircle, Mail, Phone } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import Navigation from "@/components/Navigation";
+import { Bed, Bath, Home, Tag, Wind, Mountain, TreePine, MapPin, ChevronLeft, ChevronRight, X, MessageCircle, Mail, Phone } from "lucide-react";
 
 const WHATSAPP_LINK = "https://wa.me/34662317561?text=Hola%20Manuel%2C%20me%20interesa%20el%20piso%20en%20Frigiliana%20(ref.%20pa225).%20%C2%BFPuedo%20agendar%20una%20visita%3F";
 
@@ -31,7 +29,6 @@ const FEATURES = [
 ];
 
 const PisoFrigiliana = () => {
-  const navigate = useNavigate();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState(0);
 
@@ -52,19 +49,7 @@ const PisoFrigiliana = () => {
         <meta name="description" content="Dúplex de 1 dormitorio en el Casco Nuevo de Frigiliana. Terraza de 20m² con vistas a la montaña. 750€/mes. Ref. pa225." />
       </Helmet>
 
-      <Navigation />
-
-      <main className="bg-background min-h-screen pt-20">
-        {/* Back button */}
-        <div className="max-w-[1100px] mx-auto px-5 pt-6">
-          <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors font-medium"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver
-          </button>
-        </div>
+      <main className="bg-background min-h-screen pt-6">
 
         {/* Header */}
         <header className="max-w-[1100px] mx-auto px-5 pt-6 pb-4">
@@ -318,7 +303,7 @@ const PisoFrigiliana = () => {
         <footer className="border-t border-border bg-card py-8">
           <div className="max-w-[1100px] mx-auto px-5 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="font-display text-lg font-bold text-primary">Propaxar</div>
-            <div className="text-xs text-muted">© 2026 Propaxar · Frigiliana, Málaga · Manuel C. Fernández Ramírez</div>
+            <div className="text-xs text-muted">© 2026 Propaxar · Frigiliana, Málaga</div>
           </div>
         </footer>
       </main>
