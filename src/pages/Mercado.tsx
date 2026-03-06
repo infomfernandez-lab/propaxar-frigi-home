@@ -320,6 +320,60 @@ export default function MercadoPage() {
         ))}
       </section>
 
+      {/* PERSONALIZED REPORT UPSELL */}
+      <section className="data-section" style={{ background: 'var(--bg, #F4F6F8)' }}>
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'hsl(var(--foreground-subtle))', marginBottom: 8 }}>
+            Reporte personalizado
+          </div>
+          <h2 style={{ fontFamily: "'Crimson Pro', serif", fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: 600, color: 'hsl(var(--foreground))', lineHeight: 1.15, marginBottom: 12 }}>
+            Este es el informe público.<br />El tuyo es diferente.
+          </h2>
+          <p style={{ fontSize: 15, lineHeight: 1.7, color: 'hsl(var(--foreground-muted))', maxWidth: 640 }}>
+            Los datos de arriba son el mercado general. Tu situación — tu zona, tu presupuesto, tu objetivo concreto — necesita un análisis específico. Lo preparo en 48 horas.
+          </p>
+        </div>
+
+        <div className="reporte-upsell-card">
+          <div className="reporte-upsell-left">
+            <ul className="reporte-upsell-list">
+              <li>Análisis de tu zona y presupuesto específico</li>
+              <li>Comparativa de propiedades similares vendidas/alquiladas recientemente</li>
+              <li>Estimación de precio justo vs precio de mercado actual</li>
+              <li>Recomendación sobre timing — cuándo actuar</li>
+              <li>Formato PDF ejecutivo</li>
+              <li>Entrega en 48h</li>
+            </ul>
+          </div>
+          <div className="reporte-upsell-right">
+            <div style={{ fontSize: 48, fontWeight: 800, color: '#fff', lineHeight: 1 }}>180€</div>
+            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', marginTop: 6 }}>pago único · sin suscripción</div>
+            <Link
+              to="/empezar"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                marginTop: 24,
+                background: '#fff',
+                color: '#1E2535',
+                fontWeight: 600,
+                fontSize: 14,
+                padding: '14px 28px',
+                borderRadius: 7,
+                textDecoration: 'none',
+                transition: 'opacity 0.2s',
+              }}
+            >
+              Solicitar mi reporte →
+            </Link>
+            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 14, maxWidth: 260, lineHeight: 1.5 }}>
+              Si decides trabajar conmigo directamente, los 180€ se descuentan del servicio.
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* NEWSLETTER CAPTURE */}
       <section className="mercado-capture">
         <div className="capture-left">
