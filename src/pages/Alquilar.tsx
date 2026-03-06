@@ -22,7 +22,7 @@ const MONTHS = [
 const WOW_CARDS = [
   { n: "01", icon: "📅", title: "El calendario que ningún portal publica", text: "En julio es casi imposible alquilar a precio justo — los propietarios prefieren VUT a 251€/noche. Enero, noviembre y diciembre son el momento ideal. Ese dato vale semanas de búsqueda.", stat: "98%", sl: "Ocupación turística agosto — competencia directa" },
   { n: "02", icon: "🏘️", title: "Residencial vs turístico: dos mercados distintos", text: "El precio de Airbnb (124€/noche media) no tiene nada que ver con el alquiler residencial (1.100–1.400€/mes). Pero en temporada alta compiten por el mismo stock de viviendas.", stat: "1.100–1.400€", sl: "Alquiler residencial típico 2/3 dorm" },
-  { n: "03", icon: "🤝", title: "Propiedades que no están en Idealista", text: "Los propietarios con quien tengo relación de años no publican en portales. Me llaman directamente. Eso significa que algunas de las mejores propiedades nunca aparecen online.", stat: "40 años", sl: "Red de propietarios directos en Frigiliana" },
+  { n: "03", icon: "🤝", title: "Propiedades fuera del mercado público", text: "Los propietarios con quien tengo relación de años no necesitan publicar en ningún sitio. Me llaman directamente. Eso significa que algunas de las mejores propiedades nunca aparecen online.", stat: "40 años", sl: "Red de propietarios directos en Frigiliana" },
   { n: "04", icon: "📊", title: "El coste real — con todos los gastos", text: "El portal te dice el precio de alquiler. Nadie te dice lo que cuesta el agua, la comunidad si aplica, o si la calefacción es por leña o eléctrica. Aquí lo sabes antes de llamar.", stat: "200–400€", sl: "Gastos adicionales típicos mensuales" },
   { n: "05", icon: "📡", title: "Conectividad real — no la que promete el anuncio", text: "El casco histórico de Frigiliana tiene cobertura fibra limitada. La parte nueva tiene mejor conexión. Para nómadas digitales, esto puede ser la diferencia.", stat: "100–600Mb", sl: "Rango real según zona del pueblo" },
   { n: "06", icon: "📋", title: "Contratos que te protegen legalmente", text: "En Frigiliana existen alquileres de temporada que los propietarios presentan como residenciales — sin los derechos que te corresponden por la LAU.", stat: "LAU 2023", sl: "Derechos reales que pocos inquilinos conocen" },
@@ -104,11 +104,11 @@ export default function AlquilarPage() {
       {/* TRUST */}
       <div className="alq-trust">
         {[
-          { icon: "🔍", strong: "Propiedades off-market", text: "Que no están en Idealista ni Fotocasa" },
+          { icon: "🔍", strong: "Propiedades off-market", text: "Acceso a propiedades que no están publicadas online" },
           { icon: "📋", strong: "Revisión de contrato", text: "LAU vs temporada — que sepas lo que firmas" },
           { icon: "📅", strong: "Timing de mercado", text: "Cuándo salen más propiedades residenciales" },
           { icon: "💬", strong: "Negociación directa", text: "Con propietarios que llevan años de relación" },
-          { icon: "🌐", strong: "EN / ES / NL", text: "Comunicación en tu idioma" },
+          { icon: "🌐", strong: "EN · ES", text: "Comunicación en tu idioma" },
         ].map((t, i) => (
           <div className="alq-trust-item" key={i}>
             <span className="alq-trust-icon">{t.icon}</span>
@@ -127,8 +127,8 @@ export default function AlquilarPage() {
           Lo que ningún portal<br /><em>sabe explicarte.</em>
         </h2>
         <p className="alq-wow-lead">
-          Idealista te da el precio. Fotocasa te da las fotos.
-          Ninguno te dice cuándo buscar, qué contratos evitar, qué zonas tienen fibra real,
+          Los portales te dan el precio y las fotos.
+          Nadie te dice cuándo buscar, qué contratos evitar, qué zonas tienen fibra real,
           o que hay propiedades que nunca se publican.
         </p>
         <div className="alq-wow-cards">
@@ -297,11 +297,11 @@ export default function AlquilarPage() {
               </p>
             </div>
             <div className="alq-insight-card" style={{ borderLeftColor: "hsl(var(--primary))" }}>
-              <div className="alq-insight-card-title">💡 El contacto directo vale meses de búsqueda</div>
+            <div className="alq-insight-card-title">💡 El contacto directo vale meses de búsqueda</div>
               <p className="alq-insight-card-text">
-                Las mejores propiedades en Frigiliana nunca llegan a Idealista.
+                Las mejores propiedades en Frigiliana nunca se publican online.
                 Un propietario con quien tengo relación de años me llama antes de
-                publicar. Eso es lo que ningún portal puede darte.
+                anunciar nada. Eso es lo que ningún portal puede darte.
               </p>
             </div>
           </div>
@@ -380,7 +380,7 @@ export default function AlquilarPage() {
         </p>
         <div className="alq-advantage-list">
           {[
-            { icon: "🏡", title: "Propiedades off-market", text: "Antes de que aparezcan en Idealista. Propietarios que confían en mí para encontrar buenos inquilinos directamente." },
+            { icon: "🏡", title: "Propiedades off-market", text: "Propietarios que confían en mí directamente. Algunas de las mejores propiedades de Frigiliana nunca se publican." },
             { icon: "⚖️", title: "Revisión legal del contrato", text: "LAU residencial vs temporada. Que sepas exactamente qué derechos tienes antes de firmar." },
             { icon: "📅", title: "Estrategia de timing", text: "Te digo cuándo y cómo buscar para maximizar tu poder de negociación y acceso al mejor stock." },
             { icon: "💬", title: "Negociación directa", text: "Con propietarios con quien tengo relación de años. El precio de lista no siempre es el precio final." },
@@ -430,13 +430,13 @@ export default function AlquilarPage() {
           </p>
           <ul className="alq-promise-list">
             <li>Propiedades residenciales a precio justo — no precio vacacional</li>
-            <li>Off-market: propietarios directos que no publican en portales</li>
+            <li>Acceso a propiedades que no están publicadas online</li>
             <li>Revisión del contrato incluida — que firmes con seguridad</li>
             <li>Consejo de timing: cuándo tienes más poder de negociación</li>
             <li>Sin coste para el inquilino</li>
           </ul>
           <div className="alq-contact-block">
-            <div className="alq-contact-line">📱 <strong>WhatsApp: +34 662 317 561</strong> (EN/ES/NL)</div>
+            <div className="alq-contact-line">📱 <strong>WhatsApp: +34 662 317 561</strong> (EN / ES)</div>
             <div className="alq-contact-line">✉️ <strong>Email: info@propaxar.com</strong></div>
             <div className="alq-contact-line">⏱ Respuesta en menos de 24h laborables</div>
           </div>
@@ -446,7 +446,7 @@ export default function AlquilarPage() {
           {!sent ? (
             <>
               <div className="alq-form-card-title">Buscar mi alquiler en Frigiliana</div>
-              <div className="alq-form-card-sub">Gratis · Sin compromiso · Bilingüe EN/ES/NL</div>
+              <div className="alq-form-card-sub">Gratis · Sin compromiso · Bilingüe EN / ES</div>
               <div className="alq-field-row">
                 <div className="alq-field">
                   <label>Tu nombre *</label>
