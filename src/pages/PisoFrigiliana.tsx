@@ -59,7 +59,7 @@ const t = {
     agentBio: "40 años de conocimiento local. Conozco cada propiedad y cada propietario de Frigiliana. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo.",
     highlights: "Lo que destaca",
     highlightsList: [
-      "Terraza privada de 20m²",
+      "Terraza privada de 15m²",
       "Casco Nuevo — acceso fácil sin cuestas",
       "Dúplex con niveles para privacidad",
       "Vistas a la montaña",
