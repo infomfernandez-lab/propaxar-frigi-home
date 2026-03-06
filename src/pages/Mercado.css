@@ -27,10 +27,7 @@
   align-items: center;
   height: 64px;
   background: hsl(var(--background));
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(12px);
+  margin-top: 60px;
 }
 .masthead-left {
   font-size: 11px;
