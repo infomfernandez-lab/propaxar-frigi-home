@@ -50,7 +50,7 @@ export default function InvertirPage() {
       <section className="inv-hero" style={{ paddingTop: '64px' }}>
         <div className="inv-hero-bg" />
         
-        <div className="inv-hero-eyebrow">Inversión inmobiliaria — Frigiliana, Costa del Sol</div>
+        <div className="inv-hero-eyebrow">Inversión inmobiliaria · Frigiliana · La Axarquía</div>
         <h1 className="inv-hero-h1">
           12–14% de retorno.<br />
           <em>Verificado.</em> Cada año.
@@ -90,7 +90,7 @@ export default function InvertirPage() {
       <div className="inv-proof-bar">
         {[
           { icon: "✓", text: <><strong>40 años</strong> de conocimiento local en Frigiliana</> },
-          { icon: "✓", text: <><strong>18 fuentes</strong> de datos verificadas, actualizadas mensualmente</> },
+          { icon: "✓", text: <><strong>18 fuentes</strong> de datos verificadas · Market Report mensual</> },
           { icon: "✓", text: <><strong>Nº1 VUT rural</strong> Málaga — 355 establecimientos registrados</> },
           { icon: "✓", text: <><strong>32,3%</strong> compradores extranjeros en Málaga provincia</> },
         ].map((p, i) => (
@@ -110,7 +110,7 @@ export default function InvertirPage() {
         </h2>
         <p className="inv-section-lead">
           Tres modelos basados en propiedades reales de Frigiliana.
-          Ingresos Airbnb verificados con datos de 901 listings activos.
+          Ingresos verificados con datos de 901 propiedades activas.
           Gastos calculados con operadores locales.
         </p>
 
@@ -180,7 +180,7 @@ export default function InvertirPage() {
             </div>
           </div>
           <p style={{ fontSize: 11, color: "hsl(var(--foreground-subtle))", marginTop: 20, lineHeight: 1.6 }}>
-            Nota: {sc.note} · Fuentes: Airbtics, AirDNA, operadores locales Frigiliana · Los gastos de compra (ITP 7% + notaría ~1,5% + gestoría ~1,5%) no están incluidos en el modelo de retorno.
+            Nota: {sc.note} · Fuentes: datos de mercado verificados, operadores locales Frigiliana · 18 fuentes · Los gastos de compra (ITP 7% + notaría ~1,5% + gestoría ~1,5%) no están incluidos en el modelo de retorno.
           </p>
         </div>
       </section>
@@ -193,7 +193,7 @@ export default function InvertirPage() {
         <div className="inv-why-grid">
           {[
             { n: "01", icon: "✈️", title: "26,7 millones de puertas de entrada", text: "El aeropuerto de Málaga cerró 2025 con récord histórico absoluto. +7,4% en pasajeros, inversión aprobada de 1.500M€ para ampliar. Reino Unido solo envió 6,1 millones de personas.", stat: "26,7M pax 2025", sl: "Aena — récord histórico" },
-            { n: "02", icon: "🏛️", title: "Moratoria VUT: ventaja exclusiva", text: "Málaga capital suspendió nuevas licencias VUT 3 años. Frigiliana no está afectada. Mientras la competencia se contrae, tu propiedad puede operar y obtener licencia.", stat: "Frigiliana libre", sl: "Moratoria NO aplica aquí" },
+            { n: "02", icon: "🏛️", title: "Moratoria VUT: ventaja exclusiva", text: "Málaga capital suspendió nuevas licencias VUT 3 años. Frigiliana no está afectada — puedes obtener licencia ahora. La oferta de alquiler vacacional de calidad se reduce en la zona, mientras la demanda sigue creciendo.", stat: "Frigiliana libre", sl: "Moratoria NO aplica aquí" },
             { n: "03", icon: "📊", title: "Oferta estructuralmente limitada", text: "3.041 viviendas construidas totales. Crecimiento urbanístico muy restringido por normativa de Parque Natural. La escasez no es circunstancial — es permanente.", stat: "3.041 viviendas", sl: "Stock total — oferta inelástica" },
             { n: "04", icon: "🌍", title: "32,3% de compradores son extranjeros", text: "En toda la provincia de Málaga. Británicos, holandeses, suecos, belgas llevan décadas comprando en la Axarquía. Mercado internacionalizado y maduro.", stat: "32,3% extranjeros", sl: "Registradores 2025" },
             { n: "05", icon: "⭐", title: "Top 4 Pueblos más bonitos de España", text: "Reconocimiento oficial de Pueblos Más Bonitos España. Top 23 mundial según Travel & Leisure USA. 54.745 turistas con pernoctación en 2024. No es un secreto — pero aún no está sobreexplotado.", stat: "Top 4 España", sl: "Pueblos Más Bonitos España" },
@@ -288,6 +288,11 @@ export default function InvertirPage() {
                 Enviar consulta gratuita →
               </button>
               <div className="inv-form-legal">Datos tratados conforme al RGPD. No compartimos información con terceros. Respuesta garantizada en 24h laborables.</div>
+              <div style={{ marginTop: 20, fontSize: 13, color: "hsl(var(--foreground-muted))", lineHeight: 1.8 }}>
+                <p>📱 <strong style={{ color: "hsl(var(--foreground))" }}>WhatsApp: +34 662 317 561</strong> (ES / EN)</p>
+                <p>✉️ <strong style={{ color: "hsl(var(--foreground))" }}>info@propaxar.es</strong></p>
+                <p>⏱ Respuesta en menos de 24h laborables</p>
+              </div>
             </>
           ) : (
             <div style={{ textAlign: "center", padding: "40px 0" }}>
