@@ -40,19 +40,7 @@ export default function AlquilarPage() {
         <meta name="description" content="Encuentra alquiler residencial en Frigiliana a precio justo. Datos reales de coste de vida, calendario de mercado y propiedades off-market. Consulta gratuita." />
       </Helmet>
 
-      {/* NAV */}
-      <nav className="alq-nav">
-        <a href="/" className="alq-nav-logo">Propaxar</a>
-        <div className="alq-nav-links">
-          <a href="/mercado" className="alq-nav-link">Market Report</a>
-          <a href="/invertir" className="alq-nav-link">Invertir</a>
-          <a href="/empezar" className="alq-nav-link">Comprar</a>
-          <a href="/alquilar" className="alq-nav-link active">Alquilar</a>
-        </div>
-        <button className="alq-nav-cta" onClick={() => document.getElementById('buscar')?.scrollIntoView({ behavior: 'smooth' })}>
-          Iniciar búsqueda
-        </button>
-      </nav>
+      <Navigation />
 
       {/* HERO */}
       <section className="alq-hero">
