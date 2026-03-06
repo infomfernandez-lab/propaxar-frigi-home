@@ -451,17 +451,7 @@ export default function MercadoPage() {
         ))}
       </div>
 
-      {/* FOOTER */}
-      <footer className="mercado-footer">
-        <div className="footer-brand">Propaxar</div>
-        <nav className="footer-links">
-          <a href="/empezar" className="footer-link">Invertir</a>
-          <a href="/empezar" className="footer-link">Comprar</a>
-          <a href="/empezar" className="footer-link">Alquilar</a>
-          <a href="/empezar" className="footer-link">Contacto</a>
-        </nav>
-        <div className="footer-legal">© 2026 Propaxar · Manuel C. Fernández Ramírez · Frigiliana</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
