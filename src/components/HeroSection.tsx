@@ -26,8 +26,8 @@ const HeroSection = () => {
         <div className="max-w-[800px] mx-auto text-center">
           <h1 className="text-[34px] md:text-[54px] font-extrabold text-white leading-[1.1] mb-4 font-heading opacity-0 animate-fade-in-up">
             {language === 'es'
-              ? <>Tu consultor personal de vivienda en <span style={{ color: 'hsl(210, 56%, 55%)' }}>Frigiliana</span></>
-              : <>Your personal housing consultant in <span style={{ color: 'hsl(210, 56%, 55%)' }}>Frigiliana</span></>
+              ? <>Tu consultor personal de vivienda en Frigiliana</>
+              : <>Your personal housing consultant in Frigiliana</>
             }
           </h1>
 
