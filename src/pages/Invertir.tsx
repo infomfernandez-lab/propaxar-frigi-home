@@ -44,22 +44,10 @@ export default function InvertirPage() {
         <meta name="description" content="Modelos de inversión inmobiliaria en Frigiliana con rentabilidad verificada. Datos reales de 901 propiedades VUT. Consulta gratuita con experto local." />
       </Helmet>
 
-      {/* NAV */}
-      <nav className="inv-nav">
-        <a href="/" className="inv-nav-logo">Propaxar</a>
-        <div className="inv-nav-links">
-          <a href="/mercado" className="inv-nav-link">Market Report</a>
-          <a href="/invertir" className="inv-nav-link active">Invertir</a>
-          <a href="/empezar" className="inv-nav-link">Comprar</a>
-          <a href="/empezar" className="inv-nav-link">Alquilar</a>
-        </div>
-        <button className="inv-nav-cta" onClick={() => document.getElementById('consulta')?.scrollIntoView({ behavior: 'smooth' })}>
-          Consulta gratuita
-        </button>
-      </nav>
+      <Navigation />
 
       {/* HERO */}
-      <section className="inv-hero">
+      <section className="inv-hero" style={{ paddingTop: '64px' }}>
         <div className="inv-hero-bg" />
         <div className="inv-hero-grid-lines" />
         <div className="inv-hero-eyebrow">Inversión inmobiliaria — Frigiliana, Costa del Sol</div>
