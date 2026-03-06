@@ -171,6 +171,9 @@ Eso es todo. El resto lo hablamos en la llamada. No necesitas preparar presentac
     'nav.contact': 'Contact',
     'nav.start': 'Start',
     'nav.subtitle': 'Housing Consultant',
+    'nav.rent': 'Rent',
+    'nav.buy': 'Buy',
+    'nav.invest': 'Invest',
 
     // Hero
     'hero.line1': 'Stop searching.',
