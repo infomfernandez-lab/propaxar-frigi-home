@@ -24,14 +24,12 @@ const Navigation = () => {
       <div className="max-w-[1200px] mx-auto px-5 md:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center">
             <div
-              className="w-[34px] h-[34px] rounded-full flex items-center justify-center text-sm font-bold"
-              style={{ backgroundColor: 'hsl(210, 53%, 24%)', color: '#fff' }}
+              className="w-[34px] h-[34px] rounded-full flex items-center justify-center text-sm font-bold bg-white/20 text-white"
             >
               P
             </div>
-            <span className="text-white font-heading font-bold text-lg">Propaxar</span>
           </Link>
 
           {/* Desktop Navigation */}
