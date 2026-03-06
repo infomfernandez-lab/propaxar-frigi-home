@@ -436,7 +436,7 @@ export default function AlquilarPage() {
             <li>Sin coste para el inquilino</li>
           </ul>
           <div className="alq-contact-block">
-            <div className="alq-contact-line">📱 <strong>WhatsApp: +34 662 317 561</strong> (EN/ES/NL)</div>
+            <div className="alq-contact-line">📱 <strong>WhatsApp: +34 662 317 561</strong> (EN / ES)</div>
             <div className="alq-contact-line">✉️ <strong>Email: info@propaxar.com</strong></div>
             <div className="alq-contact-line">⏱ Respuesta en menos de 24h laborables</div>
           </div>
