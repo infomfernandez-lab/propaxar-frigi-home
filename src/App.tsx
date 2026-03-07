@@ -19,6 +19,7 @@ import Empezar from "./pages/Empezar";
 import Mercado from "./pages/Mercado";
 import Invertir from "./pages/Invertir";
 import Alquilar from "./pages/Alquilar";
+import EncuentraTuAlquiler from "./pages/EncuentraTuAlquiler";
 import PisoFrigiliana from "./pages/PisoFrigiliana";
 import NotFound from "./pages/NotFound";
 
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="/mercado" element={<Mercado />} />
               <Route path="/invertir" element={<Invertir />} />
               <Route path="/alquilar" element={<Alquilar />} />
+              <Route path="/encuentra-tu-alquiler" element={<EncuentraTuAlquiler />} />
               <Route path="/property/pisoenfrigiliana" element={<PisoFrigiliana />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
