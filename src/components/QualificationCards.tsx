@@ -15,7 +15,7 @@ const QualificationCards = () => {
         ? 'Larga temporada o segunda residencia. Acceso a propiedades seleccionadas, incluyendo las que no están en portales.'
         : 'Long-term or second residence. Access to selected properties, including those not listed on portals.',
       link: language === 'es' ? 'Cómo funciona' : 'How it works',
-      href: '/alquilar',
+      href: '/encuentra-tu-alquiler',
     },
     {
       icon: '🔑',

@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Center */}
         <nav className="flex items-center gap-6">
           {[
-            { label: 'Alquilar', href: '/alquilar' },
+            { label: 'Alquilar', href: '/encuentra-tu-alquiler' },
             { label: 'Comprar', href: '/comprar' },
             { label: 'Invertir', href: '/invertir' },
             { label: 'Market Report', href: '/mercado' },
