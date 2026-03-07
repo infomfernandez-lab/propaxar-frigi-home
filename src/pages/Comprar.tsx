@@ -93,8 +93,131 @@ export default function ComprarPage() {
         </div>
       </section>
 
-      {/* 3. PERFILES DE COMPRADOR */}
-      {/* 8. FORMULARIO DE CONTACTO */}
+      {/* 4. DATOS DE MERCADO */}
+      <section className="py-24 bg-card">
+        <div className="max-w-5xl mx-auto px-5">
+          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">El mercado en datos</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Por qué 2025 es el momento de comprar en Frigiliana</h2>
+          <p className="text-foreground-muted mb-12 max-w-2xl">
+            Los datos no mienten. Frigiliana combina revalorización sostenida, demanda internacional creciente y un mercado aún accesible comparado con la Costa del Sol occidental.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Price by bedrooms */}
+            <div className="bg-background border border-border rounded-[14px] p-7">
+              <h3 className="font-bold text-foreground mb-4">Precio medio por dormitorios</h3>
+              <div className="space-y-3">
+                {[
+                  { beds: "1 dormitorio", price: "185.000€", range: "120–250k€" },
+                  { beds: "2 dormitorios", price: "275.000€", range: "180–380k€" },
+                  { beds: "3 dormitorios", price: "420.000€", range: "280–600k€" },
+                  { beds: "4+ dormitorios", price: "580.000€", range: "400–900k€" },
+                ].map((r, i) => (
+                  <div key={i} className="flex justify-between items-center py-2 border-b border-border last:border-0">
+                    <span className="text-sm text-foreground">{r.beds}</span>
+                    <div className="text-right">
+                      <span className="font-bold text-foreground">{r.price}</span>
+                      <span className="text-xs text-foreground-muted ml-2">{r.range}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Buyer demographics */}
+            <div className="bg-background border border-border rounded-[14px] p-7">
+              <h3 className="font-bold text-foreground mb-4">¿Quién compra en la Axarquía?</h3>
+              <div className="space-y-3">
+                {[
+                  { country: "🇬🇧 Reino Unido", pct: "28%" },
+                  { country: "🇳🇱 Países Bajos", pct: "14%" },
+                  { country: "🇧🇪 Bélgica", pct: "11%" },
+                  { country: "🇩🇰 Dinamarca / Suecia", pct: "9%" },
+                  { country: "🇩🇪 Alemania", pct: "8%" },
+                  { country: "🇪🇸 España (otras provincias)", pct: "30%" },
+                ].map((r, i) => (
+                  <div key={i} className="flex justify-between items-center py-2 border-b border-border last:border-0">
+                    <span className="text-sm text-foreground">{r.country}</span>
+                    <span className="font-bold text-foreground">{r.pct}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. PROCESO DE COMPRA */}
+      <section id="proceso" className="py-24 bg-background">
+        <div className="max-w-5xl mx-auto px-5">
+          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">El proceso</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">De la búsqueda a las llaves. Paso a paso.</h2>
+          <p className="text-foreground-muted mb-12 max-w-2xl">
+            Te acompaño en cada fase. Sin sorpresas, sin letra pequeña. Cada paso tiene un timing claro y una gestión profesional detrás.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { step: "01", title: "NIE + Cuenta bancaria", time: "2–4 semanas", desc: "Gestión completa del NIE y apertura de cuenta bancaria española. Sin desplazamientos innecesarios." },
+              { step: "02", title: "Búsqueda personalizada", time: "1–4 semanas", desc: "Selección de propiedades según tu perfil exacto. Incluyendo las que no están publicadas en portales." },
+              { step: "03", title: "Visitas guiadas", time: "2–3 días", desc: "Visitas organizadas y acompañadas. Te cuento lo que no se ve en las fotos: vecinos, humedades, orientación real." },
+              { step: "04", title: "Contrato de arras", time: "1 semana", desc: "Negociación del precio y redacción del contrato de arras. Revisión legal incluida." },
+              { step: "05", title: "Due diligence", time: "3–6 semanas", desc: "Verificación registral, cargas, deudas de comunidad, licencias urbanísticas. Todo antes de firmar." },
+              { step: "06", title: "Escritura y llaves", time: "1 día", desc: "Firma ante notario y entrega de llaves. Alta de suministros y gestión post-venta si la necesitas." },
+            ].map((s, i) => (
+              <div key={i} className="bg-card border border-border rounded-[14px] p-7">
+                <div className="text-xs font-mono text-foreground-muted mb-2">{s.step}</div>
+                <h3 className="font-bold text-foreground text-lg mb-1">{s.title}</h3>
+                <span className="inline-block text-[10px] font-semibold px-2.5 py-1 rounded-full bg-background text-foreground-muted border border-border mb-3">{s.time}</span>
+                <p className="text-foreground-muted text-sm leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. COSTES DE COMPRA */}
+      <section className="py-24 bg-card">
+        <div className="max-w-3xl mx-auto px-5">
+          <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">Transparencia total</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Los costes reales de comprar en Andalucía</h2>
+          <p className="text-foreground-muted mb-10 max-w-2xl">
+            Además del precio de la propiedad, hay costes obligatorios. Aquí los tienes, sin letra pequeña.
+          </p>
+          <div className="bg-background border border-border rounded-[14px] overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left px-6 py-4 text-xs uppercase tracking-wider text-foreground-muted">Concepto</th>
+                    <th className="text-right px-6 py-4 text-xs uppercase tracking-wider text-foreground-muted">%</th>
+                    <th className="text-right px-6 py-4 text-xs uppercase tracking-wider text-foreground-muted">En 300.000€</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { concept: "ITP (Impuesto Transmisiones)", pct: "7%", amount: "21.000€" },
+                    { concept: "Notaría", pct: "~0,8%", amount: "2.400€" },
+                    { concept: "Registro de la Propiedad", pct: "~0,4%", amount: "1.200€" },
+                    { concept: "Gestoría", pct: "~0,3%", amount: "900€" },
+                    { concept: "Total costes adicionales", pct: "~8,5%", amount: "25.500€" },
+                  ].map((r, i) => (
+                    <tr key={i} className={`border-b border-border last:border-0 ${i === 4 ? 'font-bold bg-card' : ''}`}>
+                      <td className="px-6 py-3 text-foreground">{r.concept}</td>
+                      <td className="px-6 py-3 text-right text-foreground">{r.pct}</td>
+                      <td className="px-6 py-3 text-right text-foreground">{r.amount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="px-6 py-4 text-xs text-foreground-muted border-t border-border">
+              * Para vivienda nueva el IVA es 10% en lugar de ITP 7%. Importes orientativos. Siempre solicitamos presupuesto notarial exacto antes de la firma.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
       <section id="contacto" className="py-24 bg-card">
         <div className="max-w-5xl mx-auto px-5 grid md:grid-cols-[5fr_4fr] gap-12">
           <div>
