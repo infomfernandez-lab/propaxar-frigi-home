@@ -328,38 +328,6 @@ export default function ComprarPage() {
         </div>
       </section>
 
-      {/* 7. BIO MANUEL */}
-      <section className="py-24" style={{ background: "hsl(222, 28%, 16%)" }}>
-        <div className="max-w-[800px] mx-auto px-5 text-center">
-          <div className="mb-10">
-            <span className="text-5xl leading-none" style={{ color: "#C9A84C" }}>"</span>
-            <blockquote className="text-xl md:text-2xl text-white italic leading-relaxed mt-2" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-              Sé qué propietarios quieren vender antes de colgar el cartel.
-              Sé qué casas tienen problemas que no se ven en las fotos.
-              Sé qué precio es justo y cuál está inflado.
-              Eso no se aprende en un curso.
-            </blockquote>
-            <span className="text-5xl leading-none" style={{ color: "#C9A84C" }}>"</span>
-          </div>
-          <p className="text-white font-bold text-lg mb-1">Manuel Carlos Fernández Ramírez</p>
-          <p className="text-white/60 text-xs font-mono tracking-wide mb-10">
-            Propaxar Frigiliana · Especialista inmobiliario Axarquía
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { val: "40 años", label: "en Frigiliana" },
-              { val: "Bilingüe", label: "ES / EN" },
-              { val: "Red local", label: "propietarios directos" },
-              { val: "<24h", label: "tiempo de respuesta" },
-            ].map((s, i) => (
-              <div key={i}>
-                <div className="text-xl font-bold text-white">{s.val}</div>
-                <div className="text-white/40 text-xs mt-1">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 8. FORMULARIO DE CONTACTO */}
       <section id="contacto" className="py-24 bg-card">
