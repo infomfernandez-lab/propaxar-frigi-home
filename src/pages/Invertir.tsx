@@ -216,14 +216,8 @@ export default function InvertirPage() {
         <div>
           <div className="inv-section-eyebrow">Consulta gratuita</div>
           <h2 className="inv-lead-title">
-            Cuéntame tu inversión.<br />
-            Te digo si <em>tiene sentido.</em>
+            Cuéntame tu inversión.
           </h2>
-          <p className="inv-lead-body">
-            Soy Manuel. Llevo 40 años en Frigiliana. Conozco cada calle, cada propietario,
-            cada propiedad que sale al mercado antes de publicarse.
-            En 30 minutos te digo si tu objetivo es alcanzable con el presupuesto que tienes.
-          </p>
           <ul className="inv-lead-promise">
             <li>Análisis de rentabilidad personalizado con tus datos</li>
             <li>Propiedades que encajan con tu perfil — antes de que salgan al mercado</li>
