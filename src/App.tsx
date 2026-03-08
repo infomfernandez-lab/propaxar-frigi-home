@@ -21,6 +21,7 @@ import Invertir from "./pages/Invertir";
 import Alquilar from "./pages/Alquilar";
 import EncuentraTuAlquiler from "./pages/EncuentraTuAlquiler";
 import PisoFrigiliana from "./pages/PisoFrigiliana";
+import VillaFrigiliana from "./pages/VillaFrigiliana";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
