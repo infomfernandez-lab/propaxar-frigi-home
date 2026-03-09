@@ -28,28 +28,6 @@ const QualificationCards = () => {
       link: language === 'es' ? 'Cómo funciona' : 'How it works',
       href: '/comprar',
     },
-    {
-      icon: '📊',
-      borderColor: '#059669',
-      linkColor: '#059669',
-      title: language === 'es' ? 'Quiero invertir con criterio' : 'I want to invest wisely',
-      text: language === 'es'
-        ? 'Análisis por escenario, ROI real. Datos verificados, no proyecciones optimistas.'
-        : 'Scenario analysis, real ROI. Verified data, not optimistic projections.',
-      link: language === 'es' ? 'Ver análisis' : 'View analysis',
-      href: '/invertir',
-    },
-    {
-      icon: '🏢',
-      borderColor: '#C9A84C',
-      linkColor: '#C9A84C',
-      title: language === 'es' ? 'Tengo una propiedad en Frigiliana' : 'I own a property in Frigiliana',
-      text: language === 'es'
-        ? 'Gestión integral de tu inmueble. Alquiler de larga temporada o vacacional. Ocupación máxima, sin gestiones para ti.'
-        : 'Full property management. Long-term or vacation rental. Maximum occupancy, zero hassle for you.',
-      link: language === 'es' ? 'Conocer el servicio' : 'Learn more',
-      href: '/propietarios',
-    },
   ];
 
   return (
@@ -68,7 +46,7 @@ const QualificationCards = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
           {cards.map((card, i) => (
             <Link
               key={i}
