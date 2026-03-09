@@ -14,7 +14,6 @@ const Footer = () => {
           {[
             { label: 'Alquilar', href: '/encuentra-tu-alquiler' },
             { label: 'Comprar', href: '/comprar' },
-            { label: 'Invertir', href: '/invertir' },
             { label: 'Market Report', href: '/mercado' },
           ].map(link => (
             <Link

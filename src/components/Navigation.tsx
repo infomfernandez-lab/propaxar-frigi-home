@@ -11,7 +11,6 @@ const Navigation = () => {
   const navLinks = [
     { label: t('nav.rent'), href: '/encuentra-tu-alquiler' },
     { label: t('nav.buy'), href: '/comprar' },
-    { label: t('nav.invest'), href: '/invertir' },
     { label: 'Market Report', href: '/mercado' },
   ];
 

@@ -46,7 +46,7 @@ const QualificationCards = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
           {cards.map((card, i) => (
             <Link
               key={i}
