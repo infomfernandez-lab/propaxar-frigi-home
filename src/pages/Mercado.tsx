@@ -5,6 +5,11 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import "./Mercado.css";
 
+const STRIPE_URL = 'https://buy.stripe.com/bJe6oJ9fS73gffkdepgEg05';
+const WHATSAPP_NUMBER = '34662317561';
+const EMAIL = 'info@propaxar.com';
+const PHONE = '+34 662 317 561';
+
 const AXARQUIA = [
   { name: "Nerja", price: 4354, rent: "1.300–1.800€", trend: "+8,2%", vut: "76%", highlight: false },
   { name: "Rincón de la Victoria", price: 4029, rent: "900–1.200€", trend: "+9,1%", vut: "71%", highlight: false },
@@ -35,9 +40,12 @@ const TICKER = [
   "VUT Frigiliana: 901 activos — ocupación 72% media anual",
 ];
 
+const cardStyle: React.CSSProperties = { backgroundColor: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' };
+
 export default function MercadoPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ nombre: "", email: "", perfil: "" });
+  const [accepted, setAccepted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,396 +67,494 @@ export default function MercadoPage() {
         <meta name="description" content="Reporte mensual gratuito del mercado inmobiliario de Frigiliana y Axarquía. Precios, turismo, regulación y rentabilidad. Datos de 18 fuentes oficiales." />
       </Helmet>
 
-      {/* MASTHEAD */}
-      <header className="mercado-masthead">
-        <div className="masthead-left">
-          propaxar.es/mercado
-        </div>
-        <div className="masthead-center">
-          <div className="masthead-logo">Propaxar</div>
-          <div className="masthead-tagline">Market Intelligence · Frigiliana & Axarquía</div>
-        </div>
-        <div className="masthead-right">
-          <span>Marzo 2026</span>
-          <strong>Edición mensual gratuita</strong>
-        </div>
-      </header>
-
       {/* TICKER */}
       <div className="mercado-ribbon">
         <div className="ribbon-inner">{tickerText}</div>
       </div>
 
-      {/* HERO EDITORIAL */}
-      <section className="mercado-hero">
-        <div className="hero-main">
-          <div className="edition-tag">
-            <span className="edition-dot" />
-            Reporte Mensual — Marzo 2026
-          </div>
-          <h1 className="hero-headline">
-            Frigiliana:<br />
-            el mercado que ningún portal<br />
-            <em>sabe explicar.</em>
-          </h1>
-          <p className="hero-deck">
-            Precios, flujos turísticos, compradores internacionales y rentabilidad real —
-            en un solo informe. Datos de 18 fuentes oficiales. Publicado cada primer lunes del mes.
-            Sin coste. Sin trampa.
-          </p>
-          <p className="hero-byline">
-            Por <strong>Manuel C. Fernández Ramírez</strong> · Propaxar Frigiliana ·
-            40 años de conocimiento local
-          </p>
-        </div>
-
-        {/* SIDEBAR KPIS */}
-        <aside className="hero-sidebar">
-          <div className="sidebar-section">
-            <div className="sidebar-label">€/m² Frigiliana</div>
-            <div className="sidebar-kpi">3.295</div>
-            <div className="sidebar-kpi-sub">Idealista dic. 2025</div>
-            <div className="sidebar-badge badge-up">▲ +6,4% anual</div>
-          </div>
-          <div className="sidebar-section">
-            <div className="sidebar-label">Pasajeros aeropuerto 2025</div>
-            <div className="sidebar-kpi">26,7M</div>
-            <div className="sidebar-kpi-sub">Récord histórico — Aena</div>
-            <div className="sidebar-badge badge-up">▲ +7,4% vs 2024</div>
-          </div>
-          <div className="sidebar-section">
-            <div className="sidebar-label">Extranjeros en Málaga</div>
-            <div className="sidebar-kpi">32,3%</div>
-            <div className="sidebar-kpi-sub">De todas las compraventas</div>
-            <div className="sidebar-badge badge-up">▲ 2ª provincia España</div>
-          </div>
-          <div className="sidebar-section">
-            <div className="sidebar-label">Ingresos VUT Frigiliana</div>
-            <div className="sidebar-kpi">29k€</div>
-            <div className="sidebar-kpi-sub">Media anual — 65m² — Airbtics</div>
-            <div className="sidebar-badge badge-up">▲ 72% ocupación</div>
-          </div>
-        </aside>
-      </section>
-
-      {/* THREE COLUMNS — CONTEXT */}
-      <section className="mercado-columns">
-        <div className="col">
-          <h2 className="col-title">El dato que <em>nadie publica</em></h2>
-          <div className="col-rule" />
-          <p className="col-text">
-            Frigiliana registró 54.745 turistas con pernoctación en 2024.
-            El 62,5% eran internacionales — y crecieron un +20,2%.
-            Con 3.041 viviendas construidas, el ratio es de 18 turistas alojados por cada vivienda del pueblo.
-          </p>
-          <div className="col-stat">18:1</div>
-          <div className="col-stat-label">Turistas alojados / vivienda construida</div>
-        </div>
-        <div className="col">
-          <h2 className="col-title">Moratoria VUT: ventaja <em>Frigiliana</em></h2>
-          <div className="col-rule" />
-          <p className="col-text">
-            Málaga capital bloqueó nuevas licencias VUT durante 3 años (2024–2027).
-            Frigiliana no está afectada.
-            Mientras el mercado vecino se contrae, aquí la oferta puede crecer. Para inversores con visión,
-            este dato vale decenas de miles de euros.
-          </p>
-          <div className="col-stat">355</div>
-          <div className="col-stat-label">VUT activas — Nº1 rural de Málaga</div>
-        </div>
-        <div className="col">
-          <h2 className="col-title">El aeropuerto <em>no para de crecer</em></h2>
-          <div className="col-rule" />
-          <p className="col-text">
-            26,7 millones de pasajeros en 2025. Récord absoluto en 105 años de historia.
-            Reino Unido envió 6,1 millones de personas.
-            El Gobierno invierte 1.500M€ para ampliarlo. Cada vuelo es demanda potencial para Frigiliana.
-          </p>
-          <div className="col-stat">+7,4%</div>
-          <div className="col-stat-label">Crecimiento aeropuerto 2025 — 4º España</div>
-        </div>
-      </section>
-
-      {/* MACRO STATS */}
-      <section className="data-section">
-        <div className="section-flag">
-          <div className="section-number">01</div>
-          <h2 className="section-heading">España & Málaga — Indicadores clave <em>2025</em></h2>
-        </div>
-        <div className="stats-grid">
-          {[
-            { l: "Compraventas España", v: "705.000", s: "Récord desde 2008", d: "+10,4% anual", up: true },
-            { l: "IPV España Q3 2025", v: "+12,8%", s: "Máximo histórico INE", d: "2ª mano +13,4%", up: true },
-            { l: "Extranjeros compradores", v: "97.300", s: "Nuevo máximo absoluto", d: "+5% vs 2024", up: true },
-            { l: "Precio medio España", v: "2.354€", s: "Por m² — Registradores", d: "+9,5% anual", up: true },
-            { l: "Málaga: extranjeros", v: "32,3%", s: "De todas las compras", d: "2ª prov. España", up: true },
-            { l: "Precio Málaga provincia", v: "3.232€", s: "Por m² — cierre 2025", d: "+15,5% anual", up: true },
-            { l: "Hipotecas España 2025", v: "367.715", s: "Acumulado sept. 2025", d: "+13,4% anual", up: true },
-            { l: "IRAV — tope alquiler", v: "+2,2%", s: "Actualización contratos", d: "Ley 12/2023", up: false },
-          ].map((s, i) => (
-            <div className="stat-cell" key={i}>
-              <div className="stat-cell-label">{s.l}</div>
-              <div className="stat-cell-val">{s.v}</div>
-              <div className="stat-cell-sub">{s.s}</div>
-              <div className={`stat-cell-delta ${s.up ? "delta-up" : "delta-neu"}`}>
-                {s.up ? "▲" : "●"} {s.d}
+      {/* ── HERO ── */}
+      <section
+        className="relative text-white overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}
+      >
+        <div className="relative max-w-4xl mx-auto px-6 pt-16 pb-24">
+          <div className="grid md:grid-cols-5 gap-10 items-center">
+            {/* Left */}
+            <div className="md:col-span-3">
+              <div className="flex items-center gap-3 mb-6">
+                <span
+                  className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase px-3 py-1.5 rounded-lg"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.12)' }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Marzo 2026
+                </span>
+                <span className="text-xs font-semibold px-3 py-1.5 rounded-lg" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+                  Edición mensual gratuita
+                </span>
               </div>
+
+              <h1
+                className="font-black leading-tight mb-5"
+                style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', letterSpacing: '-0.025em', lineHeight: 1.08 }}
+              >
+                No es solo un informe<br />de mercado.
+                <span style={{ color: 'rgba(255,255,255,0.5)' }}> Es tu ventaja</span><br />
+                para encontrar casa.
+              </h1>
+
+              <p className="text-base leading-relaxed mb-8 max-w-lg" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                Propiedades reales analizadas una a una. Precios verificados. Información privilegiada que ningún portal publica. 
+                Cada primer lunes del mes, en tu bandeja de entrada.
+              </p>
+
+              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                Por <strong style={{ color: 'rgba(255,255,255,0.7)' }}>Manuel C. Fernández Ramírez</strong> · Propaxar Frigiliana · 40 años de conocimiento local
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* AXARQUÍA TABLE */}
-      <section className="data-section">
-        <div className="section-flag">
-          <div className="section-number">02</div>
-          <h2 className="section-heading">Comparativa Axarquía completa — Precios <em>2025</em></h2>
-        </div>
-
-        <div className="exclusive">
-          <div className="exclusive-eyebrow">★ Dato exclusivo Propaxar</div>
-          <p className="exclusive-text">
-            Frigiliana cotiza un 24% por debajo de Nerja con rentabilidad vacacional comparable (72% vs 76% ocupación).
-            Para el mismo presupuesto, en Frigiliana obtienes un <strong>32% más de metros cuadrados</strong> de propiedad — con mayor potencial de revalorización.
-          </p>
-        </div>
-
-        <table className="compare-table">
-          <thead>
-            <tr>
-              <th>Municipio</th>
-              <th>€/m² venta</th>
-              <th>Alquiler LT/mes</th>
-              <th>Ocup. VUT</th>
-              <th>Tend. anual</th>
-            </tr>
-          </thead>
-          <tbody>
-            {AXARQUIA.map((r, i) => (
-              <tr key={i} className={r.highlight ? "highlight-row" : ""}>
-                <td>{r.name}</td>
-                <td>{r.price.toLocaleString()}</td>
-                <td>{r.rent}</td>
-                <td>{r.vut}</td>
-                <td className="td-up">{r.trend}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      {/* AIRPORT + SEASONALITY */}
-      <section className="mercado-columns" style={{ gridTemplateColumns: "1fr 1fr" }}>
-        <div className="col">
-          <h3 className="col-title">
-            Mercados emisores aeropuerto <em>Málaga 2025</em>
-          </h3>
-          <div className="col-rule" />
-          <div className="nations-grid">
-            {[
-              { flag: "🇬🇧", name: "Reino Unido", pax: "6.149.697 pax", d: "+7,1%", up: true },
-              { flag: "🇩🇪", name: "Alemania", pax: "2.012.019 pax", d: "+8,3%", up: true },
-              { flag: "🇳🇱", name: "Países Bajos", pax: "1.631.525 pax", d: "+9,2%", up: true },
-              { flag: "🇮🇹", name: "Italia", pax: "1.397.672 pax", d: "+11,4%", up: true },
-              { flag: "🇦🇪", name: "Emiratos Árabes", pax: "Mercado emergente", d: "+75,7% 🔥", up: true },
-              { flag: "🇮🇸", name: "Islandia", pax: "Mercado emergente", d: "+59,2% 🔥", up: true },
-              { flag: "🇨🇿", name: "R. Checa", pax: "Mercado emergente", d: "+32,4%", up: true },
-              { flag: "🇫🇷", name: "Francia", pax: "1.386.610 pax", d: "+8,9%", up: true },
-            ].map((n, i) => (
-              <div className="nation-row" key={i}>
-                <span className="nation-flag">{n.flag}</span>
-                <div style={{ flex: 1 }}>
-                  <div className="nation-name">{n.name}</div>
-                  <div className="nation-pax">{n.pax}</div>
+            {/* Right — KPI cards */}
+            <div className="md:col-span-2 grid grid-cols-2 gap-3">
+              {[
+                { label: '€/m² Frigiliana', val: '3.295', sub: 'Idealista dic. 2025', badge: '▲ +6,4%' },
+                { label: 'Pasajeros 2025', val: '26,7M', sub: 'Récord histórico', badge: '▲ +7,4%' },
+                { label: 'Extranjeros', val: '32,3%', sub: 'De compraventas', badge: '2ª provincia' },
+                { label: 'Ingresos VUT', val: '29k€', sub: 'Media anual', badge: '72% ocup.' },
+              ].map((k, i) => (
+                <div
+                  key={i}
+                  className="rounded-lg p-4"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
+                >
+                  <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: 'rgba(255,255,255,0.45)' }}>{k.label}</div>
+                  <div className="text-2xl font-black mb-1">{k.val}</div>
+                  <div className="text-[10px] mb-1.5" style={{ color: 'rgba(255,255,255,0.45)' }}>{k.sub}</div>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded" style={{ backgroundColor: 'rgba(74,222,128,0.15)', color: '#4ade80' }}>{k.badge}</span>
                 </div>
-                <span className={`nation-delta ${n.up ? "delta-up" : "delta-down"}`}>{n.d}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="col">
-          <h3 className="col-title">
-            Estacionalidad vacacional <em>Frigiliana</em>
-          </h3>
-          <div className="col-rule" />
-          <div className="col-stat-label" style={{ marginBottom: 8 }}>Ocupación mensual — Airbtics 2024</div>
-          <div className="season-wrap">
-            {SEASON.map((s, i) => (
-              <div className="s-col" key={i}>
-                <span className="s-val" style={{ color: s.occ > 85 ? "hsl(var(--destructive))" : s.occ > 65 ? "hsl(var(--primary))" : "hsl(var(--foreground-subtle))" }}>{s.occ}%</span>
-                <div className="s-bar" style={{ height: `${s.occ}%`, background: s.c }} />
-                <span className="s-label">{s.m}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: "flex", gap: 16, marginTop: 20, flexWrap: "wrap" }}>
-            {[
-              ["Agosto pico", "251€/noche", "hsl(var(--destructive))"],
-              ["Media anual", "124€/noche", "hsl(var(--primary))"],
-              ["263 noches", "reservadas/año", "hsl(var(--foreground-subtle))"],
-            ].map(([a, b, c], i) => (
-              <div key={i} style={{ borderLeft: `2px solid ${c}`, paddingLeft: 10 }}>
-                <div style={{ fontSize: 10, color: c, fontWeight: 600 }}>{a}</div>
-                <div style={{ fontSize: 12, color: "hsl(var(--foreground-muted))" }}>{b}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* REGULATION */}
-      <section className="data-section">
-        <div className="section-flag">
-          <div className="section-number">03</div>
-          <h2 className="section-heading">Marco regulatorio — Lo que cambia en <em>2025</em></h2>
-        </div>
-        {[
-          { date: "Ene 2025", title: "Registro VUT obligatorio (RD 1312/2024)", detail: "Todas las viviendas turísticas deben inscribirse en el Registro Único de Arrendamientos. Plazo regularización: julio 2025.", tag: "OBLIGATORIO", tc: "rgba(194,75,58,0.2)", color: "#EB8B7F" },
-          { date: "2024–2027", title: "Moratoria VUT Málaga capital — Frigiliana NO afectada", detail: "Suspensión 3 años de nuevas licencias VUT en Málaga capital. Frigiliana queda fuera de la moratoria: ventaja estructural para inversores.", tag: "VENTAJA COMPETITIVA", tc: "rgba(74,158,107,0.2)", color: "#6FCF97" },
-          { date: "2025", title: "IRAV — Tope actualización renta +2,2%", detail: "El nuevo Índice de Referencia para Actualización de Renta sustituye al IPC. Aplica a contratos firmados desde mayo 2023.", tag: "RESTRICTIVO PROPIETARIOS", tc: "rgba(201,168,76,0.15)", color: "var(--gold)" },
-          { date: "Abr 2025", title: "Comunidades pueden limitar VUT por mayoría 3/5", detail: "Art. 17.12 LPH: las comunidades de propietarios pueden restringir o prohibir VUT con mayoría cualificada.", tag: "RIESGO MODERADO", tc: "rgba(122,130,153,0.15)", color: "var(--muted)" },
-        ].map((r, i) => (
-          <div className="reg-item" key={i}>
-            <div className="reg-date">{r.date}</div>
-            <div className="reg-content">
-              <div className="reg-title">{r.title}</div>
-              <div className="reg-detail">{r.detail}</div>
-              <span className="reg-tag" style={{ background: r.tc, color: r.color }}>{r.tag}</span>
+              ))}
             </div>
           </div>
-        ))}
-      </section>
-
-      {/* PERSONALIZED REPORT UPSELL */}
-      <section className="data-section" style={{ background: 'var(--bg, #F4F6F8)' }}>
-        <div style={{ marginBottom: 32 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'hsl(var(--foreground-subtle))', marginBottom: 8 }}>
-            Reporte personalizado
-          </div>
-          <h2 style={{ fontFamily: "'Crimson Pro', serif", fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: 600, color: 'hsl(var(--foreground))', lineHeight: 1.15, marginBottom: 12 }}>
-            Este es el informe público.<br />El tuyo es diferente.
-          </h2>
-          <p style={{ fontSize: 15, lineHeight: 1.7, color: 'hsl(var(--foreground-muted))', maxWidth: 640 }}>
-            Los datos de arriba son el mercado general. Tu situación — tu zona, tu presupuesto, tu objetivo concreto — necesita un análisis específico. Lo preparo en 48 horas.
-          </p>
         </div>
 
-        <div className="reporte-upsell-card">
-          <div className="reporte-upsell-left">
-            <ul className="reporte-upsell-list">
-              <li>Análisis de tu zona y presupuesto específico</li>
-              <li>Comparativa de propiedades similares vendidas/alquiladas recientemente</li>
-              <li>Estimación de precio justo vs precio de mercado actual</li>
-              <li>Recomendación sobre timing — cuándo actuar</li>
-              <li>Formato PDF ejecutivo</li>
-              <li>Entrega en 48h</li>
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+            <path d="M0 48h1440V24C1200 0 960 48 720 24S240 0 0 24V48z" fill="#f5f5f5" />
+          </svg>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-4 py-12 space-y-14">
+
+        {/* ── THREE INSIGHTS ── */}
+        <section>
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>
+              DATOS EXCLUSIVOS
+            </span>
+            <h2 className="font-black mb-2" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', color: '#1a1a1a', letterSpacing: '-0.02em' }}>
+              Lo que ningún portal te cuenta
+            </h2>
+            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>
+              Información verificada de 18 fuentes oficiales. No opiniones: hechos.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[
+              { stat: '18:1', label: 'Turistas / vivienda', title: 'El dato que nadie publica', desc: 'Frigiliana: 54.745 turistas con pernoctación en 2024. 62,5% internacionales. Con 3.041 viviendas, el ratio es de 18 turistas por vivienda.' },
+              { stat: '355', label: 'VUT activas', title: 'Ventaja Frigiliana', desc: 'Málaga capital bloqueó nuevas licencias VUT (2024–2027). Frigiliana no está afectada. Mientras el mercado vecino se contrae, aquí la oferta puede crecer.' },
+              { stat: '+7,4%', label: 'Crecimiento aeropuerto', title: 'El aeropuerto no para', desc: '26,7 millones de pasajeros en 2025. Récord absoluto. UK envió 6,1M de personas. Cada vuelo es demanda potencial para Frigiliana.' },
+            ].map((c, i) => (
+              <div key={i} className="rounded-lg p-6 hover:-translate-y-1 transition-transform" style={cardStyle}>
+                <div className="text-3xl font-black mb-1" style={{ color: '#2d3e4e' }}>{c.stat}</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: '#9ca3af' }}>{c.label}</div>
+                <h3 className="font-bold text-base mb-2" style={{ color: '#1a1a1a' }}>{c.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#666' }}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── MACRO STATS ── */}
+        <section className="rounded-lg overflow-hidden" style={cardStyle}>
+          <div className="px-6 py-4 text-white" style={{ backgroundColor: '#2d3e4e' }}>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold bg-white/15 px-2.5 py-1 rounded">01</span>
+              <h2 className="text-lg font-black">España & Málaga — Indicadores clave 2025</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-200">
+            {[
+              { l: "Compraventas España", v: "705.000", s: "Récord desde 2008", d: "+10,4% anual" },
+              { l: "IPV España Q3 2025", v: "+12,8%", s: "Máximo histórico INE", d: "2ª mano +13,4%" },
+              { l: "Extranjeros compradores", v: "97.300", s: "Nuevo máximo absoluto", d: "+5% vs 2024" },
+              { l: "Precio medio España", v: "2.354€", s: "Por m² — Registradores", d: "+9,5% anual" },
+              { l: "Málaga: extranjeros", v: "32,3%", s: "De todas las compras", d: "2ª prov. España" },
+              { l: "Precio Málaga provincia", v: "3.232€", s: "Por m² — cierre 2025", d: "+15,5% anual" },
+              { l: "Hipotecas España 2025", v: "367.715", s: "Acumulado sept. 2025", d: "+13,4% anual" },
+              { l: "IRAV — tope alquiler", v: "+2,2%", s: "Actualización contratos", d: "Ley 12/2023" },
+            ].map((s, i) => (
+              <div key={i} className="bg-white p-5 hover:bg-gray-50 transition-colors">
+                <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: '#9ca3af' }}>{s.l}</div>
+                <div className="text-2xl font-black mb-1" style={{ color: '#2d3e4e' }}>{s.v}</div>
+                <div className="text-xs mb-1" style={{ color: '#666' }}>{s.s}</div>
+                <span className="text-[10px] font-bold" style={{ color: '#22c55e' }}>▲ {s.d}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── AXARQUÍA TABLE ── */}
+        <section className="rounded-lg overflow-hidden" style={cardStyle}>
+          <div className="px-6 py-4 text-white" style={{ backgroundColor: '#2d3e4e' }}>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold bg-white/15 px-2.5 py-1 rounded">02</span>
+              <h2 className="text-lg font-black">Comparativa Axarquía — Precios 2025</h2>
+            </div>
+          </div>
+
+          {/* Exclusive callout */}
+          <div className="px-6 py-5" style={{ backgroundColor: 'rgba(61,90,115,0.04)', borderBottom: '1px solid #e5e7eb' }}>
+            <div className="flex items-start gap-3">
+              <span className="text-lg">★</span>
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-widest mb-1" style={{ color: '#2d3e4e' }}>Dato exclusivo Propaxar</div>
+                <p className="text-sm leading-relaxed" style={{ color: '#666' }}>
+                  Frigiliana cotiza un 24% por debajo de Nerja con rentabilidad vacacional comparable (72% vs 76% ocupación).
+                  Para el mismo presupuesto, en Frigiliana obtienes un <strong style={{ color: '#1a1a1a' }}>32% más de metros cuadrados</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+                  {['Municipio', '€/m² venta', 'Alquiler LT/mes', 'Ocup. VUT', 'Tend. anual'].map(h => (
+                    <th key={h} className={`px-5 py-3 text-[10px] font-bold uppercase tracking-widest ${h !== 'Municipio' ? 'text-right' : 'text-left'}`} style={{ color: '#9ca3af' }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {AXARQUIA.map((r, i) => (
+                  <tr
+                    key={i}
+                    className="hover:bg-gray-50 transition-colors"
+                    style={{
+                      borderBottom: '1px solid #f3f4f6',
+                      backgroundColor: r.highlight ? 'rgba(61,90,115,0.06)' : undefined,
+                    }}
+                  >
+                    <td className="px-5 py-3 font-semibold" style={{ color: r.highlight ? '#2d3e4e' : '#1a1a1a' }}>{r.name}</td>
+                    <td className="px-5 py-3 text-right font-medium" style={{ color: '#1a1a1a' }}>{r.price.toLocaleString()}</td>
+                    <td className="px-5 py-3 text-right" style={{ color: '#666' }}>{r.rent}</td>
+                    <td className="px-5 py-3 text-right" style={{ color: '#666' }}>{r.vut}</td>
+                    <td className="px-5 py-3 text-right font-semibold" style={{ color: '#22c55e' }}>{r.trend}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* ── AIRPORT + SEASONALITY ── */}
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Airport */}
+          <div className="rounded-lg overflow-hidden" style={cardStyle}>
+            <div className="px-6 py-4" style={{ borderBottom: '1px solid #e5e7eb', backgroundColor: '#f9fafb' }}>
+              <h3 className="font-bold text-base" style={{ color: '#2d3e4e' }}>Mercados emisores — Málaga 2025</h3>
+            </div>
+            <div className="p-5 space-y-2">
+              {[
+                { flag: "🇬🇧", name: "Reino Unido", pax: "6.149.697 pax", d: "+7,1%" },
+                { flag: "🇩🇪", name: "Alemania", pax: "2.012.019 pax", d: "+8,3%" },
+                { flag: "🇳🇱", name: "Países Bajos", pax: "1.631.525 pax", d: "+9,2%" },
+                { flag: "🇮🇹", name: "Italia", pax: "1.397.672 pax", d: "+11,4%" },
+                { flag: "🇦🇪", name: "Emiratos Árabes", pax: "Emergente", d: "+75,7% 🔥" },
+                { flag: "🇮🇸", name: "Islandia", pax: "Emergente", d: "+59,2% 🔥" },
+                { flag: "🇨🇿", name: "R. Checa", pax: "Emergente", d: "+32,4%" },
+                { flag: "🇫🇷", name: "Francia", pax: "1.386.610 pax", d: "+8,9%" },
+              ].map((n, i) => (
+                <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <span className="text-xl">{n.flag}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold" style={{ color: '#1a1a1a' }}>{n.name}</div>
+                    <div className="text-xs" style={{ color: '#9ca3af' }}>{n.pax}</div>
+                  </div>
+                  <span className="text-xs font-bold" style={{ color: '#22c55e' }}>{n.d}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Seasonality */}
+          <div className="rounded-lg overflow-hidden" style={cardStyle}>
+            <div className="px-6 py-4" style={{ borderBottom: '1px solid #e5e7eb', backgroundColor: '#f9fafb' }}>
+              <h3 className="font-bold text-base" style={{ color: '#2d3e4e' }}>Estacionalidad vacacional — Frigiliana</h3>
+            </div>
+            <div className="p-5">
+              <div className="text-xs mb-4" style={{ color: '#9ca3af' }}>Ocupación mensual — Airbtics 2024</div>
+              <div className="flex items-end gap-2 h-28 mb-4">
+                {SEASON.map((s, i) => (
+                  <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                    <span className="text-[9px] font-bold" style={{ color: s.occ > 85 ? '#ef4444' : s.occ > 65 ? '#2d3e4e' : '#9ca3af' }}>{s.occ}%</span>
+                    <div className="w-full rounded-t" style={{ height: `${s.occ}%`, background: s.c, minHeight: 3 }} />
+                    <span className="text-[9px]" style={{ color: '#9ca3af' }}>{s.m}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-4 flex-wrap">
+                {[
+                  { a: "Agosto pico", b: "251€/noche", c: "#ef4444" },
+                  { a: "Media anual", b: "124€/noche", c: "#2d3e4e" },
+                  { a: "263 noches", b: "reservadas/año", c: "#9ca3af" },
+                ].map((d, i) => (
+                  <div key={i} className="pl-3" style={{ borderLeft: `2px solid ${d.c}` }}>
+                    <div className="text-[10px] font-bold" style={{ color: d.c }}>{d.a}</div>
+                    <div className="text-xs" style={{ color: '#666' }}>{d.b}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── REGULATION ── */}
+        <section className="rounded-lg overflow-hidden" style={cardStyle}>
+          <div className="px-6 py-4 text-white" style={{ backgroundColor: '#2d3e4e' }}>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold bg-white/15 px-2.5 py-1 rounded">03</span>
+              <h2 className="text-lg font-black">Marco regulatorio — Lo que cambia en 2025</h2>
+            </div>
+          </div>
+          <div className="divide-y divide-gray-100">
+            {[
+              { date: "Ene 2025", title: "Registro VUT obligatorio (RD 1312/2024)", detail: "Todas las viviendas turísticas deben inscribirse en el Registro Único. Plazo regularización: julio 2025.", tag: "OBLIGATORIO", tagBg: "rgba(239,68,68,0.1)", tagColor: "#ef4444" },
+              { date: "2024–2027", title: "Moratoria VUT Málaga capital — Frigiliana NO afectada", detail: "Suspensión 3 años de nuevas licencias VUT en Málaga capital. Frigiliana queda fuera: ventaja estructural para inversores.", tag: "VENTAJA", tagBg: "rgba(34,197,94,0.1)", tagColor: "#22c55e" },
+              { date: "2025", title: "IRAV — Tope actualización renta +2,2%", detail: "El nuevo Índice de Referencia para Actualización de Renta sustituye al IPC. Aplica a contratos firmados desde mayo 2023.", tag: "RESTRICTIVO", tagBg: "rgba(245,158,11,0.1)", tagColor: "#f59e0b" },
+              { date: "Abr 2025", title: "Comunidades pueden limitar VUT por mayoría 3/5", detail: "Art. 17.12 LPH: las comunidades de propietarios pueden restringir o prohibir VUT con mayoría cualificada.", tag: "RIESGO", tagBg: "rgba(107,114,128,0.1)", tagColor: "#6b7280" },
+            ].map((r, i) => (
+              <div key={i} className="px-6 py-5 flex gap-4 hover:bg-gray-50 transition-colors">
+                <div className="text-[10px] font-medium pt-0.5 min-w-[70px]" style={{ color: '#9ca3af' }}>{r.date}</div>
+                <div>
+                  <div className="font-semibold text-sm mb-1" style={{ color: '#1a1a1a' }}>{r.title}</div>
+                  <div className="text-xs leading-relaxed mb-2" style={{ color: '#666' }}>{r.detail}</div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style={{ backgroundColor: r.tagBg, color: r.tagColor }}>{r.tag}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── UPSELL: PERSONALIZED REPORT ── */}
+        <section>
+          <div className="text-center mb-8">
+            <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>
+              REPORTE PERSONALIZADO
+            </span>
+            <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              Este es el informe público.<br />El tuyo es diferente.
+            </h2>
+            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>
+              Los datos de arriba son el mercado general. Tu reporte incluye propiedades reales, seleccionadas para ti, con análisis que ningún portal ofrece.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+            {[
+              { icon: '🏘️', title: 'Propiedades Seleccionadas', desc: 'Escogidas manualmente para tu presupuesto y requisitos. Sin listados irrelevantes.', tag: '✓ 100% relevantes' },
+              { icon: '📊', title: 'Análisis Honesto', desc: 'Precios reales, disponibilidad actual e información que solo un experto local con 10+ años conoce.', tag: '✓ Info exclusiva' },
+              { icon: '🎯', title: 'Recomendación Directa', desc: 'Qué propiedad se ajusta mejor a tu perfil y por qué. Sin ambigüedades.', tag: '✓ Decisión clara' },
+              { icon: '📦', title: 'Guía Logística Insider', desc: 'Campo vs pueblo, agua, paquetería, basuras. La verdad que descubres cuando ya te mudaste.', tag: '✓ Sin sorpresas' },
+              { icon: '📅', title: '6 Meses de Seguimiento', desc: 'Actualizaciones cada viernes con nuevas propiedades y cambios de precio.', tag: '✓ 24 updates' },
+              { icon: '🎁', title: 'Reembolso Garantizado', desc: 'Si acabas alquilando una propiedad Propaxar Direct, reembolsamos los 180€ completos.', tag: '✓ Riesgo cero', highlight: true },
+            ].map((f, i) => (
+              <div
+                key={i}
+                className="rounded-lg p-6 transition-transform hover:-translate-y-1"
+                style={{
+                  backgroundColor: '#fff',
+                  border: f.highlight ? '2px solid #4ade80' : '1px solid #e5e7eb',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+                }}
+              >
+                <span className="text-3xl mb-4 block">{f.icon}</span>
+                <h3 className="font-bold text-base mb-2" style={{ color: '#1a1a1a' }}>{f.title}</h3>
+                <p className="text-sm leading-relaxed mb-3" style={{ color: '#666' }}>{f.desc}</p>
+                <span
+                  className="text-xs font-bold px-2.5 py-1 rounded-lg"
+                  style={{
+                    backgroundColor: f.highlight ? 'rgba(74,222,128,0.15)' : 'rgba(61,90,115,0.10)',
+                    color: f.highlight ? '#15803d' : '#2d3e4e',
+                  }}
+                >
+                  {f.tag}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA BLOCK */}
+          <div
+            className="rounded-lg overflow-hidden text-white"
+            style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}
+          >
+            <div className="px-8 py-10 text-center">
+              <div
+                className="mx-auto w-full max-w-sm rounded-lg p-8"
+                style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
+              >
+                <div className="flex gap-2 justify-center mb-4">
+                  <span className="rounded-lg px-3 py-1 text-xs font-black" style={{ backgroundColor: '#f59e0b', color: '#78350f' }}>-60% DESCUENTO</span>
+                  <span className="rounded-lg px-3 py-1 text-xs font-black" style={{ backgroundColor: '#4ade80', color: '#14532d' }}>6 MESES INCLUIDOS</span>
+                </div>
+
+                <div className="flex items-center justify-center gap-3 mb-1">
+                  <span className="line-through text-xl font-bold" style={{ color: 'rgba(255,255,255,0.35)' }}>€450</span>
+                  <span className="text-5xl font-black">€180</span>
+                </div>
+                <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>Pago único · 24 actualizaciones · Reembolsable</p>
+
+                {/* T&C */}
+                <label
+                  className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all ${!accepted ? 'animate-pulse' : ''}`}
+                  style={{
+                    border: accepted ? '1px solid rgba(74,222,128,0.5)' : '1px dashed rgba(255,255,255,0.35)',
+                    backgroundColor: accepted ? 'rgba(74,222,128,0.12)' : 'rgba(255,255,255,0.08)',
+                  }}
+                >
+                  <input type="checkbox" checked={accepted} onChange={e => setAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 rounded flex-shrink-0" style={{ accentColor: '#4ade80' }} />
+                  <span className="text-xs leading-snug">
+                    {!accepted && <span className="block font-bold text-xs mb-0.5" style={{ color: '#fcd34d' }}>👆 Marca esto para continuar</span>}
+                    <span style={{ color: 'rgba(255,255,255,0.7)' }}>
+                      Al proceder al pago, aceptas los{' '}
+                      <Link to="/terminos-finder" className="text-white underline hover:no-underline">Términos y Condiciones</Link>
+                    </span>
+                  </span>
+                </label>
+
+                <button
+                  onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
+                  disabled={!accepted}
+                  className="w-full font-bold text-lg py-4 rounded-lg transition-all mb-3"
+                  style={{
+                    backgroundColor: accepted ? '#4ade80' : '#9ca3af',
+                    color: accepted ? '#14532d' : '#6b7280',
+                    cursor: accepted ? 'pointer' : 'not-allowed',
+                    opacity: accepted ? 1 : 0.65,
+                    boxShadow: accepted ? '0 4px 14px rgba(74,222,128,0.3)' : 'none',
+                    border: 'none',
+                  }}
+                >
+                  Solicitar Mi Reporte Personalizado →
+                </button>
+
+                <div className="flex flex-wrap justify-center gap-3 text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                  <span>✓ Pago Stripe seguro</span><span>·</span>
+                  <span>✓ Sin suscripciones</span><span>·</span>
+                  <span>✓ Reembolsable</span>
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-lg px-6 py-4 max-w-md mx-auto text-left" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+                <p className="text-xs font-black mb-1" style={{ color: '#fcd34d' }}>💡 GARANTÍA</p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  Si en las primeras 24 horas tras recibir tu reporte no estás satisfecho, contacta y lo solucionamos. Si decides trabajar conmigo, los 180€ se descuentan del servicio.
+                </p>
+              </div>
+            </div>
+
+            {/* Contact strip */}
+            <div className="border-t px-8 py-6 text-center" style={{ borderColor: 'rgba(255,255,255,0.15)', backgroundColor: 'rgba(0,0,0,0.12)' }}>
+              <p className="text-sm font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>¿Prefieres hablar antes de comprar?</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola Manuel, tengo una pregunta sobre el Reporte de Mercado Frigiliana.')}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white font-bold px-6 py-3 rounded-lg transition hover:opacity-90" style={{ backgroundColor: '#22c55e' }}>
+                  💬 WhatsApp: {PHONE}
+                </a>
+                <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-lg transition hover:bg-white/20" style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                  📧 {EMAIL}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── NEWSLETTER CAPTURE ── */}
+        <section className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-widest mb-3" style={{ color: '#2d3e4e' }}>Suscripción gratuita</div>
+            <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+              El primer lunes de cada mes. En tu bandeja de entrada. Sin coste.
+            </h2>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: '#666' }}>
+              Precios actualizados, análisis de mercado, cambios regulatorios y propiedades destacadas. La inteligencia que necesitas antes de tomar decisiones.
+            </p>
+            <ul className="space-y-2">
+              {[
+                'Precios €/m² actualizados Frigiliana y Axarquía',
+                'Datos aeropuerto y turismo mensual',
+                'Cambios regulatorios que afectan a tu propiedad',
+                'Sin spam. Baja cuando quieras. Solo datos.',
+              ].map((li, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm" style={{ color: '#666' }}>
+                  <span style={{ color: '#2d3e4e', fontWeight: 600 }}>→</span> {li}
+                </li>
+              ))}
             </ul>
           </div>
-          <div className="reporte-upsell-right">
-            <div style={{ fontSize: 48, fontWeight: 800, color: '#fff', lineHeight: 1 }}>180€</div>
-            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', marginTop: 6 }}>pago único · sin suscripción</div>
-            <Link
-              to="/empezar"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                marginTop: 24,
-                background: '#fff',
-                color: '#1E2535',
-                fontWeight: 600,
-                fontSize: 14,
-                padding: '14px 28px',
-                borderRadius: 7,
-                textDecoration: 'none',
-                transition: 'opacity 0.2s',
-              }}
-            >
-              Solicitar mi reporte →
-            </Link>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 14, maxWidth: 260, lineHeight: 1.5 }}>
-              Si decides trabajar conmigo directamente, los 180€ se descuentan del servicio.
-            </div>
+
+          <div className="rounded-lg p-6" style={cardStyle}>
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="font-bold text-base mb-1" style={{ color: '#1a1a1a' }}>Recibir el informe mensual</div>
+                <div className="text-xs mb-4" style={{ color: '#9ca3af' }}>Gratis · Sin compromiso · Datos reales</div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#9ca3af' }}>Nombre</label>
+                  <input className="w-full border rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-300" style={{ borderColor: '#e5e7eb' }} placeholder="Tu nombre" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#9ca3af' }}>Email *</label>
+                  <input className="w-full border rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-300" style={{ borderColor: '#e5e7eb' }} type="email" placeholder="tu@email.com" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#9ca3af' }}>Perfil</label>
+                  <select className="w-full border rounded-lg px-4 py-3 text-sm outline-none bg-white" style={{ borderColor: '#e5e7eb' }} value={form.perfil} onChange={e => setForm({ ...form, perfil: e.target.value })}>
+                    <option value="">¿Qué te describe mejor?</option>
+                    <option>Comprador — quiero vivir aquí</option>
+                    <option>Inquilino — busco alquiler</option>
+                    <option>Propietario — tengo una propiedad</option>
+                    <option>Curiosidad general</option>
+                  </select>
+                </div>
+                <button type="submit" className="w-full font-bold py-3.5 rounded-lg text-white text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#2d3e4e' }}>
+                  Suscribirme al Market Report →
+                </button>
+                <p className="text-[10px]" style={{ color: '#9ca3af' }}>
+                  Al suscribirte aceptas recibir el informe mensual. Datos tratados conforme al RGPD. Baja inmediata con un clic.
+                </p>
+              </form>
+            ) : (
+              <div className="text-center py-10">
+                <div className="text-4xl mb-3" style={{ color: '#22c55e' }}>✓</div>
+                <div className="font-bold text-lg mb-2" style={{ color: '#1a1a1a' }}>Suscripción confirmada</div>
+                <p className="text-sm" style={{ color: '#666' }}>
+                  Recibirás el próximo informe el <strong style={{ color: '#2d3e4e' }}>primer lunes de abril.</strong>
+                </p>
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* NEWSLETTER CAPTURE */}
-      <section className="mercado-capture">
-        <div className="capture-left">
-          <div className="capture-edition">Suscripción gratuita — Market Report Propaxar</div>
-          <h2 className="capture-title">
-            El primer lunes de cada mes.<br />
-            En tu bandeja de entrada.<br />
-            <em>Sin coste.</em>
-          </h2>
-          <p className="capture-body">
-            Cada mes: precios actualizados, análisis de mercado, cambios regulatorios
-            y operaciones destacadas. La inteligencia de mercado que los inversores serios
-            necesitan antes de tomar decisiones.
-          </p>
-          <ul className="capture-features">
-            <li>Precios €/m² actualizados Frigiliana y Axarquía</li>
-            <li>Datos aeropuerto y turismo mensual</li>
-            <li>Cambios regulatorios que afectan a tu propiedad</li>
-            <li>Análisis de rentabilidad VUT y larga temporada</li>
-            <li>Sin spam. Baja cuando quieras. Solo datos.</li>
-          </ul>
+        {/* SOURCES */}
+        <div className="flex items-center gap-3 flex-wrap py-4">
+          <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: '#9ca3af' }}>Fuentes</span>
+          {["INE", "Registradores", "Aena", "Idealista", "Airbtics", "Banco de España", "CaixaBank Research", "Turismo Costa del Sol", "Diputación Málaga", "Kyero", "RealAdvisor", "Likibu", "MIVAU", "Ayto. Frigiliana"].map(s => (
+            <span key={s} className="text-[9px] px-2 py-1 rounded" style={{ backgroundColor: '#e5e7eb', color: '#666' }}>{s}</span>
+          ))}
         </div>
 
-        <div className="capture-form-wrap">
-          {!submitted ? (
-            <form className="capture-form" onSubmit={handleSubmit}>
-              <div className="form-title">Recibir el informe mensual</div>
-              <div className="form-sub">Gratis · Sin compromiso · Datos reales</div>
-              <div className="form-field">
-                <label className="form-label">Nombre</label>
-                <input className="form-input" placeholder="Tu nombre" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
-              </div>
-              <div className="form-field">
-                <label className="form-label">Email *</label>
-                <input className="form-input" type="email" placeholder="tu@email.com" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-              </div>
-              <div className="form-field">
-                <label className="form-label">Perfil</label>
-                <select className="form-select" value={form.perfil} onChange={e => setForm({ ...form, perfil: e.target.value })}>
-                  <option value="">¿Qué describes mejor?</option>
-                  <option>Inversor — busco rentabilidad</option>
-                  <option>Comprador — quiero vivir aquí</option>
-                  <option>Propietario — tengo una propiedad</option>
-                  <option>Inquilino — busco alquiler</option>
-                  <option>Curiosidad general</option>
-                </select>
-              </div>
-              <button type="submit" className="form-btn">
-                Suscribirme al Market Report →
-              </button>
-              <p className="form-disclaimer">
-                Al suscribirte aceptas recibir el informe mensual de Propaxar.
-                Datos tratados conforme al RGPD. Baja inmediata con un clic.
-              </p>
-            </form>
-          ) : (
-            <div className="capture-form" style={{ textAlign: "center", padding: "48px 32px" }}>
-              <div style={{ fontSize: 48, marginBottom: 16, color: "hsl(var(--success))" }}>✓</div>
-              <div className="form-title">Suscripción confirmada</div>
-              <p style={{ fontSize: 14, color: "hsl(var(--foreground-muted))", marginTop: 12, lineHeight: 1.7 }}>
-                Recibirás el próximo informe el<br />
-                <strong style={{ color: "hsl(var(--primary))" }}>primer lunes de abril.</strong><br />
-                Mientras tanto, explora los datos en esta página o contacta directamente con Manuel.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* SOURCES */}
-      <div className="sources-bar">
-        <span className="sources-label">Fuentes</span>
-        {["INE", "Registradores", "Aena", "Idealista", "Airbtics", "Banco de España", "CaixaBank Research", "Turismo Costa del Sol", "Diputación Málaga", "Kyero", "RealAdvisor", "Likibu", "MIVAU", "Ayto. Frigiliana"].map(s => (
-          <span className="source-chip" key={s}>{s}</span>
-        ))}
       </div>
 
       <Footer />
