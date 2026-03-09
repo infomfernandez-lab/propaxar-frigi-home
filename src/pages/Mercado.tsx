@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import "./Mercado.css";
-
-const STRIPE_URL = 'https://buy.stripe.com/bJe6oJ9fS73gffkdepgEg05';
 const WHATSAPP_NUMBER = '34662317561';
 const EMAIL = 'info@propaxar.com';
 const PHONE = '+34 662 317 561';
@@ -45,7 +42,6 @@ const cardStyle: React.CSSProperties = { backgroundColor: '#ffffff', border: '1p
 export default function MercadoPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ nombre: "", email: "", perfil: "" });
-  const [accepted, setAccepted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -396,84 +392,21 @@ export default function MercadoPage() {
             ))}
           </div>
 
-          {/* CTA BLOCK */}
+          {/* CTA BLOCK — Contact only */}
           <div
             className="rounded-lg overflow-hidden text-white"
             style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}
           >
             <div className="px-8 py-10 text-center">
-              <div
-                className="mx-auto w-full max-w-sm rounded-lg p-8"
-                style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
-              >
-                <div className="flex gap-2 justify-center mb-4">
-                  <span className="rounded-lg px-3 py-1 text-xs font-black" style={{ backgroundColor: '#f59e0b', color: '#78350f' }}>-60% DESCUENTO</span>
-                  <span className="rounded-lg px-3 py-1 text-xs font-black" style={{ backgroundColor: '#4ade80', color: '#14532d' }}>6 MESES INCLUIDOS</span>
-                </div>
-
-                <div className="flex items-center justify-center gap-3 mb-1">
-                  <span className="line-through text-xl font-bold" style={{ color: 'rgba(255,255,255,0.35)' }}>€450</span>
-                  <span className="text-5xl font-black">€180</span>
-                </div>
-                <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>Pago único · 24 actualizaciones · Reembolsable</p>
-
-                {/* T&C */}
-                <label
-                  className={`flex items-start gap-3 cursor-pointer text-left mb-4 rounded-lg px-3 py-2.5 transition-all ${!accepted ? 'animate-pulse' : ''}`}
-                  style={{
-                    border: accepted ? '1px solid rgba(74,222,128,0.5)' : '1px dashed rgba(255,255,255,0.35)',
-                    backgroundColor: accepted ? 'rgba(74,222,128,0.12)' : 'rgba(255,255,255,0.08)',
-                  }}
-                >
-                  <input type="checkbox" checked={accepted} onChange={e => setAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 rounded flex-shrink-0" style={{ accentColor: '#4ade80' }} />
-                  <span className="text-xs leading-snug">
-                    {!accepted && <span className="block font-bold text-xs mb-0.5" style={{ color: '#fcd34d' }}>👆 Marca esto para continuar</span>}
-                    <span style={{ color: 'rgba(255,255,255,0.7)' }}>
-                      Al proceder al pago, aceptas los{' '}
-                      <Link to="/terminos-finder" className="text-white underline hover:no-underline">Términos y Condiciones</Link>
-                    </span>
-                  </span>
-                </label>
-
-                <button
-                  onClick={() => { if (accepted) window.location.href = STRIPE_URL; }}
-                  disabled={!accepted}
-                  className="w-full font-bold text-lg py-4 rounded-lg transition-all mb-3"
-                  style={{
-                    backgroundColor: accepted ? '#4ade80' : '#9ca3af',
-                    color: accepted ? '#14532d' : '#6b7280',
-                    cursor: accepted ? 'pointer' : 'not-allowed',
-                    opacity: accepted ? 1 : 0.65,
-                    boxShadow: accepted ? '0 4px 14px rgba(74,222,128,0.3)' : 'none',
-                    border: 'none',
-                  }}
-                >
-                  Solicitar Mi Reporte Personalizado →
-                </button>
-
-                <div className="flex flex-wrap justify-center gap-3 text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                  <span>✓ Pago Stripe seguro</span><span>·</span>
-                  <span>✓ Sin suscripciones</span><span>·</span>
-                  <span>✓ Reembolsable</span>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-lg px-6 py-4 max-w-md mx-auto text-left" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
-                <p className="text-xs font-black mb-1" style={{ color: '#fcd34d' }}>💡 GARANTÍA</p>
-                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  Si en las primeras 24 horas tras recibir tu reporte no estás satisfecho, contacta y lo solucionamos. Si decides trabajar conmigo, los 180€ se descuentan del servicio.
-                </p>
-              </div>
-            </div>
-
-            {/* Contact strip */}
-            <div className="border-t px-8 py-6 text-center" style={{ borderColor: 'rgba(255,255,255,0.15)', backgroundColor: 'rgba(0,0,0,0.12)' }}>
-              <p className="text-sm font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>¿Prefieres hablar antes de comprar?</p>
+              <h3 className="text-2xl font-black mb-3">¿Quieres tu reporte personalizado?</h3>
+              <p className="text-sm max-w-md mx-auto mb-8" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                Escríbeme y te explico qué incluye, cómo funciona y si tiene sentido para tu situación. Sin compromiso.
+              </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola Manuel, tengo una pregunta sobre el Reporte de Mercado Frigiliana.')}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white font-bold px-6 py-3 rounded-lg transition hover:opacity-90" style={{ backgroundColor: '#22c55e' }}>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola Manuel, me interesa el Reporte Personalizado de Frigiliana. ¿Me puedes dar más información?')}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white font-bold px-6 py-3.5 rounded-lg transition hover:opacity-90" style={{ backgroundColor: '#22c55e' }}>
                   💬 WhatsApp: {PHONE}
                 </a>
-                <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-lg transition hover:bg-white/20" style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <a href={`mailto:${EMAIL}?subject=${encodeURIComponent('Reporte Personalizado Frigiliana')}`} className="inline-flex items-center gap-2 text-white font-semibold px-6 py-3.5 rounded-lg transition hover:bg-white/20" style={{ backgroundColor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.2)' }}>
                   📧 {EMAIL}
                 </a>
               </div>
