@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import "./Mercado.css";
-
-const STRIPE_URL = 'https://buy.stripe.com/bJe6oJ9fS73gffkdepgEg05';
 const WHATSAPP_NUMBER = '34662317561';
 const EMAIL = 'info@propaxar.com';
 const PHONE = '+34 662 317 561';
