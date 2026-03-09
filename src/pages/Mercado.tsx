@@ -42,7 +42,6 @@ const cardStyle: React.CSSProperties = { backgroundColor: '#ffffff', border: '1p
 export default function MercadoPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ nombre: "", email: "", perfil: "" });
-  const [accepted, setAccepted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
