@@ -99,8 +99,8 @@ const t = {
     langToggle: "EN",
   },
   en: {
-    title: "Villa in Frigiliana · Panoramic Views — €1,600/month | Propaxar",
-    metaDesc: "3-bedroom, 2-bathroom villa in Frigiliana with panoramic sea and mountain views. Private pool, BBQ, fruit garden. €1,600/month. Ref. pa219.",
+    title: "Villa in Frigiliana · Panoramic Views — €1,700/month | Propaxar",
+    metaDesc: "3-bedroom, 2-bathroom villa in Frigiliana with panoramic sea and mountain views. Private pool, BBQ, fruit garden. €1,700/month. Ref. pa219.",
     ref: "Ref. pa219 · Residential rental",
     heading: "Villa in Frigiliana",
     subtitle: "Panoramic Views",
