@@ -23,6 +23,7 @@ import EncuentraTuAlquiler from "./pages/EncuentraTuAlquiler";
 import PisoFrigiliana from "./pages/PisoFrigiliana";
 import VillaFrigiliana from "./pages/VillaFrigiliana";
 import VillaVistas from "./pages/VillaVistas";
+import VillaPatricia from "./pages/VillaPatricia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
               <Route path="/property/pisoenfrigiliana" element={<PisoFrigiliana />} />
               <Route path="/property/villaenfrigiliana" element={<VillaFrigiliana />} />
               <Route path="/property/villavistas" element={<VillaVistas />} />
+              <Route path="/property/villapatricia" element={<VillaPatricia />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
