@@ -13,6 +13,7 @@ import ReporteTest from "./pages/ReporteTest";
 import ReportePropaxar from "./pages/ReportePropaxar";
 import ReporteKatinkaEN from "./pages/ReporteKatinkaEN";
 import ReporteNadiaEN from "./pages/ReporteNadiaEN";
+import ReporteHenriEN from "./pages/ReporteHenriEN";
 import ComprarReporte from "./pages/ComprarReporte";
 import DemoReporte from "./pages/DemoReporte";
 import Empezar from "./pages/Empezar";
