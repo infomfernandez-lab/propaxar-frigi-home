@@ -237,7 +237,7 @@ const VillaVistas = () => {
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-white font-black" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>1.600€</div>
+                <div className="text-white font-black" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>1.700€</div>
                 <div className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{c.perMonth}</div>
               </div>
             </div>
