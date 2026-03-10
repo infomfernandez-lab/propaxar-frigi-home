@@ -35,8 +35,8 @@ const PHOTOS = [
 
 const t = {
   es: {
-    title: "Villa en Frigiliana · Vistas a todo — 1.600€/mes | Propaxar",
-    metaDesc: "Villa de 3 dormitorios y 2 baños en Frigiliana con vistas panorámicas al mar y montaña. Piscina privada, BBQ, jardín con frutales. 1.600€/mes. Ref. pa219.",
+    title: "Villa en Frigiliana · Vistas a todo — 1.700€/mes | Propaxar",
+    metaDesc: "Villa de 3 dormitorios y 2 baños en Frigiliana con vistas panorámicas al mar y montaña. Piscina privada, BBQ, jardín con frutales. 1.700€/mes. Ref. pa219.",
     ref: "Ref. pa219 · Alquiler residencial",
     heading: "Villa en Frigiliana",
     subtitle: "Vistas a todo",
