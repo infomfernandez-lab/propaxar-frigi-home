@@ -404,7 +404,7 @@ const VillaVistas = () => {
                 {/* Price card */}
                 <div className="rounded-lg overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 100%)' }}>
                   <div className="px-6 py-6 text-center">
-                    <div className="font-black text-4xl mb-1">1.600€</div>
+                    <div className="font-black text-4xl mb-1">1.700€</div>
                     <div className="text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>{c.rentalType}</div>
                   </div>
                   <div className="px-6 pb-6 space-y-3">
