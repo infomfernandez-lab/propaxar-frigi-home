@@ -35,8 +35,8 @@ const PHOTOS = [
 
 const t = {
   es: {
-    title: "Villa en Frigiliana · Vistas a todo — 1.600€/mes | Propaxar",
-    metaDesc: "Villa de 3 dormitorios y 2 baños en Frigiliana con vistas panorámicas al mar y montaña. Piscina privada, BBQ, jardín con frutales. 1.600€/mes. Ref. pa219.",
+    title: "Villa en Frigiliana · Vistas a todo — 1.700€/mes | Propaxar",
+    metaDesc: "Villa de 3 dormitorios y 2 baños en Frigiliana con vistas panorámicas al mar y montaña. Piscina privada, BBQ, jardín con frutales. 1.700€/mes. Ref. pa219.",
     ref: "Ref. pa219 · Alquiler residencial",
     heading: "Villa en Frigiliana",
     subtitle: "Vistas a todo",
@@ -99,8 +99,8 @@ const t = {
     langToggle: "EN",
   },
   en: {
-    title: "Villa in Frigiliana · Panoramic Views — €1,600/month | Propaxar",
-    metaDesc: "3-bedroom, 2-bathroom villa in Frigiliana with panoramic sea and mountain views. Private pool, BBQ, fruit garden. €1,600/month. Ref. pa219.",
+    title: "Villa in Frigiliana · Panoramic Views — €1,700/month | Propaxar",
+    metaDesc: "3-bedroom, 2-bathroom villa in Frigiliana with panoramic sea and mountain views. Private pool, BBQ, fruit garden. €1,700/month. Ref. pa219.",
     ref: "Ref. pa219 · Residential rental",
     heading: "Villa in Frigiliana",
     subtitle: "Panoramic Views",
@@ -237,7 +237,7 @@ const VillaVistas = () => {
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-white font-black" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>1.600€</div>
+                <div className="text-white font-black" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>1.700€</div>
                 <div className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{c.perMonth}</div>
               </div>
             </div>
@@ -404,7 +404,7 @@ const VillaVistas = () => {
                 {/* Price card */}
                 <div className="rounded-lg overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 100%)' }}>
                   <div className="px-6 py-6 text-center">
-                    <div className="font-black text-4xl mb-1">1.600€</div>
+                    <div className="font-black text-4xl mb-1">1.700€</div>
                     <div className="text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>{c.rentalType}</div>
                   </div>
                   <div className="px-6 pb-6 space-y-3">
