@@ -27,6 +27,7 @@ import VillaVistas from "./pages/VillaVistas";
 import VillaPatricia from "./pages/VillaPatricia";
 import VillaCelia from "./pages/VillaCelia";
 import CasaRural from "./pages/CasaRural";
+import VillaPanorama from "./pages/VillaPanorama";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
