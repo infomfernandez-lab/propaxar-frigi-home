@@ -112,6 +112,9 @@ const Propiedades = () => {
 
   return (
     <main className="min-h-screen bg-[hsl(222,20%,96%)]">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <Navigation />
 
       {/* Hero */}
