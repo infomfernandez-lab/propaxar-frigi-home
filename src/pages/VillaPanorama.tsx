@@ -149,8 +149,8 @@ const t = {
 
 type Lang = "es" | "en";
 
-const MAPS_URL = "https://www.google.com/maps/place/Q3WQ%2B7VJ+Frigiliana,+M%C3%A1laga";
-const MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.5!2d-3.9103!3d36.7957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7224b09423f143%3A0x4baba624c54b1580!2sQ3WQ%2B7VJ%20Frigiliana%2C%20M%C3%A1laga!5e1!3m2!1ses!2ses!4v1772797075045!5m2!1ses!2ses";
+const MAPS_URL = "https://www.google.com/maps/place/Q3RQ%2B7PX+Frigiliana";
+const MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.5!2d-3.9103!3d36.7957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7224b09423f143%3A0x4baba624c54b1580!2sQ3RQ%2B7PX%20Frigiliana!5e1!3m2!1ses!2ses!4v1772797075045!5m2!1ses!2ses";
 
 const bodyFont = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
 const cardStyle = { backgroundColor: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' };
