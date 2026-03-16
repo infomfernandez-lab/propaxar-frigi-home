@@ -127,7 +127,7 @@ const t = {
     descSubtitle: "What makes this house unique:",
     descBullets: [
       { title: "Landscaped gardens", text: <>Flowers and trees surround the property creating a natural setting of <strong>exceptional beauty</strong>.</> },
-      { title v: "BBQ area", text: <>An integrated BBQ zone for enjoying <strong>outdoor meals</strong> any time of year.</> },
+      { title: "BBQ area", text: <>An integrated BBQ zone for enjoying <strong>outdoor meals</strong> any time of year.</> },
       { title: "Panoramic views", text: <>From the terrace you'll enjoy <strong>sea and mountain views</strong> that will leave you speechless.</> },
       { title: "Private pool", text: <>A private pool surrounded by nature, perfect for <strong>cooling off and relaxing</strong> in total privacy.</> },
       { title: "Outdoor spaces", text: <>Different corners for <strong>reading, resting or sharing moments</strong> in good company.</> },
