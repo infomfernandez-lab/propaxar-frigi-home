@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -111,6 +112,9 @@ const Propiedades = () => {
 
   return (
     <main className="min-h-screen bg-[hsl(222,20%,96%)]">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <Navigation />
 
       {/* Hero */}
