@@ -158,6 +158,30 @@ const t = {
     ],
   },
 
+  // Preview section
+  previewTag: { es: 'EJEMPLO REAL', en: 'REAL EXAMPLE' },
+  previewTitle: { es: 'Así es tu reporte por dentro', en: 'This is your report inside' },
+  previewDesc: {
+    es: 'Un reporte real creado para un cliente satisfecho. Nombre anonimizado por privacidad.',
+    en: 'A real report created for a satisfied client. Name anonymised for privacy.',
+  },
+  previewCards: {
+    es: [
+      { title: 'Resumen de búsqueda', desc: 'Tu perfil, presupuesto y propiedades encontradas de un vistazo.' },
+      { title: 'Análisis de propiedad', desc: 'Pros, contras, puntuación profesional, fotos y tests in situ.' },
+      { title: 'Info insider exclusiva', desc: 'Datos del propietario, historial y mapa de vecinos.' },
+      { title: 'Recomendación del experto', desc: 'La propiedad que mejor encaja contigo y por qué.' },
+    ],
+    en: [
+      { title: 'Search summary', desc: 'Your profile, budget and properties found at a glance.' },
+      { title: 'Property analysis', desc: 'Pros, cons, professional rating, photos and on-site tests.' },
+      { title: 'Exclusive insider info', desc: 'Owner details, history and neighbour map.' },
+      { title: 'Expert recommendation', desc: 'The property that best fits you and why.' },
+    ],
+  },
+  previewCta: { es: 'Ver reporte demo completo →', en: 'See full demo report →' },
+  previewNote: { es: 'El tuyo será personalizado para tu perfil y presupuesto', en: 'Yours will be personalised for your profile and budget' },
+
   // CTA
   ctaTitle: { es: '¿Listo para tu reporte?', en: 'Ready for your report?' },
   ctaDesc: { es: 'Un click te separa de conocer el 100% del mercado', en: 'One click away from knowing 100% of the market' },
@@ -392,6 +416,127 @@ export default function MarketReport() {
                 <span className="text-xs font-bold px-2.5 py-1 rounded-lg" style={{ backgroundColor: f.highlight ? 'rgba(74,222,128,0.15)' : 'rgba(61,90,115,0.10)', color: f.highlight ? '#15803d' : '#2d3e4e' }}>{f.tag}</span>
               </div>
             ))}
+          </div>
+        </RevealSection>
+
+        {/* ── REPORT PREVIEW ── */}
+        <RevealSection>
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>{t.previewTag[lang]}</span>
+            <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', color: '#1a1a1a', letterSpacing: '-0.02em' }}>{t.previewTitle[lang]}</h2>
+            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>{t.previewDesc[lang]}</p>
+          </div>
+
+          {/* Browser mockup frame */}
+          <div className="rounded-xl overflow-hidden" style={{ border: '1px solid #d1d5db', boxShadow: '0 8px 40px rgba(0,0,0,0.12)' }}>
+            {/* Title bar */}
+            <div className="flex items-center gap-2 px-4 py-2.5" style={{ backgroundColor: '#f3f4f6', borderBottom: '1px solid #e5e7eb' }}>
+              <div className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#ef4444' }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#f59e0b' }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#22c55e' }} />
+              </div>
+              <div className="flex-1 mx-3">
+                <div className="rounded px-3 py-1 text-[10px] text-center truncate" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', color: '#9ca3af' }}>
+                  propaxar.es/reporte/sarah-m-demo
+                </div>
+              </div>
+            </div>
+
+            {/* Report content preview */}
+            <div style={{ backgroundColor: '#fafafa' }}>
+              {/* Mini hero */}
+              <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a2a3a 0%, #2d3e4e 100%)', height: 120 }}>
+                <div className="absolute inset-0 flex items-center justify-center text-center text-white">
+                  <div>
+                    <p className="text-[10px] tracking-widest uppercase opacity-50 mb-1">PERSONALISED PROPERTY REPORT</p>
+                    <p className="text-lg font-bold">Sarah M.</p>
+                    <p className="text-[11px] opacity-60">Frigiliana · Spring 2026</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Search summary mini cards */}
+              <div className="px-5 py-4">
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  {[
+                    { icon: '🔍', num: '47', label: lang === 'es' ? 'Propiedades analizadas' : 'Properties analysed' },
+                    { icon: '✅', num: '4', label: lang === 'es' ? 'Seleccionadas' : 'Selected' },
+                    { icon: '🎯', num: '1', label: lang === 'es' ? 'Dentro del presupuesto' : 'Within budget' },
+                  ].map((s, i) => (
+                    <div key={i} className="rounded-lg p-3 text-center" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }}>
+                      <span className="text-lg">{s.icon}</span>
+                      <p className="text-xl font-black mt-1" style={{ color: '#2d3e4e' }}>{s.num}</p>
+                      <p className="text-[9px]" style={{ color: '#9ca3af' }}>{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Property card preview */}
+                <div className="rounded-lg overflow-hidden mb-3" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }}>
+                  <div className="flex">
+                    <div className="w-28 h-24 flex-shrink-0 relative">
+                      <img src="/images/properties/IMG_4099.jpg" alt="Villa Patricia preview" className="w-full h-full object-cover" loading="lazy" />
+                      <span className="absolute top-1.5 left-1.5 text-[8px] font-bold px-1.5 py-0.5 rounded text-white" style={{ backgroundColor: '#22c55e' }}>✅ {lang === 'es' ? 'DENTRO PRESUPUESTO' : 'WITHIN BUDGET'}</span>
+                    </div>
+                    <div className="p-3 flex-1 min-w-0">
+                      <p className="text-sm font-bold" style={{ color: '#2d3e4e' }}>Villa Patricia</p>
+                      <p className="text-[11px]" style={{ color: '#666' }}>€900/month · 2 beds · 2 baths · 90m²</p>
+                      <div className="flex gap-0.5 mt-1">
+                        {[1,2,3,4,5].map(i => (
+                          <span key={i} className="text-[10px]" style={{ color: '#f59e0b' }}>★</span>
+                        ))}
+                        <span className="text-[9px] ml-1" style={{ color: '#666' }}>5/5 match</span>
+                      </div>
+                      <div className="flex gap-1 mt-1.5">
+                        <span className="text-[8px] px-1.5 py-0.5 rounded" style={{ backgroundColor: 'rgba(34,197,94,0.1)', color: '#15803d' }}>✓ {lang === 'es' ? 'Mascotas' : 'Pets'}</span>
+                        <span className="text-[8px] px-1.5 py-0.5 rounded" style={{ backgroundColor: 'rgba(61,90,115,0.1)', color: '#2d3e4e' }}>📷 6 {lang === 'es' ? 'fotos' : 'photos'}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Blurred locked properties */}
+                <div className="relative">
+                  <div className="space-y-2" style={{ filter: 'blur(6px)', pointerEvents: 'none', userSelect: 'none' }}>
+                    {['Casa del Campo', 'Casa Fabi', 'Casa Loma Cruz'].map((name, i) => (
+                      <div key={i} className="rounded-lg p-3 flex items-center gap-3" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb' }}>
+                        <div className="w-12 h-12 rounded bg-gray-200 flex-shrink-0" />
+                        <div>
+                          <p className="text-sm font-bold" style={{ color: '#2d3e4e' }}>{name}</p>
+                          <p className="text-[10px]" style={{ color: '#9ca3af' }}>€1,600/month · 3 beds</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center px-4 py-3 rounded-lg" style={{ backgroundColor: 'rgba(45,62,78,0.92)' }}>
+                      <span className="text-white text-lg">🔒</span>
+                      <p className="text-white text-xs font-bold mt-1">{lang === 'es' ? '+3 propiedades más en tu reporte' : '+3 more properties in your report'}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+            {t.previewCards[lang].map((c, i) => (
+              <div key={i} className="rounded-lg p-4 transition-transform hover:-translate-y-0.5" style={cardStyle}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-sm font-black text-white" style={{ backgroundColor: '#3d5a73' }}>{i + 1}</div>
+                <h4 className="text-sm font-bold mb-1" style={{ color: '#1a1a1a' }}>{c.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: '#666' }}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Demo link */}
+          <div className="text-center mt-8 space-y-3">
+            <Link to="/demo-reporte" className="inline-flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.previewCta[lang]}
+            </Link>
+            <p className="text-xs" style={{ color: '#9ca3af' }}>{t.previewNote[lang]}</p>
           </div>
         </RevealSection>
 
