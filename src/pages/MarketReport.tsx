@@ -313,6 +313,30 @@ function RevealSection({ children, className, delay = 0 }: { children: React.Rea
   return <div ref={ref} className={className} style={{ ...style, transitionDelay: `${delay}ms` }}>{children}</div>;
 }
 
+/* ── FAQ Accordion (avoids hooks-in-map) ── */
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg overflow-hidden transition-all" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-50 active:scale-[0.995]">
+        <span className="font-semibold text-sm pr-4" style={{ color: '#1a1a1a' }}>{q}</span>
+        <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs transition-transform" style={{ backgroundColor: 'rgba(61,90,115,0.1)', color: '#2d3e4e', transform: open ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
+      </button>
+      <div className="overflow-hidden transition-all" style={{ maxHeight: open ? 300 : 0, opacity: open ? 1 : 0, transition: 'max-height 0.35s ease, opacity 0.25s ease' }}>
+        <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: '#666' }}>{a}</p>
+      </div>
+    </div>
+  );
+}
+
+function FAQAccordion({ items }: { items: { q: string; a: string }[] }) {
+  return (
+    <div className="space-y-3">
+      {items.map((faq, i) => <FAQItem key={i} q={faq.q} a={faq.a} />)}
+    </div>
+  );
+}
+
 /* ── Stripe CTA Block ── */
 function StripeCTA({ lang, compact = false }: { lang: Lang; compact?: boolean }) {
   const [accepted, setAccepted] = useState(false);
