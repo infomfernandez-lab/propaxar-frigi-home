@@ -63,7 +63,7 @@ export default function ComprarPage() {
               { icon: "🏡", val: "374.000€", label: "Precio medio listado Frigiliana" },
               { icon: "📈", val: "+6,4% anual", label: "Revalorización 2026" },
               { icon: "🌍", val: "32,3% extranjeros", label: "Compradores Málaga provincia" },
-              { icon: "✈️", val: "26,7M pasajeros", label: "Aeropuerto Málaga 2025" },
+              { icon: "✈️", val: "26,7M pasajeros", label: "Aeropuerto Málaga 2026" },
             ].map((s, i) => (
               <div key={i} className="px-4">
                 <div className="text-2xl mb-1">{s.icon}</div>
