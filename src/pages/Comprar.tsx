@@ -61,9 +61,9 @@ export default function ComprarPage() {
           <div className="max-w-5xl mx-auto px-5 py-5 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 text-center">
             {[
               { icon: "🏡", val: "374.000€", label: "Precio medio listado Frigiliana" },
-              { icon: "📈", val: "+6,4% anual", label: "Revalorización 2025" },
+              { icon: "📈", val: "+6,4% anual", label: "Revalorización 2026" },
               { icon: "🌍", val: "32,3% extranjeros", label: "Compradores Málaga provincia" },
-              { icon: "✈️", val: "26,7M pasajeros", label: "Aeropuerto Málaga 2025" },
+              { icon: "✈️", val: "26,7M pasajeros", label: "Aeropuerto Málaga 2026" },
             ].map((s, i) => (
               <div key={i} className="px-4">
                 <div className="text-2xl mb-1">{s.icon}</div>
@@ -97,7 +97,7 @@ export default function ComprarPage() {
       <section className="py-24 bg-card">
         <div className="max-w-5xl mx-auto px-5">
           <p className="text-xs uppercase tracking-[0.2em] text-foreground-muted mb-3">El mercado en datos</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Por qué 2025 es el momento de comprar en Frigiliana</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Por qué 2026 es el momento de comprar en Frigiliana</h2>
           <p className="text-foreground-muted mb-12 max-w-2xl">
             Los datos no mienten. Frigiliana combina revalorización sostenida, demanda internacional creciente y un mercado aún accesible comparado con la Costa del Sol occidental.
           </p>
