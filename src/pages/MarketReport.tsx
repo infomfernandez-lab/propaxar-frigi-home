@@ -158,6 +158,30 @@ const t = {
     ],
   },
 
+  // Preview section
+  previewTag: { es: 'EJEMPLO REAL', en: 'REAL EXAMPLE' },
+  previewTitle: { es: 'Así es tu reporte por dentro', en: 'This is your report inside' },
+  previewDesc: {
+    es: 'Un reporte real creado para un cliente satisfecho. Nombre anonimizado por privacidad.',
+    en: 'A real report created for a satisfied client. Name anonymised for privacy.',
+  },
+  previewCards: {
+    es: [
+      { title: 'Resumen de búsqueda', desc: 'Tu perfil, presupuesto y propiedades encontradas de un vistazo.' },
+      { title: 'Análisis de propiedad', desc: 'Pros, contras, puntuación profesional, fotos y tests in situ.' },
+      { title: 'Info insider exclusiva', desc: 'Datos del propietario, historial y mapa de vecinos.' },
+      { title: 'Recomendación del experto', desc: 'La propiedad que mejor encaja contigo y por qué.' },
+    ],
+    en: [
+      { title: 'Search summary', desc: 'Your profile, budget and properties found at a glance.' },
+      { title: 'Property analysis', desc: 'Pros, cons, professional rating, photos and on-site tests.' },
+      { title: 'Exclusive insider info', desc: 'Owner details, history and neighbour map.' },
+      { title: 'Expert recommendation', desc: 'The property that best fits you and why.' },
+    ],
+  },
+  previewCta: { es: 'Ver reporte demo completo →', en: 'See full demo report →' },
+  previewNote: { es: 'El tuyo será personalizado para tu perfil y presupuesto', en: 'Yours will be personalised for your profile and budget' },
+
   // CTA
   ctaTitle: { es: '¿Listo para tu reporte?', en: 'Ready for your report?' },
   ctaDesc: { es: 'Un click te separa de conocer el 100% del mercado', en: 'One click away from knowing 100% of the market' },
