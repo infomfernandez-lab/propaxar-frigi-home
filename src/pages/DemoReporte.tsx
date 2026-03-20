@@ -723,7 +723,7 @@ export default function DemoReporte() {
             <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
               <CardContent className="p-6">
                 <h3 className="font-bold mb-4" style={{ color: "hsl(213 56% 23%)" }}>📄 Also Good to Know</h3>
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-4 filter blur-[5px] select-none">
                   {[
                     { title: "Certificado Digital", desc: "For online government services. Apply at FNMT after getting NIE." },
                     { title: "Home Insurance", desc: "Some landlords require it. €150-300/year. Covers fire, theft, liability." },
