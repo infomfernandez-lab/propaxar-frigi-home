@@ -2,21 +2,135 @@ import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowRight, Check } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const txt = {
+  es: {
+    eyebrow: "Alquiler residencial · Frigiliana · La Axarquía",
+    heroTitle: "Encuentra tu alquiler en Frigiliana. Sin buscar.",
+    heroSub: "Cuéntame qué buscas. Reviso mi portfolio actual y te envío opciones en menos de 24 horas — incluyendo propiedades que no están publicadas.",
+    ctaPrimary: "Ver qué tengo disponible",
+    ctaSecondary: "¿Cómo funciona el Reporte? →",
+    pills: ["✓ Sin coste para el inquilino", "✓ Respuesta en 24h", "✓ EN · ES"],
+
+    step1Label: "Paso 1",
+    step1Title: "¿Tienes algo para mí?",
+    step1Sub: "Comparte lo que buscas. Reviso mi portfolio y te digo honestamente en 24h si tengo algo que encaje — o no.",
+    labelRooms: "Mínimo de habitaciones",
+    labelBudget: "Presupuesto máximo/mes",
+    labelEntry: "¿Cuándo quieres entrar?",
+    labelPets: "¿Tienes mascotas?",
+    labelName: "Nombre *",
+    labelEmail: "Email *",
+    labelNotes: "¿Algo más que deba saber?",
+    phName: "Tu nombre",
+    phEmail: "tu@email.com",
+    phNotes: "Zona preferida, teletrabajo, requisitos especiales...",
+    select: "Seleccionar",
+    rooms: ["Estudio o 1 hab", "2 hab", "3 hab", "4+ hab"],
+    budgets: ["Hasta 800€", "800–1.200€", "1.200–1.600€", "1.600–2.000€", "Más de 2.000€"],
+    entries: ["Lo antes posible", "En 1–2 meses", "En 3–6 meses", "Explorando opciones"],
+    pets: ["No", "Sí — perro pequeño", "Sí — perro grande", "Sí — gato"],
+    submit: "Enviar — revisar portfolio disponible",
+    formNote: "Sin compromiso. Te respondo antes de 24h con lo que tengo — o te digo honestamente si no tengo nada que encaje ahora mismo.",
+    sentTitle: "Recibido",
+    sentText: "Reviso mi portfolio hoy y te escribo antes de 24h con lo que tengo disponible.",
+
+    step2Label: "Paso 2 — Si no encaja nada del portfolio",
+    step2Title: "Accede a todo el mercado. No solo a lo que tengo yo.",
+    step2Sub: "El Reporte de Mercado Personalizado analiza todas las propiedades disponibles en Frigiliana según tu perfil exacto — y te da una recomendación clara de cuál es la tuya.",
+    includesLabel: "Qué incluye",
+    includes: [
+      "Análisis de todas las propiedades disponibles según tu perfil exacto",
+      "Recomendación profesional — cuál es la mejor opción y por qué",
+      "Precios reales del mercado — sin inflación",
+      "Guía logística: campo vs pueblo, conectividad, gastos reales",
+      "6 meses de seguimiento activo con actualizaciones",
+      "Si alquilas una propiedad de mi portfolio directo, te devuelvo el importe íntegro",
+    ],
+    reportCardLabel: "Reporte de Mercado Personalizado",
+    reportCardTitle: "Tu análisis privado del mercado de alquiler",
+    reportCardSub: "Entrega en 24–48h. Acceso privado por URL única. Incluye propiedades fuera del mercado público.",
+    reportCardPrice: "180€",
+    reportCardPriceNote: "pago único · sin suscripción",
+    reportCardCta: "Conocer el Reporte →",
+    reportCardDisclaimer: "Pago seguro · RGPD · Garantía de reembolso",
+
+    alertEyebrow: "¿Todavía no es el momento?",
+    alertTitle: "Te aviso cuando salga algo que encaje.",
+    alertSub: "Deja tu email. Cuando entre una propiedad que coincida con lo que buscas, eres el primero en saberlo.",
+    alertSent: "✓ Anotado. Te escribo cuando aparezca algo.",
+    alertCta: "Avisarme",
+    alertDisclaimer: "Sin spam. Solo cuando haya algo relevante para ti.",
+  },
+  en: {
+    eyebrow: "Residential rental · Frigiliana · La Axarquía",
+    heroTitle: "Find your rental in Frigiliana. Without searching.",
+    heroSub: "Tell me what you're looking for. I'll review my current portfolio and send you options within 24 hours — including unlisted properties.",
+    ctaPrimary: "See what I have available",
+    ctaSecondary: "How does the Report work? →",
+    pills: ["✓ No cost for tenants", "✓ Response within 24h", "✓ EN · ES"],
+
+    step1Label: "Step 1",
+    step1Title: "Do I have something for you?",
+    step1Sub: "Share what you're looking for. I'll review my portfolio and honestly tell you within 24h if I have something that fits — or not.",
+    labelRooms: "Minimum bedrooms",
+    labelBudget: "Max budget/month",
+    labelEntry: "When do you want to move in?",
+    labelPets: "Do you have pets?",
+    labelName: "Name *",
+    labelEmail: "Email *",
+    labelNotes: "Anything else I should know?",
+    phName: "Your name",
+    phEmail: "you@email.com",
+    phNotes: "Preferred area, remote work, special requirements...",
+    select: "Select",
+    rooms: ["Studio or 1 bed", "2 beds", "3 beds", "4+ beds"],
+    budgets: ["Up to €800", "€800–1,200", "€1,200–1,600", "€1,600–2,000", "More than €2,000"],
+    entries: ["As soon as possible", "In 1–2 months", "In 3–6 months", "Exploring options"],
+    pets: ["No", "Yes — small dog", "Yes — large dog", "Yes — cat"],
+    submit: "Send — review available portfolio",
+    formNote: "No commitment. I'll respond within 24h with what I have — or honestly tell you if nothing fits right now.",
+    sentTitle: "Received",
+    sentText: "I'll review my portfolio today and write to you within 24h with what's available.",
+
+    step2Label: "Step 2 — If nothing from the portfolio fits",
+    step2Title: "Access the entire market. Not just what I have.",
+    step2Sub: "The Personalised Market Report analyses all available properties in Frigiliana based on your exact profile — and gives you a clear recommendation on which one is yours.",
+    includesLabel: "What's included",
+    includes: [
+      "Analysis of all available properties based on your exact profile",
+      "Professional recommendation — which is the best option and why",
+      "Real market prices — no inflation",
+      "Logistics guide: countryside vs village, connectivity, real costs",
+      "6 months of active follow-up with updates",
+      "If you rent a property from my direct portfolio, I refund the full amount",
+    ],
+    reportCardLabel: "Personalised Market Report",
+    reportCardTitle: "Your private rental market analysis",
+    reportCardSub: "Delivered in 24–48h. Private access via unique URL. Includes off-market properties.",
+    reportCardPrice: "€180",
+    reportCardPriceNote: "one-time payment · no subscription",
+    reportCardCta: "Learn about the Report →",
+    reportCardDisclaimer: "Secure payment · GDPR · Refund guarantee",
+
+    alertEyebrow: "Not the right time yet?",
+    alertTitle: "I'll let you know when something fits.",
+    alertSub: "Leave your email. When a property that matches what you're looking for comes in, you'll be the first to know.",
+    alertSent: "✓ Noted. I'll write when something comes up.",
+    alertCta: "Notify me",
+    alertDisclaimer: "No spam. Only when there's something relevant for you.",
+  },
+};
 
 const EncuentraTuAlquiler = () => {
-  // Qualification form state
+  const { language } = useLanguage();
+  const t = txt[language];
+
   const [formData, setFormData] = useState({
-    habitaciones: "",
-    presupuesto: "",
-    entrada: "",
-    mascotas: "",
-    nombre: "",
-    email: "",
-    notas: "",
+    habitaciones: "", presupuesto: "", entrada: "", mascotas: "", nombre: "", email: "", notas: "",
   });
   const [formSent, setFormSent] = useState(false);
-
-  // Email capture state
   const [alertEmail, setAlertEmail] = useState("");
   const [alertSent, setAlertSent] = useState(false);
 
@@ -74,7 +188,6 @@ const EncuentraTuAlquiler = () => {
         />
 
         <div className="relative z-10 text-center px-5 max-w-[800px] mx-auto">
-          {/* Eyebrow */}
           <span
             className="inline-block text-[10px] font-mono font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full mb-6"
             style={{
@@ -82,7 +195,7 @@ const EncuentraTuAlquiler = () => {
               border: "1px solid rgba(255,255,255,0.3)",
             }}
           >
-            Alquiler residencial · Frigiliana · La Axarquía
+            {t.eyebrow}
           </span>
 
           <h1
@@ -92,47 +205,38 @@ const EncuentraTuAlquiler = () => {
               fontSize: "clamp(36px, 5.5vw, 64px)",
             }}
           >
-            Encuentra tu alquiler en Frigiliana. Sin buscar.
+            {t.heroTitle}
           </h1>
 
           <p
             className="text-[17px] md:text-[19px] leading-[1.6] mx-auto mb-8"
             style={{ color: "rgba(255,255,255,0.8)", maxWidth: 520 }}
           >
-            Cuéntame qué buscas. Reviso mi portfolio actual y te envío opciones
-            en menos de 24 horas — incluyendo propiedades que no están
-            publicadas.
+            {t.heroSub}
           </p>
 
-          {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
             <button
               onClick={() => scrollTo("cualificar")}
               className="flex items-center gap-2 text-[14px] font-semibold px-8 py-3.5 rounded-lg transition-all"
-              style={{
-                backgroundColor: "#fff",
-                color: "hsl(222, 28%, 16%)",
-              }}
+              style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
             >
-              Ver qué tengo disponible
+              {t.ctaPrimary}
             </button>
             <button
               onClick={() => scrollTo("reporte")}
               className="flex items-center gap-1.5 text-[14px] font-medium px-8 py-3.5 rounded-lg transition-all text-white"
               style={{ border: "1px solid rgba(255,255,255,0.4)" }}
             >
-              ¿Cómo funciona el Reporte? →
+              {t.ctaSecondary}
             </button>
           </div>
 
-          {/* Trust pills */}
           <div
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-[13px]"
             style={{ color: "rgba(255,255,255,0.5)" }}
           >
-            <span>✓ Sin coste para el inquilino</span>
-            <span>✓ Respuesta en 24h</span>
-            <span>✓ EN · ES</span>
+            {t.pills.map((p, i) => <span key={i}>{p}</span>)}
           </div>
         </div>
       </section>
@@ -144,23 +248,21 @@ const EncuentraTuAlquiler = () => {
             className="block text-[10px] font-mono font-bold uppercase tracking-[0.14em] mb-3"
             style={{ color: "hsl(222, 28%, 16%)" }}
           >
-            Paso 1
+            {t.step1Label}
           </span>
           <h2
             className="text-[28px] md:text-[38px] font-extrabold leading-[1.15] mb-3"
             style={{ color: "hsl(222, 28%, 16%)" }}
           >
-            ¿Tienes algo para mí?
+            {t.step1Title}
           </h2>
           <p
             className="text-[15px] leading-[1.7] mb-10"
             style={{ color: "#6B7280", maxWidth: 520 }}
           >
-            Comparte lo que buscas. Reviso mi portfolio y te digo honestamente
-            en 24h si tengo algo que encaje — o no.
+            {t.step1Sub}
           </p>
 
-          {/* Form Card */}
           <div
             className="rounded-[14px] p-8 md:p-10"
             style={{
@@ -170,7 +272,6 @@ const EncuentraTuAlquiler = () => {
             }}
           >
             {formSent ? (
-              /* ── Sent state ── */
               <div className="text-center py-8">
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
@@ -182,11 +283,10 @@ const EncuentraTuAlquiler = () => {
                   className="text-[22px] font-bold mb-2"
                   style={{ color: "hsl(222, 28%, 16%)" }}
                 >
-                  Recibido, {formData.nombre}.
+                  {t.sentTitle}, {formData.nombre}.
                 </h3>
                 <p className="text-[14px] leading-[1.7] mb-4" style={{ color: "#6B7280" }}>
-                  Reviso mi portfolio hoy y te escribo antes de 24h con lo que
-                  tengo disponible.
+                  {t.sentText}
                 </p>
                 <p
                   className="text-[13px] font-medium mb-2"
@@ -199,153 +299,82 @@ const EncuentraTuAlquiler = () => {
                 </p>
               </div>
             ) : (
-              /* ── Form ── */
               <>
-                {/* Row 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                      Mínimo de habitaciones
+                      {t.labelRooms}
                     </label>
-                    <select
-                      className={selectClass}
-                      value={formData.habitaciones}
-                      onChange={(e) =>
-                        setFormData({ ...formData, habitaciones: e.target.value })
-                      }
-                    >
-                      <option value="">Seleccionar</option>
-                      <option>Estudio o 1 hab</option>
-                      <option>2 hab</option>
-                      <option>3 hab</option>
-                      <option>4+ hab</option>
+                    <select className={selectClass} value={formData.habitaciones} onChange={(e) => setFormData({ ...formData, habitaciones: e.target.value })}>
+                      <option value="">{t.select}</option>
+                      {t.rooms.map((r, i) => <option key={i}>{r}</option>)}
                     </select>
                   </div>
                   <div>
                     <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                      Presupuesto máximo/mes
+                      {t.labelBudget}
                     </label>
-                    <select
-                      className={selectClass}
-                      value={formData.presupuesto}
-                      onChange={(e) =>
-                        setFormData({ ...formData, presupuesto: e.target.value })
-                      }
-                    >
-                      <option value="">Seleccionar</option>
-                      <option>Hasta 800€</option>
-                      <option>800–1.200€</option>
-                      <option>1.200–1.600€</option>
-                      <option>1.600–2.000€</option>
-                      <option>Más de 2.000€</option>
+                    <select className={selectClass} value={formData.presupuesto} onChange={(e) => setFormData({ ...formData, presupuesto: e.target.value })}>
+                      <option value="">{t.select}</option>
+                      {t.budgets.map((b, i) => <option key={i}>{b}</option>)}
                     </select>
                   </div>
                 </div>
 
-                {/* Row 2 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                      ¿Cuándo quieres entrar?
+                      {t.labelEntry}
                     </label>
-                    <select
-                      className={selectClass}
-                      value={formData.entrada}
-                      onChange={(e) =>
-                        setFormData({ ...formData, entrada: e.target.value })
-                      }
-                    >
-                      <option value="">Seleccionar</option>
-                      <option>Lo antes posible</option>
-                      <option>En 1–2 meses</option>
-                      <option>En 3–6 meses</option>
-                      <option>Explorando opciones</option>
+                    <select className={selectClass} value={formData.entrada} onChange={(e) => setFormData({ ...formData, entrada: e.target.value })}>
+                      <option value="">{t.select}</option>
+                      {t.entries.map((e2, i) => <option key={i}>{e2}</option>)}
                     </select>
                   </div>
                   <div>
                     <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                      ¿Tienes mascotas?
+                      {t.labelPets}
                     </label>
-                    <select
-                      className={selectClass}
-                      value={formData.mascotas}
-                      onChange={(e) =>
-                        setFormData({ ...formData, mascotas: e.target.value })
-                      }
-                    >
-                      <option value="">Seleccionar</option>
-                      <option>No</option>
-                      <option>Sí — perro pequeño</option>
-                      <option>Sí — perro grande</option>
-                      <option>Sí — gato</option>
+                    <select className={selectClass} value={formData.mascotas} onChange={(e) => setFormData({ ...formData, mascotas: e.target.value })}>
+                      <option value="">{t.select}</option>
+                      {t.pets.map((p, i) => <option key={i}>{p}</option>)}
                     </select>
                   </div>
                 </div>
 
-                {/* Row 3 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                      Nombre *
+                      {t.labelName}
                     </label>
-                    <input
-                      type="text"
-                      className={inputClass}
-                      placeholder="Tu nombre"
-                      value={formData.nombre}
-                      onChange={(e) =>
-                        setFormData({ ...formData, nombre: e.target.value })
-                      }
-                    />
+                    <input type="text" className={inputClass} placeholder={t.phName} value={formData.nombre} onChange={(e) => setFormData({ ...formData, nombre: e.target.value })} />
                   </div>
                   <div>
                     <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                      Email *
+                      {t.labelEmail}
                     </label>
-                    <input
-                      type="email"
-                      className={inputClass}
-                      placeholder="tu@email.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                    />
+                    <input type="email" className={inputClass} placeholder={t.phEmail} value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
                   </div>
                 </div>
 
-                {/* Notes */}
                 <div className="mb-6">
                   <label className="block text-[9px] font-semibold uppercase tracking-[0.1em] text-gray-400 mb-1.5">
-                    ¿Algo más que deba saber?
+                    {t.labelNotes}
                   </label>
-                  <textarea
-                    rows={2}
-                    className={`${inputClass} resize-none`}
-                    placeholder="Zona preferida, teletrabajo, requisitos especiales..."
-                    value={formData.notas}
-                    onChange={(e) =>
-                      setFormData({ ...formData, notas: e.target.value })
-                    }
-                  />
+                  <textarea rows={2} className={`${inputClass} resize-none`} placeholder={t.phNotes} value={formData.notas} onChange={(e) => setFormData({ ...formData, notas: e.target.value })} />
                 </div>
 
-                {/* Submit */}
                 <button
                   onClick={handleFormSubmit}
                   className="w-full text-[14px] font-semibold text-white py-4 rounded-lg transition-colors flex items-center justify-center gap-2"
                   style={{ backgroundColor: "hsl(222, 28%, 16%)" }}
                 >
-                  Enviar — revisar portfolio disponible
+                  {t.submit}
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <p
-                  className="text-center text-[13px] mt-4 leading-[1.6]"
-                  style={{ color: "#9CA3AF" }}
-                >
-                  Sin compromiso. Te respondo antes de 24h con lo que tengo — o
-                  te digo honestamente si no tengo nada que encaje ahora mismo.
+                <p className="text-center text-[13px] mt-4 leading-[1.6]" style={{ color: "#9CA3AF" }}>
+                  {t.formNote}
                 </p>
               </>
             )}
@@ -354,66 +383,45 @@ const EncuentraTuAlquiler = () => {
       </section>
 
       {/* ═══ 3. EL REPORTE ═══ */}
-      <section
-        id="reporte"
-        style={{ backgroundColor: "#F4F6F8", padding: "96px 0" }}
-      >
+      <section id="reporte" style={{ backgroundColor: "#F4F6F8", padding: "96px 0" }}>
         <div className="max-w-[1000px] mx-auto px-5 md:px-8">
           <span
             className="block text-[10px] font-mono font-bold uppercase tracking-[0.14em] mb-3"
             style={{ color: "hsl(222, 28%, 16%)" }}
           >
-            Paso 2 — Si no encaja nada del portfolio
+            {t.step2Label}
           </span>
           <h2
             className="text-[28px] md:text-[38px] font-extrabold leading-[1.15] mb-3"
             style={{ color: "hsl(222, 28%, 16%)" }}
           >
-            Accede a todo el mercado. No solo a lo que tengo yo.
+            {t.step2Title}
           </h2>
           <p
             className="text-[15px] leading-[1.7] mb-12"
             style={{ color: "#6B7280", maxWidth: 580 }}
           >
-            El Reporte de Mercado Personalizado analiza todas las propiedades
-            disponibles en Frigiliana según tu perfil exacto — y te da una
-            recomendación clara de cuál es la tuya.
+            {t.step2Sub}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-            {/* Left — features */}
             <div className="md:col-span-3">
               <p
                 className="text-[12px] font-bold uppercase tracking-[0.08em] mb-5"
                 style={{ color: "hsl(222, 28%, 16%)" }}
               >
-                Qué incluye
+                {t.includesLabel}
               </p>
               <div className="flex flex-col gap-4">
-                {[
-                  "Análisis de todas las propiedades disponibles según tu perfil exacto",
-                  "Recomendación profesional — cuál es la mejor opción y por qué",
-                  "Precios reales del mercado — sin inflación",
-                  "Guía logística: campo vs pueblo, conectividad, gastos reales",
-                  "6 meses de seguimiento activo con actualizaciones",
-                  "Si alquilas una propiedad de mi portfolio directo, te devuelvo el importe íntegro",
-                ].map((item, i) => (
+                {t.includes.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <span
-                      className="text-[14px] mt-0.5 flex-shrink-0"
-                      style={{ color: "hsl(160, 84%, 39%)" }}
-                    >
-                      ✓
-                    </span>
-                    <span className="text-[14px] leading-[1.6]" style={{ color: "#374151" }}>
-                      {item}
-                    </span>
+                    <span className="text-[14px] mt-0.5 flex-shrink-0" style={{ color: "hsl(160, 84%, 39%)" }}>✓</span>
+                    <span className="text-[14px] leading-[1.6]" style={{ color: "#374151" }}>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right — CTA card */}
             <div
               className="md:col-span-2 rounded-[14px] p-8 md:p-9 flex flex-col"
               style={{ backgroundColor: "hsl(222, 28%, 16%)" }}
@@ -422,37 +430,39 @@ const EncuentraTuAlquiler = () => {
                 className="block text-[9px] font-mono font-semibold uppercase tracking-[0.12em] mb-3"
                 style={{ color: "rgba(255,255,255,0.4)" }}
               >
-                Reporte de Mercado Personalizado
+                {t.reportCardLabel}
               </span>
               <h3
                 className="text-[22px] font-bold text-white leading-[1.25] mb-3"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
-                Tu análisis privado del mercado de alquiler
+                {t.reportCardTitle}
               </h3>
               <p
                 className="text-[14px] leading-[1.65] mt-1 mb-6"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
-                Entrega en 24–48h. Acceso privado por URL única. Incluye
-                propiedades fuera del mercado público.
+                {t.reportCardSub}
               </p>
               <div className="mt-auto">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-[36px] font-bold text-white">{t.reportCardPrice}</span>
+                  <span className="text-[12px]" style={{ color: "rgba(255,255,255,0.4)" }}>
+                    {t.reportCardPriceNote}
+                  </span>
+                </div>
                 <button
                   onClick={handleReporteClick}
                   className="w-full text-[14px] font-semibold py-3.5 rounded-lg transition-colors"
-                  style={{
-                    backgroundColor: "#fff",
-                    color: "hsl(222, 28%, 16%)",
-                  }}
+                  style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
                 >
-                  Conocer el Reporte →
+                  {t.reportCardCta}
                 </button>
                 <p
                   className="text-center text-[11px] mt-3"
                   style={{ color: "rgba(255,255,255,0.35)" }}
                 >
-                  Pago seguro · RGPD · Garantía de reembolso
+                  {t.reportCardDisclaimer}
                 </p>
               </div>
             </div>
@@ -461,37 +471,31 @@ const EncuentraTuAlquiler = () => {
       </section>
 
       {/* ═══ 4. CAPTURA EMAIL ═══ */}
-      <section
-        id="avisar"
-        style={{ backgroundColor: "hsl(222, 28%, 16%)", padding: "72px 0" }}
-      >
+      <section id="avisar" style={{ backgroundColor: "hsl(222, 28%, 16%)", padding: "72px 0" }}>
         <div className="max-w-[520px] mx-auto px-5 text-center">
           <span
             className="block text-[10px] font-mono font-semibold uppercase tracking-[0.14em] mb-3"
             style={{ color: "rgba(255,255,255,0.35)" }}
           >
-            ¿Todavía no es el momento?
+            {t.alertEyebrow}
           </span>
           <h2 className="text-[28px] font-extrabold text-white leading-[1.2] mb-3">
-            Te aviso cuando salga algo que encaje.
+            {t.alertTitle}
           </h2>
           <p
             className="text-[15px] leading-[1.6] mb-8"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
-            Deja tu email. Cuando entre una propiedad que coincida con lo que
-            buscas, eres el primero en saberlo.
+            {t.alertSub}
           </p>
 
           {alertSent ? (
-            <p className="text-[15px] font-medium text-white">
-              ✓ Anotado. Te escribo cuando aparezca algo.
-            </p>
+            <p className="text-[15px] font-medium text-white">{t.alertSent}</p>
           ) : (
             <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
-                placeholder="tu@email.com"
+                placeholder={txt[language].phEmail}
                 value={alertEmail}
                 onChange={(e) => setAlertEmail(e.target.value)}
                 className="flex-1 text-[14px] px-4 py-3.5 rounded-lg outline-none transition-colors text-white placeholder:text-white/40"
@@ -503,12 +507,9 @@ const EncuentraTuAlquiler = () => {
               <button
                 onClick={handleAlertSubmit}
                 className="text-[14px] font-semibold px-6 py-3.5 rounded-lg flex-shrink-0 transition-colors"
-                style={{
-                  backgroundColor: "#fff",
-                  color: "hsl(222, 28%, 16%)",
-                }}
+                style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
               >
-                Avisarme
+                {t.alertCta}
               </button>
             </div>
           )}
@@ -517,7 +518,7 @@ const EncuentraTuAlquiler = () => {
             className="text-[11px] mt-4"
             style={{ color: "rgba(255,255,255,0.25)" }}
           >
-            Sin spam. Solo cuando haya algo relevante para ti.
+            {t.alertDisclaimer}
           </p>
         </div>
       </section>
