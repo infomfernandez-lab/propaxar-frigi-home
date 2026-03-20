@@ -202,6 +202,54 @@ const t = {
   whatsappBtn: { es: `💬 WhatsApp: ${PHONE}`, en: `💬 WhatsApp: ${PHONE}` },
   emailBtn: { es: `📧 ${EMAIL}`, en: `📧 ${EMAIL}` },
 
+  // How it actually works section
+  howTag: { es: 'CÓMO FUNCIONA', en: 'HOW IT WORKS' },
+  howTitle: { es: 'Qué recibes exactamente', en: 'What you actually get' },
+  howSub: { es: 'No solo mis propiedades. Todo el mercado de alquiler de Frigiliana.', en: 'Not just my listings. The entire Frigiliana rental market.' },
+  howIntro: {
+    es: 'La mayoría de búsquedas de vivienda en Frigiliana empiezan y terminan con lo que una sola agencia tiene disponible. Este reporte es diferente.',
+    en: 'Most property searches in Frigiliana start and end with whatever one agency happens to have available. This report is different.',
+  },
+  howBlocks: {
+    es: [
+      { icon: '🏘️', title: 'Todas las propiedades del mercado', desc: 'Tu reporte incluye alquileres disponibles de todas las agencias y propietarios particulares de Frigiliana — no solo las que yo gestiono. Si existe, está en tu reporte.' },
+      { icon: '🤝', title: 'Te conecto con quien la gestione', desc: 'Si te interesa una propiedad que no es de mi cartera, te pongo en contacto directo con la agencia o propietario que la lleva. Sin intermediarios innecesarios.' },
+      { icon: '💰', title: 'Reembolso total si alquilas conmigo', desc: 'Si al final alquilas una propiedad de mi cartera directa, te devuelvo el 100% del coste del reporte. El servicio te habrá salido completamente gratis.' },
+    ],
+    en: [
+      { icon: '🏘️', title: 'Every property on the market', desc: 'Your report includes available rentals from all agencies and private landlords in Frigiliana — not just the ones I manage. If it exists, it\'s in your report.' },
+      { icon: '🤝', title: 'I connect you with whoever manages it', desc: 'If you\'re interested in a property outside my portfolio, I put you in direct contact with the agency or landlord who manages it. No unnecessary middlemen.' },
+      { icon: '💰', title: 'Full refund if you rent with me', desc: 'If you end up renting a property from my direct portfolio, I refund the full cost of the report. The service will have been completely free.' },
+    ],
+  },
+  howClose: {
+    es: 'Un reporte. Todo el mercado. Entregado personalmente.',
+    en: 'One report. The whole market. Delivered to you personally.',
+  },
+  howCta: { es: 'Quiero mi reporte →', en: 'Get my report →' },
+
+  // FAQ
+  faqTag: { es: 'PREGUNTAS FRECUENTES', en: 'FAQ' },
+  faqTitle: { es: 'Dudas antes de decidir', en: 'Questions before you decide' },
+  faqs: {
+    es: [
+      { q: '¿Las propiedades son solo las que tú gestionas?', a: 'No. El reporte incluye propiedades de todas las agencias inmobiliarias de Frigiliana y también de propietarios particulares. Peino el mercado completo — no solo mi cartera.' },
+      { q: '¿Qué pasa si me gusta una propiedad que no es tuya?', a: 'Te pongo en contacto directo con la agencia o propietario que la gestiona. Tu reporte incluye toda la información de contacto necesaria. Yo no me interpongo.' },
+      { q: '¿Y si al final alquilo una de tus propiedades?', a: 'Te devuelvo los €180 completos. El servicio del reporte te habrá salido 100% gratis. Es mi manera de recompensarte por confiar en el proceso.' },
+      { q: '¿Cuántas propiedades incluye el reporte?', a: 'Depende del mercado en ese momento. Normalmente entre 1 y 8 propiedades que encajan con tu perfil. Solo incluyo las que realmente tienen sentido — nada de relleno.' },
+      { q: '¿Con qué frecuencia se actualiza?', a: 'Cada viernes durante 6 meses. Si aparece una nueva propiedad que encaja contigo, la incluyo inmediatamente y te aviso personalmente.' },
+      { q: '¿Y si no estoy satisfecho con el reporte?', a: 'Tienes 7 días de garantía de satisfacción. Si no te convence la calidad, hablamos y lo solucionamos. Mi reputación depende de clientes felices.' },
+    ],
+    en: [
+      { q: 'Are the properties only the ones you manage?', a: 'No. The report includes properties from all real estate agencies in Frigiliana and also from private landlords. I scour the entire market — not just my portfolio.' },
+      { q: 'What if I like a property that isn\'t yours?', a: 'I put you in direct contact with the agency or landlord who manages it. Your report includes all necessary contact information. I don\'t get in the way.' },
+      { q: 'What if I end up renting one of your properties?', a: 'I refund the full €180. The report service will have been 100% free. It\'s my way of rewarding you for trusting the process.' },
+      { q: 'How many properties does the report include?', a: 'It depends on the market at that moment. Usually between 1 and 8 properties that match your profile. I only include those that truly make sense — no filler.' },
+      { q: 'How often is it updated?', a: 'Every Friday for 6 months. If a new property appears that fits you, I include it immediately and notify you personally.' },
+      { q: 'What if I\'m not satisfied with the report?', a: 'You have a 7-day satisfaction guarantee. If the quality doesn\'t convince you, we talk and sort it out. My reputation depends on happy clients.' },
+    ],
+  },
+
   // Sources
   sourcesLabel: { es: 'Fuentes', en: 'Sources' },
 };
