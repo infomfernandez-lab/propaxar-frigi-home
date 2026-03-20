@@ -414,6 +414,33 @@ export default function MarketReport() {
 
       <div className="max-w-4xl mx-auto px-4 py-12 space-y-16">
 
+        {/* ── HOW IT WORKS — 3 pillars ── */}
+        <RevealSection>
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>{t.howTag[lang]}</span>
+            <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.1 }}>{t.howTitle[lang]}</h2>
+            <p className="text-lg font-semibold mb-2" style={{ color: '#2d3e4e' }}>{t.howSub[lang]}</p>
+            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>{t.howIntro[lang]}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {t.howBlocks[lang].map((b, i) => (
+              <RevealSection key={i} delay={i * 100}>
+                <div className="rounded-lg p-7 h-full transition-transform hover:-translate-y-1" style={{ backgroundColor: '#fff', border: i === 2 ? '2px solid #4ade80' : '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                  <span className="text-4xl block mb-4">{b.icon}</span>
+                  <h3 className="font-bold text-base mb-3" style={{ color: '#1a1a1a' }}>{b.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#666' }}>{b.desc}</p>
+                </div>
+              </RevealSection>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <p className="text-base font-medium italic mb-5" style={{ color: '#9ca3af', maxWidth: 520, margin: '0 auto' }}>{t.howClose[lang]}</p>
+            <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.howCta[lang]}
+            </a>
+          </div>
+        </RevealSection>
+
         {/* ── DATA CREDIBILITY ── */}
         <RevealSection>
           <div className="text-center mb-10">
