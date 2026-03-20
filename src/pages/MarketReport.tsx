@@ -202,6 +202,54 @@ const t = {
   whatsappBtn: { es: `💬 WhatsApp: ${PHONE}`, en: `💬 WhatsApp: ${PHONE}` },
   emailBtn: { es: `📧 ${EMAIL}`, en: `📧 ${EMAIL}` },
 
+  // How it actually works section
+  howTag: { es: 'CÓMO FUNCIONA', en: 'HOW IT WORKS' },
+  howTitle: { es: 'Qué recibes exactamente', en: 'What you actually get' },
+  howSub: { es: 'No solo mis propiedades. Todo el mercado de alquiler de Frigiliana.', en: 'Not just my listings. The entire Frigiliana rental market.' },
+  howIntro: {
+    es: 'La mayoría de búsquedas de vivienda en Frigiliana empiezan y terminan con lo que una sola agencia tiene disponible. Este reporte es diferente.',
+    en: 'Most property searches in Frigiliana start and end with whatever one agency happens to have available. This report is different.',
+  },
+  howBlocks: {
+    es: [
+      { icon: '🏘️', title: 'Todas las propiedades del mercado', desc: 'Tu reporte incluye alquileres disponibles de todas las agencias y propietarios particulares de Frigiliana — no solo las que yo gestiono. Si existe, está en tu reporte.' },
+      { icon: '🤝', title: 'Te conecto con quien la gestione', desc: 'Si te interesa una propiedad que no es de mi cartera, te pongo en contacto directo con la agencia o propietario que la lleva. Sin intermediarios innecesarios.' },
+      { icon: '💰', title: 'Reembolso total si alquilas conmigo', desc: 'Si al final alquilas una propiedad de mi cartera directa, te devuelvo el 100% del coste del reporte. El servicio te habrá salido completamente gratis.' },
+    ],
+    en: [
+      { icon: '🏘️', title: 'Every property on the market', desc: 'Your report includes available rentals from all agencies and private landlords in Frigiliana — not just the ones I manage. If it exists, it\'s in your report.' },
+      { icon: '🤝', title: 'I connect you with whoever manages it', desc: 'If you\'re interested in a property outside my portfolio, I put you in direct contact with the agency or landlord who manages it. No unnecessary middlemen.' },
+      { icon: '💰', title: 'Full refund if you rent with me', desc: 'If you end up renting a property from my direct portfolio, I refund the full cost of the report. The service will have been completely free.' },
+    ],
+  },
+  howClose: {
+    es: 'Un reporte. Todo el mercado. Entregado personalmente.',
+    en: 'One report. The whole market. Delivered to you personally.',
+  },
+  howCta: { es: 'Quiero mi reporte →', en: 'Get my report →' },
+
+  // FAQ
+  faqTag: { es: 'PREGUNTAS FRECUENTES', en: 'FAQ' },
+  faqTitle: { es: 'Dudas antes de decidir', en: 'Questions before you decide' },
+  faqs: {
+    es: [
+      { q: '¿Las propiedades son solo las que tú gestionas?', a: 'No. El reporte incluye propiedades de todas las agencias inmobiliarias de Frigiliana y también de propietarios particulares. Peino el mercado completo — no solo mi cartera.' },
+      { q: '¿Qué pasa si me gusta una propiedad que no es tuya?', a: 'Te pongo en contacto directo con la agencia o propietario que la gestiona. Tu reporte incluye toda la información de contacto necesaria. Yo no me interpongo.' },
+      { q: '¿Y si al final alquilo una de tus propiedades?', a: 'Te devuelvo los €180 completos. El servicio del reporte te habrá salido 100% gratis. Es mi manera de recompensarte por confiar en el proceso.' },
+      { q: '¿Cuántas propiedades incluye el reporte?', a: 'Depende del mercado en ese momento. Normalmente entre 1 y 8 propiedades que encajan con tu perfil. Solo incluyo las que realmente tienen sentido — nada de relleno.' },
+      { q: '¿Con qué frecuencia se actualiza?', a: 'Cada viernes durante 6 meses. Si aparece una nueva propiedad que encaja contigo, la incluyo inmediatamente y te aviso personalmente.' },
+      { q: '¿Y si no estoy satisfecho con el reporte?', a: 'Tienes 7 días de garantía de satisfacción. Si no te convence la calidad, hablamos y lo solucionamos. Mi reputación depende de clientes felices.' },
+    ],
+    en: [
+      { q: 'Are the properties only the ones you manage?', a: 'No. The report includes properties from all real estate agencies in Frigiliana and also from private landlords. I scour the entire market — not just my portfolio.' },
+      { q: 'What if I like a property that isn\'t yours?', a: 'I put you in direct contact with the agency or landlord who manages it. Your report includes all necessary contact information. I don\'t get in the way.' },
+      { q: 'What if I end up renting one of your properties?', a: 'I refund the full €180. The report service will have been 100% free. It\'s my way of rewarding you for trusting the process.' },
+      { q: 'How many properties does the report include?', a: 'It depends on the market at that moment. Usually between 1 and 8 properties that match your profile. I only include those that truly make sense — no filler.' },
+      { q: 'How often is it updated?', a: 'Every Friday for 6 months. If a new property appears that fits you, I include it immediately and notify you personally.' },
+      { q: 'What if I\'m not satisfied with the report?', a: 'You have a 7-day satisfaction guarantee. If the quality doesn\'t convince you, we talk and sort it out. My reputation depends on happy clients.' },
+    ],
+  },
+
   // Sources
   sourcesLabel: { es: 'Fuentes', en: 'Sources' },
 };
@@ -263,6 +311,30 @@ function useReveal() {
 function RevealSection({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const { ref, style } = useReveal();
   return <div ref={ref} className={className} style={{ ...style, transitionDelay: `${delay}ms` }}>{children}</div>;
+}
+
+/* ── FAQ Accordion (avoids hooks-in-map) ── */
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg overflow-hidden transition-all" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-50 active:scale-[0.995]">
+        <span className="font-semibold text-sm pr-4" style={{ color: '#1a1a1a' }}>{q}</span>
+        <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs transition-transform" style={{ backgroundColor: 'rgba(61,90,115,0.1)', color: '#2d3e4e', transform: open ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
+      </button>
+      <div className="overflow-hidden transition-all" style={{ maxHeight: open ? 300 : 0, opacity: open ? 1 : 0, transition: 'max-height 0.35s ease, opacity 0.25s ease' }}>
+        <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: '#666' }}>{a}</p>
+      </div>
+    </div>
+  );
+}
+
+function FAQAccordion({ items }: { items: { q: string; a: string }[] }) {
+  return (
+    <div className="space-y-3">
+      {items.map((faq, i) => <FAQItem key={i} q={faq.q} a={faq.a} />)}
+    </div>
+  );
 }
 
 /* ── Stripe CTA Block ── */
@@ -365,6 +437,33 @@ export default function MarketReport() {
       </section>
 
       <div className="max-w-4xl mx-auto px-4 py-12 space-y-16">
+
+        {/* ── HOW IT WORKS — 3 pillars ── */}
+        <RevealSection>
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>{t.howTag[lang]}</span>
+            <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.1 }}>{t.howTitle[lang]}</h2>
+            <p className="text-lg font-semibold mb-2" style={{ color: '#2d3e4e' }}>{t.howSub[lang]}</p>
+            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>{t.howIntro[lang]}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {t.howBlocks[lang].map((b, i) => (
+              <RevealSection key={i} delay={i * 100}>
+                <div className="rounded-lg p-7 h-full transition-transform hover:-translate-y-1" style={{ backgroundColor: '#fff', border: i === 2 ? '2px solid #4ade80' : '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                  <span className="text-4xl block mb-4">{b.icon}</span>
+                  <h3 className="font-bold text-base mb-3" style={{ color: '#1a1a1a' }}>{b.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#666' }}>{b.desc}</p>
+                </div>
+              </RevealSection>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <p className="text-base font-medium italic mb-5" style={{ color: '#9ca3af', maxWidth: 520, margin: '0 auto' }}>{t.howClose[lang]}</p>
+            <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.howCta[lang]}
+            </a>
+          </div>
+        </RevealSection>
 
         {/* ── DATA CREDIBILITY ── */}
         <RevealSection>
@@ -648,9 +747,18 @@ export default function MarketReport() {
           </div>
         </RevealSection>
 
+        {/* ── FAQ ── */}
+        <RevealSection>
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>{t.faqTag[lang]}</span>
+            <h2 className="font-black mb-2" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', color: '#1a1a1a', letterSpacing: '-0.02em' }}>{t.faqTitle[lang]}</h2>
+          </div>
+          <FAQAccordion items={t.faqs[lang]} />
+        </RevealSection>
+
         {/* ── FINAL CTA ── */}
         <RevealSection>
-          <div className="rounded-lg overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}>
+          <div id="cta-final" className="rounded-lg overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}>
             <div className="px-8 py-12 text-center">
               <h2 className="text-2xl md:text-3xl font-black mb-2">{t.ctaTitle[lang]}</h2>
               <p className="text-sm mb-8" style={{ color: 'rgba(255,255,255,0.6)' }}>{t.ctaDesc[lang]}</p>
