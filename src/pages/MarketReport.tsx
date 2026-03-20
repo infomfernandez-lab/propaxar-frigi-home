@@ -729,22 +729,7 @@ export default function MarketReport() {
             <span className="inline-block text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase mb-4" style={{ backgroundColor: 'rgba(61,90,115,0.12)', color: '#2d3e4e' }}>{t.faqTag[lang]}</span>
             <h2 className="font-black mb-2" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', color: '#1a1a1a', letterSpacing: '-0.02em' }}>{t.faqTitle[lang]}</h2>
           </div>
-          <div className="space-y-3">
-            {t.faqs[lang].map((faq, i) => {
-              const [open, setOpen] = useState(false);
-              return (
-                <div key={i} className="rounded-lg overflow-hidden transition-all" style={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
-                  <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-50 active:scale-[0.995]">
-                    <span className="font-semibold text-sm pr-4" style={{ color: '#1a1a1a' }}>{faq.q}</span>
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs transition-transform" style={{ backgroundColor: 'rgba(61,90,115,0.1)', color: '#2d3e4e', transform: open ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
-                  </button>
-                  <div className="overflow-hidden transition-all" style={{ maxHeight: open ? 300 : 0, opacity: open ? 1 : 0, transition: 'max-height 0.35s ease, opacity 0.25s ease' }}>
-                    <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: '#666' }}>{faq.a}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <FAQAccordion items={t.faqs[lang]} />
         </RevealSection>
 
         {/* ── FINAL CTA ── */}
