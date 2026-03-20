@@ -758,7 +758,7 @@ export default function MarketReport() {
 
         {/* ── FINAL CTA ── */}
         <RevealSection>
-          <div className="rounded-lg overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}>
+          <div id="cta-final" className="rounded-lg overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)' }}>
             <div className="px-8 py-12 text-center">
               <h2 className="text-2xl md:text-3xl font-black mb-2">{t.ctaTitle[lang]}</h2>
               <p className="text-sm mb-8" style={{ color: 'rgba(255,255,255,0.6)' }}>{t.ctaDesc[lang]}</p>
