@@ -20,8 +20,8 @@ const t = {
     en: 'Your Personalised Report\nIs Ready to Be Created',
   },
   heroDesc: {
-    es: 'Como acordamos en nuestra llamada, aquí está todo lo que incluye tu análisis profesional del mercado Frigiliana.',
-    en: 'As we discussed on the phone, here is everything your professional Frigiliana market analysis includes.',
+    es: 'Aquí está todo lo que incluye tu análisis profesional del mercado Frigiliana.',
+    en: 'Here is everything your professional Frigiliana market analysis includes.',
   },
   offerBadge:   { es: 'OFERTA ESPECIAL', en: 'SPECIAL OFFER' },
   refundBadge:  { es: 'REEMBOLSABLE', en: 'REFUNDABLE' },
