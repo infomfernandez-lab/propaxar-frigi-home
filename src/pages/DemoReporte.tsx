@@ -705,8 +705,8 @@ export default function DemoReporte() {
                         <span className="inline-block text-xs font-bold mt-1 px-2 py-0.5 rounded-full text-white" style={{ background: doc.urgencyColor }}>{doc.urgency}</span>
                       </div>
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{doc.description}</p>
-                    <ul className="space-y-1">
+                    <p className="text-sm leading-relaxed filter blur-[5px] select-none" style={{ color: "hsl(215 19% 34%)" }}>{doc.description}</p>
+                    <ul className="space-y-1 filter blur-[5px] select-none">
                       {doc.steps.map((s, j) => (
                         <li key={j} className="text-sm flex items-start gap-2">
                           <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(142 71% 45%)" }} />
@@ -714,7 +714,7 @@ export default function DemoReporte() {
                         </li>
                       ))}
                     </ul>
-                    <p className="text-xs font-medium" style={{ color: "hsl(213 56% 40%)" }}>{doc.tip}</p>
+                    <p className="text-xs font-medium filter blur-[5px] select-none" style={{ color: "hsl(213 56% 40%)" }}>{doc.tip}</p>
                   </CardContent>
                 </Card>
               ))}
