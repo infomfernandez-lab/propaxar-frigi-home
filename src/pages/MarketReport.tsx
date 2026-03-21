@@ -482,6 +482,11 @@ export default function MarketReport() {
               </div>
             ))}
           </div>
+          <div className="text-center mt-8">
+            <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.howCta[lang]}
+            </a>
+          </div>
         </RevealSection>
 
         {/* ── EXCLUSIVE INSIGHT ── */}
@@ -515,6 +520,11 @@ export default function MarketReport() {
                 <span className="text-xs font-bold px-2.5 py-1 rounded-lg" style={{ backgroundColor: f.highlight ? 'rgba(74,222,128,0.15)' : 'rgba(61,90,115,0.10)', color: f.highlight ? '#15803d' : '#2d3e4e' }}>{f.tag}</span>
               </div>
             ))}
+          </div>
+          <div className="text-center mt-8">
+            <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.howCta[lang]}
+            </a>
           </div>
         </RevealSection>
 
@@ -636,6 +646,9 @@ export default function MarketReport() {
               {t.previewCta[lang]}
             </Link>
             <p className="text-xs" style={{ color: '#9ca3af' }}>{t.previewNote[lang]}</p>
+            <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97] mt-3" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.howCta[lang]}
+            </a>
           </div>
         </RevealSection>
 
@@ -671,6 +684,13 @@ export default function MarketReport() {
             </div>
           </div>
         </RevealSection>
+
+        {/* CTA after table */}
+        <div className="text-center">
+          <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+            {t.howCta[lang]}
+          </a>
+        </div>
 
         {/* ── SEASONALITY ── */}
         <RevealSection>
@@ -730,6 +750,13 @@ export default function MarketReport() {
           </div>
         </RevealSection>
 
+        {/* CTA after timeline */}
+        <div className="text-center">
+          <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+            {t.howCta[lang]}
+          </a>
+        </div>
+
         {/* ── GUARANTEES ── */}
         <RevealSection>
           <div className="text-center mb-8">
@@ -746,6 +773,13 @@ export default function MarketReport() {
             ))}
           </div>
         </RevealSection>
+
+        {/* CTA after guarantees */}
+        <div className="text-center">
+          <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+            {t.howCta[lang]}
+          </a>
+        </div>
 
         {/* ── FAQ ── */}
         <RevealSection>

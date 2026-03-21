@@ -71,14 +71,6 @@ const Navigation = () => {
               </button>
             </div>
 
-            {/* Desktop CTA */}
-            <Link
-              to="/empezar"
-              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 transition-all"
-              style={{ backgroundColor: '#fff', color: '#1E2535', borderRadius: '7px' }}
-            >
-              {t('nav.start')} <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
 
             {/* Mobile Hamburger */}
             <button
@@ -105,13 +97,6 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/empezar"
-              className="mt-4 flex items-center justify-center gap-2 font-semibold px-6 py-3.5 transition-all"
-              style={{ backgroundColor: '#fff', color: '#1E2535', borderRadius: '7px' }}
-            >
-              {t('nav.start')} <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       )}

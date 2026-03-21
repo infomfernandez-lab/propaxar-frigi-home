@@ -8,16 +8,12 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import MarketReport from "./pages/MarketReport";
 import Comprar from "./pages/Comprar";
-import PropertyFinder from "./pages/PropertyFinder";
 import TerminosFinder from "./pages/TerminosFinder";
-import ReporteTest from "./pages/ReporteTest";
-import ReportePropaxar from "./pages/ReportePropaxar";
 import ReporteKatinkaEN from "./pages/ReporteKatinkaEN";
 import ReporteNadiaEN from "./pages/ReporteNadiaEN";
 import ReporteHenriEN from "./pages/ReporteHenriEN";
 import ComprarReporte from "./pages/ComprarReporte";
 import DemoReporte from "./pages/DemoReporte";
-import Empezar from "./pages/Empezar";
 import Mercado from "./pages/Mercado";
 import Invertir from "./pages/Invertir";
 import Alquilar from "./pages/Alquilar";
@@ -46,17 +42,12 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/market-report" element={<MarketReport />} />
-              <Route path="/finder" element={<PropertyFinder />} />
               <Route path="/terminos-finder" element={<TerminosFinder />} />
-              <Route path="/reporte-test" element={<ReporteTest />} />
-              <Route path="/reporte-propaxar" element={<ReportePropaxar />} />
-              <Route path="/reporte/:slug" element={<ReportePropaxar />} />
               <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
               <Route path="/reporte/nadia-horsted-n-b4x9k2-en" element={<ReporteNadiaEN />} />
               <Route path="/reporte/henri-gloudemans-h3v7p9-en" element={<ReporteHenriEN />} />
               <Route path="/comprar-reporte" element={<ComprarReporte />} />
               <Route path="/demo-reporte" element={<DemoReporte />} />
-              <Route path="/empezar" element={<Empezar />} />
               <Route path="/comprar" element={<Comprar />} />
               <Route path="/mercado" element={<Mercado />} />
               <Route path="/invertir" element={<Invertir />} />

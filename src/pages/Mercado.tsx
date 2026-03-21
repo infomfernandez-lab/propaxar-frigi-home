@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -40,13 +40,6 @@ const TICKER = [
 const cardStyle: React.CSSProperties = { backgroundColor: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' };
 
 export default function MercadoPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ nombre: "", email: "", perfil: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (form.email) setSubmitted(true);
-  };
 
   const tickerText = [...TICKER, ...TICKER].map((t, i) => (
     <span key={i}>
@@ -353,9 +346,16 @@ export default function MercadoPage() {
             <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
               Este es el informe público.<br />El tuyo es diferente.
             </h2>
-            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>
+            <p className="text-base max-w-xl mx-auto mb-6" style={{ color: '#666' }}>
               Los datos de arriba son el mercado general. Tu reporte incluye propiedades reales, seleccionadas para ti, con análisis que ningún portal ofrece.
             </p>
+            <Link
+              to="/market-report"
+              className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]"
+              style={{ backgroundColor: '#2d3e4e', color: '#fff' }}
+            >
+              Ver mi reporte personalizado →
+            </Link>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
@@ -414,71 +414,6 @@ export default function MercadoPage() {
           </div>
         </section>
 
-        {/* ── NEWSLETTER CAPTURE ── */}
-        <section className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <div className="text-[10px] font-black uppercase tracking-widest mb-3" style={{ color: '#2d3e4e' }}>Suscripción gratuita</div>
-            <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              El primer lunes de cada mes. En tu bandeja de entrada. Sin coste.
-            </h2>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: '#666' }}>
-              Precios actualizados, análisis de mercado, cambios regulatorios y propiedades destacadas. La inteligencia que necesitas antes de tomar decisiones.
-            </p>
-            <ul className="space-y-2">
-              {[
-                'Precios €/m² actualizados Frigiliana y Axarquía',
-                'Datos aeropuerto y turismo mensual',
-                'Cambios regulatorios que afectan a tu propiedad',
-                'Sin spam. Baja cuando quieras. Solo datos.',
-              ].map((li, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm" style={{ color: '#666' }}>
-                  <span style={{ color: '#2d3e4e', fontWeight: 600 }}>→</span> {li}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-lg p-6" style={cardStyle}>
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="font-bold text-base mb-1" style={{ color: '#1a1a1a' }}>Recibir el informe mensual</div>
-                <div className="text-xs mb-4" style={{ color: '#9ca3af' }}>Gratis · Sin compromiso · Datos reales</div>
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#9ca3af' }}>Nombre</label>
-                  <input className="w-full border rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-300" style={{ borderColor: '#e5e7eb' }} placeholder="Tu nombre" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#9ca3af' }}>Email *</label>
-                  <input className="w-full border rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gray-300" style={{ borderColor: '#e5e7eb' }} type="email" placeholder="tu@email.com" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#9ca3af' }}>Perfil</label>
-                  <select className="w-full border rounded-lg px-4 py-3 text-sm outline-none bg-white" style={{ borderColor: '#e5e7eb' }} value={form.perfil} onChange={e => setForm({ ...form, perfil: e.target.value })}>
-                    <option value="">¿Qué te describe mejor?</option>
-                    <option>Comprador — quiero vivir aquí</option>
-                    <option>Inquilino — busco alquiler</option>
-                    <option>Propietario — tengo una propiedad</option>
-                    <option>Curiosidad general</option>
-                  </select>
-                </div>
-                <button type="submit" className="w-full font-bold py-3.5 rounded-lg text-white text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#2d3e4e' }}>
-                  Suscribirme al Market Report →
-                </button>
-                <p className="text-[10px]" style={{ color: '#9ca3af' }}>
-                  Al suscribirte aceptas recibir el informe mensual. Datos tratados conforme al RGPD. Baja inmediata con un clic.
-                </p>
-              </form>
-            ) : (
-              <div className="text-center py-10">
-                <div className="text-4xl mb-3" style={{ color: '#22c55e' }}>✓</div>
-                <div className="font-bold text-lg mb-2" style={{ color: '#1a1a1a' }}>Suscripción confirmada</div>
-                <p className="text-sm" style={{ color: '#666' }}>
-                  Recibirás el próximo informe el <strong style={{ color: '#2d3e4e' }}>primer lunes de abril.</strong>
-                </p>
-              </div>
-            )}
-          </div>
-        </section>
 
         {/* SOURCES */}
         <div className="flex items-center gap-3 flex-wrap py-4">
