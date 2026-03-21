@@ -685,6 +685,13 @@ export default function MarketReport() {
           </div>
         </RevealSection>
 
+        {/* CTA after table */}
+        <div className="text-center">
+          <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+            {t.howCta[lang]}
+          </a>
+        </div>
+
         {/* ── SEASONALITY ── */}
         <RevealSection>
           <div className="rounded-lg overflow-hidden" style={cardStyle}>
