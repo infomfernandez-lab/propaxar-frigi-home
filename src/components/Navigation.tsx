@@ -97,13 +97,6 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/empezar"
-              className="mt-4 flex items-center justify-center gap-2 font-semibold px-6 py-3.5 transition-all"
-              style={{ backgroundColor: '#fff', color: '#1E2535', borderRadius: '7px' }}
-            >
-              {t('nav.start')} <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       )}
