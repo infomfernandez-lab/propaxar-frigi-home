@@ -521,6 +521,11 @@ export default function MarketReport() {
               </div>
             ))}
           </div>
+          <div className="text-center mt-8">
+            <a href="#cta-final" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]" style={{ backgroundColor: '#2d3e4e', color: '#fff' }}>
+              {t.howCta[lang]}
+            </a>
+          </div>
         </RevealSection>
 
         {/* ── REPORT PREVIEW ── */}
