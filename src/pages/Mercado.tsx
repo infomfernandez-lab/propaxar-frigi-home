@@ -353,9 +353,16 @@ export default function MercadoPage() {
             <h2 className="font-black mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: '#1a1a1a', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
               Este es el informe público.<br />El tuyo es diferente.
             </h2>
-            <p className="text-base max-w-xl mx-auto" style={{ color: '#666' }}>
+            <p className="text-base max-w-xl mx-auto mb-6" style={{ color: '#666' }}>
               Los datos de arriba son el mercado general. Tu reporte incluye propiedades reales, seleccionadas para ti, con análisis que ningún portal ofrece.
             </p>
+            <Link
+              to="/market-report"
+              className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.97]"
+              style={{ backgroundColor: '#2d3e4e', color: '#fff' }}
+            >
+              Ver mi reporte personalizado →
+            </Link>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
