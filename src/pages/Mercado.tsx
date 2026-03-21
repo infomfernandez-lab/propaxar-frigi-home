@@ -41,13 +41,6 @@ const TICKER = [
 const cardStyle: React.CSSProperties = { backgroundColor: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' };
 
 export default function MercadoPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ nombre: "", email: "", perfil: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (form.email) setSubmitted(true);
-  };
 
   const tickerText = [...TICKER, ...TICKER].map((t, i) => (
     <span key={i}>
