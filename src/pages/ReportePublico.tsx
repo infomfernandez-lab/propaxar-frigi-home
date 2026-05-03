@@ -3,9 +3,11 @@
 // Web pública (propaxar-frigi-home) — NO va en el CRM
 // Ruta: /r/:slug
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { FileText, CreditCard, Globe, Shield, Check, Package, Trash2, Droplets, TrendingUp, Download } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 // --------------------------- Tipos ---------------------------
@@ -46,6 +48,12 @@ type Propiedad = {
   aspectos_a_considerar: string | null;
   descripcion: string | null;
   imagenes?: string[] | null;
+  analisis_acceso?: string | null;
+  analisis_agua?: string | null;
+  analisis_internet?: string | null;
+  analisis_vecindario?: string | null;
+  analisis_historial?: string | null;
+  analisis_propietario?: string | null;
 };
 
 type Lead = {
