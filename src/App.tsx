@@ -27,6 +27,7 @@ import CasaRural from "./pages/CasaRural";
 import VillaPanorama from "./pages/VillaPanorama";
 import CasaFrigiliana from "./pages/CasaFrigiliana";
 import Propiedades from "./pages/Propiedades";
+import ReportePublico from "./pages/ReportePublico";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => (
               <Route path="/property/villapanorama" element={<VillaPanorama />} />
               <Route path="/property/casaenfrigiliana" element={<CasaFrigiliana />} />
               <Route path="/propiedades" element={<Propiedades />} />
+              <Route path="/r/:slug" element={<ReportePublico />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
