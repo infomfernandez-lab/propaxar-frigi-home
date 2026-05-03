@@ -524,6 +524,8 @@ export default function ReportePublico() {
         </div>
       </header>
 
+      <div ref={contentRef}>
+
       {/* PROFILE */}
       <section className="px-6 py-14 max-w-5xl mx-auto">
         <h2 className="font-serif text-2xl md:text-3xl mb-6">{t.profile_title}</h2>
@@ -543,6 +545,37 @@ export default function ReportePublico() {
             <KV k={t.nationality} v={p?.nacionalidad ?? "—"} />
             <KV k={t.language} v={p?.idioma ?? reporte.idioma} />
           </ProfileCard>
+        </div>
+      </section>
+
+      {/* DOCUMENTATION & LEGAL */}
+      <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>{S.docsTitle}</h2>
+        <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>{S.docsSubtitle}</p>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {S.docs.map((doc, i) => (
+            <div key={i} className="bg-white rounded-xl border-0 overflow-hidden p-6 space-y-3" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)" }}>
+              <div className="flex items-start gap-3">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                  {ICONS[doc.icon]}
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{doc.title}</h3>
+                  <span className="inline-block text-xs font-bold mt-1 px-2 py-0.5 rounded-full text-white" style={{ background: doc.urgencyColor }}>{doc.urgency}</span>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{doc.description}</p>
+              <ul className="space-y-1">
+                {doc.steps.map((s, j) => (
+                  <li key={j} className="text-sm flex items-start gap-2">
+                    <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(142 71% 45%)" }} />
+                    <span style={{ color: "hsl(215 19% 34%)" }}>{s}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs font-medium" style={{ color: "hsl(213 56% 40%)" }}>{doc.tip}</p>
+            </div>
+          ))}
         </div>
       </section>
 
