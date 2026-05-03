@@ -405,6 +405,22 @@ export default function ReportePublico() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPdf = async () => {
+    const html2pdf = (await import("html2pdf.js")).default;
+    const el = contentRef.current;
+    if (!el) return;
+    el.querySelectorAll("[data-no-print]").forEach((n) => ((n as HTMLElement).style.display = "none"));
+    await html2pdf().set({
+      margin: 10,
+      filename: `Propaxar_Report_${slug ?? "report"}_${new Date().toISOString().slice(0, 10)}.pdf`,
+      image: { type: "jpeg", quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    }).from(el).save();
+    el.querySelectorAll("[data-no-print]").forEach((n) => ((n as HTMLElement).style.display = ""));
+  };
 
   useEffect(() => {
     (async () => {
@@ -436,6 +452,7 @@ export default function ReportePublico() {
   }, [slug]);
 
   const t = T[reporte?.idioma ?? "en"];
+  const S = SECTIONS[reporte?.idioma ?? "en"];
 
   const ordered = useMemo(() => {
     if (!reporte) return [];
