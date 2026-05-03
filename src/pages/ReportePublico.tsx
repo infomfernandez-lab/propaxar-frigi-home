@@ -3,9 +3,11 @@
 // Web pública (propaxar-frigi-home) — NO va en el CRM
 // Ruta: /r/:slug
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { FileText, CreditCard, Globe, Shield, Check, Package, Trash2, Droplets, TrendingUp, Download } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 // --------------------------- Tipos ---------------------------
@@ -46,6 +48,12 @@ type Propiedad = {
   aspectos_a_considerar: string | null;
   descripcion: string | null;
   imagenes?: string[] | null;
+  analisis_acceso?: string | null;
+  analisis_agua?: string | null;
+  analisis_internet?: string | null;
+  analisis_vecindario?: string | null;
+  analisis_historial?: string | null;
+  analisis_propietario?: string | null;
 };
 
 type Lead = {
@@ -230,6 +238,124 @@ const T: Record<Idioma, Record<string, string>> = {
   },
 };
 
+// --------------------------- Localized rich content ---------------------------
+
+type DocItem = { title: string; urgency: string; urgencyColor: string; description: string; steps: string[]; tip: string; icon: "file" | "card" | "globe" | "shield" };
+type LogItem = { title: string; countryside: string; town: string; icon: "package" | "trash" | "droplets" };
+type ProAnalysisLabels = { title: string; access: string; water: string; internet: string; neighbourhood: string; history: string; owner: string };
+
+const SECTIONS: Record<Idioma, {
+  proAnalysis: ProAnalysisLabels;
+  docsTitle: string; docsSubtitle: string;
+  logisticsTitle: string; logisticsSubtitle: string;
+  countryside: string; inTown: string;
+  chartTitle: string; chartSubtitle: string; chartTooltip: string;
+  pdfTitle: string; pdfSub: string; pdfBtn: string;
+  docs: DocItem[];
+  logistics: LogItem[];
+}> = {
+  en: {
+    proAnalysis: { title: "🔍 MY PROFESSIONAL ANALYSIS", access: "Access & Parking", water: "Water & Services", internet: "Internet & Connectivity", neighbourhood: "Neighbourhood & Noise", history: "Property History", owner: "Owner Profile" },
+    docsTitle: "Documentation & Legal Requirements", docsSubtitle: "What you need to rent legally in Spain",
+    logisticsTitle: "Country vs Town Living Logistics", logisticsSubtitle: "The Insider's Truth",
+    countryside: "🌿 IN THE COUNTRYSIDE", inTown: "🏘️ IN THE TOWN",
+    chartTitle: "Market Evolution in Frigiliana", chartSubtitle: "Average price +6% yearly · Long-term rental availability <1%", chartTooltip: "Average price",
+    pdfTitle: "DOWNLOAD YOUR REPORT", pdfSub: "Save offline · Print it · Share it", pdfBtn: "Download PDF",
+    docs: [
+      { icon: "file", title: "NIE (Foreigners' ID Number)", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Required for ALL contracts, bank accounts, utilities. Without it, you literally cannot rent.", steps: ["Apply at Spanish Consulate (home country) or Police Station (Spain)", "Processing: 2-4 weeks from abroad, 1-2 weeks in Spain", "Documents: passport, EX-15 form, proof of reason"], tip: "💡 Start this NOW if you don't have one. It's the #1 blocker." },
+      { icon: "card", title: "Spanish Bank Account", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Most landlords require rent via Spanish bank transfer. Also needed for utilities.", steps: ["Open at any bank with NIE + passport", "Some banks allow opening remotely (N26, Openbank)", "Same day in branch with NIE"], tip: "💡 I can recommend a branch in Nerja where they speak English." },
+      { icon: "globe", title: "Empadronamiento (Town Registration)", urgency: "WITHIN 3 MONTHS", urgencyColor: "hsl(39 76% 51%)", description: "Mandatory registration at your local town hall. Required for healthcare, voting, and residency.", steps: ["Go to Town Hall with rental contract + passport", "Free of charge, done same day", "Needed for healthcare, schools, residency"], tip: "💡 I'll accompany you to Town Hall." },
+      { icon: "shield", title: "Rental Contract Essentials", urgency: "AT SIGNING", urgencyColor: "hsl(213 56% 43%)", description: "Spanish rental law (LAU) protects tenants. Key things to verify in your contract.", steps: ["Minimum duration (for individual landlords)", "Deposit: max 2 months rent", "Rent increases tied to CPI, max once per year", "I review ALL contracts before you sign"], tip: "💡 Never sign without understanding every clause." },
+    ],
+    logistics: [
+      { icon: "package", title: "Package Delivery and Amazon", countryside: "There is no door-to-door delivery in rural areas. We'll help you register at a local Parcel Point.", town: "Each home has its own address with door-to-door delivery." },
+      { icon: "trash", title: "Waste Collection", countryside: "The garbage truck does not access rural lanes. Waste must be deposited at clean points on the main road.", town: "Collection is house by house. Put garbage out after 9:30 PM." },
+      { icon: "droplets", title: "Water", countryside: "Water in rural houses usually comes from community or private wells.", town: "Water comes from the municipal network, generally managed by Aqualia." },
+    ],
+  },
+  es: {
+    proAnalysis: { title: "🔍 MI ANÁLISIS PROFESIONAL", access: "Acceso y aparcamiento", water: "Agua y servicios", internet: "Internet y conectividad", neighbourhood: "Vecindario y ruido", history: "Historial de la propiedad", owner: "Perfil del propietario" },
+    docsTitle: "Documentación y requisitos legales", docsSubtitle: "Lo que necesitas para alquilar legalmente en España",
+    logisticsTitle: "Vivir en el campo vs en el pueblo", logisticsSubtitle: "La verdad desde dentro",
+    countryside: "🌿 EN EL CAMPO", inTown: "🏘️ EN EL PUEBLO",
+    chartTitle: "Evolución del mercado en Frigiliana", chartSubtitle: "Precio medio +6% anual · Disponibilidad de alquiler larga estancia <1%", chartTooltip: "Precio medio",
+    pdfTitle: "DESCARGA TU REPORTE", pdfSub: "Guárdalo offline · Imprímelo · Compártelo", pdfBtn: "Descargar PDF",
+    docs: [
+      { icon: "file", title: "NIE (Número de Identificación de Extranjero)", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "Imprescindible para TODOS los contratos, cuentas bancarias y suministros.", steps: ["Solicitar en Consulado o Comisaría de Policía", "Tramitación: 2-4 semanas desde el extranjero, 1-2 en España", "Documentos: pasaporte, EX-15, justificación"], tip: "💡 Empieza YA si no lo tienes. Es el bloqueo #1." },
+      { icon: "card", title: "Cuenta bancaria española", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "La mayoría de propietarios exigen transferencia bancaria española.", steps: ["Apertura con NIE + pasaporte", "Algunos bancos permiten apertura remota (N26, Openbank)", "Mismo día en sucursal con NIE"], tip: "💡 Te recomiendo una sucursal en Nerja con personal inglés." },
+      { icon: "globe", title: "Empadronamiento", urgency: "EN 3 MESES", urgencyColor: "hsl(39 76% 51%)", description: "Inscripción obligatoria en el ayuntamiento. Necesario para sanidad, voto y residencia.", steps: ["Acude al Ayuntamiento con contrato + pasaporte", "Gratuito, mismo día", "Necesario para sanidad pública, colegios, residencia"], tip: "💡 Te acompaño al Ayuntamiento." },
+      { icon: "shield", title: "Contrato de alquiler: lo esencial", urgency: "AL FIRMAR", urgencyColor: "hsl(213 56% 43%)", description: "La LAU protege al inquilino. Puntos clave a verificar.", steps: ["Duración mínima (propietario particular)", "Fianza: máximo 2 meses", "Subida ligada al IPC, máximo 1 vez al año", "Reviso TODOS los contratos antes de firmar"], tip: "💡 Nunca firmes sin entender cada cláusula." },
+    ],
+    logistics: [
+      { icon: "package", title: "Paquetería y Amazon", countryside: "No hay entrega puerta a puerta en zonas rurales. Te ayudamos a registrarte en un Punto de Entrega local.", town: "Cada vivienda tiene su dirección con entrega puerta a puerta." },
+      { icon: "trash", title: "Recogida de basura", countryside: "El camión no accede a caminos rurales. La basura se deposita en puntos limpios en la carretera principal.", town: "Recogida casa por casa. Saca la basura después de las 21:30." },
+      { icon: "droplets", title: "Agua", countryside: "En casas rurales suele venir de pozos comunitarios o privados.", town: "Agua de la red municipal, gestionada por Aqualia." },
+    ],
+  },
+  nl: {
+    proAnalysis: { title: "🔍 MIJN PROFESSIONELE ANALYSE", access: "Toegang & Parkeren", water: "Water & Diensten", internet: "Internet & Verbinding", neighbourhood: "Buurt & Geluid", history: "Geschiedenis van het pand", owner: "Profiel eigenaar" },
+    docsTitle: "Documentatie & Juridische Vereisten", docsSubtitle: "Wat u nodig heeft om legaal te huren in Spanje",
+    logisticsTitle: "Wonen op het platteland vs in het dorp", logisticsSubtitle: "De insider waarheid",
+    countryside: "🌿 OP HET PLATTELAND", inTown: "🏘️ IN HET DORP",
+    chartTitle: "Marktontwikkeling in Frigiliana", chartSubtitle: "Gemiddelde prijs +6% per jaar · Beschikbaarheid langdurige huur <1%", chartTooltip: "Gemiddelde prijs",
+    pdfTitle: "DOWNLOAD UW RAPPORT", pdfSub: "Offline opslaan · Printen · Delen", pdfBtn: "PDF downloaden",
+    docs: [
+      { icon: "file", title: "NIE (ID-nummer)", urgency: "ESSENTIEEL", urgencyColor: "hsl(0 72% 51%)", description: "Vereist voor ALLE contracten en rekeningen.", steps: ["Aanvraag bij consulaat of politiebureau", "Verwerking: 2-4 weken vanuit buitenland", "Documenten: paspoort, EX-15"], tip: "💡 Begin NU als u die nog niet heeft." },
+      { icon: "card", title: "Spaanse bankrekening", urgency: "ESSENTIEEL", urgencyColor: "hsl(0 72% 51%)", description: "Verhuurders eisen meestal Spaanse overschrijving.", steps: ["Openen met NIE + paspoort", "Soms op afstand mogelijk (N26, Openbank)", "Zelfde dag in filiaal"], tip: "💡 Ik raad een Engelstalige bank in Nerja aan." },
+      { icon: "globe", title: "Empadronamiento", urgency: "BINNEN 3 MAANDEN", urgencyColor: "hsl(39 76% 51%)", description: "Verplichte registratie bij gemeentehuis.", steps: ["Naar gemeentehuis met contract + paspoort", "Gratis, zelfde dag", "Nodig voor zorg en residentie"], tip: "💡 Ik ga met u mee." },
+      { icon: "shield", title: "Huurcontract essentials", urgency: "BIJ ONDERTEKENING", urgencyColor: "hsl(213 56% 43%)", description: "Spaanse huurwet beschermt huurders.", steps: ["Minimumduur", "Borg: max 2 maanden", "Verhoging gekoppeld aan CPI", "Ik beoordeel alle contracten"], tip: "💡 Teken nooit zonder begrip." },
+    ],
+    logistics: [
+      { icon: "package", title: "Pakketbezorging en Amazon", countryside: "Geen bezorging aan huis in landelijke gebieden. We helpen u bij een Parcel Point.", town: "Elke woning heeft adres met bezorging aan huis." },
+      { icon: "trash", title: "Vuilophaal", countryside: "Vuilniswagen komt niet in landwegen. Naar containers op hoofdweg.", town: "Huis-aan-huis ophaal. Vuilnis na 21:30 buiten." },
+      { icon: "droplets", title: "Water", countryside: "Water uit gemeenschaps- of privéputten.", town: "Water uit gemeentenet, beheerd door Aqualia." },
+    ],
+  },
+  de: {
+    proAnalysis: { title: "🔍 MEINE PROFESSIONELLE ANALYSE", access: "Zugang & Parken", water: "Wasser & Versorgung", internet: "Internet & Konnektivität", neighbourhood: "Nachbarschaft & Lärm", history: "Objekthistorie", owner: "Eigentümerprofil" },
+    docsTitle: "Dokumentation & rechtliche Anforderungen", docsSubtitle: "Was Sie für legales Mieten in Spanien brauchen",
+    logisticsTitle: "Land- vs. Stadtleben Logistik", logisticsSubtitle: "Die Insider-Wahrheit",
+    countryside: "🌿 AUF DEM LAND", inTown: "🏘️ IM ORT",
+    chartTitle: "Marktentwicklung in Frigiliana", chartSubtitle: "Durchschnittspreis +6% jährlich · Langzeitmiete-Verfügbarkeit <1%", chartTooltip: "Durchschnittspreis",
+    pdfTitle: "BERICHT HERUNTERLADEN", pdfSub: "Offline speichern · Drucken · Teilen", pdfBtn: "PDF herunterladen",
+    docs: [
+      { icon: "file", title: "NIE (Ausländer-ID)", urgency: "UNERLÄSSLICH", urgencyColor: "hsl(0 72% 51%)", description: "Erforderlich für ALLE Verträge und Konten.", steps: ["Antrag im Konsulat oder bei der Polizei", "Bearbeitung: 2-4 Wochen aus dem Ausland", "Unterlagen: Pass, EX-15"], tip: "💡 Beginnen Sie JETZT damit." },
+      { icon: "card", title: "Spanisches Bankkonto", urgency: "UNERLÄSSLICH", urgencyColor: "hsl(0 72% 51%)", description: "Vermieter verlangen meist spanische Überweisung.", steps: ["Eröffnung mit NIE + Pass", "Manche Banken auch remote (N26, Openbank)", "Gleicher Tag in Filiale"], tip: "💡 Englischsprachige Filiale in Nerja empfohlen." },
+      { icon: "globe", title: "Empadronamiento", urgency: "INNERHALB 3 MONATEN", urgencyColor: "hsl(39 76% 51%)", description: "Pflichtmeldung beim Rathaus.", steps: ["Rathaus mit Vertrag + Pass", "Kostenlos, gleicher Tag", "Nötig für Gesundheit, Schule"], tip: "💡 Ich begleite Sie." },
+      { icon: "shield", title: "Mietvertrag Wesentliches", urgency: "BEI UNTERZEICHNUNG", urgencyColor: "hsl(213 56% 43%)", description: "Spanisches Mietrecht (LAU) schützt Mieter.", steps: ["Mindestlaufzeit", "Kaution: max 2 Monate", "Erhöhung an CPI gebunden", "Ich prüfe alle Verträge"], tip: "💡 Niemals ohne Verständnis unterschreiben." },
+    ],
+    logistics: [
+      { icon: "package", title: "Paketzustellung und Amazon", countryside: "Keine Zustellung in ländlichen Gebieten. Wir helfen bei Parcel Point.", town: "Jede Wohnung mit Adresse und Zustellung." },
+      { icon: "trash", title: "Müllabfuhr", countryside: "Müllwagen fährt keine Landwege. Zu Sammelpunkten an Hauptstraße.", town: "Haus-zu-Haus. Müll nach 21:30 raus." },
+      { icon: "droplets", title: "Wasser", countryside: "Wasser aus Gemeinschafts- oder Privatbrunnen.", town: "Wasser vom Stadtnetz, betrieben von Aqualia." },
+    ],
+  },
+  fr: {
+    proAnalysis: { title: "🔍 MON ANALYSE PROFESSIONNELLE", access: "Accès & Stationnement", water: "Eau & Services", internet: "Internet & Connectivité", neighbourhood: "Voisinage & Bruit", history: "Historique du bien", owner: "Profil du propriétaire" },
+    docsTitle: "Documentation et exigences légales", docsSubtitle: "Ce qu'il vous faut pour louer légalement en Espagne",
+    logisticsTitle: "Vivre à la campagne vs au village", logisticsSubtitle: "La vérité des connaisseurs",
+    countryside: "🌿 À LA CAMPAGNE", inTown: "🏘️ AU VILLAGE",
+    chartTitle: "Évolution du marché à Frigiliana", chartSubtitle: "Prix moyen +6% annuel · Disponibilité location longue durée <1%", chartTooltip: "Prix moyen",
+    pdfTitle: "TÉLÉCHARGER VOTRE RAPPORT", pdfSub: "Hors ligne · Imprimer · Partager", pdfBtn: "Télécharger PDF",
+    docs: [
+      { icon: "file", title: "NIE (Numéro d'identification)", urgency: "ESSENTIEL", urgencyColor: "hsl(0 72% 51%)", description: "Requis pour TOUS les contrats et comptes.", steps: ["Demande au Consulat ou Commissariat", "Traitement: 2-4 semaines depuis l'étranger", "Documents: passeport, EX-15"], tip: "💡 Commencez MAINTENANT." },
+      { icon: "card", title: "Compte bancaire espagnol", urgency: "ESSENTIEL", urgencyColor: "hsl(0 72% 51%)", description: "Les bailleurs exigent virement espagnol.", steps: ["Ouverture avec NIE + passeport", "Certaines banques à distance (N26, Openbank)", "Même jour en agence"], tip: "💡 Agence anglophone à Nerja recommandée." },
+      { icon: "globe", title: "Empadronamiento", urgency: "DANS 3 MOIS", urgencyColor: "hsl(39 76% 51%)", description: "Inscription obligatoire à la mairie.", steps: ["Mairie avec contrat + passeport", "Gratuit, même jour", "Nécessaire pour santé, école"], tip: "💡 Je vous accompagne." },
+      { icon: "shield", title: "Contrat de location: l'essentiel", urgency: "À LA SIGNATURE", urgencyColor: "hsl(213 56% 43%)", description: "Le droit espagnol (LAU) protège les locataires.", steps: ["Durée minimale", "Caution: max 2 mois", "Hausse liée à l'IPC", "Je révise tous les contrats"], tip: "💡 Ne signez jamais sans comprendre." },
+    ],
+    logistics: [
+      { icon: "package", title: "Livraison de colis et Amazon", countryside: "Pas de livraison à domicile en zones rurales. Nous vous aidons à utiliser un Point Relais.", town: "Chaque logement a son adresse avec livraison à domicile." },
+      { icon: "trash", title: "Collecte des déchets", countryside: "Le camion ne va pas sur les chemins. Déposer aux points propres sur la route principale.", town: "Collecte porte à porte. Sortir après 21h30." },
+      { icon: "droplets", title: "Eau", countryside: "Eau de puits communautaires ou privés.", town: "Eau du réseau municipal, géré par Aqualia." },
+    ],
+  },
+};
+
+const ICONS = {
+  file: <FileText className="w-7 h-7" />, card: <CreditCard className="w-7 h-7" />, globe: <Globe className="w-7 h-7" />, shield: <Shield className="w-7 h-7" />,
+  package: <Package className="w-7 h-7" />, trash: <Trash2 className="w-7 h-7" />, droplets: <Droplets className="w-7 h-7" />,
+};
+
 // --------------------------- Matching score ---------------------------
 
 function matchScore(
@@ -279,6 +405,22 @@ export default function ReportePublico() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPdf = async () => {
+    const html2pdf = (await import("html2pdf.js")).default;
+    const el = contentRef.current;
+    if (!el) return;
+    el.querySelectorAll("[data-no-print]").forEach((n) => ((n as HTMLElement).style.display = "none"));
+    await html2pdf().set({
+      margin: 10,
+      filename: `Propaxar_Report_${slug ?? "report"}_${new Date().toISOString().slice(0, 10)}.pdf`,
+      image: { type: "jpeg", quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    }).from(el).save();
+    el.querySelectorAll("[data-no-print]").forEach((n) => ((n as HTMLElement).style.display = ""));
+  };
 
   useEffect(() => {
     (async () => {
@@ -310,6 +452,7 @@ export default function ReportePublico() {
   }, [slug]);
 
   const t = T[reporte?.idioma ?? "en"];
+  const S = SECTIONS[reporte?.idioma ?? "en"];
 
   const ordered = useMemo(() => {
     if (!reporte) return [];
@@ -381,6 +524,8 @@ export default function ReportePublico() {
         </div>
       </header>
 
+      <div ref={contentRef}>
+
       {/* PROFILE */}
       <section className="px-6 py-14 max-w-5xl mx-auto">
         <h2 className="font-serif text-2xl md:text-3xl mb-6">{t.profile_title}</h2>
@@ -400,6 +545,37 @@ export default function ReportePublico() {
             <KV k={t.nationality} v={p?.nacionalidad ?? "—"} />
             <KV k={t.language} v={p?.idioma ?? reporte.idioma} />
           </ProfileCard>
+        </div>
+      </section>
+
+      {/* DOCUMENTATION & LEGAL */}
+      <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>{S.docsTitle}</h2>
+        <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>{S.docsSubtitle}</p>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {S.docs.map((doc, i) => (
+            <div key={i} className="bg-white rounded-xl border-0 overflow-hidden p-6 space-y-3" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)" }}>
+              <div className="flex items-start gap-3">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                  {ICONS[doc.icon]}
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{doc.title}</h3>
+                  <span className="inline-block text-xs font-bold mt-1 px-2 py-0.5 rounded-full text-white" style={{ background: doc.urgencyColor }}>{doc.urgency}</span>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{doc.description}</p>
+              <ul className="space-y-1">
+                {doc.steps.map((s, j) => (
+                  <li key={j} className="text-sm flex items-start gap-2">
+                    <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(142 71% 45%)" }} />
+                    <span style={{ color: "hsl(215 19% 34%)" }}>{s}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs font-medium" style={{ color: "hsl(213 56% 40%)" }}>{doc.tip}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -505,6 +681,24 @@ export default function ReportePublico() {
                           <p className="whitespace-pre-line text-slate-700 leading-relaxed">{sel.analisis_personalizado}</p>
                         </div>
                       )}
+                      {(prop.analisis_acceso || prop.analisis_agua || prop.analisis_internet || prop.analisis_vecindario || prop.analisis_historial || prop.analisis_propietario) && (
+                        <div className="rounded-xl p-5 space-y-4" style={{ background: "hsl(142 71% 45%/0.06)" }}>
+                          <h4 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.proAnalysis.title}</h4>
+                          {([
+                            [S.proAnalysis.access, prop.analisis_acceso],
+                            [S.proAnalysis.water, prop.analisis_agua],
+                            [S.proAnalysis.internet, prop.analisis_internet],
+                            [S.proAnalysis.neighbourhood, prop.analisis_vecindario],
+                            [S.proAnalysis.history, prop.analisis_historial],
+                            [S.proAnalysis.owner, prop.analisis_propietario],
+                          ] as [string, string | null | undefined][]).filter(([, v]) => !!v).map(([label, text]) => (
+                            <div key={label}>
+                              <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>{label}</p>
+                              <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                       <div className="grid md:grid-cols-2 gap-4">
                         {prop.puntos_fuertes && (
                           <div className="bg-emerald-50 border border-emerald-100 rounded p-4">
@@ -596,6 +790,82 @@ export default function ReportePublico() {
             <Step n="2" title={t.n2_t} desc={t.n2_d} />
             <Step n="3" title={t.n3_t} desc={t.n3_d} />
           </div>
+        </div>
+      </section>
+
+      {/* COUNTRY VS TOWN LOGISTICS */}
+      {ordered.some(({ prop }) => prop.zona === "campo") && (
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-1" style={{ color: "hsl(213 56% 23%)" }}>{S.logisticsTitle}</h2>
+          <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>{S.logisticsSubtitle}</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {S.logistics.map((c, i) => (
+              <div key={i} className="bg-white border rounded-xl p-6 space-y-4" style={{ borderColor: "hsl(212 26% 83%)" }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                  {ICONS[c.icon]}
+                </div>
+                <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{c.title}</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>{S.countryside}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.countryside}</p>
+                  </div>
+                  <div className="border-t pt-3" style={{ borderColor: "hsl(212 26% 90%)" }}>
+                    <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 40%)" }}>{S.inTown}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.town}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* MARKET EVOLUTION CHART */}
+      <section className="py-12 px-4 md:px-8 max-w-5xl mx-auto">
+        <div className="bg-white rounded-xl p-6 md:p-8" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)" }}>
+          <div className="flex items-center gap-2 mb-1">
+            <TrendingUp className="w-5 h-5" style={{ color: "hsl(142 71% 45%)" }} />
+            <h3 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.chartTitle}</h3>
+          </div>
+          <p className="text-xs mb-6" style={{ color: "hsl(215 19% 34%)" }}>{S.chartSubtitle}</p>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={[
+                { year: "2020", price: 650 },
+                { year: "2021", price: 690 },
+                { year: "2022", price: 730 },
+                { year: "2023", price: 780 },
+                { year: "2024", price: 830 },
+                { year: "2025", price: 880 },
+                { year: "2026", price: 935 },
+              ]}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(212 26% 83%)" />
+                <XAxis dataKey="year" tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} />
+                <YAxis tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} tickFormatter={(v) => `€${v}`} />
+                <Tooltip formatter={(value: number) => [`€${value}/month`, S.chartTooltip]} />
+                <Line type="monotone" dataKey="price" stroke="hsl(213 56% 23%)" strokeWidth={2.5} dot={{ fill: "hsl(213 56% 23%)", r: 4 }} activeDot={{ r: 6, fill: "hsl(142 71% 45%)" }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </section>
+
+      </div>
+
+      {/* PDF DOWNLOAD */}
+      <section className="py-16 px-4 md:px-8 max-w-3xl mx-auto text-center" data-no-print>
+        <div className="bg-white rounded-2xl p-8 space-y-4" style={{ boxShadow: "0 4px 24px hsl(0 0% 0%/0.08)" }}>
+          <Download className="w-10 h-10 mx-auto" style={{ color: "hsl(142 71% 45%)" }} />
+          <h2 className="text-xl font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.pdfTitle}</h2>
+          <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{S.pdfSub}</p>
+          <button
+            onClick={handleDownloadPdf}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white font-bold"
+            style={{ background: "hsl(142 71% 45%)" }}
+          >
+            <Download className="w-4 h-4" /> {S.pdfBtn}
+          </button>
         </div>
       </section>
 
