@@ -681,6 +681,24 @@ export default function ReportePublico() {
                           <p className="whitespace-pre-line text-slate-700 leading-relaxed">{sel.analisis_personalizado}</p>
                         </div>
                       )}
+                      {(prop.analisis_acceso || prop.analisis_agua || prop.analisis_internet || prop.analisis_vecindario || prop.analisis_historial || prop.analisis_propietario) && (
+                        <div className="rounded-xl p-5 space-y-4" style={{ background: "hsl(142 71% 45%/0.06)" }}>
+                          <h4 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.proAnalysis.title}</h4>
+                          {([
+                            [S.proAnalysis.access, prop.analisis_acceso],
+                            [S.proAnalysis.water, prop.analisis_agua],
+                            [S.proAnalysis.internet, prop.analisis_internet],
+                            [S.proAnalysis.neighbourhood, prop.analisis_vecindario],
+                            [S.proAnalysis.history, prop.analisis_historial],
+                            [S.proAnalysis.owner, prop.analisis_propietario],
+                          ] as [string, string | null | undefined][]).filter(([, v]) => !!v).map(([label, text]) => (
+                            <div key={label}>
+                              <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>{label}</p>
+                              <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                       <div className="grid md:grid-cols-2 gap-4">
                         {prop.puntos_fuertes && (
                           <div className="bg-emerald-50 border border-emerald-100 rounded p-4">
