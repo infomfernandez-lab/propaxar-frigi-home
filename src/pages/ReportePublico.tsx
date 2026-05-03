@@ -238,6 +238,124 @@ const T: Record<Idioma, Record<string, string>> = {
   },
 };
 
+// --------------------------- Localized rich content ---------------------------
+
+type DocItem = { title: string; urgency: string; urgencyColor: string; description: string; steps: string[]; tip: string; icon: "file" | "card" | "globe" | "shield" };
+type LogItem = { title: string; countryside: string; town: string; icon: "package" | "trash" | "droplets" };
+type ProAnalysisLabels = { title: string; access: string; water: string; internet: string; neighbourhood: string; history: string; owner: string };
+
+const SECTIONS: Record<Idioma, {
+  proAnalysis: ProAnalysisLabels;
+  docsTitle: string; docsSubtitle: string;
+  logisticsTitle: string; logisticsSubtitle: string;
+  countryside: string; inTown: string;
+  chartTitle: string; chartSubtitle: string; chartTooltip: string;
+  pdfTitle: string; pdfSub: string; pdfBtn: string;
+  docs: DocItem[];
+  logistics: LogItem[];
+}> = {
+  en: {
+    proAnalysis: { title: "🔍 MY PROFESSIONAL ANALYSIS", access: "Access & Parking", water: "Water & Services", internet: "Internet & Connectivity", neighbourhood: "Neighbourhood & Noise", history: "Property History", owner: "Owner Profile" },
+    docsTitle: "Documentation & Legal Requirements", docsSubtitle: "What you need to rent legally in Spain",
+    logisticsTitle: "Country vs Town Living Logistics", logisticsSubtitle: "The Insider's Truth",
+    countryside: "🌿 IN THE COUNTRYSIDE", inTown: "🏘️ IN THE TOWN",
+    chartTitle: "Market Evolution in Frigiliana", chartSubtitle: "Average price +6% yearly · Long-term rental availability <1%", chartTooltip: "Average price",
+    pdfTitle: "DOWNLOAD YOUR REPORT", pdfSub: "Save offline · Print it · Share it", pdfBtn: "Download PDF",
+    docs: [
+      { icon: "file", title: "NIE (Foreigners' ID Number)", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Required for ALL contracts, bank accounts, utilities. Without it, you literally cannot rent.", steps: ["Apply at Spanish Consulate (home country) or Police Station (Spain)", "Processing: 2-4 weeks from abroad, 1-2 weeks in Spain", "Documents: passport, EX-15 form, proof of reason"], tip: "💡 Start this NOW if you don't have one. It's the #1 blocker." },
+      { icon: "card", title: "Spanish Bank Account", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Most landlords require rent via Spanish bank transfer. Also needed for utilities.", steps: ["Open at any bank with NIE + passport", "Some banks allow opening remotely (N26, Openbank)", "Same day in branch with NIE"], tip: "💡 I can recommend a branch in Nerja where they speak English." },
+      { icon: "globe", title: "Empadronamiento (Town Registration)", urgency: "WITHIN 3 MONTHS", urgencyColor: "hsl(39 76% 51%)", description: "Mandatory registration at your local town hall. Required for healthcare, voting, and residency.", steps: ["Go to Town Hall with rental contract + passport", "Free of charge, done same day", "Needed for healthcare, schools, residency"], tip: "💡 I'll accompany you to Town Hall." },
+      { icon: "shield", title: "Rental Contract Essentials", urgency: "AT SIGNING", urgencyColor: "hsl(213 56% 43%)", description: "Spanish rental law (LAU) protects tenants. Key things to verify in your contract.", steps: ["Minimum duration (for individual landlords)", "Deposit: max 2 months rent", "Rent increases tied to CPI, max once per year", "I review ALL contracts before you sign"], tip: "💡 Never sign without understanding every clause." },
+    ],
+    logistics: [
+      { icon: "package", title: "Package Delivery and Amazon", countryside: "There is no door-to-door delivery in rural areas. We'll help you register at a local Parcel Point.", town: "Each home has its own address with door-to-door delivery." },
+      { icon: "trash", title: "Waste Collection", countryside: "The garbage truck does not access rural lanes. Waste must be deposited at clean points on the main road.", town: "Collection is house by house. Put garbage out after 9:30 PM." },
+      { icon: "droplets", title: "Water", countryside: "Water in rural houses usually comes from community or private wells.", town: "Water comes from the municipal network, generally managed by Aqualia." },
+    ],
+  },
+  es: {
+    proAnalysis: { title: "🔍 MI ANÁLISIS PROFESIONAL", access: "Acceso y aparcamiento", water: "Agua y servicios", internet: "Internet y conectividad", neighbourhood: "Vecindario y ruido", history: "Historial de la propiedad", owner: "Perfil del propietario" },
+    docsTitle: "Documentación y requisitos legales", docsSubtitle: "Lo que necesitas para alquilar legalmente en España",
+    logisticsTitle: "Vivir en el campo vs en el pueblo", logisticsSubtitle: "La verdad desde dentro",
+    countryside: "🌿 EN EL CAMPO", inTown: "🏘️ EN EL PUEBLO",
+    chartTitle: "Evolución del mercado en Frigiliana", chartSubtitle: "Precio medio +6% anual · Disponibilidad de alquiler larga estancia <1%", chartTooltip: "Precio medio",
+    pdfTitle: "DESCARGA TU REPORTE", pdfSub: "Guárdalo offline · Imprímelo · Compártelo", pdfBtn: "Descargar PDF",
+    docs: [
+      { icon: "file", title: "NIE (Número de Identificación de Extranjero)", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "Imprescindible para TODOS los contratos, cuentas bancarias y suministros.", steps: ["Solicitar en Consulado o Comisaría de Policía", "Tramitación: 2-4 semanas desde el extranjero, 1-2 en España", "Documentos: pasaporte, EX-15, justificación"], tip: "💡 Empieza YA si no lo tienes. Es el bloqueo #1." },
+      { icon: "card", title: "Cuenta bancaria española", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "La mayoría de propietarios exigen transferencia bancaria española.", steps: ["Apertura con NIE + pasaporte", "Algunos bancos permiten apertura remota (N26, Openbank)", "Mismo día en sucursal con NIE"], tip: "💡 Te recomiendo una sucursal en Nerja con personal inglés." },
+      { icon: "globe", title: "Empadronamiento", urgency: "EN 3 MESES", urgencyColor: "hsl(39 76% 51%)", description: "Inscripción obligatoria en el ayuntamiento. Necesario para sanidad, voto y residencia.", steps: ["Acude al Ayuntamiento con contrato + pasaporte", "Gratuito, mismo día", "Necesario para sanidad pública, colegios, residencia"], tip: "💡 Te acompaño al Ayuntamiento." },
+      { icon: "shield", title: "Contrato de alquiler: lo esencial", urgency: "AL FIRMAR", urgencyColor: "hsl(213 56% 43%)", description: "La LAU protege al inquilino. Puntos clave a verificar.", steps: ["Duración mínima (propietario particular)", "Fianza: máximo 2 meses", "Subida ligada al IPC, máximo 1 vez al año", "Reviso TODOS los contratos antes de firmar"], tip: "💡 Nunca firmes sin entender cada cláusula." },
+    ],
+    logistics: [
+      { icon: "package", title: "Paquetería y Amazon", countryside: "No hay entrega puerta a puerta en zonas rurales. Te ayudamos a registrarte en un Punto de Entrega local.", town: "Cada vivienda tiene su dirección con entrega puerta a puerta." },
+      { icon: "trash", title: "Recogida de basura", countryside: "El camión no accede a caminos rurales. La basura se deposita en puntos limpios en la carretera principal.", town: "Recogida casa por casa. Saca la basura después de las 21:30." },
+      { icon: "droplets", title: "Agua", countryside: "En casas rurales suele venir de pozos comunitarios o privados.", town: "Agua de la red municipal, gestionada por Aqualia." },
+    ],
+  },
+  nl: {
+    proAnalysis: { title: "🔍 MIJN PROFESSIONELE ANALYSE", access: "Toegang & Parkeren", water: "Water & Diensten", internet: "Internet & Verbinding", neighbourhood: "Buurt & Geluid", history: "Geschiedenis van het pand", owner: "Profiel eigenaar" },
+    docsTitle: "Documentatie & Juridische Vereisten", docsSubtitle: "Wat u nodig heeft om legaal te huren in Spanje",
+    logisticsTitle: "Wonen op het platteland vs in het dorp", logisticsSubtitle: "De insider waarheid",
+    countryside: "🌿 OP HET PLATTELAND", inTown: "🏘️ IN HET DORP",
+    chartTitle: "Marktontwikkeling in Frigiliana", chartSubtitle: "Gemiddelde prijs +6% per jaar · Beschikbaarheid langdurige huur <1%", chartTooltip: "Gemiddelde prijs",
+    pdfTitle: "DOWNLOAD UW RAPPORT", pdfSub: "Offline opslaan · Printen · Delen", pdfBtn: "PDF downloaden",
+    docs: [
+      { icon: "file", title: "NIE (ID-nummer)", urgency: "ESSENTIEEL", urgencyColor: "hsl(0 72% 51%)", description: "Vereist voor ALLE contracten en rekeningen.", steps: ["Aanvraag bij consulaat of politiebureau", "Verwerking: 2-4 weken vanuit buitenland", "Documenten: paspoort, EX-15"], tip: "💡 Begin NU als u die nog niet heeft." },
+      { icon: "card", title: "Spaanse bankrekening", urgency: "ESSENTIEEL", urgencyColor: "hsl(0 72% 51%)", description: "Verhuurders eisen meestal Spaanse overschrijving.", steps: ["Openen met NIE + paspoort", "Soms op afstand mogelijk (N26, Openbank)", "Zelfde dag in filiaal"], tip: "💡 Ik raad een Engelstalige bank in Nerja aan." },
+      { icon: "globe", title: "Empadronamiento", urgency: "BINNEN 3 MAANDEN", urgencyColor: "hsl(39 76% 51%)", description: "Verplichte registratie bij gemeentehuis.", steps: ["Naar gemeentehuis met contract + paspoort", "Gratis, zelfde dag", "Nodig voor zorg en residentie"], tip: "💡 Ik ga met u mee." },
+      { icon: "shield", title: "Huurcontract essentials", urgency: "BIJ ONDERTEKENING", urgencyColor: "hsl(213 56% 43%)", description: "Spaanse huurwet beschermt huurders.", steps: ["Minimumduur", "Borg: max 2 maanden", "Verhoging gekoppeld aan CPI", "Ik beoordeel alle contracten"], tip: "💡 Teken nooit zonder begrip." },
+    ],
+    logistics: [
+      { icon: "package", title: "Pakketbezorging en Amazon", countryside: "Geen bezorging aan huis in landelijke gebieden. We helpen u bij een Parcel Point.", town: "Elke woning heeft adres met bezorging aan huis." },
+      { icon: "trash", title: "Vuilophaal", countryside: "Vuilniswagen komt niet in landwegen. Naar containers op hoofdweg.", town: "Huis-aan-huis ophaal. Vuilnis na 21:30 buiten." },
+      { icon: "droplets", title: "Water", countryside: "Water uit gemeenschaps- of privéputten.", town: "Water uit gemeentenet, beheerd door Aqualia." },
+    ],
+  },
+  de: {
+    proAnalysis: { title: "🔍 MEINE PROFESSIONELLE ANALYSE", access: "Zugang & Parken", water: "Wasser & Versorgung", internet: "Internet & Konnektivität", neighbourhood: "Nachbarschaft & Lärm", history: "Objekthistorie", owner: "Eigentümerprofil" },
+    docsTitle: "Dokumentation & rechtliche Anforderungen", docsSubtitle: "Was Sie für legales Mieten in Spanien brauchen",
+    logisticsTitle: "Land- vs. Stadtleben Logistik", logisticsSubtitle: "Die Insider-Wahrheit",
+    countryside: "🌿 AUF DEM LAND", inTown: "🏘️ IM ORT",
+    chartTitle: "Marktentwicklung in Frigiliana", chartSubtitle: "Durchschnittspreis +6% jährlich · Langzeitmiete-Verfügbarkeit <1%", chartTooltip: "Durchschnittspreis",
+    pdfTitle: "BERICHT HERUNTERLADEN", pdfSub: "Offline speichern · Drucken · Teilen", pdfBtn: "PDF herunterladen",
+    docs: [
+      { icon: "file", title: "NIE (Ausländer-ID)", urgency: "UNERLÄSSLICH", urgencyColor: "hsl(0 72% 51%)", description: "Erforderlich für ALLE Verträge und Konten.", steps: ["Antrag im Konsulat oder bei der Polizei", "Bearbeitung: 2-4 Wochen aus dem Ausland", "Unterlagen: Pass, EX-15"], tip: "💡 Beginnen Sie JETZT damit." },
+      { icon: "card", title: "Spanisches Bankkonto", urgency: "UNERLÄSSLICH", urgencyColor: "hsl(0 72% 51%)", description: "Vermieter verlangen meist spanische Überweisung.", steps: ["Eröffnung mit NIE + Pass", "Manche Banken auch remote (N26, Openbank)", "Gleicher Tag in Filiale"], tip: "💡 Englischsprachige Filiale in Nerja empfohlen." },
+      { icon: "globe", title: "Empadronamiento", urgency: "INNERHALB 3 MONATEN", urgencyColor: "hsl(39 76% 51%)", description: "Pflichtmeldung beim Rathaus.", steps: ["Rathaus mit Vertrag + Pass", "Kostenlos, gleicher Tag", "Nötig für Gesundheit, Schule"], tip: "💡 Ich begleite Sie." },
+      { icon: "shield", title: "Mietvertrag Wesentliches", urgency: "BEI UNTERZEICHNUNG", urgencyColor: "hsl(213 56% 43%)", description: "Spanisches Mietrecht (LAU) schützt Mieter.", steps: ["Mindestlaufzeit", "Kaution: max 2 Monate", "Erhöhung an CPI gebunden", "Ich prüfe alle Verträge"], tip: "💡 Niemals ohne Verständnis unterschreiben." },
+    ],
+    logistics: [
+      { icon: "package", title: "Paketzustellung und Amazon", countryside: "Keine Zustellung in ländlichen Gebieten. Wir helfen bei Parcel Point.", town: "Jede Wohnung mit Adresse und Zustellung." },
+      { icon: "trash", title: "Müllabfuhr", countryside: "Müllwagen fährt keine Landwege. Zu Sammelpunkten an Hauptstraße.", town: "Haus-zu-Haus. Müll nach 21:30 raus." },
+      { icon: "droplets", title: "Wasser", countryside: "Wasser aus Gemeinschafts- oder Privatbrunnen.", town: "Wasser vom Stadtnetz, betrieben von Aqualia." },
+    ],
+  },
+  fr: {
+    proAnalysis: { title: "🔍 MON ANALYSE PROFESSIONNELLE", access: "Accès & Stationnement", water: "Eau & Services", internet: "Internet & Connectivité", neighbourhood: "Voisinage & Bruit", history: "Historique du bien", owner: "Profil du propriétaire" },
+    docsTitle: "Documentation et exigences légales", docsSubtitle: "Ce qu'il vous faut pour louer légalement en Espagne",
+    logisticsTitle: "Vivre à la campagne vs au village", logisticsSubtitle: "La vérité des connaisseurs",
+    countryside: "🌿 À LA CAMPAGNE", inTown: "🏘️ AU VILLAGE",
+    chartTitle: "Évolution du marché à Frigiliana", chartSubtitle: "Prix moyen +6% annuel · Disponibilité location longue durée <1%", chartTooltip: "Prix moyen",
+    pdfTitle: "TÉLÉCHARGER VOTRE RAPPORT", pdfSub: "Hors ligne · Imprimer · Partager", pdfBtn: "Télécharger PDF",
+    docs: [
+      { icon: "file", title: "NIE (Numéro d'identification)", urgency: "ESSENTIEL", urgencyColor: "hsl(0 72% 51%)", description: "Requis pour TOUS les contrats et comptes.", steps: ["Demande au Consulat ou Commissariat", "Traitement: 2-4 semaines depuis l'étranger", "Documents: passeport, EX-15"], tip: "💡 Commencez MAINTENANT." },
+      { icon: "card", title: "Compte bancaire espagnol", urgency: "ESSENTIEL", urgencyColor: "hsl(0 72% 51%)", description: "Les bailleurs exigent virement espagnol.", steps: ["Ouverture avec NIE + passeport", "Certaines banques à distance (N26, Openbank)", "Même jour en agence"], tip: "💡 Agence anglophone à Nerja recommandée." },
+      { icon: "globe", title: "Empadronamiento", urgency: "DANS 3 MOIS", urgencyColor: "hsl(39 76% 51%)", description: "Inscription obligatoire à la mairie.", steps: ["Mairie avec contrat + passeport", "Gratuit, même jour", "Nécessaire pour santé, école"], tip: "💡 Je vous accompagne." },
+      { icon: "shield", title: "Contrat de location: l'essentiel", urgency: "À LA SIGNATURE", urgencyColor: "hsl(213 56% 43%)", description: "Le droit espagnol (LAU) protège les locataires.", steps: ["Durée minimale", "Caution: max 2 mois", "Hausse liée à l'IPC", "Je révise tous les contrats"], tip: "💡 Ne signez jamais sans comprendre." },
+    ],
+    logistics: [
+      { icon: "package", title: "Livraison de colis et Amazon", countryside: "Pas de livraison à domicile en zones rurales. Nous vous aidons à utiliser un Point Relais.", town: "Chaque logement a son adresse avec livraison à domicile." },
+      { icon: "trash", title: "Collecte des déchets", countryside: "Le camion ne va pas sur les chemins. Déposer aux points propres sur la route principale.", town: "Collecte porte à porte. Sortir après 21h30." },
+      { icon: "droplets", title: "Eau", countryside: "Eau de puits communautaires ou privés.", town: "Eau du réseau municipal, géré par Aqualia." },
+    ],
+  },
+};
+
+const ICONS = {
+  file: <FileText className="w-7 h-7" />, card: <CreditCard className="w-7 h-7" />, globe: <Globe className="w-7 h-7" />, shield: <Shield className="w-7 h-7" />,
+  package: <Package className="w-7 h-7" />, trash: <Trash2 className="w-7 h-7" />, droplets: <Droplets className="w-7 h-7" />,
+};
+
 // --------------------------- Matching score ---------------------------
 
 function matchScore(
