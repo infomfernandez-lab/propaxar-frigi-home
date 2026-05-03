@@ -793,6 +793,82 @@ export default function ReportePublico() {
         </div>
       </section>
 
+      {/* COUNTRY VS TOWN LOGISTICS */}
+      {ordered.some(({ prop }) => prop.zona === "campo") && (
+        <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-1" style={{ color: "hsl(213 56% 23%)" }}>{S.logisticsTitle}</h2>
+          <p className="text-center text-sm mb-10" style={{ color: "hsl(215 19% 34%)" }}>{S.logisticsSubtitle}</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {S.logistics.map((c, i) => (
+              <div key={i} className="bg-white border rounded-xl p-6 space-y-4" style={{ borderColor: "hsl(212 26% 83%)" }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "hsl(213 56% 23%/0.08)", color: "hsl(213 56% 23%)" }}>
+                  {ICONS[c.icon]}
+                </div>
+                <h3 className="font-bold text-sm" style={{ color: "hsl(213 56% 23%)" }}>{c.title}</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>{S.countryside}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.countryside}</p>
+                  </div>
+                  <div className="border-t pt-3" style={{ borderColor: "hsl(212 26% 90%)" }}>
+                    <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 40%)" }}>{S.inTown}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "hsl(215 19% 34%)" }}>{c.town}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* MARKET EVOLUTION CHART */}
+      <section className="py-12 px-4 md:px-8 max-w-5xl mx-auto">
+        <div className="bg-white rounded-xl p-6 md:p-8" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)" }}>
+          <div className="flex items-center gap-2 mb-1">
+            <TrendingUp className="w-5 h-5" style={{ color: "hsl(142 71% 45%)" }} />
+            <h3 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.chartTitle}</h3>
+          </div>
+          <p className="text-xs mb-6" style={{ color: "hsl(215 19% 34%)" }}>{S.chartSubtitle}</p>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={[
+                { year: "2020", price: 650 },
+                { year: "2021", price: 690 },
+                { year: "2022", price: 730 },
+                { year: "2023", price: 780 },
+                { year: "2024", price: 830 },
+                { year: "2025", price: 880 },
+                { year: "2026", price: 935 },
+              ]}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(212 26% 83%)" />
+                <XAxis dataKey="year" tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} />
+                <YAxis tick={{ fontSize: 12, fill: "hsl(215 19% 34%)" }} tickFormatter={(v) => `€${v}`} />
+                <Tooltip formatter={(value: number) => [`€${value}/month`, S.chartTooltip]} />
+                <Line type="monotone" dataKey="price" stroke="hsl(213 56% 23%)" strokeWidth={2.5} dot={{ fill: "hsl(213 56% 23%)", r: 4 }} activeDot={{ r: 6, fill: "hsl(142 71% 45%)" }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </section>
+
+      </div>
+
+      {/* PDF DOWNLOAD */}
+      <section className="py-16 px-4 md:px-8 max-w-3xl mx-auto text-center" data-no-print>
+        <div className="bg-white rounded-2xl p-8 space-y-4" style={{ boxShadow: "0 4px 24px hsl(0 0% 0%/0.08)" }}>
+          <Download className="w-10 h-10 mx-auto" style={{ color: "hsl(142 71% 45%)" }} />
+          <h2 className="text-xl font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.pdfTitle}</h2>
+          <p className="text-sm" style={{ color: "hsl(215 19% 34%)" }}>{S.pdfSub}</p>
+          <button
+            onClick={handleDownloadPdf}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white font-bold"
+            style={{ background: "hsl(142 71% 45%)" }}
+          >
+            <Download className="w-4 h-4" /> {S.pdfBtn}
+          </button>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="px-6 py-10 text-center bg-slate-900 text-white/70">
         <p className="text-xs tracking-[0.3em] font-bold text-[#D4A017]">PROPAXAR</p>
