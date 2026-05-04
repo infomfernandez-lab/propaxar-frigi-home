@@ -2,7 +2,7 @@
 // Página pública dinámica del reporte personalizado · Propaxar
 // Ruta: /r/:slug — datos desde Supabase, diseño idéntico a ReporteHenriEN
 
-import { Component, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -290,10 +290,10 @@ const SECTIONS: Record<Idioma, {
     countryside: "🌿 IN THE COUNTRYSIDE", inTown: "🏘️ IN THE TOWN",
     chartTitle: "Market Evolution in Frigiliana", chartSubtitle: "Average price +6% yearly · Long-term rental availability <1%", chartTooltip: "Average price",
     docs: [
-      { icon: "file", title: "NIE (Foreigners' ID Number)", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Required for ALL contracts, bank accounts, utilities. Without it, you literally cannot rent.", steps: ["Apply at Spanish Consulate (home country) or Police Station (Spain)", "Processing: 2-4 weeks from abroad, 1-2 weeks in Spain", "Documents: passport, application form EX-15, proof of reason"], tip: "💡 Start this NOW if you don't have one. It's the #1 blocker." },
-      { icon: "card", title: "Spanish Bank Account", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Most landlords require rent via Spanish bank transfer. Also needed for utilities (Endesa, Aqualia).", steps: ["Open at any bank with NIE + passport (Sabadell, CaixaBank, BBVA)", "Some banks allow opening remotely (N26, Openbank)", "Processing: same day in branch with NIE"], tip: "💡 I can recommend a branch in Nerja where they speak English." },
-      { icon: "globe", title: "Empadronamiento (Town Registration)", urgency: "WITHIN 3 MONTHS", urgencyColor: "hsl(39 76% 51%)", description: "Mandatory registration at your local town hall. Required for healthcare (SAS), voting, and residency.", steps: ["Go to Frigiliana Town Hall with rental contract + passport", "Free of charge, done same day", "Needed for: public healthcare, schools, residency application"], tip: "💡 I'll accompany you to Town Hall." },
-      { icon: "shield", title: "Rental Contract Essentials", urgency: "AT SIGNING", urgencyColor: "hsl(213 56% 43%)", description: "Spanish rental law (LAU) protects tenants. Key things to verify in your contract.", steps: ["Minimum duration (for individual landlords)", "Deposit: max 2 months rent", "Rent increases tied to CPI, max once per year", "I review ALL contracts before you sign"], tip: "💡 Never sign without understanding every clause." },
+      { icon: "file", title: "NIE (Foreigners' ID Number)", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Required for ALL contracts, bank accounts, utilities.", steps: ["Apply at Spanish Consulate (home country) or Police Station (Spain)", "Processing: 2-4 weeks from abroad, 1-2 weeks in Spain", "Documents: passport, application form EX-15, proof of reason"], tip: "💡 Start this NOW if you don't have one. It's the #1 blocker." },
+      { icon: "card", title: "Spanish Bank Account", urgency: "ESSENTIAL", urgencyColor: "hsl(0 72% 51%)", description: "Most landlords require rent via Spanish bank transfer.", steps: ["Open at any bank with NIE + passport (Sabadell, CaixaBank, BBVA)", "Some banks allow opening remotely (N26, Openbank)", "Processing: same day in branch with NIE"], tip: "💡 I can recommend a branch in Nerja where they speak English." },
+      { icon: "globe", title: "Empadronamiento (Town Registration)", urgency: "WITHIN 3 MONTHS", urgencyColor: "hsl(39 76% 51%)", description: "Mandatory registration at your local town hall.", steps: ["Go to Frigiliana Town Hall with rental contract + passport", "Free of charge, done same day", "Needed for: public healthcare, schools, residency application"], tip: "💡 I'll accompany you to Town Hall." },
+      { icon: "shield", title: "Rental Contract Essentials", urgency: "AT SIGNING", urgencyColor: "hsl(213 56% 43%)", description: "Spanish rental law (LAU) protects tenants.", steps: ["Minimum duration (for individual landlords)", "Deposit: max 2 months rent", "Rent increases tied to CPI, max once per year", "I review ALL contracts before you sign"], tip: "💡 Never sign without understanding every clause." },
     ],
     logistics: [
       { icon: "package", title: "Package Delivery and Amazon", countryside: "There is no door-to-door delivery in rural Frigiliana. We'll help you register at a local Parcel Point.", town: "Each home has its own address with door-to-door delivery." },
@@ -308,14 +308,14 @@ const SECTIONS: Record<Idioma, {
     countryside: "🌿 EN EL CAMPO", inTown: "🏘️ EN EL PUEBLO",
     chartTitle: "Evolución del mercado en Frigiliana", chartSubtitle: "Precio medio +6% anual · Disponibilidad larga estancia <1%", chartTooltip: "Precio medio",
     docs: [
-      { icon: "file", title: "NIE (Número de Identificación de Extranjero)", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "Imprescindible para TODOS los contratos, cuentas y suministros. Sin él no puedes alquilar.", steps: ["Solicitar en Consulado o Comisaría de Policía", "Tramitación: 2-4 semanas desde el extranjero, 1-2 en España", "Documentos: pasaporte, EX-15, justificación"], tip: "💡 Empieza YA si no lo tienes. Es el bloqueo #1." },
+      { icon: "file", title: "NIE (Número de Identificación de Extranjero)", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "Imprescindible para TODOS los contratos, cuentas y suministros.", steps: ["Solicitar en Consulado o Comisaría de Policía", "Tramitación: 2-4 semanas desde el extranjero, 1-2 en España", "Documentos: pasaporte, EX-15, justificación"], tip: "💡 Empieza YA si no lo tienes. Es el bloqueo #1." },
       { icon: "card", title: "Cuenta bancaria española", urgency: "ESENCIAL", urgencyColor: "hsl(0 72% 51%)", description: "La mayoría de propietarios exigen transferencia bancaria española.", steps: ["Apertura con NIE + pasaporte (Sabadell, CaixaBank, BBVA)", "Algunos bancos permiten apertura remota (N26, Openbank)", "Mismo día en sucursal"], tip: "💡 Te recomiendo una sucursal en Nerja con personal inglés." },
-      { icon: "globe", title: "Empadronamiento", urgency: "EN 3 MESES", urgencyColor: "hsl(39 76% 51%)", description: "Inscripción obligatoria en el ayuntamiento. Necesario para sanidad, voto y residencia.", steps: ["Acude al Ayuntamiento de Frigiliana con contrato + pasaporte", "Gratuito, mismo día", "Necesario para sanidad, colegios, residencia"], tip: "💡 Te acompaño al Ayuntamiento." },
-      { icon: "shield", title: "Contrato de alquiler: lo esencial", urgency: "AL FIRMAR", urgencyColor: "hsl(213 56% 43%)", description: "La LAU protege al inquilino. Puntos clave a verificar.", steps: ["Duración mínima (propietario particular)", "Fianza: máximo 2 meses", "Subida ligada al IPC, máximo 1 vez al año", "Reviso TODOS los contratos antes de firmar"], tip: "💡 Nunca firmes sin entender cada cláusula." },
+      { icon: "globe", title: "Empadronamiento", urgency: "EN 3 MESES", urgencyColor: "hsl(39 76% 51%)", description: "Inscripción obligatoria en el ayuntamiento.", steps: ["Acude al Ayuntamiento de Frigiliana con contrato + pasaporte", "Gratuito, mismo día", "Necesario para sanidad, colegios, residencia"], tip: "💡 Te acompaño al Ayuntamiento." },
+      { icon: "shield", title: "Contrato de alquiler: lo esencial", urgency: "AL FIRMAR", urgencyColor: "hsl(213 56% 43%)", description: "La LAU protege al inquilino.", steps: ["Duración mínima (propietario particular)", "Fianza: máximo 2 meses", "Subida ligada al IPC, máximo 1 vez al año", "Reviso TODOS los contratos antes de firmar"], tip: "💡 Nunca firmes sin entender cada cláusula." },
     ],
     logistics: [
-      { icon: "package", title: "Paquetería y Amazon", countryside: "No hay entrega puerta a puerta en zonas rurales de Frigiliana. Te ayudamos a registrarte en un Punto de Entrega local.", town: "Cada vivienda tiene su dirección con entrega puerta a puerta." },
-      { icon: "trash", title: "Recogida de basura", countryside: "El camión no accede a caminos rurales. La basura se deposita en puntos limpios en la carretera principal.", town: "Recogida casa por casa. Saca la basura después de las 21:30." },
+      { icon: "package", title: "Paquetería y Amazon", countryside: "No hay entrega puerta a puerta en zonas rurales de Frigiliana.", town: "Cada vivienda tiene su dirección con entrega puerta a puerta." },
+      { icon: "trash", title: "Recogida de basura", countryside: "El camión no accede a caminos rurales. La basura se deposita en puntos limpios.", town: "Recogida casa por casa. Saca la basura después de las 21:30." },
       { icon: "droplets", title: "Agua", countryside: "En casas rurales suele venir de pozos comunitarios o privados.", town: "Agua de la red municipal, gestionada por Aqualia." },
     ],
   },
@@ -332,8 +332,8 @@ const SECTIONS: Record<Idioma, {
       { icon: "shield", title: "Huurcontract essentials", urgency: "BIJ ONDERTEKENING", urgencyColor: "hsl(213 56% 43%)", description: "Spaanse huurwet beschermt huurders.", steps: ["Minimumduur", "Borg: max 2 maanden", "Verhoging gekoppeld aan CPI", "Ik beoordeel alle contracten"], tip: "💡 Teken nooit zonder begrip." },
     ],
     logistics: [
-      { icon: "package", title: "Pakketbezorging en Amazon", countryside: "Geen bezorging aan huis in landelijke gebieden. Wij helpen bij een Parcel Point.", town: "Elke woning heeft adres met bezorging aan huis." },
-      { icon: "trash", title: "Vuilophaal", countryside: "Vuilniswagen komt niet in landwegen. Naar containers op hoofdweg.", town: "Huis-aan-huis ophaal. Vuilnis na 21:30 buiten." },
+      { icon: "package", title: "Pakketbezorging en Amazon", countryside: "Geen bezorging aan huis in landelijke gebieden.", town: "Elke woning heeft adres met bezorging aan huis." },
+      { icon: "trash", title: "Vuilophaal", countryside: "Vuilniswagen komt niet in landwegen.", town: "Huis-aan-huis ophaal. Vuilnis na 21:30 buiten." },
       { icon: "droplets", title: "Water", countryside: "Water uit gemeenschaps- of privéputten.", town: "Water uit gemeentenet, beheerd door Aqualia." },
     ],
   },
@@ -350,8 +350,8 @@ const SECTIONS: Record<Idioma, {
       { icon: "shield", title: "Mietvertrag Wesentliches", urgency: "BEI UNTERZEICHNUNG", urgencyColor: "hsl(213 56% 43%)", description: "Spanisches Mietrecht (LAU) schützt Mieter.", steps: ["Mindestlaufzeit", "Kaution: max 2 Monate", "Erhöhung an CPI gebunden", "Ich prüfe alle Verträge"], tip: "💡 Niemals ohne Verständnis unterschreiben." },
     ],
     logistics: [
-      { icon: "package", title: "Paketzustellung und Amazon", countryside: "Keine Zustellung in ländlichen Gebieten. Wir helfen bei Parcel Point.", town: "Jede Wohnung mit Adresse und Zustellung." },
-      { icon: "trash", title: "Müllabfuhr", countryside: "Müllwagen fährt keine Landwege. Zu Sammelpunkten an Hauptstraße.", town: "Haus-zu-Haus. Müll nach 21:30 raus." },
+      { icon: "package", title: "Paketzustellung und Amazon", countryside: "Keine Zustellung in ländlichen Gebieten.", town: "Jede Wohnung mit Adresse und Zustellung." },
+      { icon: "trash", title: "Müllabfuhr", countryside: "Müllwagen fährt keine Landwege.", town: "Haus-zu-Haus. Müll nach 21:30 raus." },
       { icon: "droplets", title: "Wasser", countryside: "Wasser aus Gemeinschafts- oder Privatbrunnen.", town: "Wasser vom Stadtnetz, betrieben von Aqualia." },
     ],
   },
@@ -368,8 +368,8 @@ const SECTIONS: Record<Idioma, {
       { icon: "shield", title: "Contrat de location: l'essentiel", urgency: "À LA SIGNATURE", urgencyColor: "hsl(213 56% 43%)", description: "Le droit espagnol (LAU) protège les locataires.", steps: ["Durée minimale", "Caution: max 2 mois", "Hausse liée à l'IPC", "Je révise tous les contrats"], tip: "💡 Ne signez jamais sans comprendre." },
     ],
     logistics: [
-      { icon: "package", title: "Livraison de colis et Amazon", countryside: "Pas de livraison à domicile en zones rurales. Nous vous aidons à utiliser un Point Relais.", town: "Chaque logement a son adresse avec livraison à domicile." },
-      { icon: "trash", title: "Collecte des déchets", countryside: "Le camion ne va pas sur les chemins. Déposer aux points propres sur la route principale.", town: "Collecte porte à porte. Sortir après 21h30." },
+      { icon: "package", title: "Livraison de colis et Amazon", countryside: "Pas de livraison à domicile en zones rurales.", town: "Chaque logement a son adresse avec livraison à domicile." },
+      { icon: "trash", title: "Collecte des déchets", countryside: "Le camion ne va pas sur les chemins.", town: "Collecte porte à porte. Sortir après 21h30." },
       { icon: "droplets", title: "Eau", countryside: "Eau de puits communautaires ou privés.", town: "Eau du réseau municipal, géré par Aqualia." },
     ],
   },
@@ -440,7 +440,6 @@ type CriteriaResult = {
 
 function buildCriteria(prop: Propiedad, demand: Lead["demanda"]): CriteriaResult {
   const c: CriteriaResult = { price: "ok", beds: "ok", baths: "ok", surface: "ok", pool: "ok", furnished: "ok", pets: "ok", availableNow: "ok", matchCount: 0, matchTotal: 8 };
-  // Price
   const pmax = Number(demand?.presupuesto_max ?? 0);
   const precio = Number(prop.precio ?? 0);
   if (pmax > 0 && precio > 0) {
@@ -448,35 +447,26 @@ function buildCriteria(prop: Propiedad, demand: Lead["demanda"]): CriteriaResult
     else if (precio <= pmax * 1.1) c.price = "warn";
     else c.price = "fail";
   }
-  // Beds
   const hmin = demand?.habitaciones_min ?? null;
   if (hmin != null && prop.habitaciones != null) {
     if (prop.habitaciones >= hmin) c.beds = "ok";
     else if (prop.habitaciones === hmin - 1) c.beds = "warn";
     else c.beds = "fail";
   }
-  // Baths (no demand) — ok if >=1
   c.baths = (prop.banos ?? 0) >= 1 ? "ok" : "warn";
-  // Surface — informational
   c.surface = "ok";
-  // Pool
   c.pool = prop.piscina && prop.piscina !== "no" ? "ok" : "warn";
-  // Furnished
   c.furnished = prop.amueblado === false ? "warn" : "ok";
-  // Pets
   if (demand?.mascotas) c.pets = prop.mascotas_permitidas ? "ok" : "fail";
   else c.pets = "ok";
-  // Available
   c.availableNow = prop.disponible === false ? "warn" : "ok";
-
   c.matchCount = (["price", "beds", "baths", "surface", "pool", "furnished", "pets", "availableNow"] as const)
     .filter((k) => c[k] === "ok").length;
   return c;
 }
 
 function matchScoreFromCriteria(c: CriteriaResult) {
-  const score = c.matchCount / c.matchTotal;
-  return Math.round(score * 100);
+  return Math.round((c.matchCount / c.matchTotal) * 100);
 }
 
 const WHATSAPP = "34662317561";
@@ -543,7 +533,6 @@ function PropertyCard({
       {lightbox.open && hasPhotos && (
         <Lightbox images={photos} initialIndex={lightbox.index} onClose={() => setLightbox({ open: false, index: 0 })} />
       )}
-
       <Card className="overflow-hidden border-0" style={{ boxShadow: "0 4px 24px hsl(0 0% 0%/0.08)", borderRadius: 12 }}>
         <div className="flex flex-wrap gap-2 px-5 pt-5">
           <span className="px-3 py-1 rounded-full text-xs font-bold text-white" style={{ background: meta.color }}>{meta.label}</span>
@@ -551,19 +540,16 @@ function PropertyCard({
             <span className="px-3 py-1 rounded-full text-xs font-bold text-white" style={{ background: "hsl(39 76% 61%)" }}>{t.direct}</span>
           )}
         </div>
-
         {hasPhotos && (
           <div className="relative h-52 bg-gray-200 overflow-hidden cursor-pointer mx-5 mt-3 rounded-lg" onClick={() => setLightbox({ open: true, index: 0 })}>
             <img src={photos[0]} alt={prop.titulo} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
             <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full">📷 {photos.length}</div>
           </div>
         )}
-
         <CardContent className="p-5 space-y-3">
           <h3 className="text-lg font-bold" style={{ color: "hsl(213 56% 23%)" }}>
             {prop.ref_interna ? `${prop.ref_interna} · ` : ""}{prop.titulo}{prop.zona ? ` · ${prop.zona}` : ""}
           </h3>
-
           <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
             <div className="flex justify-between"><span>{t.price}:</span><span className="font-semibold">{fmtPrecio(prop.precio, prop.operacion)} <StatusIcon status={criteria.price} /></span></div>
             <div className="flex justify-between"><span>{t.bedrooms_l}:</span><span className="font-semibold">{prop.habitaciones ?? "—"} <StatusIcon status={criteria.beds} /></span></div>
@@ -574,7 +560,6 @@ function PropertyCard({
             <div className="flex justify-between"><span>{t.pets}:</span><span className="font-semibold">{prop.mascotas_permitidas ? t.yes : t.no} <StatusIcon status={criteria.pets} /></span></div>
             <div className="flex justify-between"><span>{t.available_l}:</span><span className="font-semibold">{prop.disponible === false ? t.no : t.yes} <StatusIcon status={criteria.availableNow} /></span></div>
           </div>
-
           <div className="pt-2">
             <div className="flex justify-between text-sm mb-1">
               <span className="font-semibold" style={{ color: "hsl(213 56% 23%)" }}>{t.compat}</span>
@@ -584,21 +569,18 @@ function PropertyCard({
             </div>
             <Progress value={matchPct} className="h-3" />
           </div>
-
           {listingUrl && (
             <div className="flex flex-wrap gap-2 pt-1">
               <a href={listingUrl}><Button variant="outline" size="sm" className="text-xs"><ExternalLink className="w-3 h-3 mr-1" /> {t.view_listing}</Button></a>
             </div>
           )}
-
           <Button className="w-full mt-2 font-semibold" style={{ background: "hsl(213 56% 23%)", color: "#fff", borderRadius: 8 }} onClick={() => setOpen(!open)}>
             {open ? t.hide : t.view_full}
             {open ? <ChevronUp className="ml-2 w-4 h-4" /> : <ChevronDown className="ml-2 w-4 h-4" />}
           </Button>
         </CardContent>
-
         {open && (
-          <div className="border-t px-5 pb-6 space-y-6 animate-fade-in">
+          <div className="border-t px-5 pb-6 space-y-6">
             {hasPhotos && (
               <div className="pt-4">
                 <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: "hsl(215 19% 34%)" }}>{t.click_enlarge}</p>
@@ -609,16 +591,12 @@ function PropertyCard({
                 </div>
               </div>
             )}
-
-            {/* Custom analysis from CRM */}
             {sel.analisis_personalizado && (
               <div className="rounded-xl p-5" style={{ background: "hsl(213 56% 23%/0.04)" }}>
                 <h4 className="font-bold mb-2" style={{ color: "hsl(213 56% 23%)" }}>✍️ {t.custom_analysis}</h4>
                 <p className="text-sm whitespace-pre-line" style={{ color: "hsl(215 19% 34%)" }}>{sel.analisis_personalizado}</p>
               </div>
             )}
-
-            {/* Ratings tabs */}
             <div>
               <h4 className="font-bold mb-3" style={{ color: "hsl(213 56% 23%)" }}>{t.ratings}</h4>
               <Tabs defaultValue="quality">
@@ -639,8 +617,6 @@ function PropertyCard({
                 ))}
               </Tabs>
             </div>
-
-            {/* Professional analysis */}
             {(pa.access || pa.water || pa.internet || pa.neighbourhood || pa.history || pa.owner) && (
               <div className="rounded-xl p-5 space-y-4" style={{ background: "hsl(142 71% 45%/0.06)" }}>
                 <h4 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.proAnalysis.title}</h4>
@@ -659,7 +635,6 @@ function PropertyCard({
                 ))}
               </div>
             )}
-
             {pros.length > 0 && (
               <div>
                 <h4 className="font-bold flex items-center gap-2 mb-2" style={{ color: "hsl(142 71% 45%)" }}>
@@ -670,7 +645,6 @@ function PropertyCard({
                 </ul>
               </div>
             )}
-
             {cons.length > 0 && (
               <div>
                 <h4 className="font-bold flex items-center gap-2 mb-2 text-amber-600">
@@ -681,7 +655,6 @@ function PropertyCard({
                 </ul>
               </div>
             )}
-
             <div className="flex flex-col sm:flex-row gap-2 pt-2">
               <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMsg + " — " + (prop.ref_interna ?? prop.titulo))}`} target="_blank" rel="noopener noreferrer" className="flex-1">
                 <Button className="w-full font-semibold" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 8 }}>
@@ -719,7 +692,6 @@ function ComparisonTable({ items, t }: { items: { prop: Propiedad; criteria: Cri
     { label: t.available_l, key: "availableNow", values: items.map((x) => ({ text: x.prop.disponible === false ? "—" : "✅", status: x.criteria.availableNow })) },
     { label: "TOTAL", key: "total", values: items.map((x) => ({ text: `${x.criteria.matchCount}/${x.criteria.matchTotal}`, status: x.criteria.matchCount >= x.criteria.matchTotal - 1 ? "ok" : "warn" })) },
   ];
-
   return (
     <div ref={fade.ref} className={fade.className}>
       <div className="overflow-x-auto">
@@ -750,7 +722,7 @@ function ComparisonTable({ items, t }: { items: { prop: Propiedad; criteria: Cri
 
 // --------------------------- Main Page ---------------------------
 
-function ReportePublicoInner() {
+export default function ReportePublico() {
   const { slug } = useParams<{ slug: string }>();
   const [reporte, setReporte] = useState<Reporte | null>(null);
   const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
@@ -758,6 +730,7 @@ function ReportePublicoInner() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [debug, setDebug] = useState<string>("");
   const [inactivo, setInactivo] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -777,15 +750,14 @@ function ReportePublicoInner() {
     (async () => {
       if (!slug) { setError("Slug ausente en la URL."); setLoading(false); return; }
       try {
-        console.log("[ReportePublico] Buscando slug:", slug);
         const { data: r, error: rError } = await supabase
           .from("reportes")
           .select("*")
           .eq("slug", slug)
           .maybeSingle();
-        console.log("[ReportePublico] Resultado:", { data: r, error: rError });
+        setDebug(`slug="${slug}" · data=${r ? "OK" : "null"} · error=${rError?.message ?? "none"}`);
         if (rError) { setError("Supabase error: " + rError.message); setLoading(false); return; }
-        if (!r) { setError("Reporte no encontrado con slug: " + slug); setLoading(false); return; }
+        if (!r) { setNotFound(true); setLoading(false); return; }
         if (r.estado !== "activo") { setInactivo(r.estado); setLoading(false); return; }
         setReporte(r as Reporte);
         const ids = ((r.propiedades_seleccionadas as PropSel[]) ?? []).map((p) => p.propiedad_id);
@@ -795,38 +767,13 @@ function ReportePublicoInner() {
           setPropiedades((props ?? []) as Propiedad[]);
         }
         if (r.lead_id) {
-          const { data: leadRow, error: lError } = await supabase
+          const { data: l, error: lError } = await supabase
             .from("leads")
-            .select("id, persona_id")
+            .select("id, persona:personas(nombre, apellidos, nacionalidad, idioma), demanda:demandas(tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad)")
             .eq("id", r.lead_id)
             .maybeSingle();
           if (lError) { console.warn("Lead fetch warning:", lError.message); }
-          if (leadRow) {
-            const [personaResult, demandaResult] = await Promise.all([
-              leadRow.persona_id
-                ? supabase
-                    .from("personas")
-                    .select("nombre, apellidos, nacionalidad, idioma")
-                    .eq("id", leadRow.persona_id)
-                    .maybeSingle()
-                : Promise.resolve({ data: null, error: null }),
-              supabase
-                .from("demandas")
-                .select("tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad")
-                .eq("lead_id", leadRow.id)
-                .limit(1)
-                .maybeSingle(),
-            ]);
-
-            if (personaResult.error) { console.warn("Persona fetch warning:", personaResult.error.message); }
-            if (demandaResult.error) { console.warn("Demanda fetch warning:", demandaResult.error.message); }
-
-            setLead({
-              id: leadRow.id,
-              persona: personaResult.data ?? null,
-              demanda: demandaResult.data ?? null,
-            } as Lead);
-          }
+          if (l) setLead(l as unknown as Lead);
         }
         setLoading(false);
       } catch (e: any) {
@@ -884,7 +831,7 @@ function ReportePublicoInner() {
         <div className="max-w-xl w-full border border-red-300 bg-red-50 text-red-800 rounded-lg p-6">
           <p className="font-semibold mb-2">No se pudo cargar el reporte</p>
           <p className="text-sm break-words">{error}</p>
-          <p className="mt-4 text-xs text-red-700/70">slug: {slug ?? "—"}</p>
+          <p className="mt-4 text-xs text-red-700/70">slug: {slug ?? "—"} · {debug}</p>
         </div>
       </main>
     );
@@ -896,7 +843,6 @@ function ReportePublicoInner() {
         <div className="text-center max-w-md">
           <p className="text-xl font-semibold text-slate-700">Este reporte no está disponible</p>
           <p className="mt-2 text-sm text-slate-500">Estado: {inactivo}</p>
-          <p className="mt-1 text-xs text-slate-400">slug: {slug}</p>
         </div>
       </main>
     );
@@ -939,31 +885,25 @@ function ReportePublicoInner() {
         <meta property="og:description" content="Stop searching. Start finding." />
       </Helmet>
 
-      {/* HERO */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
         <img src={heroImg} alt="Frigiliana" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div ref={heroFade.ref} className={`relative z-10 px-6 max-w-xl ${heroFade.className}`}>
           <img src="/propaxar-vision.png" alt="Propaxar" className="h-10 mx-auto mb-6 opacity-90" />
           <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white mb-3">{t.hero_title}</h1>
-          <p className="text-xl md:text-2xl font-medium mt-4 text-white/90">
-            {t.hero_prepared} <strong>{cliente}</strong>
-          </p>
+          <p className="text-xl md:text-2xl font-medium mt-4 text-white/90">{t.hero_prepared} <strong>{cliente}</strong></p>
           <p className="text-base mt-2 text-white/70">{t.hero_by}</p>
           <div className="flex flex-wrap justify-center gap-2 mt-6">
             {[`🗓 ${fechaStr}`, `🏡 ${numProps} ${t.properties_label}`, `📍 ${t.hero_zone}`, `🌐 ${t.hero_confidential}`].map((b) => (
               <span key={b} className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/15 text-white/90 backdrop-blur-sm">{b}</span>
             ))}
           </div>
-          <p className="text-sm mt-8 italic text-white/60 max-w-md mx-auto leading-relaxed">
-            "{t.hero_quote}"<br />— Manuel Fernández, Propaxar
-          </p>
+          <p className="text-sm mt-8 italic text-white/60 max-w-md mx-auto leading-relaxed">"{t.hero_quote}"<br />— Manuel Fernández, Propaxar</p>
           <ChevronDown className="mx-auto mt-8 w-8 h-8 animate-bounce text-white/60" />
         </div>
       </section>
 
       <div ref={contentRef}>
-        {/* PROFILE */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={profileFade.ref}>
           <div className={profileFade.className}>
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>{t.profile_title}</h2>
@@ -978,7 +918,7 @@ function ReportePublicoInner() {
                       [t.zone, demanda?.zona_preferida ?? t.any],
                       [t.type, demanda?.tipo_propiedad ?? t.any],
                       [t.bedrooms, demanda?.habitaciones_min != null ? String(demanda.habitaciones_min) : t.any],
-                      [t.pets, demanda?.mascotas == null ? "—" : demanda.mascotas ? t.yes : t.no],
+                      [t.pets, demanda?.mascotas ? t.yes : t.no],
                       [t.move_in, demanda?.fecha_entrada ?? "—"],
                       [t.flex, demanda?.flexibilidad ?? "—"],
                     ] as [string, string][]).map(([k, v]) => (
@@ -1011,7 +951,6 @@ function ReportePublicoInner() {
           </div>
         </section>
 
-        {/* MARKET CONTEXT */}
         {reporte.texto_mercado && (
           <section className="py-12 px-4 md:px-8 max-w-5xl mx-auto" ref={marketFade.ref}>
             <div className={marketFade.className}>
@@ -1025,7 +964,6 @@ function ReportePublicoInner() {
           </section>
         )}
 
-        {/* DOCUMENTATION */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={docsFade.ref}>
           <div className={docsFade.className}>
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>{S.docsTitle}</h2>
@@ -1058,7 +996,6 @@ function ReportePublicoInner() {
           </div>
         </section>
 
-        {/* PROPERTIES */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={propsFade.ref}>
           <div className={propsFade.className}>
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: "hsl(213 56% 23%)" }}>{t.props_title}</h2>
@@ -1071,7 +1008,6 @@ function ReportePublicoInner() {
           </div>
         </section>
 
-        {/* LOGISTICS */}
         {hasCampo && (
           <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={logisticsFade.ref}>
             <div className={logisticsFade.className}>
@@ -1101,7 +1037,6 @@ function ReportePublicoInner() {
           </section>
         )}
 
-        {/* MARKET CHART */}
         <section className="py-12 px-4 md:px-8 max-w-5xl mx-auto" ref={chartFade.ref}>
           <div className={chartFade.className}>
             <Card className="border-0" style={{ boxShadow: "0 4px 20px hsl(0 0% 0%/0.07)", borderRadius: 12 }}>
@@ -1130,7 +1065,6 @@ function ReportePublicoInner() {
           </div>
         </section>
 
-        {/* COMPARISON TABLE */}
         {ordered.length > 1 && (
           <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={compFade.ref}>
             <div className={compFade.className}>
@@ -1140,7 +1074,6 @@ function ReportePublicoInner() {
           </section>
         )}
 
-        {/* RECOMMENDATION */}
         {reporte.texto_recomendacion && (
           <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" ref={recoFade.ref}>
             <div className={recoFade.className}>
@@ -1159,7 +1092,6 @@ function ReportePublicoInner() {
           </section>
         )}
 
-        {/* NEXT STEPS */}
         <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto" style={{ background: "hsl(210 20% 98%)" }} ref={stepsFade.ref}>
           <div className={stepsFade.className}>
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: "hsl(213 56% 23%)" }}>{t.next_title}</h2>
@@ -1179,7 +1111,6 @@ function ReportePublicoInner() {
           </div>
         </section>
 
-        {/* PDF DOWNLOAD */}
         <section className="py-16 px-4 md:px-8 max-w-3xl mx-auto text-center" ref={pdfFade.ref} data-no-print>
           <div className={pdfFade.className}>
             <Card className="border-0" style={{ boxShadow: "0 4px 24px hsl(0 0% 0%/0.08)", borderRadius: 16 }}>
@@ -1196,7 +1127,6 @@ function ReportePublicoInner() {
         </section>
       </div>
 
-      {/* FOOTER */}
       <footer className="py-12 px-4 text-center text-white" style={{ background: "hsl(213 56% 23%)" }} data-no-print>
         <img src="/propaxar-vision.png" alt="Propaxar" className="h-8 mx-auto mb-6 brightness-200" />
         <p className="text-xl font-bold mb-1 text-white">Manuel Fernández · Propaxar</p>
@@ -1221,43 +1151,5 @@ function ReportePublicoInner() {
         </div>
       </footer>
     </>
-  );
-}
-
-// --------------------------- Error Boundary ---------------------------
-
-class ReporteErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
-  constructor(props: { children: ReactNode }) {
-    super(props);
-    this.state = { error: null };
-  }
-  static getDerivedStateFromError(error: Error) {
-    return { error };
-  }
-  componentDidCatch(error: Error, info: unknown) {
-    console.error("ReportePublico render error:", error, info);
-  }
-  render() {
-    if (this.state.error) {
-      return (
-        <div style={{ padding: 40, fontFamily: "monospace", color: "#b91c1c", background: "#fff" }}>
-          <h1 style={{ fontSize: 22, marginBottom: 12 }}>Error al renderizar el reporte</h1>
-          <pre style={{ whiteSpace: "pre-wrap", background: "#fee2e2", padding: 16, borderRadius: 6 }}>
-            {this.state.error.message}
-            {"\n\n"}
-            {this.state.error.stack}
-          </pre>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
-
-export default function ReportePublico() {
-  return (
-    <ReporteErrorBoundary>
-      <ReportePublicoInner />
-    </ReporteErrorBoundary>
   );
 }
