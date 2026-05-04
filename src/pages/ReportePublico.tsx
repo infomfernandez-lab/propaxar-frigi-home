@@ -758,6 +758,13 @@ function ComparisonTable({ items, t }: { items: { prop: Propiedad; criteria: Cri
 
 export default function ReportePublico() {
   const { slug } = useParams<{ slug: string }>();
+  return (
+    <div style={{ padding: "40px", fontFamily: "monospace" }}>
+      <h1>DEBUG</h1>
+      <p>Slug from URL: {slug}</p>
+      <p>Supabase URL: {import.meta.env.VITE_SUPABASE_URL || "NO DEFINIDA"}</p>
+    </div>
+  );
   const [reporte, setReporte] = useState<Reporte | null>(null);
   const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
   const [lead, setLead] = useState<Lead | null>(null);
