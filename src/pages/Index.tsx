@@ -1,12 +1,9 @@
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import QualificationCards from "@/components/QualificationCards";
-import MarketStrip from "@/components/MarketStrip";
+import SocialProof from "@/components/SocialProof";
 import HowItWorks from "@/components/HowItWorks";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FormSection from "@/components/FormSection";
-import FAQSection from "@/components/FAQSection";
-import FinalCTA from "@/components/FinalCTA";
+import ReporteTeaser from "@/components/ReporteTeaser";
+import WhatsAppCTA from "@/components/WhatsAppCTA";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -14,13 +11,10 @@ const Index = () => {
     <main className="min-h-screen">
       <Navigation />
       <HeroSection />
-      <QualificationCards />
-      <MarketStrip />
+      <SocialProof />
       <HowItWorks />
-      <TestimonialsSection />
-      <FormSection />
-      <FAQSection />
-      <FinalCTA />
+      <ReporteTeaser />
+      <WhatsAppCTA />
       <Footer />
     </main>
   );
