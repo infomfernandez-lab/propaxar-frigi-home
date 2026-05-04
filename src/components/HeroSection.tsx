@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
+
 
 const HeroSection = () => {
   const { language } = useLanguage();
