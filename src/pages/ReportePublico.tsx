@@ -937,11 +937,6 @@ export default function ReportePublico() {
 
   return (
     <>
-      <pre style={{ background: "#e5e7eb", color: "#111", padding: 16, fontSize: 11, maxHeight: 400, overflow: "auto", whiteSpace: "pre-wrap" }}>
-        {"=== REPORTE ===\n"}{JSON.stringify(reporte, null, 2)}
-        {"\n\n=== PROPIEDADES ===\n"}{JSON.stringify(propiedades, null, 2)}
-        {"\n\n=== LEAD ===\n"}{JSON.stringify(lead, null, 2)}
-      </pre>
       <Helmet>
         <html lang={idioma} />
         <title>{`${t.hero_title} · ${cliente} · Propaxar`}</title>
