@@ -1229,3 +1229,41 @@ function ReportePublicoInner() {
     </>
   );
 }
+
+// --------------------------- Error Boundary ---------------------------
+
+class ReporteErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  componentDidCatch(error: Error, info: unknown) {
+    console.error("ReportePublico render error:", error, info);
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: 40, fontFamily: "monospace", color: "#b91c1c", background: "#fff" }}>
+          <h1 style={{ fontSize: 22, marginBottom: 12 }}>Error al renderizar el reporte</h1>
+          <pre style={{ whiteSpace: "pre-wrap", background: "#fee2e2", padding: 16, borderRadius: 6 }}>
+            {this.state.error.message}
+            {"\n\n"}
+            {this.state.error.stack}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+export default function ReportePublico() {
+  return (
+    <ReporteErrorBoundary>
+      <ReportePublicoInner />
+    </ReporteErrorBoundary>
+  );
+}
