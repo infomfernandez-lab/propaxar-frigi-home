@@ -28,11 +28,8 @@ import VillaPanorama from "./pages/VillaPanorama";
 import CasaFrigiliana from "./pages/CasaFrigiliana";
 import Propiedades from "./pages/Propiedades";
 import ReportePublico from "./pages/ReportePublico";
+import DevReporteSource from "./pages/DevReporteSource";
 import NotFound from "./pages/NotFound";
-
-const DevReporteSource = import.meta.env.DEV
-  ? require("./pages/DevReporteSource").default
-  : null;
 
 const queryClient = new QueryClient();
 
