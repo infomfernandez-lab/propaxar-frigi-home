@@ -542,18 +542,40 @@ export default function ReporteHenriEN() {
   const pdfFade = useFadeIn();
 
   const handleDownloadPdf = async () => {
-    const html2pdf = (await import("html2pdf.js")).default;
     const el = contentRef.current;
-    if (!el) return;
-    el.querySelectorAll("[data-no-print]").forEach((n) => (n as HTMLElement).style.display = "none");
-    await html2pdf().set({
-      margin: 10,
-      filename: `Propaxar_Report_Henri_Gloudemans_${new Date().toISOString().slice(0, 10)}.pdf`,
-      image: { type: "jpeg", quality: 0.95 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    }).from(el).save();
-    el.querySelectorAll("[data-no-print]").forEach((n) => (n as HTMLElement).style.display = "");
+    if (!el) {
+      alert("Report content not ready. Please try again in a moment.");
+      return;
+    }
+    const hidden = Array.from(el.querySelectorAll<HTMLElement>("[data-no-print]"));
+    hidden.forEach((n) => (n.style.display = "none"));
+    try {
+      const mod = await import("html2pdf.js");
+      const html2pdf = (mod as any).default || (mod as any);
+      await html2pdf()
+        .set({
+          margin: [8, 8, 8, 8],
+          filename: `Propaxar_Report_Henri_Gloudemans_${new Date().toISOString().slice(0, 10)}.pdf`,
+          image: { type: "jpeg", quality: 0.92 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            logging: false,
+            backgroundColor: "#ffffff",
+            windowWidth: el.scrollWidth,
+          },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait", compress: true },
+          pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+        })
+        .from(el)
+        .save();
+    } catch (err) {
+      console.error("PDF download failed:", err);
+      alert("Could not generate PDF. Please try again or contact info@propaxar.es");
+    } finally {
+      hidden.forEach((n) => (n.style.display = ""));
+    }
   };
 
   const validUntil = new Date();
