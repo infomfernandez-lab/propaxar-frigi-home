@@ -855,8 +855,8 @@ export default function ReportePublico() {
 
   const persona = lead?.persona;
   const demanda = lead?.demanda;
-  const cliente = reporte.nombre_cliente
-    ?? [persona?.nombre, persona?.apellidos].filter(Boolean).join(" ").trim()
+  const cliente = (reporte.nombre_cliente
+    ?? [persona?.nombre, persona?.apellidos].filter(Boolean).join(" ").trim())
     || "—";
   const fechaStr = new Date(reporte.created_at).toLocaleDateString(idioma, { month: "long", year: "numeric" });
   const validUntil = new Date(reporte.created_at);
