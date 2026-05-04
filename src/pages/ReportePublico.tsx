@@ -386,13 +386,7 @@ type Status = "ok" | "warn" | "fail";
 
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.12 });
-    obs.observe(el); return () => obs.disconnect();
-  }, []);
-  return { ref, className: `transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}` };
+  return { ref, className: "opacity-100 translate-y-0" };
 }
 
 const Stars = ({ count, max = 5 }: { count: number; max?: number }) => (
