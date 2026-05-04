@@ -1,28 +1,36 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FormSection = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
 
   const timelineSteps = [
     {
       number: 1,
-      title: t('form.step1.title'),
-      description: t('form.step1.description'),
+      title: language === 'es' ? 'Recibo tu mensaje' : 'I receive your message',
+      description: language === 'es'
+        ? 'Te confirmo que lo he recibido en menos de 2 horas.'
+        : 'I confirm receipt within 2 hours.',
     },
     {
       number: 2,
-      title: t('form.step2.title'),
-      description: t('form.step2.description'),
+      title: language === 'es' ? 'Hablamos 15 minutos' : 'We talk for 15 minutes',
+      description: language === 'es'
+        ? 'Una llamada rápida para entender exactamente qué necesitas.'
+        : 'A quick call to understand exactly what you need.',
     },
     {
       number: 3,
-      title: t('form.step3.title'),
-      description: t('form.step3.description'),
+      title: language === 'es' ? 'Busco y analizo' : 'I search and analyse',
+      description: language === 'es'
+        ? 'Reviso el mercado completo y preparo tu informe personalizado.'
+        : 'I review the full market and prepare your personalised report.',
     },
     {
       number: 4,
-      title: t('form.step4.title'),
-      description: t('form.step4.description'),
+      title: language === 'es' ? 'Recibes tu informe' : 'You receive your report',
+      description: language === 'es'
+        ? 'Propiedades seleccionadas, análisis honesto y mi recomendación clara.'
+        : 'Selected properties, honest analysis and my clear recommendation.',
     },
   ];
 
@@ -34,13 +42,15 @@ const FormSection = () => {
           <div className="lg:col-span-3 self-start">
             {/* Headlines */}
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-              {t('form.headline')}
+              {language === 'es' ? 'Cuéntame qué buscas' : "Tell me what you're looking for"}
             </h2>
             <p className="text-lg text-foreground-muted mb-8">
-              {t('form.subheadline')}
+              {language === 'es'
+                ? 'Rellena el formulario o escríbeme directamente por WhatsApp. Sin esperas, sin filtros — hablas conmigo.'
+                : 'Fill in the form or message me directly on WhatsApp. No waiting, no filters — you talk to me.'}
             </p>
 
-            {/* Native Forms Iframe */}
+            {/* TODO: Reemplazar este iframe por formulario propio cuando esté lista la integración con Resend (Edge Function en Supabase). Campos necesarios: nombre, email, teléfono, qué busca, presupuesto, idioma preferido. */}
             <div className="form-container bg-background-alt md:bg-card border border-border rounded-xl shadow-lg p-10 pb-6 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-0">
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
@@ -54,10 +64,6 @@ const FormSection = () => {
             </div>
             {/* Gradient fade on mobile to blend into next section */}
             <div className="block md:hidden h-16 -mt-4 bg-gradient-to-b from-background to-background-alt pointer-events-none" />
-            {/* Micro-copy below form */}
-            <p className="text-center text-sm text-foreground-muted mt-4">
-              {t('form.microcopy')}
-            </p>
           </div>
 
           {/* Right Column - 40% (2/5) */}
@@ -65,7 +71,7 @@ const FormSection = () => {
             <div className="bg-background-alt rounded-xl p-8 pt-[30px]">
               {/* Timeline Title */}
               <h3 className="text-xl font-bold text-foreground mb-6">
-                {t('form.timelineTitle')}
+                {language === 'es' ? 'Qué pasa después' : 'What happens next'}
               </h3>
 
               {/* Timeline Steps */}

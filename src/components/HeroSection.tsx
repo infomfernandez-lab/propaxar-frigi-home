@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
+
 
 const HeroSection = () => {
   const { language } = useLanguage();
@@ -26,13 +26,15 @@ const HeroSection = () => {
         <div className="max-w-[800px] mx-auto text-center">
           <h1 className="text-[34px] md:text-[54px] font-extrabold text-white leading-[1.1] mb-4 font-heading opacity-0 animate-fade-in-up">
             {language === 'es'
-              ? <>Tu consultor personal de vivienda en Frigiliana</>
-              : <>Your personal housing consultant in Frigiliana</>
+              ? <>Deja de buscar. Empieza a encontrar.</>
+              : <>Stop searching. Start finding.</>
             }
           </h1>
 
-          <p className="text-[20px] md:text-[26px] font-medium text-white/90 leading-[1.4] mb-8 opacity-0 animate-fade-in-up animation-delay-100">
-            {language === 'es' ? 'Deja de buscar. Empieza a encontrar.' : 'Stop searching. Start finding.'}
+          <p className="text-[18px] md:text-[22px] font-medium text-white/90 leading-[1.5] mb-8 opacity-0 animate-fade-in-up animation-delay-100">
+            {language === 'es'
+              ? 'El mercado de alquiler y compra en La Axarquía es opaco, rápido y difícil de leer desde fuera. Yo lo conozco desde dentro. Frigiliana, Nerja y toda la Axarquía — cada propiedad, cada zona, cada precio real.'
+              : 'The rental and buying market in La Axarquía is opaque, fast and hard to read from the outside. I know it from the inside. Frigiliana, Nerja and the whole Axarquía — every property, every area, every real price.'}
           </p>
 
           {/* Buttons */}
@@ -45,20 +47,13 @@ const HeroSection = () => {
               {language === 'es' ? 'Empezar ahora' : 'Start now'}
               <ArrowRight className="w-5 h-5" />
             </button>
-            <Link
-              to="/mercado"
-              className="btn-ghost text-lg px-10 py-4"
-              style={{ borderColor: 'rgba(255,255,255,0.4)' }}
-            >
-              {language === 'es' ? 'Ver Market Report' : 'View Market Report'}
-            </Link>
           </div>
 
           {/* Trust items */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-[14px] text-white/70 opacity-0 animate-fade-in-up animation-delay-300">
-            <span>✓ {language === 'es' ? 'Consulta gratuita · Sin compromiso' : 'Free consultation · No commitment'}</span>
-            <span>✓ {language === 'es' ? 'Respuesta en 24h' : 'Response in 24h'}</span>
-            <span>✓ EN · ES · NL · DE</span>
+            <span>✓ {language === 'es' ? 'Respuesta en menos de 2h' : 'Response in under 2h'}</span>
+            <span>✓ {language === 'es' ? 'Hablo inglés, español y entiendo holandés' : 'I speak English, Spanish and understand Dutch'}</span>
+            <span>✓ {language === 'es' ? 'Sin portales. Sin agencias. Solo yo.' : 'No portals. No agencies. Just me.'}</span>
           </div>
         </div>
       </div>

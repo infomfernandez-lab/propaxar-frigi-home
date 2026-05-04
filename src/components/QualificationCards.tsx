@@ -1,32 +1,29 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 
 const QualificationCards = () => {
   const { language } = useLanguage();
 
-  const cards = [
+  const columns = [
     {
-      icon: '🏡',
-      borderColor: '#374151',
-      linkColor: '#374151',
-      title: language === 'es' ? 'Quiero alquilar en Frigiliana' : 'I want to rent in Frigiliana',
+      icon: '🔍',
+      title: language === 'es' ? 'Busco en todo el mercado' : 'I search the whole market',
       text: language === 'es'
-        ? 'Larga temporada o segunda residencia. Acceso a propiedades seleccionadas, incluyendo las que no están en portales.'
-        : 'Long-term or second residence. Access to selected properties, including those not listed on portals.',
-      link: language === 'es' ? 'Cómo funciona' : 'How it works',
-      href: '/encuentra-tu-alquiler',
+        ? 'Portales, agencias, contactos directos, fuera de mercado. Cada opción que existe.'
+        : 'Portals, agencies, direct contacts, off-market. Every option that exists.',
     },
     {
-      icon: '🔑',
-      borderColor: '#2563EB',
-      linkColor: '#2563EB',
-      title: language === 'es' ? 'Quiero comprar en Frigiliana' : 'I want to buy in Frigiliana',
+      icon: '📊',
+      title: language === 'es' ? 'Analizo y filtro por ti' : 'I analyse and filter for you',
       text: language === 'es'
-        ? 'Tu hogar permanente o segunda residencia. Con criterio y datos reales antes de comprometer ninguna decisión.'
-        : 'Your permanent home or second residence. With judgment and real data before committing to any decision.',
-      link: language === 'es' ? 'Cómo funciona' : 'How it works',
-      href: '/comprar',
+        ? 'Precios reales, acceso, vecinos, historial. Cosas que no encuentras online.'
+        : 'Real prices, access, neighbours, history. Things you cannot find online.',
+    },
+    {
+      icon: '📋',
+      title: language === 'es' ? 'Recibes un informe completo' : 'You get a full written report',
+      text: language === 'es'
+        ? 'Propiedades seleccionadas para tu perfil exacto. Mi recomendación profesional incluida.'
+        : 'Properties selected for your exact profile. My professional recommendation included.',
     },
   ];
 
@@ -35,35 +32,21 @@ const QualificationCards = () => {
       <div className="max-w-[1200px] mx-auto px-5">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-foreground-muted mb-3">
-            {language === 'es' ? '¿Qué estás buscando?' : 'What are you looking for?'}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading max-w-[900px] mx-auto">
             {language === 'es'
-              ? 'Dime qué necesitas. Te encuentro la solución.'
-              : 'Tell me what you need. I\'ll find the solution.'}
+              ? 'Un solo servicio. Un solo experto. Un solo objetivo: que encuentres lo que buscas.'
+              : 'One service. One expert. One goal: find exactly what you need.'}
           </h2>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
-          {cards.map((card, i) => (
-            <Link
-              key={i}
-              to={card.href}
-              className="group bg-card border border-border rounded-xl p-7 transition-all hover:shadow-md hover:-translate-y-0.5"
-              style={{ borderTopWidth: '3px', borderTopColor: card.borderColor }}
-            >
-              <div className="text-4xl mb-4">{card.icon}</div>
-              <h3 className="text-lg font-semibold text-foreground mb-2 font-heading">{card.title}</h3>
-              <p className="text-sm text-foreground-muted leading-relaxed mb-4">{card.text}</p>
-              <span
-                className="inline-flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all"
-                style={{ color: card.linkColor }}
-              >
-                {card.link} <ArrowRight className="w-4 h-4" />
-              </span>
-            </Link>
+        {/* Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1000px] mx-auto">
+          {columns.map((col, i) => (
+            <div key={i} className="text-center md:text-left">
+              <div className="text-4xl mb-4">{col.icon}</div>
+              <h3 className="text-lg font-semibold text-foreground mb-2 font-heading">{col.title}</h3>
+              <p className="text-sm text-foreground-muted leading-relaxed">{col.text}</p>
+            </div>
           ))}
         </div>
       </div>
