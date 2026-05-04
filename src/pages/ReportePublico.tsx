@@ -764,7 +764,6 @@ export default function ReportePublico() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [debug, setDebug] = useState<string>("");
   const [inactivo, setInactivo] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -791,7 +790,6 @@ export default function ReportePublico() {
           .eq("slug", slug)
           .maybeSingle();
         console.log("[ReportePublico] Resultado:", { data: r, error: rError });
-        setDebug(`slug="${slug}" · data=${r ? "OK" : "null"} · error=${rError?.message ?? "none"}`);
         if (rError) { setError("Supabase error: " + rError.message); setLoading(false); return; }
         if (!r) { setError("Reporte no encontrado con slug: " + slug); setLoading(false); return; }
         if (r.estado !== "activo") { setInactivo(r.estado); setLoading(false); return; }
@@ -803,13 +801,38 @@ export default function ReportePublico() {
           setPropiedades((props ?? []) as Propiedad[]);
         }
         if (r.lead_id) {
-          const { data: l, error: lError } = await supabase
+          const { data: leadRow, error: lError } = await supabase
             .from("leads")
-            .select("id, persona:personas(nombre, apellidos, nacionalidad, idioma), demanda:demandas(tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad)")
+            .select("id, persona_id")
             .eq("id", r.lead_id)
             .maybeSingle();
           if (lError) { console.warn("Lead fetch warning:", lError.message); }
-          if (l) setLead(l as unknown as Lead);
+          if (leadRow) {
+            const [personaResult, demandaResult] = await Promise.all([
+              leadRow.persona_id
+                ? supabase
+                    .from("personas")
+                    .select("nombre, apellidos, nacionalidad, idioma")
+                    .eq("id", leadRow.persona_id)
+                    .maybeSingle()
+                : Promise.resolve({ data: null, error: null }),
+              supabase
+                .from("demandas")
+                .select("tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad")
+                .eq("lead_id", leadRow.id)
+                .limit(1)
+                .maybeSingle(),
+            ]);
+
+            if (personaResult.error) { console.warn("Persona fetch warning:", personaResult.error.message); }
+            if (demandaResult.error) { console.warn("Demanda fetch warning:", demandaResult.error.message); }
+
+            setLead({
+              id: leadRow.id,
+              persona: personaResult.data ?? null,
+              demanda: demandaResult.data ?? null,
+            } as Lead);
+          }
         }
         setLoading(false);
       } catch (e: any) {
@@ -879,7 +902,7 @@ export default function ReportePublico() {
         <div className="text-center max-w-md">
           <p className="text-xl font-semibold text-slate-700">Este reporte no está disponible</p>
           <p className="mt-2 text-sm text-slate-500">Estado: {inactivo}</p>
-          <p className="mt-1 text-xs text-slate-400">slug: {slug} · {debug}</p>
+          <p className="mt-1 text-xs text-slate-400">slug: {slug}</p>
         </div>
       </main>
     );
@@ -914,11 +937,6 @@ export default function ReportePublico() {
 
   return (
     <>
-      <pre style={{ background: "#e5e7eb", color: "#111", padding: 16, fontSize: 11, maxHeight: 400, overflow: "auto", whiteSpace: "pre-wrap" }}>
-        {"=== REPORTE ===\n"}{JSON.stringify(reporte, null, 2)}
-        {"\n\n=== PROPIEDADES ===\n"}{JSON.stringify(propiedades, null, 2)}
-        {"\n\n=== LEAD ===\n"}{JSON.stringify(lead, null, 2)}
-      </pre>
       <Helmet>
         <html lang={idioma} />
         <title>{`${t.hero_title} · ${cliente} · Propaxar`}</title>
@@ -966,7 +984,7 @@ export default function ReportePublico() {
                       [t.zone, demanda?.zona_preferida ?? t.any],
                       [t.type, demanda?.tipo_propiedad ?? t.any],
                       [t.bedrooms, demanda?.habitaciones_min != null ? String(demanda.habitaciones_min) : t.any],
-                      [t.pets, demanda?.mascotas ? t.yes : t.no],
+                      [t.pets, demanda?.mascotas == null ? "—" : demanda.mascotas ? t.yes : t.no],
                       [t.move_in, demanda?.fecha_entrada ?? "—"],
                       [t.flex, demanda?.flexibilidad ?? "—"],
                     ] as [string, string][]).map(([k, v]) => (
