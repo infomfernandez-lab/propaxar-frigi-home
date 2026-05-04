@@ -756,7 +756,7 @@ function ComparisonTable({ items, t }: { items: { prop: Propiedad; criteria: Cri
 
 // --------------------------- Main Page ---------------------------
 
-export default function ReportePublico() {
+function ReportePublicoInner() {
   const { slug } = useParams<{ slug: string }>();
   const [reporte, setReporte] = useState<Reporte | null>(null);
   const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
