@@ -984,7 +984,7 @@ export default function ReportePublico() {
                       [t.zone, demanda?.zona_preferida ?? t.any],
                       [t.type, demanda?.tipo_propiedad ?? t.any],
                       [t.bedrooms, demanda?.habitaciones_min != null ? String(demanda.habitaciones_min) : t.any],
-                      [t.pets, demanda?.mascotas ? t.yes : t.no],
+                      [t.pets, demanda?.mascotas == null ? "—" : demanda.mascotas ? t.yes : t.no],
                       [t.move_in, demanda?.fecha_entrada ?? "—"],
                       [t.flex, demanda?.flexibilidad ?? "—"],
                     ] as [string, string][]).map(([k, v]) => (
