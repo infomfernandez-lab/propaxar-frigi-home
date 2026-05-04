@@ -855,6 +855,18 @@ export default function ReportePublico() {
       </main>
     );
   }
+  if (error) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-slate-50 px-6">
+        <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
+        <div className="max-w-xl w-full border border-red-300 bg-red-50 text-red-800 rounded-lg p-6">
+          <p className="font-semibold mb-2">No se pudo cargar el reporte</p>
+          <p className="text-sm break-words">{error}</p>
+          <p className="mt-4 text-xs text-red-700/70">slug: {slug ?? "—"}</p>
+        </div>
+      </main>
+    );
+  }
   if (notFound || !reporte) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50">
