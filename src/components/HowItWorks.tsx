@@ -5,14 +5,14 @@ const HowItWorks = () => {
 
   const steps = language === "es"
     ? [
-        { n: 1, title: "Me escribes", desc: "WhatsApp o email. Me cuentas qué buscas. Te respondo en menos de 2 horas." },
-        { n: 2, title: "Yo hago el trabajo", desc: "Busco en todo el mercado — portales, agencias, contactos directos, propiedades que no están publicadas. Analizo y selecciono lo que encaja con tu perfil exacto." },
-        { n: 3, title: "Recibes tu informe y decides", desc: "Un documento privado con las mejores opciones, análisis honesto y mi recomendación. Sin presión. Tú decides." },
+        { n: 1, title: "Me dices qué buscas", desc: "Un mensaje. WhatsApp o email. Te respondo el mismo día." },
+        { n: 2, title: "Yo hago el trabajo", desc: "Busco en todo el mercado. Visito. Analizo. Filtro. Tú no haces nada." },
+        { n: 3, title: "Recibes la respuesta correcta", desc: "Un informe privado con las mejores opciones y una recomendación clara. Tú decides." },
       ]
     : [
-        { n: 1, title: "You write to me", desc: "WhatsApp or email. Tell me what you need. I respond in under 2 hours." },
-        { n: 2, title: "I do the work", desc: "I search the whole market — portals, agencies, direct contacts, unlisted properties. I analyse and select what fits your exact profile." },
-        { n: 3, title: "You receive your report and decide", desc: "A private document with the best options, honest analysis and my recommendation. No pressure. You decide." },
+        { n: 1, title: "You tell me what you need", desc: "One message. WhatsApp or email. I respond the same day." },
+        { n: 2, title: "I do the work", desc: "I search the whole market. I visit. I analyse. I filter. You don't lift a finger." },
+        { n: 3, title: "You get the right answer", desc: "A private report with the best options and one clear recommendation. Then you decide." },
       ];
 
   return (
@@ -23,7 +23,7 @@ const HowItWorks = () => {
             {language === "es" ? "Así funciona." : "How it works."}
           </h2>
           <p className="text-base md:text-lg text-foreground-muted">
-            {language === "es" ? "Sin letra pequeña. Sin sorpresas." : "No small print. No surprises."}
+            {language === "es" ? "Sin letra pequeña. Sin sorpresas. Sin perder el tiempo." : "No small print. No surprises. No wasted time."}
           </p>
         </div>
 

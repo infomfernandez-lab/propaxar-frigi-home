@@ -6,16 +6,16 @@ const ReporteTeaser = () => {
 
   const items = language === "es"
     ? [
-        { icon: "🏠", text: "3–6 propiedades seleccionadas para tu perfil exacto" },
-        { icon: "📍", text: "Análisis de zona, acceso y vecindario" },
-        { icon: "💬", text: "Mi recomendación profesional incluida" },
-        { icon: "🔒", text: "Acceso privado por URL única" },
+        { icon: "🏠", text: "3 a 6 propiedades. Seleccionadas para tu perfil exacto." },
+        { icon: "📍", text: "Zona, acceso, vecinos, gastos reales. Todo lo que no encuentras online." },
+        { icon: "💬", text: "Mi recomendación profesional. Cuál es la tuya y por qué." },
+        { icon: "🔒", text: "Acceso privado. Tu URL. Nadie más lo ve." },
       ]
     : [
-        { icon: "🏠", text: "3–6 properties selected for your exact profile" },
-        { icon: "📍", text: "Zone, access and neighbourhood analysis" },
-        { icon: "💬", text: "My professional recommendation included" },
-        { icon: "🔒", text: "Private access via unique URL" },
+        { icon: "🏠", text: "3 to 6 properties. Hand-picked for your exact profile." },
+        { icon: "📍", text: "Area, access, neighbours, real costs. Everything you can't find online." },
+        { icon: "💬", text: "My professional recommendation. Which one is yours and why." },
+        { icon: "🔒", text: "Private access. Your URL. Nobody else sees it." },
       ];
 
   return (
@@ -26,15 +26,15 @@ const ReporteTeaser = () => {
         </h2>
         <p className="text-base md:text-lg text-foreground-muted mb-8 max-w-[640px] mx-auto">
           {language === "es"
-            ? "Un reporte privado, preparado para ti en 24–48h. Este es un ejemplo real (nombre cambiado)."
-            : "A private report, prepared for you in 24–48h. This is a real example (name changed)."}
+            ? "Un reporte real. Para un cliente real. Entregado en 48 horas. Así será el tuyo."
+            : "A real report. Prepared for a real client. Delivered in 48 hours. This is what yours will look like."}
         </p>
 
         <Link
           to="/demo-reporte"
           className="inline-block text-base font-semibold text-primary hover:underline mb-10"
         >
-          {language === "es" ? "Ver ejemplo real →" : "See real example →"}
+          {language === "es" ? "Ver un ejemplo real →" : "See a real example →"}
         </Link>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-[700px] mx-auto">
