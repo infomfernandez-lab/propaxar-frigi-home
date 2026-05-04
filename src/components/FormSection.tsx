@@ -42,13 +42,15 @@ const FormSection = () => {
           <div className="lg:col-span-3 self-start">
             {/* Headlines */}
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-              {t('form.headline')}
+              {language === 'es' ? 'Cuéntame qué buscas' : "Tell me what you're looking for"}
             </h2>
             <p className="text-lg text-foreground-muted mb-8">
-              {t('form.subheadline')}
+              {language === 'es'
+                ? 'Rellena el formulario o escríbeme directamente por WhatsApp. Sin esperas, sin filtros — hablas conmigo.'
+                : 'Fill in the form or message me directly on WhatsApp. No waiting, no filters — you talk to me.'}
             </p>
 
-            {/* Native Forms Iframe */}
+            {/* TODO: Reemplazar este iframe por formulario propio cuando esté lista la integración con Resend (Edge Function en Supabase). Campos necesarios: nombre, email, teléfono, qué busca, presupuesto, idioma preferido. */}
             <div className="form-container bg-background-alt md:bg-card border border-border rounded-xl shadow-lg p-10 pb-6 md:pb-10 box-border overflow-visible md:overflow-hidden min-h-0">
               <iframe 
                 src="https://f.nativeforms.com/AevF1SW1jZmEWb5ZGOa1Db" 
@@ -62,10 +64,6 @@ const FormSection = () => {
             </div>
             {/* Gradient fade on mobile to blend into next section */}
             <div className="block md:hidden h-16 -mt-4 bg-gradient-to-b from-background to-background-alt pointer-events-none" />
-            {/* Micro-copy below form */}
-            <p className="text-center text-sm text-foreground-muted mt-4">
-              {t('form.microcopy')}
-            </p>
           </div>
 
           {/* Right Column - 40% (2/5) */}
