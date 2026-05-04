@@ -30,6 +30,10 @@ import Propiedades from "./pages/Propiedades";
 import ReportePublico from "./pages/ReportePublico";
 import NotFound from "./pages/NotFound";
 
+const DevReporteSource = import.meta.env.DEV
+  ? require("./pages/DevReporteSource").default
+  : null;
+
 const queryClient = new QueryClient();
 
 const App = () => (
