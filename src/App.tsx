@@ -28,6 +28,7 @@ import VillaPanorama from "./pages/VillaPanorama";
 import CasaFrigiliana from "./pages/CasaFrigiliana";
 import Propiedades from "./pages/Propiedades";
 import ReportePublico from "./pages/ReportePublico";
+import DevReporteSource from "./pages/DevReporteSource";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -64,6 +65,9 @@ const App = () => (
               <Route path="/property/casaenfrigiliana" element={<CasaFrigiliana />} />
               <Route path="/propiedades" element={<Propiedades />} />
               <Route path="/r/:slug" element={<ReportePublico />} />
+              {import.meta.env.DEV && (
+                <Route path="/dev/reporte-source" element={<DevReporteSource />} />
+              )}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
