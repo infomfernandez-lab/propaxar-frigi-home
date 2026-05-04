@@ -1,16 +1,16 @@
 const testimonials = [
   {
-    quote: "Manuel found what I needed in less than 24 hours. I'd been searching for months from the UK.",
+    quote: "I'd been searching for months from the UK. Manuel found the right one in 48 hours.",
     name: "Sally H.",
     meta: "UK → Frigiliana",
   },
   {
-    quote: "He knows every property and every owner. Nobody else could have found this house.",
+    quote: "He knows every owner, every property, every real price. Nobody else does.",
     name: "Klaus & Maria",
     meta: "Germany → Frigiliana",
   },
   {
-    quote: "Professional, honest, local. He saved us months of searching.",
+    quote: "We stopped searching the moment we found Manuel.",
     name: "Jan & Annika",
     meta: "Netherlands → Frigiliana",
   },

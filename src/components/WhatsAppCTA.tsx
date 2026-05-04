@@ -1,5 +1,4 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { MessageCircle } from "lucide-react";
 
 const WhatsAppCTA = () => {
   const { language } = useLanguage();
@@ -8,30 +7,38 @@ const WhatsAppCTA = () => {
     <section className="py-16 md:py-20" style={{ backgroundColor: "hsl(222, 28%, 16%)" }}>
       <div className="max-w-[800px] mx-auto px-5 text-center text-white">
         <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">
-          {language === "es" ? "El mercado no espera." : "The market doesn't wait."}
+          {language === "es" ? "Tu casa existe." : "The right home exists."}
         </h2>
         <h3 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-white/80">
-          {language === "es" ? "Tú tampoco deberías." : "Neither should you."}
+          {language === "es" ? "Vamos a encontrarla." : "Let's find it."}
         </h3>
         <p className="text-base md:text-lg text-white/70 mb-8 max-w-[560px] mx-auto">
           {language === "es"
-            ? "Escríbeme ahora. Primera consulta gratis. Te respondo hoy."
-            : "Write to me now. First consultation free. I'll respond today."}
+            ? "Primera consulta gratis. Respuesta hoy. En tu idioma."
+            : "First consultation free. Response today. In your language."}
         </p>
 
         <a
-          href="https://wa.me/34662317561"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:info@propaxar.com?subject=I'm%20ready"
           className="inline-flex items-center gap-3 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "#25D366", color: "#fff" }}
+          style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
         >
-          <MessageCircle className="w-5 h-5" />
-          {language === "es" ? "Escribir por WhatsApp" : "Message on WhatsApp"}
+          {language === "es" ? "Estoy listo" : "I'm ready"}
         </a>
 
+        <div className="mt-4">
+          <a
+            href="https://wa.me/34662317561"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-sm text-white/50 hover:text-white/80 transition-colors"
+          >
+            {language === "es" ? "o escríbeme por WhatsApp" : "or message me on WhatsApp"}
+          </a>
+        </div>
+
         <p className="text-sm text-white/50 mt-8">
-          +34 662 317 561 · info@propaxar.es · Frigiliana, Málaga
+          +34 662 317 561 · info@propaxar.com · Frigiliana, Málaga
         </p>
       </div>
     </section>

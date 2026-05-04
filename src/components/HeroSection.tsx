@@ -45,7 +45,7 @@ const HeroSection = () => {
           </p>
 
           <a
-            href="mailto:info@propaxar.com?subject=Estoy%20listo&body=Hola%20Manuel%2C%20estoy%20listo%20para%20encontrar%20mi%20casa%20en%20La%20Axarqu%C3%ADa."
+            href="mailto:info@propaxar.com?subject=I'm%20ready"
             className="inline-flex items-center gap-2 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90 opacity-0 animate-fade-in-up animation-delay-300"
             style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
           >
