@@ -63,11 +63,6 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-[14px] text-white/70 mt-8 opacity-0 animate-fade-in-up animation-delay-300">
-            <span>✓ {language === "es" ? "Respuesta en menos de 2h" : "Response in under 2h"}</span>
-            <span>✓ {language === "es" ? "Inglés · Español · Holandés" : "English · Spanish · Dutch"}</span>
-            <span>✓ {language === "es" ? "Sin portales. Solo yo." : "No portals. Just me."}</span>
-          </div>
         </div>
       </div>
 

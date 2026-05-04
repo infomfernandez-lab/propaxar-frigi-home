@@ -5,14 +5,14 @@ const HowItWorks = () => {
 
   const steps = language === "es"
     ? [
-        { n: 1, title: "Me dices qué buscas", desc: "Un mensaje. WhatsApp o email. Te respondo el mismo día." },
-        { n: 2, title: "Yo hago el trabajo", desc: "Busco en todo el mercado. Visito. Analizo. Filtro. Tú no haces nada." },
-        { n: 3, title: "Recibes la respuesta correcta", desc: "Un informe privado con las mejores opciones y una recomendación clara. Tú decides." },
+        { n: 1, title: "Me dices qué buscas", desc: "Un mensaje. Te respondo el mismo día. Sin formularios, sin salas de espera, sin equipos. Hablas directamente conmigo." },
+        { n: 2, title: "Yo hago el trabajo", desc: "Busco todo. Visito. Analizo lo que no se ve en las fotos — el vecino, el camino, el agua, el propietario. Tú te ahorras semanas de frustración." },
+        { n: 3, title: "Recibes la respuesta correcta", desc: "Un informe privado con las mejores opciones, análisis honesto y una recomendación clara. No diez opciones. Una. La correcta." },
       ]
     : [
-        { n: 1, title: "You tell me what you need", desc: "One message. WhatsApp or email. I respond the same day." },
-        { n: 2, title: "I do the work", desc: "I search the whole market. I visit. I analyse. I filter. You don't lift a finger." },
-        { n: 3, title: "You get the right answer", desc: "A private report with the best options and one clear recommendation. Then you decide." },
+        { n: 1, title: "You tell me what you need", desc: "One message. I respond the same day. No forms, no waiting rooms, no teams. You talk to me directly." },
+        { n: 2, title: "I do the work", desc: "I search everything. I visit. I analyse the things you can't see in photos — the neighbour, the road, the water, the owner. You save weeks of frustration." },
+        { n: 3, title: "You get the right answer", desc: "A private report with the best options, honest analysis and one clear recommendation. Not ten options. One. The right one." },
       ];
 
   return (

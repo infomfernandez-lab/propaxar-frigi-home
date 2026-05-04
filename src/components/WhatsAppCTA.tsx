@@ -7,15 +7,15 @@ const WhatsAppCTA = () => {
     <section className="py-16 md:py-20" style={{ backgroundColor: "hsl(222, 28%, 16%)" }}>
       <div className="max-w-[800px] mx-auto px-5 text-center text-white">
         <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">
-          {language === "es" ? "Tu casa existe." : "The right home exists."}
+          {language === "es" ? "Ya has buscado suficiente." : "You've been searching long enough."}
         </h2>
         <h3 className="text-2xl md:text-3xl font-bold font-heading mb-6 text-white/80">
-          {language === "es" ? "Vamos a encontrarla." : "Let's find it."}
+          {language === "es" ? "Acabemos con esto hoy." : "Let's end it today."}
         </h3>
         <p className="text-base md:text-lg text-white/70 mb-8 max-w-[560px] mx-auto">
           {language === "es"
-            ? "Primera consulta gratis. Respuesta hoy. En tu idioma."
-            : "First consultation free. Response today. In your language."}
+            ? "Primera consulta gratis. Respondo hoy. En tu idioma."
+            : "First consultation free. I respond today. In your language."}
         </p>
 
         <a
