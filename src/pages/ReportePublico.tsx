@@ -758,11 +758,12 @@ function ComparisonTable({ items, t }: { items: { prop: Propiedad; criteria: Cri
 
 export default function ReportePublico() {
   const { slug } = useParams<{ slug: string }>();
+  const testUrl = (supabase as any).supabaseUrl || "NO URL";
   return (
     <div style={{ padding: "40px", fontFamily: "monospace" }}>
       <h1>DEBUG</h1>
       <p>Slug from URL: {slug}</p>
-      <p>Supabase URL: {import.meta.env.VITE_SUPABASE_URL || "NO DEFINIDA"}</p>
+      <p>Supabase client URL: {testUrl}</p>
     </div>
   );
   const [reporte, setReporte] = useState<Reporte | null>(null);
