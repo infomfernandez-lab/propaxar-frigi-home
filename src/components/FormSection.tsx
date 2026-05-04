@@ -71,7 +71,7 @@ const FormSection = () => {
             <div className="bg-background-alt rounded-xl p-8 pt-[30px]">
               {/* Timeline Title */}
               <h3 className="text-xl font-bold text-foreground mb-6">
-                {t('form.timelineTitle')}
+                {language === 'es' ? 'Qué pasa después' : 'What happens next'}
               </h3>
 
               {/* Timeline Steps */}
