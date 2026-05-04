@@ -51,7 +51,7 @@ const HeroSection = () => {
             className="inline-flex items-center gap-2 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90 opacity-0 animate-fade-in-up animation-delay-300"
             style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
           >
-            {language === "es" ? "Hablar con Manuel" : "Talk to Manuel"}
+            {language === "es" ? "Estoy listo" : "I'm ready"}
           </a>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-[14px] text-white/70 mt-8 opacity-0 animate-fade-in-up animation-delay-300">
