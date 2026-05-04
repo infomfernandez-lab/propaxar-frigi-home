@@ -2,7 +2,7 @@
 // Página pública dinámica del reporte personalizado · Propaxar
 // Ruta: /r/:slug — datos desde Supabase, diseño idéntico a ReporteHenriEN
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Component, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
