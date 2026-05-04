@@ -883,6 +883,7 @@ export default function ReportePublico() {
         </div>
       </main>
     );
+  }
   if (notFound || !reporte) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50">
