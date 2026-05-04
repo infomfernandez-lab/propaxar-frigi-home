@@ -32,11 +32,8 @@ const HowItWorks = () => {
       <div className="max-w-[1200px] mx-auto px-5">
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="text-xs font-semibold uppercase tracking-widest text-foreground-muted mb-3">
-            {language === 'es' ? 'Cómo funciona' : 'How it works'}
-          </p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading">
-            {language === 'es' ? 'De la primera llamada a tu nueva casa' : 'From first call to your new home'}
+            {language === 'es' ? 'Así funciona. Sin letra pequeña.' : 'How it works. No small print.'}
           </h2>
         </div>
 
