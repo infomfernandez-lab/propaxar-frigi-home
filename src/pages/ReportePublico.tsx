@@ -872,6 +872,17 @@ export default function ReportePublico() {
       </main>
     );
   }
+  if (inactivo) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-slate-50 px-6">
+        <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
+        <div className="text-center max-w-md">
+          <p className="text-xl font-semibold text-slate-700">Este reporte no está disponible</p>
+          <p className="mt-2 text-sm text-slate-500">Estado: {inactivo}</p>
+          <p className="mt-1 text-xs text-slate-400">slug: {slug} · {debug}</p>
+        </div>
+      </main>
+    );
   if (notFound || !reporte) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50">
