@@ -1,28 +1,36 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FormSection = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
 
   const timelineSteps = [
     {
       number: 1,
-      title: t('form.step1.title'),
-      description: t('form.step1.description'),
+      title: language === 'es' ? 'Recibo tu mensaje' : 'I receive your message',
+      description: language === 'es'
+        ? 'Te confirmo que lo he recibido en menos de 2 horas.'
+        : 'I confirm receipt within 2 hours.',
     },
     {
       number: 2,
-      title: t('form.step2.title'),
-      description: t('form.step2.description'),
+      title: language === 'es' ? 'Hablamos 15 minutos' : 'We talk for 15 minutes',
+      description: language === 'es'
+        ? 'Una llamada rápida para entender exactamente qué necesitas.'
+        : 'A quick call to understand exactly what you need.',
     },
     {
       number: 3,
-      title: t('form.step3.title'),
-      description: t('form.step3.description'),
+      title: language === 'es' ? 'Busco y analizo' : 'I search and analyse',
+      description: language === 'es'
+        ? 'Reviso el mercado completo y preparo tu informe personalizado.'
+        : 'I review the full market and prepare your personalised report.',
     },
     {
       number: 4,
-      title: t('form.step4.title'),
-      description: t('form.step4.description'),
+      title: language === 'es' ? 'Recibes tu informe' : 'You receive your report',
+      description: language === 'es'
+        ? 'Propiedades seleccionadas, análisis honesto y mi recomendación clara.'
+        : 'Selected properties, honest analysis and my clear recommendation.',
     },
   ];
 
