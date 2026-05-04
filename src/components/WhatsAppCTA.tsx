@@ -18,22 +18,23 @@ const WhatsAppCTA = () => {
             : "First consultation free. I respond today. In your language."}
         </p>
 
-        <a
-          href="mailto:info@propaxar.com?subject=I'm%20ready"
-          className="inline-flex items-center gap-3 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
-        >
-          {language === "es" ? "Estoy listo" : "I'm ready"}
-        </a>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="mailto:info@propaxar.com?subject=I'm%20ready"
+            className="inline-flex items-center gap-3 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
+          >
+            {language === "es" ? "Estoy listo" : "I'm ready"}
+          </a>
 
-        <div className="mt-4">
           <a
             href="https://wa.me/34662317561"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-sm text-white/50 hover:text-white/80 transition-colors"
+            className="inline-flex items-center gap-3 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
           >
-            {language === "es" ? "o escríbeme por WhatsApp" : "or message me on WhatsApp"}
+            {language === "es" ? "Escríbeme por WhatsApp" : "Message me on WhatsApp"}
           </a>
         </div>
 
