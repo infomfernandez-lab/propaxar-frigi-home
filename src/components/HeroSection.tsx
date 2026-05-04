@@ -45,14 +45,23 @@ const HeroSection = () => {
           </p>
 
           <a
-            href="https://wa.me/34662317561"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:info@propaxar.com?subject=Estoy%20listo&body=Hola%20Manuel%2C%20estoy%20listo%20para%20encontrar%20mi%20casa%20en%20La%20Axarqu%C3%ADa."
             className="inline-flex items-center gap-2 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90 opacity-0 animate-fade-in-up animation-delay-300"
             style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
           >
             {language === "es" ? "Estoy listo" : "I'm ready"}
           </a>
+
+          <div className="mt-4 opacity-0 animate-fade-in-up animation-delay-300">
+            <a
+              href="https://wa.me/34662317561"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium px-6 py-2.5 rounded-lg border border-white/40 text-white/90 hover:bg-white/10 transition-colors"
+            >
+              {language === "es" ? "o escríbeme por WhatsApp" : "or message me on WhatsApp"}
+            </a>
+          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-[14px] text-white/70 mt-8 opacity-0 animate-fade-in-up animation-delay-300">
             <span>✓ {language === "es" ? "Respuesta en menos de 2h" : "Response in under 2h"}</span>
