@@ -758,31 +758,6 @@ function ComparisonTable({ items, t }: { items: { prop: Propiedad; criteria: Cri
 
 export default function ReportePublico() {
   const { slug } = useParams<{ slug: string }>();
-  const testUrl = (supabase as any).supabaseUrl || "NO URL";
-  const [debugQuery, setDebugQuery] = useState<string>("loading...");
-  const [debugError, setDebugError] = useState<string>("");
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data, error } = await supabase.from("reportes").select("count").limit(1);
-        setDebugQuery(JSON.stringify(data));
-        setDebugError(error ? JSON.stringify(error) : "no error");
-      } catch (e: any) {
-        setDebugError("EXCEPTION: " + (e?.message || String(e)));
-      }
-    })();
-  }, []);
-
-  return (
-    <div style={{ padding: "40px", fontFamily: "monospace" }}>
-      <h1>DEBUG</h1>
-      <p>Slug from URL: {slug}</p>
-      <p>Supabase client URL: {testUrl}</p>
-      <p>Test query result: {debugQuery}</p>
-      <p>Test query error: {debugError}</p>
-    </div>
-  );
   const [reporte, setReporte] = useState<Reporte | null>(null);
   const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
   const [lead, setLead] = useState<Lead | null>(null);
