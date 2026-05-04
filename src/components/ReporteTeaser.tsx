@@ -31,7 +31,7 @@ const ReporteTeaser = () => {
         </p>
 
         <Link
-          to="/reporte/nadia-horsted-2026"
+          to="/demo-reporte"
           className="inline-block text-base font-semibold text-primary hover:underline mb-10"
         >
           {language === "es" ? "Ver ejemplo real →" : "See real example →"}
