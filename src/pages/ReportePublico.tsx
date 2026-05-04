@@ -780,24 +780,37 @@ export default function ReportePublico() {
 
   useEffect(() => {
     (async () => {
-      if (!slug) return;
-      const { data: r } = await supabase.from("reportes").select("*").eq("slug", slug).maybeSingle();
-      if (!r || r.estado !== "activo") { setNotFound(true); setLoading(false); return; }
-      setReporte(r as Reporte);
-      const ids = ((r.propiedades_seleccionadas as PropSel[]) ?? []).map((p) => p.propiedad_id);
-      if (ids.length) {
-        const { data: props } = await supabase.from("propiedades").select("*").in("id", ids);
-        setPropiedades((props ?? []) as Propiedad[]);
-      }
-      if (r.lead_id) {
-        const { data: l } = await supabase
-          .from("leads")
-          .select("id, persona:personas(nombre, apellidos, nacionalidad, idioma), demanda:demandas(tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad)")
-          .eq("id", r.lead_id)
+      if (!slug) { setError("Slug ausente en la URL."); setLoading(false); return; }
+      try {
+        const { data: r, error: rError } = await supabase
+          .from("reportes")
+          .select("*")
+          .eq("slug", slug)
           .maybeSingle();
-        if (l) setLead(l as unknown as Lead);
+        if (rError) { setError("Supabase error: " + rError.message); setLoading(false); return; }
+        if (!r) { setError("Reporte no encontrado con slug: " + slug); setLoading(false); return; }
+        if (r.estado !== "activo") { setError("Reporte no activo. Estado actual: " + r.estado); setLoading(false); return; }
+        setReporte(r as Reporte);
+        const ids = ((r.propiedades_seleccionadas as PropSel[]) ?? []).map((p) => p.propiedad_id);
+        if (ids.length) {
+          const { data: props, error: pError } = await supabase.from("propiedades").select("*").in("id", ids);
+          if (pError) { setError("Supabase error (propiedades): " + pError.message); setLoading(false); return; }
+          setPropiedades((props ?? []) as Propiedad[]);
+        }
+        if (r.lead_id) {
+          const { data: l, error: lError } = await supabase
+            .from("leads")
+            .select("id, persona:personas(nombre, apellidos, nacionalidad, idioma), demanda:demandas(tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad)")
+            .eq("id", r.lead_id)
+            .maybeSingle();
+          if (lError) { console.warn("Lead fetch warning:", lError.message); }
+          if (l) setLead(l as unknown as Lead);
+        }
+        setLoading(false);
+      } catch (e: any) {
+        setError("Error inesperado: " + (e?.message ?? String(e)));
+        setLoading(false);
       }
-      setLoading(false);
     })();
   }, [slug]);
 
