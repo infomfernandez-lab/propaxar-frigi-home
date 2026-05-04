@@ -3,62 +3,41 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const HowItWorks = () => {
   const { language } = useLanguage();
 
-  const steps = [
-    {
-      number: 1,
-      title: language === 'es' ? 'Me contactas' : 'You contact me',
-      description: language === 'es'
-        ? 'WhatsApp o email. Me cuentas qué buscas. Hablo inglés, español, entiendo holandés. Respondo en menos de 2 horas.'
-        : 'WhatsApp or email. Tell me what you need. I speak English and Spanish. I respond in under 2 hours.',
-    },
-    {
-      number: 2,
-      title: language === 'es' ? 'Yo hago el trabajo' : 'I do the work',
-      description: language === 'es'
-        ? 'Busco, analizo y selecciono las mejores opciones del mercado completo — no solo lo que está publicado. Te entrego un informe escrito con mi análisis y recomendación.'
-        : "I search, analyse and select the best options from the full market — not just what's published. I deliver a written report with my analysis and recommendation.",
-    },
-    {
-      number: 3,
-      title: language === 'es' ? 'Tú decides con información real' : 'You decide with real information',
-      description: language === 'es'
-        ? 'Sin presión. Sin comisiones ocultas. Si quieres visitar, te acompaño. Si quieres negociar, negocio por ti.'
-        : 'No pressure. No hidden fees. If you want to visit, I come with you. If you want to negotiate, I negotiate for you.',
-    },
-  ];
+  const steps = language === "es"
+    ? [
+        { n: 1, title: "Me escribes", desc: "WhatsApp o email. Me cuentas qué buscas. Te respondo en menos de 2 horas." },
+        { n: 2, title: "Yo hago el trabajo", desc: "Busco en todo el mercado — portales, agencias, contactos directos, propiedades que no están publicadas. Analizo y selecciono lo que encaja con tu perfil exacto." },
+        { n: 3, title: "Recibes tu informe y decides", desc: "Un documento privado con las mejores opciones, análisis honesto y mi recomendación. Sin presión. Tú decides." },
+      ]
+    : [
+        { n: 1, title: "You write to me", desc: "WhatsApp or email. Tell me what you need. I respond in under 2 hours." },
+        { n: 2, title: "I do the work", desc: "I search the whole market — portals, agencies, direct contacts, unlisted properties. I analyse and select what fits your exact profile." },
+        { n: 3, title: "You receive your report and decide", desc: "A private document with the best options, honest analysis and my recommendation. No pressure. You decide." },
+      ];
 
   return (
     <section id="how-it-works" className="bg-card py-16 md:py-20">
       <div className="max-w-[1200px] mx-auto px-5">
-        {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading">
-            {language === 'es' ? 'Así funciona. Sin letra pequeña.' : 'How it works. No small print.'}
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-2">
+            {language === "es" ? "Así funciona." : "How it works."}
           </h2>
+          <p className="text-base md:text-lg text-foreground-muted">
+            {language === "es" ? "Sin letra pequeña. Sin sorpresas." : "No small print. No surprises."}
+          </p>
         </div>
 
-        {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
-          {/* Connecting line - desktop only */}
-          <div className="hidden md:block absolute top-[28px] left-[16.66%] right-[16.66%] h-[1px] bg-border" />
-
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {steps.map((step) => (
-            <div key={step.number} className="flex flex-col items-center text-center relative">
-              {/* Number Circle */}
+            <div key={step.n} className="flex flex-col items-center text-center">
               <div
-                className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold text-white mb-5 relative z-10"
-                style={{ backgroundColor: 'hsl(222, 28%, 16%)' }}
+                className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold text-white mb-5"
+                style={{ backgroundColor: "hsl(222, 28%, 16%)" }}
               >
-                {step.number}
+                {step.n}
               </div>
-
-              <h3 className="text-lg font-semibold text-foreground mb-2 font-heading">
-                {step.title}
-              </h3>
-
-              <p className="text-sm text-foreground-muted leading-relaxed max-w-[300px]">
-                {step.description}
-              </p>
+              <h3 className="text-lg font-semibold text-foreground mb-2 font-heading">{step.title}</h3>
+              <p className="text-sm text-foreground-muted leading-relaxed max-w-[320px]">{step.desc}</p>
             </div>
           ))}
         </div>
