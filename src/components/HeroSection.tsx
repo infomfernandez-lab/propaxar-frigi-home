@@ -29,9 +29,19 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-[18px] md:text-[22px] font-medium text-white/90 leading-[1.5] mb-8 max-w-[680px] mx-auto opacity-0 animate-fade-in-up animation-delay-200">
-            {language === "es"
-              ? "Llevo 40 años en Frigiliana. Conozco cada propiedad, cada propietario y cada precio real de La Axarquía. Tú no tienes que buscar — yo ya lo sé."
-              : "I've spent 40 years in Frigiliana. I know every property, every owner and every real price in La Axarquía. You don't need to search — I already know."}
+            {language === "es" ? (
+              <>
+                No necesitas más opciones.<br />
+                Necesitas la opción correcta.<br />
+                Esa es la única que te voy a dar.
+              </>
+            ) : (
+              <>
+                You don't need more options.<br />
+                You need the right one.<br />
+                That's the only one I'm going to give you.
+              </>
+            )}
           </p>
 
           <a
