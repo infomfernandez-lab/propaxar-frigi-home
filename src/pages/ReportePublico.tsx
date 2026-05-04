@@ -784,14 +784,17 @@ export default function ReportePublico() {
     (async () => {
       if (!slug) { setError("Slug ausente en la URL."); setLoading(false); return; }
       try {
+        console.log("[ReportePublico] Buscando slug:", slug);
         const { data: r, error: rError } = await supabase
           .from("reportes")
           .select("*")
           .eq("slug", slug)
           .maybeSingle();
+        console.log("[ReportePublico] Resultado:", { data: r, error: rError });
+        setDebug(`slug="${slug}" · data=${r ? "OK" : "null"} · error=${rError?.message ?? "none"}`);
         if (rError) { setError("Supabase error: " + rError.message); setLoading(false); return; }
         if (!r) { setError("Reporte no encontrado con slug: " + slug); setLoading(false); return; }
-        if (r.estado !== "activo") { setError("Reporte no activo. Estado actual: " + r.estado); setLoading(false); return; }
+        if (r.estado !== "activo") { setInactivo(r.estado); setLoading(false); return; }
         setReporte(r as Reporte);
         const ids = ((r.propiedades_seleccionadas as PropSel[]) ?? []).map((p) => p.propiedad_id);
         if (ids.length) {
