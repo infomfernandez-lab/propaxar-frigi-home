@@ -6,24 +6,24 @@ const HowItWorks = () => {
   const steps = [
     {
       number: 1,
-      title: language === 'es' ? 'Consulta gratuita' : 'Free consultation',
+      title: language === 'es' ? 'Me contactas' : 'You contact me',
       description: language === 'es'
-        ? '15 minutos para entender qué buscas. Sin formularios — una conversación directa.'
-        : '15 minutes to understand what you need. No forms — a direct conversation.',
+        ? 'WhatsApp o email. Me cuentas qué buscas. Hablo inglés, español, entiendo holandés. Respondo en menos de 2 horas.'
+        : 'WhatsApp or email. Tell me what you need. I speak English and Spanish. I respond in under 2 hours.',
     },
     {
       number: 2,
-      title: language === 'es' ? 'Propuesta personalizada' : 'Personalized proposal',
+      title: language === 'es' ? 'Yo hago el trabajo' : 'I do the work',
       description: language === 'es'
-        ? 'Te presento opciones que encajan con tu perfil real. Mismo día de la consulta.'
-        : 'I present options that match your real profile. Same day as the consultation.',
+        ? 'Busco, analizo y selecciono las mejores opciones del mercado completo — no solo lo que está publicado. Te entrego un informe escrito con mi análisis y recomendación.'
+        : "I search, analyse and select the best options from the full market — not just what's published. I deliver a written report with my analysis and recommendation.",
     },
     {
       number: 3,
-      title: language === 'es' ? 'Tú decides' : 'You decide',
+      title: language === 'es' ? 'Tú decides con información real' : 'You decide with real information',
       description: language === 'es'
-        ? 'Coordino visitas, acompaño la negociación y gestiono el cierre. Sin sorpresas.'
-        : 'I coordinate visits, accompany negotiation and manage closing. No surprises.',
+        ? 'Sin presión. Sin comisiones ocultas. Si quieres visitar, te acompaño. Si quieres negociar, negocio por ti.'
+        : 'No pressure. No hidden fees. If you want to visit, I come with you. If you want to negotiate, I negotiate for you.',
     },
   ];
 
