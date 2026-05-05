@@ -16,8 +16,9 @@ const HeroSection = () => {
 
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-5 pt-24 pb-16">
         <div className="max-w-[820px] mx-auto text-center">
-          <h1 className="text-[28px] md:text-[52px] font-extrabold text-white leading-[1.1] tracking-[0.06em] mb-6 font-heading opacity-0 animate-fade-in-up">
-            PROPERTY FINDER · FRIGILIANA · LA AXARQUÍA · MÁLAGA
+          <h1 className="text-[22px] md:text-[52px] font-extrabold text-white leading-[1.2] tracking-[0.04em] md:tracking-[0.06em] mb-6 font-heading opacity-0 animate-fade-in-up">
+            <span className="block whitespace-nowrap">PROPERTY FINDER</span>
+            <span className="block md:inline"><span className="hidden md:inline"> · </span>FRIGILIANA · LA AXARQUÍA · MÁLAGA</span>
           </h1>
 
           <p className="text-[16px] md:text-[22px] font-medium text-white/80 leading-[1.2] mb-8 opacity-0 animate-fade-in-up animation-delay-100">
