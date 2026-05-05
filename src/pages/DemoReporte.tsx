@@ -541,6 +541,16 @@ export default function DemoReporte() {
         </p>
       </div>
 
+      {/* BACK BUTTON (mobile) */}
+      <a
+        href="/"
+        data-no-print
+        className="md:hidden fixed top-3 left-3 z-[60] inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold bg-white/95 text-[hsl(213_56%_23%)] shadow-md backdrop-blur"
+        aria-label={t(lang, "Volver", "Back")}
+      >
+        ← {t(lang, "Volver", "Back")}
+      </a>
+
       {/* HERO */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
         <img src={heroImg} alt="Frigiliana" className="absolute inset-0 w-full h-full object-cover" />
