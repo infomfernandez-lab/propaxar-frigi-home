@@ -26,8 +26,8 @@ const ReporteTeaser = () => {
         </h2>
         <p className="text-base md:text-lg text-foreground-muted mb-8 max-w-[640px] mx-auto">
           {language === "es"
-            ? "Este es un reporte real. Preparado para un cliente real que llevaba meses buscando desde Holanda. Lo recibió 48 horas después de su primer mensaje."
-            : "This is a real report. Prepared for a real client who was searching from the Netherlands for months. He received this 48 hours after his first message."}
+            ? "Este es un reporte real preparado para un cliente real. En 48 horas supo exactamente cuál era su propiedad — y por qué. El tuyo será así."
+            : "This is a real report prepared for a real client. In 48 hours he knew exactly which property was his — and why. Yours will look like this."}
         </p>
 
         <Link
