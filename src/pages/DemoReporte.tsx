@@ -816,9 +816,6 @@ export default function DemoReporte() {
                     <p className="text-xs mt-3" style={{ color: "hsl(215 19% 55%)" }}>
                       💰 {t(lang, "Reembolso completo si alquilas una propiedad Propaxar Direct", "Full refund if you rent a Propaxar Direct property")}
                     </p>
-                    <p className="text-xs mt-1" style={{ color: "hsl(215 19% 55%)" }}>
-                      <a href="/terminos-finder" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">{t(lang, "Términos y Condiciones", "Terms & Conditions")}</a>
-                    </p>
                   </div>
                 </div>
               </div>
@@ -1071,9 +1068,6 @@ export default function DemoReporte() {
                 </Button>
               </a>
             </div>
-            <p className="text-xs text-white/50 mb-6">
-              {t(lang, "Al comprar aceptas nuestros", "By purchasing you agree to our")} <a href="/terminos-finder" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/70">{t(lang, "Términos y Condiciones", "Terms & Conditions")}</a>
-            </p>
 
             <p className="text-sm text-white/60">
               📱 +34 662 317 561 | 📧 info@propaxar.com | 🌐 propaxar.es
@@ -1114,9 +1108,6 @@ export default function DemoReporte() {
             {t(lang, "Consigue el reporte - €180", "Get Full Report - €180")}
           </Button>
         </a>
-        <p className="text-center text-[10px] text-white/50 mt-1">
-          <a href="/terminos-finder" target="_blank" rel="noopener noreferrer" className="underline">{t(lang, "Términos y Condiciones", "Terms & Conditions")}</a>
-        </p>
       </div>
     </>
   );
