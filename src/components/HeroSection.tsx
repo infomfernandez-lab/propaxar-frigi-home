@@ -16,17 +16,17 @@ const HeroSection = () => {
 
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-5 pt-24 pb-16">
         <div className="max-w-[820px] mx-auto text-center">
-          <p className="text-base md:text-2xl font-semibold tracking-[0.18em] uppercase text-white/80 mb-6 opacity-0 animate-fade-in-up">
+          <h1 className="text-[28px] md:text-[52px] font-extrabold text-white leading-[1.1] tracking-[0.06em] mb-6 font-heading opacity-0 animate-fade-in-up">
             PROPERTY FINDER · FRIGILIANA · LA AXARQUÍA · MÁLAGA
-          </p>
-
-          <h1 className="text-[24px] md:text-[36px] font-extrabold text-white leading-[1.1] mb-8 font-heading opacity-0 animate-fade-in-up animation-delay-100">
-            {language === "es" ? (
-              <>Deja de buscar.<br />Empieza a encontrar.</>
-            ) : (
-              <>Stop searching.<br />Start finding.</>
-            )}
           </h1>
+
+          <p className="text-[16px] md:text-[22px] font-medium text-white/80 leading-[1.2] mb-8 opacity-0 animate-fade-in-up animation-delay-100">
+            {language === "es" ? (
+              <>Deja de buscar. Empieza a encontrar.</>
+            ) : (
+              <>Stop searching. Start finding.</>
+            )}
+          </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 opacity-0 animate-fade-in-up animation-delay-300">
             <a
