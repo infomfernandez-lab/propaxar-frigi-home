@@ -70,6 +70,7 @@ const App = () => (
                 <Route path="/dev/reporte-source" element={<DevReporteSource />} />
               )}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="/:ref" element={<PropiedadPublica />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
