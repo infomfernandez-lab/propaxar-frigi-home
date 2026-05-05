@@ -6,12 +6,12 @@ const HowItWorks = () => {
   const steps = language === "es"
     ? [
         { n: 1, title: "Me dices qué buscas", desc: "Un mensaje. Te respondo el mismo día. Sin formularios, sin salas de espera, sin equipos. Hablas directamente conmigo." },
-        { n: 2, title: "Yo hago el trabajo", desc: "Busco todo. Visito. Analizo lo que no se ve en las fotos — el vecino, el camino, el agua, el propietario. Tú te ahorras semanas de frustración." },
+        { n: 2, title: "Yo hago el trabajo", desc: "Busco en todo el mercado. Visito las propiedades que merecen la pena. Filtro todo lo que no encaja. Tú recibes solo lo que es para ti — nada más." },
         { n: 3, title: "Recibes la respuesta correcta", desc: "Un informe privado con las mejores opciones, análisis honesto y una recomendación clara. No diez opciones. Una. La correcta." },
       ]
     : [
         { n: 1, title: "You tell me what you need", desc: "One message. I respond the same day. No forms, no waiting rooms, no teams. You talk to me directly." },
-        { n: 2, title: "I do the work", desc: "I search everything. I visit. I analyse the things you can't see in photos — the neighbour, the road, the water, the owner. You save weeks of frustration." },
+        { n: 2, title: "I do the work", desc: "I search the whole market. I visit the properties worth visiting. I filter out everything that doesn't fit. You get only what's right for you — nothing else." },
         { n: 3, title: "You get the right answer", desc: "A private report with the best options, honest analysis and one clear recommendation. Not ten options. One. The right one." },
       ];
 

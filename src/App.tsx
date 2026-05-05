@@ -44,7 +44,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/market-report" element={<MarketReport />} />
-              <Route path="/terminos-finder" element={<TerminosFinder />} />
+              {/* <Route path="/terminos-finder" element={<TerminosFinder />} /> hidden temporarily */}
               <Route path="/reporte/katinka-durkstra-a7k9m2-en" element={<ReporteKatinkaEN />} />
               <Route path="/reporte/nadia-horsted-n-b4x9k2-en" element={<ReporteNadiaEN />} />
               <Route path="/reporte/henri-gloudemans-h3v7p9-en" element={<ReporteHenriEN />} />

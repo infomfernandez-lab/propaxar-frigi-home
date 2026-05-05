@@ -356,7 +356,7 @@ function StripeCTA({ lang, compact = false }: { lang: Lang; compact?: boolean })
         <input type="checkbox" checked={accepted} onChange={e => setAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 rounded flex-shrink-0" style={{ accentColor: '#4ade80' }} />
         <span className="text-xs leading-snug">
           {!accepted && <span className="block font-bold text-xs mb-0.5" style={{ color: '#fcd34d' }}>👆 {t.tickMark[lang]}</span>}
-          <span style={{ color: 'rgba(255,255,255,0.7)' }}>{t.termsText[lang]}{' '}<Link to="/terminos-finder" className="text-white underline hover:no-underline">{t.termsLink[lang]}</Link></span>
+          <span style={{ color: 'rgba(255,255,255,0.7)' }}>{t.termsText[lang]}</span>
         </span>
       </label>
       <button onClick={() => { if (accepted) window.location.href = STRIPE_URL; }} disabled={!accepted} className="w-full font-bold text-lg py-4 rounded-lg transition-all active:scale-[0.97]" style={{ backgroundColor: accepted ? '#4ade80' : '#9ca3af', color: accepted ? '#14532d' : '#6b7280', cursor: accepted ? 'pointer' : 'not-allowed', opacity: accepted ? 1 : 0.65, boxShadow: accepted ? '0 4px 14px rgba(74,222,128,0.3)' : 'none', border: 'none' }}>

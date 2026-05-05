@@ -223,10 +223,7 @@ export default function ComprarReporte() {
                   </span>
                 )}
                 <span style={{ color: 'rgba(255,255,255,0.7)' }}>
-                  {t.termsText[lang]}{' '}
-                  <Link to="/terminos-finder" className="text-white underline hover:no-underline">
-                    {t.termsLink[lang]}
-                  </Link>
+                  {t.termsText[lang]}
                 </span>
               </span>
             </label>
@@ -439,10 +436,7 @@ export default function ComprarReporte() {
                       </span>
                     )}
                     <span style={{ color: 'rgba(255,255,255,0.7)' }}>
-                      {t.termsText[lang]}{' '}
-                      <Link to="/terminos-finder" className="text-white underline hover:no-underline">
-                        {t.termsLink[lang]}
-                      </Link>
+                      {t.termsText[lang]}
                     </span>
                   </span>
                 </label>
@@ -510,10 +504,7 @@ export default function ComprarReporte() {
                 </a>
               </div>
               <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                {t.termsText[lang]}{' '}
-                <Link to="/terminos-finder" className="text-white underline hover:no-underline">
-                  {t.termsLink[lang]}
-                </Link>
+                {t.termsText[lang]}
               </p>
             </div>
           </div>
