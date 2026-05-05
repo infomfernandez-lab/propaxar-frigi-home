@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-5 pt-24 pb-16">
         <div className="max-w-[820px] mx-auto text-center">
           <p className="text-xs md:text-sm font-semibold tracking-[0.18em] uppercase text-white/70 mb-6 opacity-0 animate-fade-in-up">
-            Property Finder · Frigiliana · La Axarquía
+            PROPERTY FINDER · FRIGILIANA · LA AXARQUÍA · MÁLAGA
           </p>
 
           <h1 className="text-[34px] md:text-[54px] font-extrabold text-white leading-[1.1] mb-5 font-heading opacity-0 animate-fade-in-up animation-delay-100">
@@ -29,19 +29,9 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-[18px] md:text-[22px] font-medium text-white/90 leading-[1.5] mb-8 max-w-[680px] mx-auto opacity-0 animate-fade-in-up animation-delay-200">
-            {language === "es" ? (
-              <>
-                No necesitas más opciones.<br />
-                Necesitas la opción correcta.<br />
-                Esa es la única que te voy a dar.
-              </>
-            ) : (
-              <>
-                You don't need more options.<br />
-                You need the right one.<br />
-                That's the only one I'm going to give you.
-              </>
-            )}
+            {language === "es"
+              ? "Yo busco, visito y filtro todo el mercado de Frigiliana y La Axarquía. Tú recibes una sola recomendación: la correcta."
+              : "I search, visit and filter the whole Frigiliana & Axarquía market. You get one recommendation: the right one."}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 opacity-0 animate-fade-in-up animation-delay-300">
