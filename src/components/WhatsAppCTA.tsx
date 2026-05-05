@@ -22,7 +22,7 @@ const WhatsAppCTA = () => {
           <a
             href="mailto:info@propaxar.com?subject=I'm%20ready"
             className="inline-flex items-center gap-3 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "#fff", color: "hsl(222, 28%, 16%)" }}
+            style={{ backgroundColor: "hsl(222, 28%, 16%)", color: "#fff", border: "1px solid rgba(255,255,255,0.3)" }}
           >
             {language === "es" ? "Estoy listo" : "I'm ready"}
           </a>
