@@ -23,12 +23,6 @@ const WhatsAppCTA = () => {
             : <>Tell me what you need.<br/><span className="text-white/70">I reply today.</span></>}
         </h2>
 
-        <p className="text-base md:text-lg text-white/70 mb-10 max-w-[520px] mx-auto">
-          {language === "es"
-            ? "Primera consulta gratis. Sin compromiso. En tu idioma."
-            : "First consultation free. No commitment. In your language."}
-        </p>
-
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#form-section"
