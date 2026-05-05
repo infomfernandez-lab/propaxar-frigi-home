@@ -13,16 +13,6 @@ const WhatsAppCTA = () => {
   return (
     <section className="py-20 md:py-28" style={{ backgroundColor: "hsl(222, 28%, 16%)" }}>
       <div className="max-w-[760px] mx-auto px-5 text-center text-white">
-        <span className="inline-block text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase text-white/60 mb-5">
-          {language === "es" ? "Próximo paso · 60 segundos" : "Next step · 60 seconds"}
-        </span>
-
-        <h2 className="text-[32px] md:text-[44px] font-bold font-heading leading-[1.1] mb-5">
-          {language === "es"
-            ? <>Cuéntame qué buscas.<br/><span className="text-white/70">Te respondo hoy.</span></>
-            : <>Tell me what you need.<br/><span className="text-white/70">I reply today.</span></>}
-        </h2>
-
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#form-section"
@@ -44,12 +34,6 @@ const WhatsAppCTA = () => {
             <MessageCircle className="w-5 h-5" />
             {language === "es" ? "WhatsApp directo" : "WhatsApp direct"}
           </a>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-8 text-[13px] text-white/55">
-          <span>✓ {language === "es" ? "Respuesta en 24h" : "Reply within 24h"}</span>
-          <span>✓ {language === "es" ? "Sin compromiso" : "No commitment"}</span>
-          <span>✓ {language === "es" ? "Trato directo" : "Direct contact"}</span>
         </div>
 
         <p className="text-xs text-white/40 mt-6">
