@@ -808,14 +808,6 @@ export default function DemoReporte() {
                         ))}
                       </div>
                     </div>
-                    <a href={CTA_LINK} className="block mt-6">
-                      <Button className="text-base font-bold px-8 py-5" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
-                        {t(lang, "Consigue tu reporte completo - €180 →", "Get Your Full Report - €180 →")}
-                      </Button>
-                    </a>
-                    <p className="text-xs mt-3" style={{ color: "hsl(215 19% 55%)" }}>
-                      💰 {t(lang, "Reembolso completo si alquilas una propiedad Propaxar Direct", "Full refund if you rent a Propaxar Direct property")}
-                    </p>
                   </div>
                 </div>
               </div>
@@ -1002,78 +994,6 @@ export default function DemoReporte() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
-        <section className="py-20 px-4 md:px-8" style={{ background: "linear-gradient(135deg, hsl(213 56% 23%), hsl(213 56% 18%))" }} ref={ctaFade.ref}>
-          <div className={`max-w-3xl mx-auto text-center ${ctaFade.className}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              {t(lang, "¿Listo para ver el mercado completo?", "Ready to See the Complete Market?")}
-            </h2>
-
-            <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto">
-              {t(lang, "Has visto SOLO una propiedad de ejemplo. Tu reporte personalizado incluye 6-8 propiedades verificadas con este nivel de detalle, más mi recomendación profesional.", "You've seen just ONE example property. Your complete personalized report includes 6-8 verified available properties with this level of detail, plus my professional recommendation.")}
-            </p>
-
-            <div className="text-left max-w-md mx-auto mb-10">
-              <p className="text-base font-bold text-white mb-4">{t(lang, "Tu reporte completo incluye:", "Your Complete Report Includes:")}</p>
-              <div className="space-y-3">
-                {(lang === "es" ? [
-                  "6-8 propiedades verificadas y disponibles",
-                  "Análisis detallado de cada una",
-                  "Valoración de acceso y conducción",
-                  "Mapas de privacidad y vecinos",
-                  "Recomendación profesional",
-                  "Todos los datos de contacto y GPS",
-                  "Actualizaciones semanales × 6 meses",
-                  "Acceso directo a Manuel",
-                ] : [
-                  "6-8 verified available properties",
-                  "Detailed analysis of each one",
-                  "Access & driving ratings",
-                  "Privacy & neighbor maps",
-                  "Professional recommendation",
-                  "All contact details & GPS",
-                  "Weekly updates × 6 months",
-                  "Direct access to Manuel",
-                ]).map((tx, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm text-white/90">
-                    <span style={{ color: "hsl(142 71% 55%)" }}>✓</span>
-                    <span>{tx}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ background: "hsl(39 76% 61%/0.2)", color: "hsl(39 76% 71%)", border: "1px solid hsl(39 76% 61%/0.3)" }}>
-              ⚡ {t(lang, "Solo 5 plazas disponibles este mes", "Only 5 spots available this month")}
-            </div>
-
-            <div className="mb-8">
-              <p className="text-4xl font-bold text-white mb-1">€180</p>
-              <p className="text-base text-white/70">{t(lang, "Inversión única", "One-time investment")}</p>
-              <p className="text-sm text-white/60 mt-2">
-                💰 {t(lang, "100% reembolsable si alquilas con Propaxar Direct", "100% Refundable if you rent Propaxar Direct")}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
-              <a href={CTA_LINK}>
-                <Button className="text-lg font-bold px-10 py-6" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
-                  {t(lang, "Consigue tu reporte completo →", "Get Your Complete Report →")}
-                </Button>
-              </a>
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="text-lg font-bold px-10 py-6 border-white/30 text-white hover:bg-white/10" style={{ borderRadius: 10 }}>
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  {t(lang, "¿Dudas? WhatsApp", "Questions? WhatsApp")}
-                </Button>
-              </a>
-            </div>
-
-            <p className="text-sm text-white/60">
-              📱 +34 662 317 561 | 📧 info@propaxar.com | 🌐 propaxar.es
-            </p>
-          </div>
-        </section>
       </div>
 
       {/* FOOTER */}
@@ -1101,14 +1021,6 @@ export default function DemoReporte() {
         </div>
       </footer>
 
-      {/* STICKY MOBILE CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden p-3" style={{ background: "linear-gradient(to top, hsl(213 56% 23%), hsl(213 56% 23%/0.95))" }}>
-        <a href={CTA_LINK} className="block">
-          <Button className="w-full text-base font-bold py-5" style={{ background: "hsl(142 71% 45%)", color: "#fff", borderRadius: 10 }}>
-            {t(lang, "Consigue el reporte - €180", "Get Full Report - €180")}
-          </Button>
-        </a>
-      </div>
     </>
   );
 }
