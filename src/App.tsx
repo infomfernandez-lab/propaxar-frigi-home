@@ -29,6 +29,7 @@ import CasaFrigiliana from "./pages/CasaFrigiliana";
 import Propiedades from "./pages/Propiedades";
 import ReportePublico from "./pages/ReportePublico";
 import DevReporteSource from "./pages/DevReporteSource";
+import PropiedadPublica from "./pages/PropiedadPublica";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -69,6 +70,7 @@ const App = () => (
                 <Route path="/dev/reporte-source" element={<DevReporteSource />} />
               )}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="/:ref" element={<PropiedadPublica />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
