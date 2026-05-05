@@ -29,6 +29,7 @@ import CasaFrigiliana from "./pages/CasaFrigiliana";
 import Propiedades from "./pages/Propiedades";
 import ReportePublico from "./pages/ReportePublico";
 import DevReporteSource from "./pages/DevReporteSource";
+import PropiedadPublica from "./pages/PropiedadPublica";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
