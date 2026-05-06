@@ -1,337 +1,513 @@
 // src/pages/PropiedadPublica.tsx
-// Página pública dinámica — propaxar.es/pa194
-// Carga datos desde Supabase por ref_interna
-
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
-  Bed, Bath, Home, Tag, MapPin, ChevronLeft, ChevronRight, X,
-  MessageCircle, Mail, Phone, Car, Waves, Wifi, Mountain, TreePine,
-  Maximize,
+  Bed,
+  Bath,
+  Home,
+  Tag,
+  MapPin,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  MessageCircle,
+  Mail,
+  Phone,
+  Car,
+  Waves,
+  Wifi,
+  Mountain,
+  TreePine,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://jkirjhpnddkrkpghpxdz.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpraXJqaHBuZGRrcmtwZ2hweGR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3OTkyOTksImV4cCI6MjA5MzM3NTI5OX0.sot9GO_j8ZBXSFuccRz86Lnzfr2wiJ4w6ouV4f5ipjI",
+);
 
 type Lang = "es" | "en";
-
-type Prop = {
-  id: string;
-  ref_interna: string;
-  titulo: string;
-  tipo: string | null;
-  zona: string | null;
-  precio: number | null;
-  habitaciones: number | null;
-  banos: number | null;
-  m2_construidos: number | null;
-  operacion: string;
-  disponible: boolean;
-  mascotas_permitidas: boolean | null;
-  piscina: string | null;
-  parking: string | null;
-  jardin: boolean | null;
-  terraza: boolean | null;
-  vistas: string | null;
-  amueblado: string | null;
-  internet: string | null;
-  descripcion: string | null;
-  puntos_fuertes: string | null;
-  aspectos_a_considerar: string | null;
-  analisis_acceso: string | null;
-  analisis_agua: string | null;
-  analisis_internet: string | null;
-  analisis_vecindario: string | null;
-  analisis_historial: string | null;
-  perfil_ia: string | null;
-  imagenes: string[] | null;
-  disponible_desde: string | null;
-  propaxar_direct: boolean;
-  direccion: string | null;
-};
-
-const ZONA_LABEL: Record<string, string> = {
-  casco_antiguo: "Casco antiguo", afueras: "Afueras", campo: "Campo",
-  frigiliana: "Frigiliana", nerja: "Nerja", torrox: "Torrox",
-};
-
 const bodyFont = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-const cardStyle: React.CSSProperties = { backgroundColor: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' };
-
-function featuresList(p: Prop, lang: Lang) {
-  const features: { icon: any; label: string }[] = [];
-  if (p.piscina && p.piscina !== "no") features.push({ icon: Waves, label: lang === "es" ? "Piscina" : "Pool" });
-  if (p.parking && p.parking !== "no") features.push({ icon: Car, label: lang === "es" ? "Parking" : "Parking" });
-  if (p.jardin) features.push({ icon: TreePine, label: lang === "es" ? "Jardín" : "Garden" });
-  if (p.terraza) features.push({ icon: Mountain, label: lang === "es" ? "Terraza" : "Terrace" });
-  if (p.internet && p.internet !== "sin_internet") features.push({ icon: Wifi, label: p.internet === "fibra" ? "Fibra óptica" : "WiFi" });
-  if (p.mascotas_permitidas) features.push({ icon: Home, label: lang === "es" ? "Mascotas permitidas" : "Pets allowed" });
-  if (p.amueblado && p.amueblado !== "sin_amueblar") features.push({ icon: Home, label: lang === "es" ? "Amueblado" : "Furnished" });
-  if (p.vistas && p.vistas !== "sin_vistas") {
-    const vLabel: Record<string, string> = {
-      mar: lang === "es" ? "Vistas al mar" : "Sea views",
-      montana: lang === "es" ? "Vistas a la montaña" : "Mountain views",
-      pueblo: lang === "es" ? "Vistas al pueblo" : "Village views",
-    };
-    features.push({ icon: Mountain, label: vLabel[p.vistas] ?? p.vistas });
-  }
-  return features;
-}
-
-function highlightsList(p: Prop, lang: Lang): string[] {
-  const h: string[] = [];
-  if (p.habitaciones) h.push(lang === "es" ? `${p.habitaciones} dormitorios` : `${p.habitaciones} bedrooms`);
-  if (p.banos) h.push(lang === "es" ? `${p.banos} baños` : `${p.banos} bathrooms`);
-  if (p.m2_construidos) h.push(`${p.m2_construidos}m²`);
-  if (p.piscina && p.piscina !== "no") h.push(lang === "es" ? "Piscina privada" : "Private pool");
-  if (p.jardin) h.push(lang === "es" ? "Jardín" : "Garden");
-  if (p.terraza) h.push(lang === "es" ? "Terraza" : "Terrace");
-  if (p.parking && p.parking !== "no") h.push(lang === "es" ? "Parking privado" : "Private parking");
-  if (p.vistas === "mar") h.push(lang === "es" ? "Vistas al mar" : "Sea views");
-  if (p.internet === "fibra") h.push(lang === "es" ? "Fibra óptica" : "Fibre optic");
-  if (p.mascotas_permitidas) h.push(lang === "es" ? "Mascotas permitidas" : "Pets allowed");
-  if (p.disponible_desde) h.push(lang === "es" ? `Disponible desde ${p.disponible_desde}` : `Available from ${p.disponible_desde}`);
-  return h;
-}
+const card: React.CSSProperties = {
+  backgroundColor: "#ffffff",
+  border: "1px solid #e5e7eb",
+  boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+  borderRadius: "8px",
+  overflow: "hidden",
+};
+const ZONA: Record<string, string> = {
+  casco_antiguo: "Casco Antiguo",
+  afueras: "Afueras",
+  campo: "Campo",
+  frigiliana: "Frigiliana",
+  nerja: "Nerja",
+  torrox: "Torrox",
+};
 
 export default function PropiedadPublica() {
   const { ref } = useParams<{ ref: string }>();
-  const navigate = useNavigate();
-  const [prop, setProp] = useState<Prop | null>(null);
+  const [prop, setProp] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [lang, setLang] = useState<Lang>(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlLang = params.get("lang");
-    if (urlLang === "en" || urlLang === "es") return urlLang as Lang;
-    return (localStorage.getItem("finder-lang") as Lang) || "es";
+    try {
+      const p = new URLSearchParams(window.location.search).get("lang");
+      if (p === "en" || p === "es") return p;
+      return (localStorage.getItem("finder-lang") as Lang) || "es";
+    } catch {
+      return "es";
+    }
   });
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIdx, setLightboxIdx] = useState(0);
+  const [lb, setLb] = useState(false);
+  const [lbIdx, setLbIdx] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem("finder-lang", lang);
+    try {
+      localStorage.setItem("finder-lang", lang);
+    } catch {}
   }, [lang]);
 
   useEffect(() => {
-    if (!ref) { setNotFound(true); setLoading(false); return; }
-    (async () => {
-      setLoading(true);
-      const { data } = await supabase
-        .from("propiedades")
-        .select("*")
-        .eq("ref_interna", ref)
-        .single();
-      if (!data) { setNotFound(true); } else { setProp(data as Prop); }
+    if (!ref) {
+      setNotFound(true);
       setLoading(false);
-    })();
+      return;
+    }
+    supabase
+      .from("propiedades")
+      .select("*")
+      .eq("ref_interna", ref)
+      .single()
+      .then(({ data }) => {
+        if (!data) setNotFound(true);
+        else setProp(data);
+        setLoading(false);
+      });
   }, [ref]);
 
-  if (loading) {
+  const isEs = lang === "es";
+  if (loading)
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: bodyFont }}>
-        <p style={{ color: '#6b7280', fontSize: 15 }}>Cargando…</p>
+      <div
+        style={{
+          fontFamily: bodyFont,
+          backgroundColor: "#2d3e4e",
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "rgba(255,255,255,0.6)",
+        }}
+      >
+        Cargando…
       </div>
     );
-  }
-
-  if (notFound || !prop) {
+  if (notFound || !prop)
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: bodyFont, padding: 24 }}>
-        <div style={{ textAlign: 'center', maxWidth: 420 }}>
-          <div style={{ fontSize: 48, marginBottom: 12 }}>🏠</div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, color: '#111827', marginBottom: 8 }}>Propiedad no encontrada</h1>
-          <p style={{ color: '#6b7280', fontSize: 14, marginBottom: 20 }}>
-            La referencia <strong>{ref}</strong> no existe o no está disponible.
+      <div
+        style={{
+          fontFamily: bodyFont,
+          backgroundColor: "#f5f5f5",
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <div>
+          <div style={{ fontSize: 64, marginBottom: 16 }}>🏠</div>
+          <h1 style={{ color: "#2d3e4e" }}>Propiedad no encontrada</h1>
+          <p style={{ color: "#666" }}>
+            Ref. <strong>{ref}</strong> no existe.
           </p>
-          <button onClick={() => navigate('/')} style={{ background: '#1E2535', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: 8, fontWeight: 600, cursor: 'pointer' }}>
-            ← Volver a Propaxar
-          </button>
+          <a href="/" style={{ color: "#3d5a73" }}>
+            ← Propaxar
+          </a>
         </div>
       </div>
     );
-  }
 
   const imgs = prop.imagenes ?? [];
-  const features = featuresList(prop, lang);
-  const highlights = highlightsList(prop, lang);
-  const isAlquiler = prop.operacion === "alquiler" || prop.operacion === "ambas";
-  const precioLabel = prop.precio ? `${Number(prop.precio).toLocaleString("es-ES")}€` : "Consultar";
-  const periodoLabel = isAlquiler ? (lang === "es" ? "/mes" : "/month") : "";
-  const operacionLabel = isAlquiler ? (lang === "es" ? "Alquiler residencial" : "Residential rental") : (lang === "es" ? "Venta" : "For sale");
-  const zonaLabel = prop.zona ? (ZONA_LABEL[prop.zona] ?? prop.zona) : "Frigiliana, Málaga";
-  const tipoLabel = prop.tipo ? prop.tipo.charAt(0).toUpperCase() + prop.tipo.slice(1) : "—";
-
-  const waMsg = lang === "es"
+  const zona = prop.zona ? (ZONA[prop.zona] ?? prop.zona) : "Frigiliana";
+  const isAlq = prop.operacion === "alquiler" || prop.operacion === "ambas";
+  const precio = prop.precio ? `${Number(prop.precio).toLocaleString("es-ES")}€` : "Consultar";
+  const periodo = isAlq ? (isEs ? "/mes" : "/month") : "";
+  const operacion = isAlq ? (isEs ? "Alquiler residencial" : "Residential rental") : isEs ? "Venta" : "For sale";
+  const tipo = prop.tipo ? prop.tipo.charAt(0).toUpperCase() + prop.tipo.slice(1) : "—";
+  const waText = isEs
     ? `Hola Manuel, me interesa la propiedad en Frigiliana (ref. ${prop.ref_interna}). ¿Puedo agendar una visita?`
     : `Hi Manuel, I'm interested in the property in Frigiliana (ref. ${prop.ref_interna}). Can I schedule a viewing?`;
-  const waLink = `https://wa.me/34662317561?text=${encodeURIComponent(waMsg)}`;
-  const emailSubject = `Consulta propiedad ${prop.ref_interna}`;
+  const waLink = `https://wa.me/34662317561?text=${encodeURIComponent(waText)}`;
 
-  const metaTitle = `${prop.titulo} — ${precioLabel}${periodoLabel} | Propaxar`;
-  const metaDesc = lang === "es"
-    ? `${prop.habitaciones ?? ""}${prop.habitaciones ? " dormitorios" : ""} en ${zonaLabel}. ${prop.descripcion?.slice(0, 100) ?? ""} ${precioLabel}${periodoLabel}. Ref. ${prop.ref_interna}.`
-    : `${prop.habitaciones ?? ""}${prop.habitaciones ? " bedrooms" : ""} in ${zonaLabel}. ${precioLabel}${periodoLabel}. Ref. ${prop.ref_interna}.`;
+  const features: { icon: any; label: string }[] = [
+    prop.piscina && prop.piscina !== "no" && { icon: Waves, label: isEs ? "Piscina privada" : "Private pool" },
+    prop.parking && prop.parking !== "no" && { icon: Car, label: "Parking" },
+    prop.jardin && { icon: TreePine, label: isEs ? "Jardín" : "Garden" },
+    prop.terraza && { icon: Mountain, label: isEs ? "Terraza" : "Terrace" },
+    prop.internet === "fibra" && { icon: Wifi, label: isEs ? "Fibra óptica" : "Fibre optic" },
+    prop.internet && prop.internet !== "sin_internet" && prop.internet !== "fibra" && { icon: Wifi, label: "WiFi" },
+    prop.mascotas_permitidas && { icon: Home, label: isEs ? "Mascotas permitidas" : "Pets allowed" },
+    prop.amueblado && prop.amueblado !== "sin_amueblar" && { icon: Home, label: isEs ? "Amueblado" : "Furnished" },
+    prop.vistas === "mar" && { icon: Mountain, label: isEs ? "Vistas al mar" : "Sea views" },
+    prop.vistas === "montana" && { icon: Mountain, label: isEs ? "Vistas a la montaña" : "Mountain views" },
+  ].filter(Boolean) as { icon: any; label: string }[];
 
-  const descripcionPrincipal = prop.perfil_ia ?? prop.descripcion ?? prop.puntos_fuertes ?? "";
-  const aspectos = prop.aspectos_a_considerar;
+  const highlights: string[] = [
+    prop.habitaciones && `${prop.habitaciones} ${isEs ? "dormitorios" : "bedrooms"}`,
+    prop.banos && `${prop.banos} ${isEs ? "baños" : "bathrooms"}`,
+    prop.m2_construidos && `${prop.m2_construidos}m²`,
+    prop.piscina && prop.piscina !== "no" && (isEs ? "Piscina privada" : "Private pool"),
+    prop.jardin && (isEs ? "Jardín" : "Garden"),
+    prop.terraza && (isEs ? "Terraza" : "Terrace"),
+    prop.parking && prop.parking !== "no" && (isEs ? "Parking privado" : "Private parking"),
+    prop.vistas === "mar" && (isEs ? "Vistas al mar" : "Sea views"),
+    prop.vistas === "montana" && (isEs ? "Vistas a la montaña" : "Mountain views"),
+    prop.internet === "fibra" && (isEs ? "Fibra óptica" : "Fibre optic"),
+    prop.mascotas_permitidas && (isEs ? "Mascotas permitidas" : "Pets allowed"),
+    prop.disponible_desde &&
+      (isEs ? `Disponible desde ${prop.disponible_desde}` : `Available from ${prop.disponible_desde}`),
+  ].filter(Boolean) as string[];
 
-  const analisisBullets = [
-    prop.analisis_acceso && { title: lang === "es" ? "Acceso" : "Access", text: prop.analisis_acceso },
-    prop.analisis_agua && { title: lang === "es" ? "Agua y servicios" : "Water & services", text: prop.analisis_agua },
-    prop.analisis_internet && { title: lang === "es" ? "Internet" : "Internet", text: prop.analisis_internet },
-    prop.analisis_vecindario && { title: lang === "es" ? "Vecindario" : "Neighbourhood", text: prop.analisis_vecindario },
-    prop.analisis_historial && { title: lang === "es" ? "Historial" : "History", text: prop.analisis_historial },
-  ].filter(Boolean) as { title: string; text: string }[];
+  const desc = prop.perfil_ia ?? prop.descripcion ?? prop.puntos_fuertes ?? "";
+  const analisis = [
+    prop.analisis_acceso && { t: isEs ? "Acceso" : "Access", v: prop.analisis_acceso },
+    prop.analisis_agua && { t: isEs ? "Agua y servicios" : "Water & services", v: prop.analisis_agua },
+    prop.analisis_internet && { t: "Internet", v: prop.analisis_internet },
+    prop.analisis_vecindario && { t: isEs ? "Vecindario" : "Neighbourhood", v: prop.analisis_vecindario },
+    prop.analisis_historial && { t: isEs ? "Historial" : "History", v: prop.analisis_historial },
+  ].filter(Boolean) as { t: string; v: string }[];
 
-  const quickStats = [
-    { icon: Home, label: lang === "es" ? "Tipo" : "Type", value: tipoLabel },
-    prop.habitaciones && { icon: Bed, label: lang === "es" ? "Dormitorios" : "Bedrooms", value: prop.habitaciones.toString() },
-    prop.banos && { icon: Bath, label: lang === "es" ? "Baños" : "Bathrooms", value: prop.banos.toString() },
-    prop.m2_construidos && { icon: Maximize, label: "m²", value: `${prop.m2_construidos}m²` },
+  const stats = [
+    { icon: Home, label: isEs ? "Tipo" : "Type", value: tipo },
+    prop.habitaciones != null && {
+      icon: Bed,
+      label: isEs ? "Dormitorios" : "Bedrooms",
+      value: String(prop.habitaciones),
+    },
+    prop.banos != null && { icon: Bath, label: isEs ? "Baños" : "Bathrooms", value: String(prop.banos) },
+    prop.m2_construidos != null && { icon: Home, label: "m²", value: `${prop.m2_construidos}m²` },
     { icon: Tag, label: "Ref.", value: prop.ref_interna },
   ].filter(Boolean) as { icon: any; label: string; value: string }[];
 
   return (
     <>
       <Helmet>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDesc} />
+        <title>
+          {prop.titulo} — {precio}
+          {periodo} | Propaxar
+        </title>
+        <meta
+          name="description"
+          content={`${prop.habitaciones ?? ""} ${isEs ? "dormitorios" : "bedrooms"} en ${zona}. ${precio}${periodo}. Ref. ${prop.ref_interna}.`}
+        />
         {imgs[0] && <meta property="og:image" content={imgs[0]} />}
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDesc} />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb', fontFamily: bodyFont, color: '#111827' }}>
+      <div style={{ fontFamily: bodyFont, backgroundColor: "#f5f5f5", color: "#1a1a1a", minHeight: "100vh" }}>
         {/* Top bar */}
-        <div style={{ backgroundColor: '#1E2535', color: '#fff', padding: '12px 0' }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <a href="/" style={{ color: '#fff', fontWeight: 700, fontSize: 16, textDecoration: 'none', letterSpacing: '0.04em' }}>Propaxar</a>
-            <button
-              onClick={() => setLang(l => l === "es" ? "en" : "es")}
-              style={{ border: '1px solid rgba(255,255,255,0.45)', color: 'white', borderRadius: 6, padding: '6px 14px', fontSize: 13, fontWeight: 600, background: 'transparent', cursor: 'pointer' }}
+        <div style={{ backgroundColor: "#2d3e4e", position: "sticky", top: 0, zIndex: 50 }}>
+          <div
+            style={{
+              maxWidth: 960,
+              margin: "0 auto",
+              padding: "0 16px",
+              height: 56,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <a
+              href="/"
+              style={{ color: "white", fontWeight: 900, fontSize: 18, letterSpacing: -0.5, textDecoration: "none" }}
             >
-              {lang === "es" ? "EN" : "ES"}
+              Propaxar
+            </a>
+            <button
+              onClick={() => setLang((l) => (l === "es" ? "en" : "es"))}
+              style={{
+                border: "1px solid rgba(255,255,255,0.45)",
+                color: "white",
+                borderRadius: 6,
+                padding: "6px 14px",
+                fontSize: 13,
+                fontWeight: 600,
+                background: "transparent",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.1)")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+            >
+              {isEs ? "EN" : "ES"}
             </button>
           </div>
         </div>
 
         {/* Hero */}
-        <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #e5e7eb' }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 20px' }}>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 12, color: '#6b7280', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                Ref. {prop.ref_interna} · {operacionLabel}
-              </span>
+        <section
+          style={{
+            background: "linear-gradient(135deg, #2d3e4e 0%, #3d5a73 50%, #2d3e4e 100%)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 24px 64px" }}>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.5)",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: 3,
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              Ref. {prop.ref_interna.toUpperCase()} · {operacion}
               {prop.propaxar_direct && (
-                <span style={{ fontSize: 11, background: '#1E2535', color: '#fff', padding: '3px 8px', borderRadius: 4, fontWeight: 700, letterSpacing: '0.05em' }}>
+                <span
+                  style={{
+                    marginLeft: 10,
+                    backgroundColor: "#22c55e",
+                    color: "white",
+                    borderRadius: 4,
+                    padding: "2px 8px",
+                    fontSize: 10,
+                  }}
+                >
                   PROPAXAR DIRECT
                 </span>
               )}
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 24 }}>
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: 16,
+                marginBottom: 32,
+              }}
+            >
               <div>
-                <h1 style={{ fontSize: 30, fontWeight: 700, color: '#111827', margin: 0, lineHeight: 1.2 }}>{prop.titulo}</h1>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 8, color: '#6b7280', fontSize: 14 }}>
-                  <MapPin size={14} />
-                  <span>{zonaLabel}, Málaga</span>
-                </div>
+                <h1
+                  style={{
+                    color: "white",
+                    fontWeight: 900,
+                    fontSize: "clamp(2rem,5vw,3rem)",
+                    letterSpacing: "-0.025em",
+                    lineHeight: 1.1,
+                    margin: 0,
+                  }}
+                >
+                  {prop.titulo}
+                </h1>
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.6)",
+                    fontSize: 14,
+                    marginTop: 8,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  <MapPin style={{ width: 14, height: 14 }} />
+                  {zona}, Málaga
+                </p>
               </div>
-              <div>
-                <p style={{ fontSize: 32, fontWeight: 800, color: '#1E2535', margin: 0 }}>{precioLabel}</p>
-                <p style={{ fontSize: 13, color: '#6b7280', margin: 0 }}>{periodoLabel} · {operacionLabel}</p>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ color: "white", fontWeight: 900, fontSize: "clamp(2rem,5vw,3rem)" }}>{precio}</div>
+                <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 14 }}>{periodo}</div>
               </div>
             </div>
-
             {imgs.length > 0 ? (
               <div
-                onClick={() => { setLightboxIdx(0); setLightboxOpen(true); }}
-                style={{ width: '100%', height: 'min(60vh, 480px)', borderRadius: 12, overflow: 'hidden', cursor: 'pointer', backgroundColor: '#f3f4f6' }}
+                onClick={() => {
+                  setLbIdx(0);
+                  setLb(true);
+                }}
+                style={{
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  borderRadius: 8,
+                  border: "1px solid rgba(255,255,255,0.15)",
+                }}
               >
-                <img src={imgs[0]} alt={prop.titulo} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img
+                  src={imgs[0]}
+                  alt={prop.titulo}
+                  style={{
+                    width: "100%",
+                    objectFit: "cover",
+                    maxHeight: 480,
+                    display: "block",
+                    transition: "transform 0.5s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                />
               </div>
             ) : (
-              <div style={{ width: '100%', height: 320, borderRadius: 12, backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8, color: '#9ca3af' }}>
-                <Home size={36} />
-                <p style={{ fontSize: 14, margin: 0 }}>{lang === "es" ? "Imágenes próximamente" : "Images coming soon"}</p>
+              <div
+                style={{
+                  height: 320,
+                  borderRadius: 8,
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  color: "rgba(255,255,255,0.3)",
+                  gap: 8,
+                }}
+              >
+                <Home style={{ width: 48, height: 48 }} />
+                <p style={{ margin: 0, fontSize: 14 }}>{isEs ? "Imágenes próximamente" : "Images coming soon"}</p>
               </div>
             )}
           </div>
-        </div>
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
+            <svg
+              viewBox="0 0 1440 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ width: "100%", display: "block" }}
+            >
+              <path d="M0 48h1440V24C1200 0 960 48 720 24S240 0 0 24V48z" fill="#f5f5f5" />
+            </svg>
+          </div>
+        </section>
 
         {/* Content */}
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 20px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 24 }} className="propax-grid">
-            {/* Left column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-
-              {/* Quick stats */}
-              <div style={{ ...cardStyle, borderRadius: 12, padding: 20 }}>
-                <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, color: '#111827' }}>
-                  {lang === "es" ? "Visión general" : "Overview"}
-                </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 14 }}>
-                  {quickStats.map((stat, i) => {
-                    const Icon = stat.icon;
-                    return (
-                      <div key={i} style={{ textAlign: 'center', padding: '12px 8px', backgroundColor: '#f9fafb', borderRadius: 8 }}>
-                        <Icon size={20} color="#1E2535" style={{ margin: '0 auto 6px' }} />
-                        <p style={{ fontWeight: 700, fontSize: 14, color: '#111827', margin: 0 }}>{stat.value}</p>
-                        <p style={{ fontSize: 11, color: '#6b7280', margin: '2px 0 0' }}>{stat.label}</p>
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 16px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 24, alignItems: "start" }}>
+            {/* Left */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              {/* Stats */}
+              <div style={card}>
+                <div style={{ padding: "16px 24px", backgroundColor: "#f0f4f8", borderBottom: "1px solid #d1dde8" }}>
+                  <p style={{ fontWeight: 700, fontSize: 16, color: "#2d3e4e", margin: 0 }}>
+                    {isEs ? "Visión general" : "Overview"}
+                  </p>
+                </div>
+                <div
+                  style={{
+                    padding: "20px 24px",
+                    display: "grid",
+                    gridTemplateColumns: `repeat(${stats.length}, 1fr)`,
+                    gap: 16,
+                  }}
+                >
+                  {stats.map((s, i) => (
+                    <div key={i} style={{ textAlign: "center" }}>
+                      <s.icon
+                        style={{ width: 20, height: 20, margin: "0 auto 8px", color: "#3d5a73", display: "block" }}
+                      />
+                      <div style={{ fontWeight: 900, fontSize: 20, color: "#1a1a1a" }}>{s.value}</div>
+                      <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#9ca3af" }}>
+                        {s.label}
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Features */}
               {features.length > 0 && (
-                <div style={{ ...cardStyle, borderRadius: 12, padding: 20 }}>
-                  <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, color: '#111827' }}>
-                    {lang === "es" ? "Características" : "Features"}
-                  </h2>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 10 }}>
-                    {features.map((f, i) => {
-                      const Icon = f.icon;
-                      return (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', backgroundColor: '#f9fafb', borderRadius: 8 }}>
-                          <Icon size={18} color="#1E2535" />
-                          <span style={{ fontSize: 13, color: '#374151' }}>{f.label}</span>
+                <div style={card}>
+                  <div style={{ padding: "16px 24px", backgroundColor: "#f0f4f8", borderBottom: "1px solid #d1dde8" }}>
+                    <p style={{ fontWeight: 700, fontSize: 16, color: "#2d3e4e", margin: 0 }}>
+                      {isEs ? "Características" : "Features"}
+                    </p>
+                  </div>
+                  <div style={{ padding: "20px 24px", display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 12 }}>
+                    {features.map((f, i) => (
+                      <div
+                        key={i}
+                        style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#1a1a1a" }}
+                      >
+                        <div
+                          style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: 8,
+                            backgroundColor: "rgba(61,90,115,0.1)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <f.icon style={{ width: 16, height: 16, color: "#3d5a73" }} />
                         </div>
-                      );
-                    })}
+                        {f.label}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
 
               {/* Description */}
-              {descripcionPrincipal && (
-                <div style={{ ...cardStyle, borderRadius: 12, padding: 20 }}>
-                  <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, color: '#111827' }}>
-                    {lang === "es" ? "Descripción" : "Description"}
-                  </h2>
-                  <div style={{ fontSize: 14, lineHeight: 1.7, color: '#374151' }}>
-                    <p style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{descripcionPrincipal}</p>
-                    {analisisBullets.length > 0 && (
+              {(desc || analisis.length > 0) && (
+                <div style={card}>
+                  <div style={{ padding: "16px 24px", backgroundColor: "#f0f4f8", borderBottom: "1px solid #d1dde8" }}>
+                    <p style={{ fontWeight: 700, fontSize: 16, color: "#2d3e4e", margin: 0 }}>
+                      {isEs ? "Descripción" : "Description"}
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      padding: "20px 24px",
+                      fontSize: 14,
+                      lineHeight: 1.7,
+                      color: "#444",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 16,
+                    }}
+                  >
+                    {desc && <p style={{ whiteSpace: "pre-wrap", margin: 0 }}>{desc}</p>}
+                    {analisis.length > 0 && (
                       <>
-                        <p style={{ fontWeight: 700, marginTop: 18, marginBottom: 8, color: '#111827' }}>
-                          {lang === "es" ? "Análisis de la propiedad:" : "Property analysis:"}
-                        </p>
-                        <ul style={{ paddingLeft: 18, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                          {analisisBullets.map((b, i) => (
+                        <h3 style={{ fontWeight: 900, fontSize: 16, color: "#2d3e4e", margin: "8px 0 4px" }}>
+                          {isEs ? "Análisis de la propiedad:" : "Property analysis:"}
+                        </h3>
+                        <ul
+                          style={{
+                            padding: 0,
+                            listStyle: "none",
+                            margin: 0,
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 16,
+                          }}
+                        >
+                          {analisis.map((a, i) => (
                             <li key={i}>
-                              <strong style={{ color: '#111827' }}>{b.title}:</strong> {b.text}
+                              <strong style={{ color: "#1a1a1a" }}>{a.t}:</strong>{" "}
+                              <span style={{ color: "#666" }}>{a.v}</span>
                             </li>
                           ))}
                         </ul>
                       </>
                     )}
-                    {aspectos && (
-                      <div style={{ marginTop: 18, padding: 14, backgroundColor: '#fef9e7', borderRadius: 8, border: '1px solid #fde68a' }}>
-                        <p style={{ fontWeight: 700, marginBottom: 6, color: '#92400e' }}>
-                          {lang === "es" ? "Aspectos a considerar:" : "Points to consider:"}
+                    {prop.aspectos_a_considerar && (
+                      <div
+                        style={{
+                          padding: 16,
+                          borderRadius: 8,
+                          backgroundColor: "#fef9ec",
+                          borderLeft: "4px solid #f59e0b",
+                        }}
+                      >
+                        <p style={{ fontSize: 12, fontWeight: 700, color: "#92400e", margin: "0 0 4px" }}>
+                          {isEs ? "Aspectos a considerar:" : "Points to consider:"}
                         </p>
-                        <p style={{ margin: 0, color: '#78350f', whiteSpace: 'pre-wrap' }}>{aspectos}</p>
+                        <p style={{ fontSize: 12, color: "#78350f", margin: 0 }}>{prop.aspectos_a_considerar}</p>
                       </div>
                     )}
                   </div>
@@ -340,168 +516,336 @@ export default function PropiedadPublica() {
 
               {/* Gallery */}
               {imgs.length > 1 && (
-                <div style={{ ...cardStyle, borderRadius: 12, padding: 20 }}>
-                  <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, color: '#111827' }}>
-                    {lang === "es" ? "Galería completa" : "Full Gallery"} ({imgs.length})
-                  </h2>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 8 }}>
-                    {imgs.map((photo, i) => (
-                      <div
-                        key={i}
-                        onClick={() => { setLightboxIdx(i); setLightboxOpen(true); }}
-                        style={{ aspectRatio: '4/3', borderRadius: 8, overflow: 'hidden', cursor: 'pointer', backgroundColor: '#f3f4f6' }}
-                      >
-                        <img src={photo} alt={`${prop.titulo} ${i + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                      </div>
-                    ))}
+                <div style={card}>
+                  <div style={{ padding: "16px 24px", backgroundColor: "#f0f4f8", borderBottom: "1px solid #d1dde8" }}>
+                    <p style={{ fontWeight: 700, fontSize: 16, color: "#2d3e4e", margin: 0 }}>
+                      {isEs ? "Galería completa" : "Full Gallery"} ({imgs.length})
+                    </p>
                   </div>
-                </div>
-              )}
-
-              {/* Location */}
-              {prop.direccion && (
-                <div style={{ ...cardStyle, borderRadius: 12, padding: 20 }}>
-                  <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 12, color: '#111827' }}>
-                    {lang === "es" ? "Ubicación" : "Location"}
-                  </h2>
-                  <p style={{ fontSize: 14, color: '#374151', margin: 0 }}>{prop.direccion}</p>
-                  <p style={{ fontSize: 13, color: '#6b7280', margin: '4px 0 0' }}>{zonaLabel}, Málaga 29788</p>
+                  <div style={{ padding: "20px 24px" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
+                      {imgs.map((photo: string, i: number) => (
+                        <div
+                          key={i}
+                          onClick={() => {
+                            setLbIdx(i);
+                            setLb(true);
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            overflow: "hidden",
+                            borderRadius: 8,
+                            aspectRatio: "4/3",
+                            border: "1px solid #e5e7eb",
+                          }}
+                        >
+                          <img
+                            src={photo}
+                            alt={`Foto ${i + 1}`}
+                            loading="lazy"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              transition: "transform 0.5s",
+                              display: "block",
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+                            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Right column — Sticky */}
-            <div className="propax-sticky">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, position: 'sticky', top: 20 }}>
-
-                {/* Price card */}
-                <div style={{ backgroundColor: '#1E2535', color: '#fff', borderRadius: 12, padding: 22 }}>
-                  <div style={{ marginBottom: 16 }}>
-                    <p style={{ fontSize: 28, fontWeight: 800, margin: 0 }}>{precioLabel}</p>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{periodoLabel} · {operacionLabel}</p>
-                    {!prop.disponible && (
-                      <p style={{ marginTop: 8, padding: '4px 8px', background: 'rgba(248,113,113,0.18)', color: '#fca5a5', borderRadius: 4, fontSize: 12, display: 'inline-block', fontWeight: 600 }}>
-                        {lang === "es" ? "No disponible" : "Not available"}
-                      </p>
-                    )}
+            {/* Right - sticky */}
+            <div style={{ position: "sticky", top: 72, display: "flex", flexDirection: "column", gap: 16 }}>
+              {/* Price */}
+              <div
+                style={{
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  background: "linear-gradient(135deg, #2d3e4e 0%, #3d5a73 100%)",
+                  color: "white",
+                }}
+              >
+                <div style={{ padding: 24, textAlign: "center" }}>
+                  <div style={{ fontWeight: 900, fontSize: 36, lineHeight: 1.1 }}>{precio}</div>
+                  <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginTop: 4 }}>
+                    {periodo} · {operacion}
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <a href={waLink} target="_blank" rel="noreferrer"
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#fff', color: '#1E2535', padding: '12px 16px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontSize: 14 }}>
-                      <MessageCircle size={16} />
-                      {lang === "es" ? "WhatsApp — Agendar visita" : "WhatsApp — Schedule viewing"}
-                    </a>
-                    <a href={`mailto:info@propaxar.com?subject=${encodeURIComponent(emailSubject)}`}
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', color: '#fff', padding: '12px 16px', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: 14 }}>
-                      <Mail size={16} />
-                      {lang === "es" ? "Enviar email" : "Send email"}
-                    </a>
-                    <a href="tel:+34662317561"
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, color: 'rgba(255,255,255,0.8)', padding: '6px', textDecoration: 'none', fontWeight: 500, fontSize: 13 }}>
-                      <Phone size={14} />
-                      +34 662 317 561
-                    </a>
-                  </div>
+                  {!prop.disponible && (
+                    <div
+                      style={{
+                        marginTop: 8,
+                        display: "inline-block",
+                        backgroundColor: "rgba(239,68,68,0.3)",
+                        color: "#fca5a5",
+                        borderRadius: 999,
+                        padding: "2px 12px",
+                        fontSize: 11,
+                      }}
+                    >
+                      {isEs ? "No disponible" : "Not available"}
+                    </div>
+                  )}
                 </div>
+                <div style={{ padding: "0 24px 24px", display: "flex", flexDirection: "column", gap: 12 }}>
+                  {[
+                    {
+                      href: waLink,
+                      bg: "#22c55e",
+                      icon: MessageCircle,
+                      label: isEs ? "WhatsApp — Agendar visita" : "WhatsApp — Schedule viewing",
+                      fw: 700,
+                    },
+                    {
+                      href: `mailto:info@propaxar.com?subject=${encodeURIComponent(`Consulta ${prop.ref_interna}`)}`,
+                      bg: "rgba(255,255,255,0.12)",
+                      border: "1px solid rgba(255,255,255,0.25)",
+                      icon: Mail,
+                      label: isEs ? "Enviar email" : "Send email",
+                      fw: 700,
+                    },
+                    {
+                      href: "tel:+34662317561",
+                      bg: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      icon: Phone,
+                      label: "+34 662 317 561",
+                      fw: 600,
+                      opacity: 0.8,
+                    },
+                  ].map((btn, i) => (
+                    <a
+                      key={i}
+                      href={btn.href}
+                      target={btn.href.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 8,
+                        padding: "12px 16px",
+                        borderRadius: 8,
+                        backgroundColor: btn.bg,
+                        border: btn.border ?? "none",
+                        color: btn.opacity ? `rgba(255,255,255,${btn.opacity})` : "#fff",
+                        textDecoration: "none",
+                        fontSize: 14,
+                        fontWeight: btn.fw,
+                        boxSizing: "border-box",
+                      }}
+                    >
+                      <btn.icon style={{ width: 16, height: 16 }} />
+                      {btn.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
 
-                {/* Agent card */}
-                <div style={{ ...cardStyle, borderRadius: 12, padding: 18 }}>
-                  <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 10 }}>
-                    <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#1E2535', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>M</div>
-                    <div>
-                      <p style={{ fontWeight: 700, margin: 0, fontSize: 14 }}>Manuel C. Fernández</p>
-                      <p style={{ margin: 0, fontSize: 12, color: '#6b7280' }}>
-                        {lang === "es" ? "Consultor inmobiliario · Frigiliana" : "Property consultant · Frigiliana"}
-                      </p>
+              {/* Agent */}
+              <div
+                style={{
+                  borderRadius: 8,
+                  padding: 24,
+                  backgroundColor: "#fff",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: "50%",
+                      backgroundColor: "#3d5a73",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: 900,
+                      fontSize: 18,
+                      color: "white",
+                    }}
+                  >
+                    M
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 14, color: "#1a1a1a" }}>Manuel C. Fernández</div>
+                    <div style={{ fontSize: 12, color: "#9ca3af" }}>
+                      {isEs ? "Consultor inmobiliario · Frigiliana" : "Property consultant · Frigiliana"}
                     </div>
                   </div>
-                  <p style={{ margin: 0, fontSize: 13, color: '#374151', lineHeight: 1.55 }}>
-                    {lang === "es"
-                      ? "40 años de conocimiento local. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo."
-                      : "40 years of local knowledge. I help you find exactly what you're looking for — without wasting time."}
-                  </p>
                 </div>
-
-                {/* Highlights */}
-                {highlights.length > 0 && (
-                  <div style={{ ...cardStyle, borderRadius: 12, padding: 18 }}>
-                    <p style={{ fontWeight: 700, marginBottom: 10, fontSize: 14 }}>
-                      {lang === "es" ? "Lo que destaca" : "Highlights"}
-                    </p>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      {highlights.map((item, i) => (
-                        <li key={i} style={{ display: 'flex', gap: 8, alignItems: 'start', fontSize: 13, color: '#374151' }}>
-                          <span style={{ color: '#16a34a', fontWeight: 700 }}>✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <p style={{ fontSize: 12, lineHeight: 1.6, color: "#666", margin: 0 }}>
+                  {isEs
+                    ? "40 años de conocimiento local. Te ayudo a encontrar exactamente lo que buscas — sin perder tiempo."
+                    : "40 years of local knowledge. I help you find exactly what you're looking for — without wasting time."}
+                </p>
               </div>
+
+              {/* Highlights */}
+              {highlights.length > 0 && (
+                <div
+                  style={{
+                    borderRadius: 8,
+                    padding: 24,
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 900,
+                      textTransform: "uppercase",
+                      letterSpacing: 3,
+                      color: "#2d3e4e",
+                      margin: "0 0 16px",
+                    }}
+                  >
+                    {isEs ? "Lo que destaca" : "Highlights"}
+                  </h3>
+                  <ul
+                    style={{
+                      listStyle: "none",
+                      padding: 0,
+                      margin: 0,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 10,
+                    }}
+                  >
+                    {highlights.map((item, i) => (
+                      <li
+                        key={i}
+                        style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 12, color: "#1a1a1a" }}
+                      >
+                        <span style={{ fontWeight: 900, color: "#22c55e", flexShrink: 0 }}>✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div style={{ backgroundColor: '#1E2535', color: '#fff', padding: '24px 0', marginTop: 40 }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-            <span style={{ fontWeight: 700 }}>Propaxar</span>
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>© 2026 Propaxar · Frigiliana, Málaga</span>
+        <div style={{ backgroundColor: "#2d3e4e", padding: "32px 16px" }}>
+          <div
+            style={{
+              maxWidth: 960,
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 16,
+            }}
+          >
+            <span style={{ color: "white", fontWeight: 900, fontSize: 18 }}>Propaxar</span>
+            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>© 2026 Propaxar · Frigiliana, Málaga</span>
           </div>
         </div>
       </div>
 
       {/* Lightbox */}
-      {lightboxOpen && imgs.length > 0 && (
+      {lb && imgs.length > 0 && (
         <div
-          onClick={() => setLightboxOpen(false)}
-          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.92)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+          onClick={() => setLb(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 999,
+            backgroundColor: "rgba(0,0,0,0.92)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <button
-            onClick={() => setLightboxOpen(false)}
-            style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(255,255,255,0.12)', border: 'none', color: '#fff', padding: 8, borderRadius: '50%', cursor: 'pointer' }}
-            aria-label="Close"
+            onClick={() => setLb(false)}
+            style={{
+              position: "absolute",
+              top: 16,
+              right: 16,
+              background: "none",
+              border: "none",
+              color: "rgba(255,255,255,0.8)",
+              cursor: "pointer",
+            }}
           >
-            <X size={20} />
+            <X style={{ width: 32, height: 32 }} />
           </button>
           {imgs.length > 1 && (
             <>
               <button
-                onClick={(e) => { e.stopPropagation(); setLightboxIdx(i => (i - 1 + imgs.length) % imgs.length); }}
-                style={{ position: 'absolute', left: 16, background: 'rgba(255,255,255,0.12)', border: 'none', color: '#fff', padding: 10, borderRadius: '50%', cursor: 'pointer' }}
-                aria-label="Previous"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLbIdx((i) => (i - 1 + imgs.length) % imgs.length);
+                }}
+                style={{
+                  position: "absolute",
+                  left: 16,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  color: "rgba(255,255,255,0.8)",
+                  cursor: "pointer",
+                }}
               >
-                <ChevronLeft size={22} />
+                <ChevronLeft style={{ width: 40, height: 40 }} />
               </button>
               <button
-                onClick={(e) => { e.stopPropagation(); setLightboxIdx(i => (i + 1) % imgs.length); }}
-                style={{ position: 'absolute', right: 16, background: 'rgba(255,255,255,0.12)', border: 'none', color: '#fff', padding: 10, borderRadius: '50%', cursor: 'pointer' }}
-                aria-label="Next"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLbIdx((i) => (i + 1) % imgs.length);
+                }}
+                style={{
+                  position: "absolute",
+                  right: 16,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  color: "rgba(255,255,255,0.8)",
+                  cursor: "pointer",
+                }}
               >
-                <ChevronRight size={22} />
+                <ChevronRight style={{ width: 40, height: 40 }} />
               </button>
             </>
           )}
           <img
-            src={imgs[lightboxIdx]}
-            alt={`${prop.titulo} ${lightboxIdx + 1}`}
+            src={imgs[lbIdx]}
+            alt=""
+            style={{ maxWidth: "90vw", maxHeight: "85vh", objectFit: "contain" }}
             onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: '92vw', maxHeight: '85vh', objectFit: 'contain', display: 'block' }}
           />
-          <div style={{ position: 'absolute', bottom: 20, left: 0, right: 0, textAlign: 'center', color: 'rgba(255,255,255,0.85)', fontSize: 13 }}>
-            {lightboxIdx + 1} / {imgs.length}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 16,
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "rgba(255,255,255,0.6)",
+              fontSize: 14,
+              fontFamily: "monospace",
+            }}
+          >
+            {lbIdx + 1} / {imgs.length}
           </div>
         </div>
       )}
-
-      <style>{`
-        @media (min-width: 900px) {
-          .propax-grid {
-            grid-template-columns: minmax(0, 1fr) 340px !important;
-          }
-        }
-      `}</style>
     </>
   );
 }
