@@ -14,7 +14,7 @@ const Index = () => {
       <div className="animate-fade-in">
         <HeroSection />
       </div>
-      <FadeInOnView><SocialProof /></FadeInOnView>
+      
       <FadeInOnView><HowItWorks /></FadeInOnView>
       <FadeInOnView><ReporteTeaser /></FadeInOnView>
       <FadeInOnView><WhatsAppCTA /></FadeInOnView>
