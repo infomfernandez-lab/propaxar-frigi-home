@@ -39,7 +39,7 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 text-base font-bold px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
               style={{ backgroundColor: "hsl(222, 28%, 16%)", color: "#fff", border: "1px solid rgba(255,255,255,0.3)" }}
             >
-              {language === "es" ? "Estoy listo" : "I'm ready"}
+              {language === "es" ? "Envíame un email" : "Email me"}
             </a>
 
             <a
