@@ -620,7 +620,7 @@ function PropertyCard({
                 ))}
               </Tabs>
             </div>
-            {(pa.access || pa.water || pa.internet || pa.neighbourhood || pa.history || pa.owner) && (
+            {(pa.access || pa.water || pa.internet || pa.neighbourhood || pa.history) && (
               <div className="rounded-xl p-5 space-y-4" style={{ background: "hsl(142 71% 45%/0.06)" }}>
                 <h4 className="font-bold" style={{ color: "hsl(213 56% 23%)" }}>{S.proAnalysis.title}</h4>
                 {([
@@ -629,7 +629,6 @@ function PropertyCard({
                   [S.proAnalysis.internet, pa.internet],
                   [S.proAnalysis.neighbourhood, pa.neighbourhood],
                   [S.proAnalysis.history, pa.history],
-                  [S.proAnalysis.owner, pa.owner],
                 ] as const).filter(([, v]) => v).map(([label, text]) => (
                   <div key={label}>
                     <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: "hsl(213 56% 23%)" }}>{label}</p>
