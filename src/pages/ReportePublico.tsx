@@ -18,7 +18,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import heroImg from "@/assets/frigiliana-street.jpg";
-import { supabase } from "@/lib/supabase";
+
+const API = "https://jkirjhpnddkrkpghpxdz.supabase.co/functions/v1/reporte-publico";
+const ANON =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpraXJqaHBuZGRrcmtwZ2hweGR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3OTkyOTksImV4cCI6MjA5MzM3NTI5OX0.sot9GO_j8ZBXSFuccRz86Lnzfr2wiJ4w6ouV4f5ipjI";
 
 // --------------------------- Tipos ---------------------------
 
@@ -522,7 +525,7 @@ function PropertyCard({
   };
   const pa = {
     access: prop.analisis_acceso, water: prop.analisis_agua, internet: prop.analisis_internet,
-    neighbourhood: prop.analisis_vecindario, history: prop.analisis_historial, owner: prop.analisis_propietario,
+    neighbourhood: prop.analisis_vecindario, history: prop.analisis_historial,
   };
   const pros = splitLines(prop.puntos_fuertes);
   const cons = splitLines(prop.aspectos_a_considerar);
@@ -750,31 +753,19 @@ export default function ReportePublico() {
     (async () => {
       if (!slug) { setError("Slug ausente en la URL."); setLoading(false); return; }
       try {
-        const { data: r, error: rError } = await supabase
-          .from("reportes")
-          .select("*")
-          .eq("slug", slug)
-          .maybeSingle();
-        setDebug(`slug="${slug}" · data=${r ? "OK" : "null"} · error=${rError?.message ?? "none"}`);
-        if (rError) { setError("Supabase error: " + rError.message); setLoading(false); return; }
-        if (!r) { setNotFound(true); setLoading(false); return; }
-        if (r.estado !== "activo") { setInactivo(r.estado); setLoading(false); return; }
-        setReporte(r as Reporte);
-        const ids = ((r.propiedades_seleccionadas as PropSel[]) ?? []).map((p) => p.propiedad_id);
-        if (ids.length) {
-          const { data: props, error: pError } = await supabase.from("propiedades").select("*").in("id", ids);
-          if (pError) { setError("Supabase error (propiedades): " + pError.message); setLoading(false); return; }
-          setPropiedades((props ?? []) as Propiedad[]);
-        }
-        if (r.lead_id) {
-          const { data: l, error: lError } = await supabase
-            .from("leads")
-            .select("id, persona:personas(nombre, apellidos, nacionalidad, idioma), demanda:demandas(tipo_operacion, presupuesto_max, zona_preferida, tipo_propiedad, habitaciones_min, mascotas, fecha_entrada, flexibilidad)")
-            .eq("id", r.lead_id)
-            .maybeSingle();
-          if (lError) { console.warn("Lead fetch warning:", lError.message); }
-          if (l) setLead(l as unknown as Lead);
-        }
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { apikey: ANON, "Content-Type": "application/json" },
+          body: JSON.stringify({ slug }),
+        });
+        const d = await res.json().catch(() => null);
+        console.log("[reporte-publico]", { slug, status: res.status, respuesta: d });
+        setDebug(`slug="${slug}" · status=${res.status} · encontrado=${d?.encontrado ?? "?"}`);
+        if (!d || d.encontrado !== true) { setNotFound(true); setLoading(false); return; }
+        if (d.estado !== "activo") { setInactivo(d.estado ?? "inactivo"); setLoading(false); return; }
+        setReporte(d.reporte as Reporte);
+        setPropiedades((d.propiedades ?? []) as Propiedad[]);
+        if (d.lead) setLead(d.lead as Lead);
         setLoading(false);
       } catch (e: any) {
         setError("Error inesperado: " + (e?.message ?? String(e)));
