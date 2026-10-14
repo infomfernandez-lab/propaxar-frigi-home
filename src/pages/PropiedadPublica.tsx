@@ -35,8 +35,8 @@ interface Propiedad {
 }
 
 const L = {
-  es: { notFound: "Propiedad no encontrada", notFoundSub: "Puede que ya no esté disponible.", back: "Volver al inicio", loading: "Cargando…", desc: "Descripción", feat: "Características", analysis: "Análisis", strong: "Puntos fuertes", consider: "Aspectos a considerar", contact: "Contacto", whatsapp: "WhatsApp", call: "Llamar", email: "Email", built: "construidos", plot: "parcela", info: "Más información" },
-  en: { notFound: "Property not found", notFoundSub: "It may no longer be available.", back: "Back to home", loading: "Loading…", desc: "Description", feat: "Features", analysis: "Analysis", strong: "Strengths", consider: "Things to consider", contact: "Contact", whatsapp: "WhatsApp", call: "Call", email: "Email", built: "built", plot: "plot", info: "More information" },
+  es: { notFound: "Propiedad no encontrada", notFoundSub: "Puede que ya no esté disponible.", loading: "Cargando…", desc: "Descripción", feat: "Características", analysis: "Análisis", strong: "Puntos fuertes", consider: "Aspectos a considerar", built: "construidos", plot: "parcela" },
+  en: { notFound: "Property not found", notFoundSub: "It may no longer be available.", loading: "Loading…", desc: "Description", feat: "Features", analysis: "Analysis", strong: "Strengths", consider: "Things to consider", built: "built", plot: "plot" },
 };
 
 const pick = (b: unknown, lang: "es" | "en"): string => {
