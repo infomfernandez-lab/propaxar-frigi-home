@@ -1,9 +1,9 @@
 // src/pages/PropiedadPublica.tsx
 // Ficha pública de propiedad — datos ya preparados por la función web-propiedad.
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Bed, Bath, Home, MapPin, ChevronLeft, ChevronRight, MessageCircle, Mail, Phone, Ruler, Trees } from "lucide-react";
+import { Bed, Bath, Home, MapPin, ChevronLeft, ChevronRight, Ruler, Trees } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const API = "https://jkirjhpnddkrkpghpxdz.supabase.co/functions/v1/web-propiedad";
@@ -12,9 +12,6 @@ const ANON =
 
 type Bi = { es: string | null; en: string | null };
 type Txt = string | Bi | null | undefined;
-type Contacto =
-  | { modo: "directo"; nombre?: string; whatsappUrl?: string; telUrl?: string; emailUrl?: string }
-  | { modo: "red_agencias"; mensaje?: Txt };
 interface Propiedad {
   encontrada: true;
   titulo: string;
@@ -35,7 +32,6 @@ interface Propiedad {
   analisis?: { clave?: string; es?: Txt; en?: Txt; texto?: Txt }[] | null;
   puntosFuertes?: string | null;
   aspectosAConsiderar?: string | null;
-  contacto?: Contacto;
 }
 
 const L = {
@@ -66,8 +62,6 @@ class Boundary extends React.Component<{ children: React.ReactNode }, { err: boo
       <div className="min-h-screen flex flex-col items-center justify-center gap-3 px-6 text-center">
         <h1 className="text-2xl font-semibold">Propaxar</h1>
         <p className="text-muted-foreground">No se ha podido mostrar esta ficha completa. / This listing could not be fully displayed.</p>
-        <a href="https://wa.me/34662317561" className="mt-2 underline">WhatsApp +34 662 317 561</a>
-        <a href="/" className="underline">Inicio / Home</a>
       </div>
     );
   }
@@ -116,7 +110,6 @@ function PropiedadInner() {
         {meta}
         <h1 className="text-2xl font-semibold text-foreground">{t.notFound}</h1>
         <p className="text-muted-foreground">{t.notFoundSub}</p>
-        <Link to="/" className="mt-4 underline text-foreground">{t.back}</Link>
       </div>
     );
 
@@ -129,7 +122,6 @@ function PropiedadInner() {
   const analisis = (Array.isArray(prop.analisis) ? prop.analisis : []).map((a) => ({ clave: pick(a?.clave, lang), texto: pick(a?.[lang] ?? a?.es ?? a?.texto, lang) })).filter((a) => a.texto);
   const fuertes = lines(prop.puntosFuertes);
   const considerar = lines(prop.aspectosAConsiderar);
-  const c = prop.contacto;
 
   const stats = [
     pick(prop.habitacionesLabel, lang) && { icon: Bed, text: pick(prop.habitacionesLabel, lang) },
@@ -139,14 +131,12 @@ function PropiedadInner() {
     pick(prop.tipoLabel, lang) && { icon: Home, text: pick(prop.tipoLabel, lang) },
   ].filter(Boolean) as { icon: typeof Bed; text: string }[];
 
-  const primaryHref = c?.modo === "directo" ? c.whatsappUrl || c.telUrl || c.emailUrl : "#contacto";
-
   return (
     <div className="min-h-screen bg-background text-foreground pb-24 md:pb-0">
       {meta}
       <header className="sticky top-0 z-30 bg-background/90 backdrop-blur border-b border-border">
         <div className="max-w-5xl mx-auto flex items-center justify-between px-4 h-14">
-          <Link to="/" className="w-9 h-9 rounded-full border border-foreground flex items-center justify-center font-semibold">P</Link>
+          <span aria-hidden="true" className="w-9 h-9 rounded-full border border-foreground flex items-center justify-center font-semibold select-none pointer-events-none">P</span>
           <div className="flex gap-1 text-sm">
             {(["es", "en"] as const).map((l) => (
               <button key={l} onClick={() => setLanguage(l)} className={`px-2 py-1 rounded ${lang === l ? "bg-foreground text-background" : "text-muted-foreground"}`}>{l.toUpperCase()}</button>
@@ -157,7 +147,7 @@ function PropiedadInner() {
 
       {imgs.length > 0 && <Gallery imgs={imgs} alt={pick(prop.titulo, lang)} />}
 
-      <main className="max-w-5xl mx-auto px-4 py-6 md:py-10 grid md:grid-cols-[1fr_320px] gap-8">
+      <main className="max-w-5xl mx-auto px-4 py-6 md:py-10">
         <div className="space-y-8 min-w-0">
           <section>
             <div className="flex flex-wrap gap-2 mb-3 text-xs uppercase tracking-wider">
@@ -195,35 +185,11 @@ function PropiedadInner() {
           {fuertes.length > 0 && <Block title={t.strong}><ul className="space-y-2">{fuertes.map((x, i) => <li key={i} className="text-sm">+ {x}</li>)}</ul></Block>}
           {considerar.length > 0 && <Block title={t.consider}><ul className="space-y-2">{considerar.map((x, i) => <li key={i} className="text-sm">· {x}</li>)}</ul></Block>}
         </div>
-
-        {c && (
-          <aside id="contacto" className="md:sticky md:top-20 h-fit border border-border rounded-xl p-5 space-y-4">
-            <h2 className="text-sm uppercase tracking-wider text-muted-foreground">{t.contact}</h2>
-            {c.modo === "directo" ? (
-              <>
-                {c.nombre && <p className="font-semibold">{c.nombre}</p>}
-                <div className="grid gap-2">
-                  {c.whatsappUrl && <a href={c.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-lg bg-foreground text-background py-3 font-medium"><MessageCircle className="w-4 h-4" />{t.whatsapp}</a>}
-                  {c.telUrl && <a href={c.telUrl} className="flex items-center justify-center gap-2 rounded-lg border border-border py-3"><Phone className="w-4 h-4" />{t.call}</a>}
-                  {c.emailUrl && <a href={c.emailUrl} className="flex items-center justify-center gap-2 rounded-lg border border-border py-3"><Mail className="w-4 h-4" />{t.email}</a>}
-                </div>
-              </>
-            ) : (
-              <p className="text-sm leading-relaxed whitespace-pre-line">{pick(c.mensaje, lang)}</p>
-            )}
-          </aside>
-        )}
       </main>
 
-      {/* Barra fija móvil */}
+      {/* Barra fija móvil: solo precio */}
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-background border-t border-border px-4 pt-3 flex items-center justify-between gap-3" style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}>
         <p className="font-semibold leading-tight min-w-0 truncate">{precio}{periodo && <span className="text-sm font-normal text-muted-foreground"> {periodo}</span>}</p>
-        {c && primaryHref && (
-          <a href={primaryHref} {...(c.modo === "directo" && c.whatsappUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className="shrink-0 flex items-center gap-2 rounded-full bg-foreground text-background px-5 py-3 text-sm font-medium">
-            {c.modo === "directo" ? (c.whatsappUrl ? <><MessageCircle className="w-4 h-4" />{t.whatsapp}</> : c.telUrl ? <><Phone className="w-4 h-4" />{t.call}</> : <><Mail className="w-4 h-4" />{t.email}</>) : t.info}
-          </a>
-        )}
       </div>
     </div>
   );
