@@ -122,8 +122,8 @@ export default function ComprarReporte() {
   const presupuesto = searchParams.get('b') || '';
   const dormitorios = searchParams.get('d') || '';
   const mascotas    = searchParams.get('p') || '';
-  const langParam   = searchParams.get('lang') || 'es';
-  const lang: Lang  = langParam === 'en' ? 'en' : 'es';
+  const langParam   = searchParams.get('lang') || 'en';
+  const lang: Lang  = langParam === 'es' ? 'es' : 'en';
 
   const hasSearch = presupuesto || dormitorios || mascotas;
 

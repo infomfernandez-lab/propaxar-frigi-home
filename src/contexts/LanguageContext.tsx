@@ -322,9 +322,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('propaxar-language');
-      return (stored === 'en' || stored === 'es') ? stored : 'es';
+      return (stored === 'en' || stored === 'es') ? stored : 'en';
     }
-    return 'es';
+    return 'en';
   });
 
   useEffect(() => {

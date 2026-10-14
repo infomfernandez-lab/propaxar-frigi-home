@@ -375,8 +375,8 @@ function StripeCTA({ lang, compact = false }: { lang: Lang; compact?: boolean })
 export default function MarketReport() {
   const [lang, setLang] = useState<Lang>(() => {
     const stored = localStorage.getItem('finder-lang');
-    if (stored === 'en') return 'en';
-    return 'es';
+    if (stored === 'es') return 'es';
+    return 'en';
   });
 
   useEffect(() => { localStorage.setItem('finder-lang', lang); }, [lang]);
