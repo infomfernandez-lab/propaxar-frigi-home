@@ -1,6 +1,6 @@
 // src/pages/PropiedadPublica.tsx
 // Ficha pública de propiedad — datos ya preparados por la función web-propiedad.
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Bed, Bath, Home, MapPin, ChevronLeft, ChevronRight, MessageCircle, Mail, Phone, Ruler, Trees } from "lucide-react";
@@ -11,27 +11,28 @@ const ANON =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpraXJqaHBuZGRrcmtwZ2hweGR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3OTkyOTksImV4cCI6MjA5MzM3NTI5OX0.sot9GO_j8ZBXSFuccRz86Lnzfr2wiJ4w6ouV4f5ipjI";
 
 type Bi = { es: string | null; en: string | null };
+type Txt = string | Bi | null | undefined;
 type Contacto =
   | { modo: "directo"; nombre?: string; whatsappUrl?: string; telUrl?: string; emailUrl?: string }
-  | { modo: "red_agencias"; mensaje: Bi };
+  | { modo: "red_agencias"; mensaje?: Txt };
 interface Propiedad {
   encontrada: true;
   titulo: string;
-  modalidadLabel?: Bi;
-  precioFormateado?: Bi;
-  precioPeriodo?: string | null;
-  estadoLabel?: Bi;
-  tipoLabel?: Bi;
+  modalidadLabel?: Txt;
+  precioFormateado?: Txt;
+  precioPeriodo?: Txt;
+  estadoLabel?: Txt;
+  tipoLabel?: Txt;
   ubicacion?: string | null;
-  habitacionesLabel?: string | null;
-  banosLabel?: string | null;
+  habitacionesLabel?: Txt;
+  banosLabel?: Txt;
   m2Construidos?: number | null;
   m2Parcela?: number | null;
-  imagenPortada: string;
-  galeria?: string[];
-  descripcion?: Bi;
-  caracteristicas?: Bi[];
-  analisis?: { clave: string; es: string }[];
+  imagenPortada?: string | null;
+  galeria?: string[] | null;
+  descripcion?: Txt;
+  caracteristicas?: Txt[] | null;
+  analisis?: { clave?: string; es?: Txt; en?: Txt; texto?: Txt }[] | null;
   puntosFuertes?: string | null;
   aspectosAConsiderar?: string | null;
   contacto?: Contacto;
@@ -42,10 +43,37 @@ const L = {
   en: { notFound: "Property not found", notFoundSub: "It may no longer be available.", back: "Back to home", loading: "Loading…", desc: "Description", feat: "Features", analysis: "Analysis", strong: "Strengths", consider: "Things to consider", contact: "Contact", whatsapp: "WhatsApp", call: "Call", email: "Email", built: "built", plot: "plot", info: "More information" },
 };
 
-const pick = (b: Bi | undefined, lang: "es" | "en") => (b ? b[lang] || b.es || "" : "");
-const lines = (s?: string | null) => (s ? s.split("\n").map((x) => x.replace(/^[-•·]\s*/, "").trim()).filter(Boolean) : []);
+const pick = (b: unknown, lang: "es" | "en"): string => {
+  if (b == null) return "";
+  if (typeof b === "string" || typeof b === "number") return String(b);
+  if (typeof b === "object") { const o = b as Record<string, unknown>; const v = o[lang] ?? o.es ?? o.en; return typeof v === "string" || typeof v === "number" ? String(v) : ""; }
+  return "";
+};
+const lines = (s?: unknown) => (typeof s === "string" && s ? s.split("\n").map((x) => x.replace(/^[-•·]\s*/, "").trim()).filter(Boolean) : []);
 
 export default function PropiedadPublica() {
+  const { ref } = useParams<{ ref: string }>();
+  return <Boundary key={ref}><PropiedadInner /></Boundary>;
+}
+
+class Boundary extends React.Component<{ children: React.ReactNode }, { err: boolean }> {
+  state = { err: false };
+  static getDerivedStateFromError() { return { err: true }; }
+  componentDidCatch(e: unknown) { console.error("[PropiedadPublica] render error", e); }
+  render() {
+    if (!this.state.err) return this.props.children;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-3 px-6 text-center">
+        <h1 className="text-2xl font-semibold">Propaxar</h1>
+        <p className="text-muted-foreground">No se ha podido mostrar esta ficha completa. / This listing could not be fully displayed.</p>
+        <a href="https://wa.me/34662317561" className="mt-2 underline">WhatsApp +34 662 317 561</a>
+        <a href="/" className="underline">Inicio / Home</a>
+      </div>
+    );
+  }
+}
+
+function PropiedadInner() {
   const { ref } = useParams<{ ref: string }>();
   const { language: lang, setLanguage } = useLanguage();
   const t = L[lang];
@@ -74,7 +102,7 @@ export default function PropiedadPublica() {
 
   const meta = (
     <Helmet>
-      <title>{prop ? `${prop.titulo} | Propaxar` : "Propaxar"}</title>
+      <title>{prop ? `${pick(prop.titulo, lang)} | Propaxar` : "Propaxar"}</title>
       <meta name="robots" content="noindex, nofollow" />
     </Helmet>
   );
@@ -92,18 +120,20 @@ export default function PropiedadPublica() {
       </div>
     );
 
-  const imgs = prop.galeria && prop.galeria.length ? prop.galeria : [prop.imagenPortada];
-  const precio = pick(prop.precioFormateado, lang);
+  const gal = Array.isArray(prop.galeria) ? prop.galeria.filter((x) => typeof x === "string" && x) : [];
+  const imgs = gal.length ? gal : prop.imagenPortada ? [prop.imagenPortada] : [];
+  const precio = pick(prop.precioFormateado, lang) || (lang === "es" ? "Consultar precio" : "Price on request");
+  const periodo = pick(prop.precioPeriodo, lang);
   const descripcion = pick(prop.descripcion, lang);
-  const feats = prop.caracteristicas ?? [];
-  const analisis = prop.analisis ?? [];
+  const feats = (Array.isArray(prop.caracteristicas) ? prop.caracteristicas : []).map((f) => pick(f, lang)).filter(Boolean);
+  const analisis = (Array.isArray(prop.analisis) ? prop.analisis : []).map((a) => ({ clave: pick(a?.clave, lang), texto: pick(a?.[lang] ?? a?.es ?? a?.texto, lang) })).filter((a) => a.texto);
   const fuertes = lines(prop.puntosFuertes);
   const considerar = lines(prop.aspectosAConsiderar);
   const c = prop.contacto;
 
   const stats = [
-    prop.habitacionesLabel && { icon: Bed, text: prop.habitacionesLabel },
-    prop.banosLabel && { icon: Bath, text: prop.banosLabel },
+    pick(prop.habitacionesLabel, lang) && { icon: Bed, text: pick(prop.habitacionesLabel, lang) },
+    pick(prop.banosLabel, lang) && { icon: Bath, text: pick(prop.banosLabel, lang) },
     prop.m2Construidos && { icon: Ruler, text: `${prop.m2Construidos} m² ${t.built}` },
     prop.m2Parcela && { icon: Trees, text: `${prop.m2Parcela} m² ${t.plot}` },
     pick(prop.tipoLabel, lang) && { icon: Home, text: pick(prop.tipoLabel, lang) },
@@ -125,7 +155,7 @@ export default function PropiedadPublica() {
         </div>
       </header>
 
-      <Gallery imgs={imgs} alt={prop.titulo} />
+      {imgs.length > 0 && <Gallery imgs={imgs} alt={pick(prop.titulo, lang)} />}
 
       <main className="max-w-5xl mx-auto px-4 py-6 md:py-10 grid md:grid-cols-[1fr_320px] gap-8">
         <div className="space-y-8 min-w-0">
@@ -134,9 +164,9 @@ export default function PropiedadPublica() {
               {pick(prop.modalidadLabel, lang) && <span className="px-2 py-1 bg-foreground text-background rounded">{pick(prop.modalidadLabel, lang)}</span>}
               {pick(prop.estadoLabel, lang) && <span className="px-2 py-1 border border-border rounded text-muted-foreground">{pick(prop.estadoLabel, lang)}</span>}
             </div>
-            <h1 className="text-2xl md:text-4xl font-semibold leading-tight">{prop.titulo}</h1>
-            {prop.ubicacion && <p className="mt-2 flex items-center gap-1 text-muted-foreground"><MapPin className="w-4 h-4" />{prop.ubicacion}</p>}
-            <p className="mt-4 text-2xl font-semibold">{precio}{prop.precioPeriodo && <span className="text-base font-normal text-muted-foreground"> {prop.precioPeriodo}</span>}</p>
+            <h1 className="text-2xl md:text-4xl font-semibold leading-tight">{pick(prop.titulo, lang)}</h1>
+            {prop.ubicacion && <p className="mt-2 flex items-center gap-1 text-muted-foreground"><MapPin className="w-4 h-4" />{pick(prop.ubicacion, lang)}</p>}
+            <p className="mt-4 text-2xl font-semibold">{precio}{periodo && <span className="text-base font-normal text-muted-foreground"> {periodo}</span>}</p>
             {stats.length > 0 && (
               <ul className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {stats.map(({ icon: I, text }) => (
@@ -150,14 +180,14 @@ export default function PropiedadPublica() {
 
           {feats.length > 0 && (
             <Block title={t.feat}>
-              <ul className="grid sm:grid-cols-2 gap-2">{feats.map((f, i) => <li key={i} className="text-sm before:content-['—'] before:mr-2 before:text-muted-foreground">{pick(f, lang)}</li>)}</ul>
+              <ul className="grid sm:grid-cols-2 gap-2">{feats.map((f, i) => <li key={i} className="text-sm before:content-['—'] before:mr-2 before:text-muted-foreground">{f}</li>)}</ul>
             </Block>
           )}
 
           {analisis.length > 0 && (
             <Block title={t.analysis}>
-              <dl className="space-y-4">{analisis.map((a) => (
-                <div key={a.clave}><dt className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{a.clave}</dt><dd className="whitespace-pre-line text-sm leading-relaxed">{a.es}</dd></div>
+              <dl className="space-y-4">{analisis.map((a, i) => (
+                <div key={i}><dt className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{a.clave}</dt><dd className="whitespace-pre-line text-sm leading-relaxed">{a.texto}</dd></div>
               ))}</dl>
             </Block>
           )}
@@ -187,7 +217,7 @@ export default function PropiedadPublica() {
 
       {/* Barra fija móvil */}
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-background border-t border-border px-4 pt-3 flex items-center justify-between gap-3" style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}>
-        <p className="font-semibold leading-tight min-w-0 truncate">{precio}{prop.precioPeriodo && <span className="text-sm font-normal text-muted-foreground"> {prop.precioPeriodo}</span>}</p>
+        <p className="font-semibold leading-tight min-w-0 truncate">{precio}{periodo && <span className="text-sm font-normal text-muted-foreground"> {periodo}</span>}</p>
         {c && primaryHref && (
           <a href={primaryHref} {...(c.modo === "directo" && c.whatsappUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="shrink-0 flex items-center gap-2 rounded-full bg-foreground text-background px-5 py-3 text-sm font-medium">
