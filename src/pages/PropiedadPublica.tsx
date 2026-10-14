@@ -56,13 +56,19 @@ export default function PropiedadPublica() {
     window.scrollTo(0, 0);
     let cancel = false;
     setState("loading");
-    fetch(`${API}?ref=${encodeURIComponent(ref ?? "")}`, { headers: { apikey: ANON, Authorization: `Bearer ${ANON}` } })
-      .then((r) => r.json())
+    const cleanRef = (ref ?? "").trim().toLowerCase();
+    const url = `${API}?ref=${encodeURIComponent(cleanRef)}`;
+    fetch(url, { headers: { apikey: ANON } })
+      .then(async (r) => {
+        const d = await r.json().catch(() => null);
+        console.log("[web-propiedad]", { url, status: r.status, respuesta: d });
+        return d;
+      })
       .then((d) => {
         if (cancel) return;
-        if (d?.encontrada) { setProp(d); setState("ok"); } else setState("notfound");
+        if (d && d.encontrada === true) { setProp(d); setState("ok"); } else setState("notfound");
       })
-      .catch(() => !cancel && setState("notfound"));
+      .catch((e) => { console.error("[web-propiedad] error", e); if (!cancel) setState("notfound"); });
     return () => { cancel = true; };
   }, [ref]);
 
